@@ -242,7 +242,7 @@
     },
     {
       "id": "TSLA:y1",
-      "story": "Robotaxi promises, a $1 trillion pay package for Musk, car sales falling.",
+      "story": "Robotaxi promises, a proposed $1 trillion pay package for Musk, car sales falling.",
       "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
@@ -1143,7 +1143,7 @@
     },
     {
       "id": "T:y1",
-      "story": "Selling its stake in DirecTV and building fibre.",
+      "story": "Finishing the sale of its DirecTV stake; building fibre.",
       "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
