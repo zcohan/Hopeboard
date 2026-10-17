@@ -55,7 +55,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 
 1. Logo, name, a one-line description of the business, and a right-aligned stack: "priced at", the number of years, "of last year's profit".
 
-2. Three labelled sections, each a headline figure with small notes: EARNS (what the business earns as a share of its price; notes: against the safe US bond, and dividends where they are 1% or more), REASONABLY PRICED IF (the profit growth a year the price needs; notes: the last decade, and the analysts' forecast for next year), RISK (what happens if growth falls short; CUSHION when that is good news).
+2. Three labelled sections, each a headline figure with small notes: EARNS (what the business earns as a share of its price; notes: against the safe US bond, and dividends where they are 1% or more), REASONABLY PRICED? ("Requires 35% growth/year": the profit growth a year the price needs; notes: the last decade, and the analysts' forecast for next year), RISK (what happens if growth falls short; CUSHION when that is good news).
 3. Links at the foot: "Why so pricey?" (or "What the price assumes", "Why so cheap?") opens two or three points on why the price is what it is; "Compare over time" opens time buttons (1 week, 1 month, 3 months, 1 year) and a badge saying whether the deal is better, worse or the same, with what the price needed then and needs now.
 
 `docs/writing-guide.md` has the wording rules for every part.

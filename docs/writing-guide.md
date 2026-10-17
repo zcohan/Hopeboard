@@ -270,10 +270,10 @@ Company cards show three labelled sections (labels in `company-lines.labels`), e
 | Label | Headline | Notes |
 | --- | --- | --- |
 | EARNS | **0.7%** of its price a year | 4.5% less than the safe US bond; dividends, when 1% or more |
-| REASONABLY PRICED IF | **35%** profit growth a year | Up from the 15%/year of the last decade; Analysts expect 107% profit growth next year |
+| REASONABLY PRICED? | Requires **35%** growth/year | Up from the 15%/year of the last decade; Analysts expect 107% profit growth next year |
 | RISK, or CUSHION when the outcome is good news | If profit only grows at 13%/year (the average big US company), you're liable to lose 55% of your investment. | |
 
-`assumes` holds the headline, a newline, then its note: `**{req}** profit growth a year\n{vsLastNote}.` The forecast note is added by the app.
+`assumes` holds the headline, a newline, then its note: `Requires **{req}** growth/year\n{vsLastNote}.` The forecast note is added by the app.
 
 Each row holds one number. Background (when it became profitable, what fell since when) goes in the bubble; only a comparison that makes the requirement readable stays in the row ("— up from the ~15%/year of the last decade", "Apple earns ~$130 billion"). On a card that lost money there is no farm line, and the opening line leads.
 
