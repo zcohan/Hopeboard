@@ -166,3 +166,12 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 :root[data-theme="dark"] .deal.worse{background:#3A2C12; color:#E8C27A}
 :root[data-theme="dark"] .deal.same{background:#252B27}
 .compare + .tabs, .pills + .compare + .tabs{margin-top:20px}
+.foot-links{margin-top:auto; display:flex; flex-direction:column; gap:12px}
+.links{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center}
+.links .whylink{margin-top:0}
+.cmplink{font:inherit; font-size:14px; font-weight:500; color:var(--ink); background:none; border:0; padding:2px 0; cursor:pointer;
+  text-decoration:underline; text-decoration-color:var(--ink-3); text-underline-offset:3px}
+.cmplink:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+.cmp{display:flex; flex-direction:column; gap:10px; align-items:flex-start; padding-top:4px}
+.cmp[hidden], .cmp .deal[hidden]{display:none}
+.cmp .deal{margin:0}

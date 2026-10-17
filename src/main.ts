@@ -5,7 +5,7 @@ import logoSources from '../public/logos/sources.json';
 import { Copy, renderBoard, SECTIONS, type BoardState } from './board';
 import type { Section } from './engine';
 import { installPopovers } from './popover';
-import { CATEGORIES, COMPARES, type Basis, type CardsFile, type Compare, type Era, type Figures } from './types';
+import { CATEGORIES, type Basis, type CardsFile, type Compare, type Era, type Figures } from './types';
 
 const F = figuresJson as unknown as Figures;
 let C = cardsJson as unknown as CardsFile;
@@ -16,7 +16,6 @@ const state: BoardState = {
   basis: 't',
   category: 'all',
   section: 'pricey',
-  compare: null,
 };
 
 const app = document.getElementById('app')!;
@@ -68,20 +67,14 @@ function render() {
     (pills
       ? `<div class="toggle pills" role="group" aria-label="Industry">${pill('cat', 'all', pills.all as string, state.category === 'all')}${CATEGORIES.map((c) => pill('cat', c, pills[c] as string, state.category === c)).join('')}</div>`
       : '') +
-    (state.era === 'now' && state.basis === 't'
-      ? `<div class="compare" role="group" aria-label="${esc(copy.label('compare', 'label'))}"><span class="tl">${esc(copy.label('compare', 'label'))}</span><div class="seg">${COMPARES.map((c) => `<button type="button" data-cmp="${c}" aria-pressed="${state.compare === c}" class="${state.compare === c ? 'on' : ''}">${esc(copy.label('compare', c))}</button>`).join('')}</div></div>`
-      : '') +
+
     `${companies}</div><p class="foot">${foot}</p>${sourcesHtml(copy)}`;
 
   app.querySelectorAll<HTMLButtonElement>('button[data-era]').forEach((b) => b.addEventListener('click', () => { state.era = b.dataset.era as Era; render(); }));
   app.querySelectorAll<HTMLButtonElement>('button[data-basis]').forEach((b) => b.addEventListener('click', () => { state.basis = b.dataset.basis as Basis; render(); }));
   placeLogos();
+  applyCompare();
   app.querySelector<HTMLButtonElement>('.theme')?.addEventListener('click', () => { setTheme(theme() === 'dark' ? 'light' : 'dark', true); render(); });
-  // off by default; picking a time scale shows the badges, and clicking it again hides them
-  app.querySelectorAll<HTMLButtonElement>('button[data-cmp]').forEach((b) => b.addEventListener('click', () => {
-    state.compare = state.compare === b.dataset.cmp ? null : (b.dataset.cmp as Compare);
-    render();
-  }));
   app.querySelectorAll<HTMLButtonElement>('button[data-sec]').forEach((b) => b.addEventListener('click', () => { state.section = b.dataset.sec as Section; render(); }));
   app.querySelectorAll<HTMLButtonElement>('button[data-cat]').forEach((b) => b.addEventListener('click', () => { state.category = b.dataset.cat as BoardState['category']; render(); }));
 }
@@ -122,6 +115,37 @@ function placeLogos() {
     if (img) slot.append(img);
   });
 }
+
+// Each card's "Compare over time" panel. Its state lives here, by card, so a re-render keeps it.
+const compareOpen = new Map<string, Compare>();
+function applyCompare() {
+  app.querySelectorAll<HTMLElement>('.tile[data-copy]').forEach((tile) => {
+    const panel = tile.querySelector<HTMLElement>('.cmp');
+    const link = tile.querySelector<HTMLButtonElement>('.cmplink');
+    if (!panel || !link) return;
+    const w = compareOpen.get(tile.dataset.copy!);
+    panel.hidden = !w;
+    link.setAttribute('aria-expanded', String(!!w));
+    panel.querySelectorAll<HTMLElement>('[data-w]').forEach((el) => {
+      if (el.tagName === 'BUTTON') { el.classList.toggle('on', el.dataset.w === w); el.setAttribute('aria-pressed', String(el.dataset.w === w)); }
+      else el.hidden = el.dataset.w !== w;
+    });
+  });
+}
+app.addEventListener('click', (ev) => {
+  const t = ev.target as HTMLElement;
+  const tile = t.closest<HTMLElement>('.tile[data-copy]');
+  if (!tile) return;
+  const id = tile.dataset.copy!;
+  if (t.closest('.cmplink')) {
+    // opening starts on a year, the longest view; clicking the link again closes it
+    if (compareOpen.has(id)) compareOpen.delete(id); else compareOpen.set(id, 'm12');
+    applyCompare();
+  } else {
+    const b = t.closest<HTMLButtonElement>('.cmp button[data-w]');
+    if (b) { compareOpen.set(id, b.dataset.w as Compare); applyCompare(); }
+  }
+});
 
 installPopovers();
 render();

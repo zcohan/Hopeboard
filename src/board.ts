@@ -5,7 +5,7 @@ import { nowModel, parseFig, pastModel, type Section } from './engine';
 import { requiredGrowth } from './formula';
 import { decPctFixed, pct, usd } from './format';
 import { companyNowTokens, companyPastTokens, eraTokens, spxNowTokens } from './tokens';
-import type { Basis, CardsFile, Category, Company, Compare, CopyEntry, Era, Figures, PastEra } from './types';
+import { COMPARES, type Basis, type CardsFile, type Category, type Company, type CopyEntry, type Era, type Figures, type PastEra } from './types';
 
 export interface BoardState {
   era: Era;
@@ -13,8 +13,6 @@ export interface BoardState {
   category: Category | 'all';
   /** The section tab shown; 'all' renders every section under its heading (tests). */
   section: Section | 'all';
-  /** What each company card's deal badge compares against; null shows no badges (the default). */
-  compare: Compare | null;
 }
 
 export class Copy {
@@ -44,8 +42,8 @@ interface TileParts {
   about?: string; // one line on what the business does
   price: { pre?: string; n: string; unit: string };
   lines: { cls: 'makes' | 'miss'; html: string }[];
-  /** The deal badge under the header: better, worse or the same deal than at the chosen time. */
-  deal?: string;
+  /** The card's compare panel (time buttons and one badge per time scale), opened from a link at the foot. */
+  compare?: { link: string; panel: string };
   /** Labelled rows (company cards): Earns, Reasonably priced, Expected next year, Risk. */
   facts?: { label: string; html: string }[];
   why?: { heading: string; bullets: string[] } | { story: [string, string][] };
@@ -72,10 +70,11 @@ function tile(t: TileParts, copy: Copy): string {
     `<div class="top"><div class="head">` +
     (t.icon ? `<div class="logo" style="background:${t.color}" aria-hidden="true">${t.icon}</div>` : t.logo ? `<div class="logo img" data-logo="${esc(t.logo)}"></div>` : `<div class="logo" style="background:${t.color}">${esc(t.badge)}</div>`) +
     `<div class="name">${esc(t.name)}${t.about ? `<small>${esc(t.about)}</small>` : ''}</div>${price}</div>` +
-    (t.deal ?? '') +
     t.lines.map((l) => `<p class="${l.cls}">${l.html}</p>`).join('') +
     (t.facts?.length ? `<dl class="facts">${t.facts.map((x) => `<div><dt>${esc(x.label)}</dt><dd>${x.html}</dd></div>`).join('')}</dl>` : '') +
-    (link ? `<button type="button" class="whylink" popovertarget="${pop}">${link}</button>` : '') +
+    (link || t.compare
+      ? `<div class="foot-links">${t.compare?.panel ?? ''}<div class="links">${link ? `<button type="button" class="whylink" popovertarget="${pop}">${link}</button>` : ''}${t.compare?.link ?? ''}</div></div>`
+      : '') +
     `</div>` +
     (link ? `<div class="why" popover id="${pop}">${why}</div>` : '') +
     `</div>`
@@ -122,16 +121,25 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     }
   };
   const L = (field: string) => copy.label('page', field);
-  // better, worse or the same deal than at the chosen time: lower required growth is better
-  const dealBadge = (co: Company, now: number | null): string | undefined => {
-    if (!s.compare) return undefined;
-    const then = co.now.then?.[s.compare];
-    if (s.basis !== 't' || now === null || !then) return undefined;
-    const was = requiredGrowth(then.y, then.pe);
-    const kind = pct(was) === pct(now) ? 'same' : was > now ? 'better' : 'worse';
-    const arrow = { better: '↓', worse: '↑', same: '=' }[kind];
-    const detail = fill(copy.label('compare', kind === 'same' ? 'detailSame' : 'detail'), { then: () => pct(was), now: () => pct(now) }, `${co.id} deal`);
-    return `<div class="deal ${kind}">${arrow} ${esc(copy.label('compare', kind))} · ${detail}</div>`;
+  // the compare panel: one badge per time scale, shown when the reader opens it and picks one.
+  // Lower required growth is a better deal. Last year's profit only, so not on the forecast view.
+  const comparePanel = (co: Company, now: number | null): TileParts['compare'] => {
+    if (s.basis !== 't' || now === null || !co.now.then) return undefined;
+    const badges = COMPARES.flatMap((c) => {
+      const then = co.now.then?.[c];
+      if (!then) return [];
+      const was = requiredGrowth(then.y, then.pe);
+      const kind = pct(was) === pct(now) ? 'same' : was > now ? 'better' : 'worse';
+      const arrow = { better: '↓', worse: '↑', same: '=' }[kind];
+      const detail = fill(copy.label('compare', kind === 'same' ? 'detailSame' : 'detail'), { then: () => pct(was), now: () => pct(now) }, `${co.id} deal`);
+      return [{ c, html: `<div class="deal ${kind}" data-w="${c}">${arrow} ${esc(copy.label('compare', kind))} · ${detail}</div>` }];
+    });
+    if (!badges.length) return undefined;
+    const buttons = badges.map(({ c }) => `<button type="button" data-w="${c}">${esc(copy.label('compare', c))}</button>`).join('');
+    return {
+      link: `<button type="button" class="cmplink" aria-expanded="false">${esc(copy.label('compare', 'link'))}</button>`,
+      panel: `<div class="cmp" hidden><div class="seg" role="group" aria-label="${esc(copy.label('compare', 'label'))}">${buttons}</div>${badges.map((b) => b.html).join('')}</div>`,
+    };
   };
   const yearsUnit = (b: Basis) => L(b === 't' ? 'unitT' : 'unitF');
   const heading = (sec: Section) => copy.label('comment-headings', sec);
@@ -238,7 +246,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
             const full = lowYears ? `${html} ${fill(shared!.lowYears as string, tk, `${id} lowYears`)}` : html;
             return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html: full };
           });
-        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts, deal: dealBadge(co, m.req('t')), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
+        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts, compare: comparePanel(co, m.req('t')), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
       });
       if (html) buckets[m.section].push({ sort: m.sectionReq ?? -Infinity, html });
     }
