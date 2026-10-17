@@ -17,6 +17,149 @@
       "unitPast": "of that year’s profit"
     },
     {
+      "id": "nav",
+      "board": "Board",
+      "philosophy": "Philosophy",
+      "methodology": "Methodology",
+      "foot": "Figures are rounded and update every day. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything.",
+      "repo": "Source on GitHub",
+      "repoUrl": "https://github.com/zcohan/Hopeboard"
+    },
+    {
+      "id": "page:philosophy",
+      "title": "Philosophy",
+      "lead": "What a price is asking you to believe, and how to read it in plain numbers.",
+      "sections": [
+        {
+          "h": "A share price says nothing on its own",
+          "p": [
+            "An Apple share costs a few hundred dollars. That number tells you nothing until you know how much profit stands behind each share. A $10 share can be expensive and a $1,000 share cheap.",
+            "So Hopeboard never shows the share price. It shows what you are paying for: the business’s profit."
+          ]
+        },
+        {
+          "h": "Count the years of profit you’re paying for",
+          "p": [
+            "Warren Buffett explained it with a farm. If a farm costs $1,000 and earns $70 a year, you are paying 14 years of its profit. Put the other way round, it earns 7% of its price a year.",
+            "Every card starts there: what the business earns each year as a share of its price, next to what the safe US bond pays with no risk at all."
+          ]
+        },
+        {
+          "h": "What the price needs",
+          "p": [
+            "Most companies grow, so most are priced above what a farm would fetch. Paying 35 years of profit only works out if the profit grows a lot.",
+            "For every card, Hopeboard works out how fast profit has to grow each year for the next ten years for the stock to do as well as the S&P 500 has done since 1928, {index} a year. Then it sets that against what the business has actually done, and against what analysts expect next year."
+          ]
+        },
+        {
+          "h": "Measured against the safe choices",
+          "p": [
+            "The safe US bond pays a guaranteed return. The S&P 500 is the average of every big company’s story, at the average return. Anything else has to promise more than these to be worth the extra risk.",
+            "A famous company at a high price can promise less than the bond. Safety is a property of the price you pay."
+          ]
+        },
+        {
+          "h": "Parking money for a decade",
+          "p": [
+            "Hopeboard is for people deciding where to put savings for ten years. It doesn’t follow the daily price. The deal does change every day, though: when the price falls or the profit grows, the same company becomes a better deal. “Compare over time” on each card shows whether the deal is better or worse than a week, a month, three months or a year ago."
+          ]
+        },
+        {
+          "h": "What it doesn’t do",
+          "p": [
+            "It makes no predictions and picks no winners. It shows what has to be true for each price to work out, and leaves the judgement to you. Some prices assume a story the business has never shown; some assume very little. Knowing which is which is most of the work.",
+            "Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "page:methodology",
+      "title": "Methodology",
+      "lead": "How every figure on the board is worked out, and where it comes from.",
+      "sections": [
+        {
+          "h": "Years of profit",
+          "p": [
+            "The number in each card’s corner is the price divided by the last twelve months of profit per share, after dilution: what investors call the P/E. Profit comes from the company’s own filings with the SEC, and the price is the latest close.",
+            "Berkshire Hathaway’s profit leaves out the paper gains and losses on its stock holdings, after the tax on them, the way Berkshire reports it itself. TSMC and ASML file full years only in a form we can read, so for them last year’s profit is the last calendar year."
+          ]
+        },
+        {
+          "h": "Next year’s forecast",
+          "p": [
+            "The forecast view grows last year’s official profit at the analysts’ average forecast rate for the next fiscal year. That keeps both years counted the same way: analysts’ own figures usually leave out one-off costs, so they can’t be compared with official profit directly."
+          ]
+        },
+        {
+          "h": "Earns",
+          "p": [
+            "What the business earns each year as a share of its price: one over the years of profit. A company priced at 25 years of profit earns 4% of its price a year. Dividends are those paid over the last twelve months. Buybacks aren’t counted as cash returned: they already raise profit per share."
+          ]
+        },
+        {
+          "h": "What “reasonably priced” means",
+          "p": [
+            "A price is reasonable if the stock would return what the S&P 500 has averaged since 1928, {index} a year, with dividends. The return over ten years comes from three things: profit growth, the dividends paid along the way, and the change in how many years of profit people pay. Hopeboard assumes that in ten years people pay an ordinary {normalYears} years of profit, the long-run average, and works backwards to the growth each price needs."
+          ],
+          "formula": "return per year = (1 + growth) × (1 + dividends) × (18 ÷ years of profit today)^(1/10) − 1"
+        },
+        {
+          "h": "The sections",
+          "p": [
+            "Pricey: the price needs profit to grow at 14% a year or more. Normal: 10% to 14%. Bargain: under 10%. Losing money: the company lost money last year, so there is no profit to price."
+          ]
+        },
+        {
+          "h": "The “if” lines",
+          "p": [
+            "Each card tests what happens if growth falls short, using a growth rate you can check: the company’s own last decade, no growth at all, or the average big US company, 11% a year. Losses are over the full ten years. For a stock priced below {normalYears} years of profit, the result assumes buyers pay more in ten years than they do today, and the card says so."
+          ]
+        },
+        {
+          "h": "Last decade",
+          "p": [
+            "Last-decade growth compares the latest fiscal year’s profit per share with the one ten years before, adjusted for stock splits."
+          ]
+        },
+        {
+          "h": "Past views",
+          "p": [
+            "The 1-, 5- and 10-year views use only the filings published by that date and that day’s prices, so each one shows what an investor could have known then. Stock returns since then include dividends. The stories are one-line summaries of what the market was saying at the time."
+          ]
+        },
+        {
+          "h": "Compare over time",
+          "p": [
+            "Each card can compare today’s deal with a week, a month, three months or a year ago: the growth the price needed then, using the filings known then, against what it needs now. Less growth needed means a better deal."
+          ]
+        },
+        {
+          "h": "Rounding",
+          "p": [
+            "All figures are rounded and approximate. ≈ marks a rough estimate, where the data isn’t complete."
+          ]
+        },
+        {
+          "h": "Updates",
+          "p": [
+            "Prices, dividends, filings and forecasts are downloaded every day and every figure is recomputed. A day’s figures are only published if every card’s wording still holds for them."
+          ]
+        },
+        {
+          "h": "Sources",
+          "p": [],
+          "sources": true
+        },
+        {
+          "h": "Not advice",
+          "p": [
+            "Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything. Figures can be out of date or wrong."
+          ]
+        }
+      ]
+    },
+    {
       "id": "sections",
       "baselines": "Baselines",
       "pricey": "Pricey",
