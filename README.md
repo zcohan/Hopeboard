@@ -21,13 +21,15 @@ The figures are computed from downloaded data, never typed in. Put the keys in `
 EOD_API_KEY=…            # EOD Historical Data: prices, dividends, splits, the 10-year Treasury yield
 ALPHAVANTAGE_API_KEY=…   # Alpha Vantage: analysts' forecasts (free plan: 25 calls a day)
 SEC_CONTACT=you@example.com   # the SEC asks for a contact email on its downloads
+CLOUDFLARE_API_TOKEN=…        # Cloudflare Pages: Edit, for publishing
+CLOUDFLARE_ACCOUNT_ID=…
 ```
 
 ```
 npm run fetch        # download into .cache/ (git-ignored); repeat runs only fetch what's stale
 npx tsx scripts/supplements.ts   # figures read from filed reports (share classes, lagging quarters)
 npm run figures      # show what the new data changes; add `-- --write` to save data/figures.json
-npm run refresh      # all of the above, kept only if the tests still pass
+npm run refresh      # all of the above, kept only if the tests still pass, then published to Cloudflare Pages
 npm run refresh:install   # run the refresh every morning at 8:00 (macOS launchd)
 ```
 
@@ -45,4 +47,4 @@ Sources: company filings from SEC EDGAR (profit per share, share classes, Berksh
 
 `{opening}` ("Only if" or "If", set by section), `{req}`, `{vsLast}` (up from / down from the last decade, or "the same rate"), `{last}`, `{g}` (scenario growth), `{outcome}` (lose X% in red, or X%/year more or less than the safe US bond; `:index`, `:its` variants), `{earns}`, `{earnsVsBond}`, `{pays}`, `{fcastValue}`, `{vsBond}`, `{pe}`, `{pef}`, `{peNow}`, `{reqProfit}`, `{p:key}`, `{bond}`, `{highSince}`, `{goldReturn}`, `{index}`, `{normalYears}`, `{profit}`, `{stock}`, `{era}`. Arguments: `:bare` drops the `≈`, `:abs` drops the sign.
 
-Scenario anchors (`scenario` on a card entry): `none`, `last`, `average` (11%), plus `endsAt` and `profit` for cards that need a dollar or level test.
+Scenario anchors (`scenario` on a card entry): `none`, `last`, `average` (the S&P 500's last-decade profit growth), plus `endsAt` and `profit` for cards that need a dollar or level test.

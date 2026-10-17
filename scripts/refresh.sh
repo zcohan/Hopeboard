@@ -24,4 +24,10 @@ if ! npx vitest run; then
   cp .cache/figures.before.json data/figures.json
   notify "New figures broke a card's wording; kept yesterday's. See .cache/refresh.log"; exit 1
 fi
+
+# Publish to Cloudflare Pages. The token and account id live in .env.local.
+export $(grep -E '^CLOUDFLARE_(API_TOKEN|ACCOUNT_ID)=' .env.local)
+if ! npx vite build || ! npx wrangler@3 pages deploy dist --project-name=hopeboard --branch=main --commit-dirty=true; then
+  notify "New figures are fine but publishing failed. See .cache/refresh.log"; exit 1
+fi
 echo "ok"
