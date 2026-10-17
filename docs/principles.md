@@ -143,7 +143,7 @@ The design is a plain card grid that a first-time reader can scan, with nothing 
 
 ## Open items
 
-- [ ] **Cheap stocks get a flattering assumption.** The board assumes people pay 18 years of profit in 2036. For a stock priced below 18 (Verizon at 12, AT&T at 8) that assumes it becomes more popular, which adds several points a year to its "if" line; those cards now say so in the Risk/Cushion row. Capping the 2036 figure at today's isn't clearly better: every stock below 18 would then need about 10% minus its dividend, so Micron at 12 and Alphabet at 17 would look the same. The owner's call.
+- [ ] **Cheap stocks get a flattering assumption.** The board assumes people pay 18 years of profit in 2036. For a stock priced below 18 (Verizon at 12, AT&T at 8) that assumes it becomes more popular, which adds several points a year to its "if" line. (A line saying so on those cards was tried and removed: it confused more than it helped.) Capping the 2036 figure at today's isn't clearly better: every stock below 18 would then need about 10% minus its dividend, so Micron at 12 and Alphabet at 17 would look the same. The owner's call.
 - [ ] **The S&P 500's next-year forecast** is still a quoted figure (≈); its other figures come from Shiller's data.
 - [ ] **TSMC and ASML** file full years only, so last year's profit is the last calendar year. **SpaceX** keeps rough figures until its first annual report.
 - [ ] **Host the board** and move the daily refresh to a scheduled job there; check EOD's terms on republishing derived figures.

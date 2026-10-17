@@ -113,7 +113,7 @@
         {
           "h": "The “if” lines",
           "p": [
-            "Each card tests what happens if growth falls short, using a growth rate you can check: the company’s own last decade, no growth at all, or the average big US company: the S&P 500’s profit growth over the last decade, {avg} a year. Losses are over the full ten years. For a stock priced below {normalYears} years of profit, the result assumes buyers pay more in ten years than they do today, and the card says so."
+            "Each card tests what happens if growth falls short, using a growth rate you can check: the company’s own last decade, no growth at all, or the average big US company: the S&P 500’s profit growth over the last decade, {avg} a year. Losses are over the full ten years."
           ]
         },
         {
@@ -187,8 +187,7 @@
         "Shared by every company card. farm: what the business earns each year as a share of its price (one over years of profit), against the safe US bond: Buffett's farm in percent. Left off when the company lost money.",
         "forecast: analysts' average forecast for the next fiscal year against this one (Alpha Vantage). Replaced the industry line in October 2026.",
         "Company cards show labelled rows (owner’s layout, October 2026): Earns, Reasonably priced, Expected next year, Risk.",
-        "The Risk row is labelled Cushion when its outcome is good news (no loss, and at least as much as the yardstick).",
-        "lowYears: on cards priced below 18 years, the Risk/Cushion row says the 18-year assumption out loud, because it adds to the result (open item in principles.md)."
+        "The Risk row is labelled Cushion when its outcome is good news (no loss, and at least as much as the yardstick)."
       ],
       "labels": {
         "farm": "Earns",
@@ -196,8 +195,7 @@
         "forecast": "Expected next year",
         "consequence": "Risk",
         "consequenceGood": "Cushion"
-      },
-      "lowYears": "That assumes buyers pay {normalYears} years of profit in 2036, up from {pe:bare} today."
+      }
     },
     {
       "id": "compare",
