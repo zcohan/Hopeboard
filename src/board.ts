@@ -217,7 +217,10 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
             const html = fill(t!, tk, `${id} ${f}`);
             // the risk row is good news on cheap cards: no loss, and no "less than"
             const good = f === 'consequence' && !html.includes('class="loss"') && !html.includes('/year less</b>');
-            return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html };
+            // below 18 years the result leans on buyers paying more in 2036: say so (a soft claim, flagged on the card)
+            const lowYears = f === 'consequence' && m.pe.v !== null && m.pe.v < 18 && shared?.lowYears;
+            const full = lowYears ? `${html} ${fill(shared!.lowYears as string, tk, `${id} lowYears`)}` : html;
+            return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html: full };
           });
         return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts, why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
       });

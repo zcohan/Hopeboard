@@ -54,7 +54,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 **Card anatomy (company cards)**
 
 1. Logo, name, a one-line description of the business, and a right-aligned stack: "priced at", the number of years, "of last year's profit".
-2. Labelled rows: EARNS (what the business earns as a share of its price, against the safe US bond, and dividends where they are 1% or more), REASONABLY PRICED (the growth the price needs, against the last decade), EXPECTED NEXT YEAR (the analysts' forecast), RISK (what happens if growth falls short; CUSHION when that is good news).
+2. Labelled rows: EARNS (what the business earns as a share of its price, against the safe US bond, and dividends where they are 1% or more), REASONABLY PRICED (the growth the price needs, against the last decade), OVER TIME (better or worse than a month, three months and a year ago), EXPECTED NEXT YEAR (the analysts' forecast), RISK (what happens if growth falls short; CUSHION when that is good news).
 3. A link at the foot ("Why so pricey?", "What the price assumes", "Why so cheap?") opens two or three points on why the price is what it is.
 
 `docs/writing-guide.md` has the wording rules for every part.
@@ -91,7 +91,9 @@ Every figure needs a named source, and soft claims get flagged on the card or in
 - Profit per share, share classes and investment gains: the companies' own filings (SEC EDGAR), read from the summary data or the filed reports.
 - Prices, dividends, splits and the 10-year Treasury yield: EOD Historical Data.
 - Analysts' forecasts: Alpha Vantage.
-- The S&P 500's long-run return: Damodaran's yearly returns table (NYU Stern).
+- The S&P 500's long-run return, and stocks against bonds since 1928: Damodaran's yearly returns table (NYU Stern).
+- The S&P 500's profit, dividends and total return: Robert Shiller's monthly data.
+- Oil (Brent): EOD.
 - Logos: Wikimedia Commons (`public/logos/sources.json`).
 
 A daily job (`npm run refresh`) downloads new data, recomputes the figures and keeps them only if every card's wording still holds.
@@ -140,8 +142,7 @@ The design is a plain card grid that a first-time reader can scan, with nothing 
 
 ## Open items
 
-- [ ] **Cheap stocks get a flattering assumption.** The board assumes people pay 18 years of profit in 2036. For a stock priced below 18 (Verizon at 12, AT&T at 8) that assumes it becomes more popular, which adds several points a year to its "if" line. Proposal: never assume buyers pay more than they do today.
-- [ ] **Show how the deal moves:** "Since last month: better. The price now needs 19%/year, down from 22%", over a month, a quarter and a year.
-- [ ] **The S&P 500's years of profit and growth** are still quoted figures; compute them.
+- [ ] **Cheap stocks get a flattering assumption.** The board assumes people pay 18 years of profit in 2036. For a stock priced below 18 (Verizon at 12, AT&T at 8) that assumes it becomes more popular, which adds several points a year to its "if" line; those cards now say so in the Risk/Cushion row. Capping the 2036 figure at today's isn't clearly better: every stock below 18 would then need about 10% minus its dividend, so Micron at 12 and Alphabet at 17 would look the same. The owner's call.
+- [ ] **The S&P 500's next-year forecast** is still a quoted figure (≈); its other figures come from Shiller's data.
 - [ ] **TSMC and ASML** file full years only, so last year's profit is the last calendar year. **SpaceX** keeps rough figures until its first annual report.
 - [ ] **Host the board** and move the daily refresh to a scheduled job there; check EOD's terms on republishing derived figures.

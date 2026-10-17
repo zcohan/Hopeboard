@@ -45,7 +45,8 @@
         "forecast: analysts' average forecast for the next fiscal year against this one (Alpha Vantage). Replaced the industry line in October 2026.",
         "Company cards show labelled rows (owner’s layout, October 2026): Earns, Reasonably priced, Expected next year, Risk.",
         "The Risk row is labelled Cushion when its outcome is good news (no loss, and at least as much as the yardstick).",
-        "Over time: required growth now against a month, three months and a year ago, with the filings known then (last year’s profit only). Lower is a better deal."
+        "Over time: required growth now against a month, three months and a year ago, with the filings known then (last year’s profit only). Lower is a better deal.",
+        "lowYears: on cards priced below 18 years, the Risk/Cushion row says the 18-year assumption out loud, because it adds to the result (open item in principles.md)."
       ],
       "labels": {
         "farm": "Earns",
@@ -55,7 +56,8 @@
         "consequenceGood": "Cushion",
         "moves": "Over time"
       },
-      "moves": "{dealMoves}"
+      "moves": "{dealMoves}",
+      "lowYears": "That assumes buyers pay {normalYears} years of profit in 2036, up from {pe:bare} today."
     },
     {
       "id": "pills",
