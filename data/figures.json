@@ -94,7 +94,7 @@
         "last": 0.13
       },
       "bondHighSince": "It reached 5.3% in October, the highest since 2002",
-      "oil": 110,
+      "oil": 127,
       "longRun": {
         "stocks": 0.1,
         "bonds": 0.045,
@@ -139,7 +139,7 @@
         "profit": 0.129,
         "stock": 0.155
       },
-      "oil": 52
+      "oil": 49
     }
   },
   "companies": [
@@ -178,6 +178,12 @@
             "pe": 255.2,
             "y": 0
           }
+        },
+        "value": 1249,
+        "profits": {
+          "last": 3.8,
+          "sharePay": 3.8,
+          "cash": 18.7
         }
       },
       "past": {
@@ -635,8 +641,8 @@
       "category": "Chips",
       "industry": "chips",
       "now": {
-        "pe": 41,
-        "pef": 32,
+        "pe": 40,
+        "pef": 31,
         "y": 0.008,
         "last": 0.188,
         "forecast": 0.295,
@@ -645,7 +651,7 @@
           "below": 0.1507,
           "month": "October"
         },
-        "revenueGrowth": -0.0555,
+        "revenueGrowth": -0.041,
         "then": {
           "w1": {
             "pe": 44.2,
@@ -668,25 +674,25 @@
       "past": {
         "y1": {
           "pe": 41,
-          "profit": 0.384,
+          "profit": 0.406,
           "stock": 0.389,
           "y": 0.008,
-          "revenueGrowth": 0.4073,
+          "revenueGrowth": 0.4062,
           "maxFall": 0.2155
         },
         "y5": {
           "pe": 33,
-          "profit": 0.234,
+          "profit": 0.238,
           "stock": 0.311,
           "y": 0.016,
-          "revenueGrowth": 0.2884,
+          "revenueGrowth": 0.2856,
           "maxFall": 0.5647
         },
         "y10": {
           "pe": 17,
           "stock": 0.326,
           "y": 0.025,
-          "profit": 0.185,
+          "profit": 0.187,
           "maxFall": 0.5647
         }
       },
@@ -1120,7 +1126,7 @@
       "industry": "chipEquipment",
       "now": {
         "pe": 59,
-        "pef": 43,
+        "pef": 44,
         "y": 0.006,
         "last": 0.226,
         "forecast": 0.361,
@@ -1129,15 +1135,15 @@
           "below": 0.1738,
           "month": "June"
         },
-        "revenueGrowth": 0.1112,
+        "revenueGrowth": 0.1091,
         "capex": 2,
         "then": {
           "w1": {
-            "pe": 64.3,
+            "pe": 64.4,
             "y": 0.005
           },
           "m1": {
-            "pe": 56.6,
+            "pe": 56.2,
             "y": 0.006
           },
           "m3": {
@@ -1145,7 +1151,7 @@
             "y": 0.005
           },
           "m12": {
-            "pe": 45.3,
+            "pe": 45.4,
             "y": 0.007
           }
         }
@@ -3602,6 +3608,12 @@
             "pe": 128.4,
             "y": 0
           }
+        },
+        "value": 262,
+        "profits": {
+          "last": 0.31,
+          "sharePay": 1.8,
+          "cash": 4.6
         }
       },
       "past": {
@@ -3988,6 +4000,12 @@
             "pe": 6436.3,
             "y": 0
           }
+        },
+        "value": 281,
+        "profits": {
+          "last": 0.05,
+          "sharePay": 1.2,
+          "cash": 2
         }
       },
       "past": {

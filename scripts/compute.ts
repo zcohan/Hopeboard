@@ -140,6 +140,8 @@ const DIVIDENDS = ['PaymentsOfDividends', 'PaymentsOfDividendsCommonStock', 'Div
 const REVENUE = ['Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax', 'Revenue'];
 const NET_INCOME = ['NetIncomeLoss', 'ProfitLossAttributableToOwnersOfParent'];
 const CAPEX = ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsToAcquireProductiveAssets'];
+const SHARE_PAY = ['ShareBasedCompensation', 'AllocatedShareBasedCompensationExpense'];
+const OPERATING_CASH = ['NetCashProvidedByUsedInOperatingActivities'];
 
 export class Filings {
   private facts: Record<string, Record<string, Record<string, Fact[]>>> = {};
@@ -278,6 +280,8 @@ export class Filings {
   dividends = DIVIDENDS;
   revenue = REVENUE;
   capex = CAPEX;
+  sharePay = SHARE_PAY;
+  operatingCash = OPERATING_CASH;
   netIncome = NET_INCOME;
 }
 

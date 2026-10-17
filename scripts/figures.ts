@@ -72,6 +72,14 @@ for (const s of SOURCES) {
   // a company whose filings gave no recent profit keeps its figures and their source
   if (now.eps !== null) co.src = { ...co.src, pe: 'sec-eod', y: 'sec-eod', last: 'sec-eod', ...(fc ? { forecast: 'alphavantage' } : {}) };
 
+  // barely profitable (earning under 0.5% of its price): shown like a loss-maker, in dollars
+  if (!dollar && now.eps !== null && now.eps > 0 && now.pe !== null && now.pe > 200 && now.netIncome) {
+    const b2 = (x: number) => (Math.abs(x) < 1 ? Math.round(x * 100) / 100 : Math.round(x * 10) / 10);
+    const ttmBn = (names: string[]) => { const t = f.ttm(names, today); return t ? b2(Math.abs(t.val) / 1e9) : undefined; };
+    co.now.value = Math.round(now.price * (now.netIncome / now.eps));
+    co.now.profits = { last: b2(now.netIncome), ...(ttmBn(f.sharePay) !== undefined ? { sharePay: ttmBn(f.sharePay)! } : {}), ...(ttmBn(f.operatingCash) !== undefined ? { cash: ttmBn(f.operatingCash)! } : {}) };
+  }
+
   // the stock's path and the business's size, for hand-written lines that quote them
   const r4 = (x: number | null | undefined) => (x === null || x === undefined || !Number.isFinite(x) ? undefined : Math.round(x * 10000) / 10000);
   const yearAgo = computeOn(f, yearsBefore(today, 1), today);

@@ -123,8 +123,9 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
   const L = (field: string) => copy.label('page', field);
   // the compare panel: one badge per time scale, shown when the reader opens it and picks one.
   // Lower required growth is a better deal. Last year's profit only, so not on the forecast view.
-  const comparePanel = (co: Company, now: number | null): TileParts['compare'] => {
-    if (s.basis !== 't' || now === null || !co.now.then) return undefined;
+  const comparePanel = (co: Company, now: number | null, section: Section): TileParts['compare'] => {
+    // growth rates mean nothing for a company with little or no profit
+    if (s.basis !== 't' || now === null || !co.now.then || section === 'loss') return undefined;
     const badges = COMPARES.flatMap((c) => {
       const then = co.now.then?.[c];
       if (!then) return [];
@@ -227,7 +228,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         // every company card: what the price needs, what the business earns against the bond,
         // what analysts expect next year, and what happens if growth falls short
         const shared = copy.get('company-lines');
-        const earnsNow = !m.pe.loss && m.shown(s.basis) !== null && !(co.now.profits && (co.now.profits.last ?? 0) < 0);
+        const earnsNow = m.section !== 'loss' && m.shown(s.basis) !== null;
         // the farm line leads; the rest reads as commentary under it
         const tpl: [string, string | undefined][] = [
           ['farm', earnsNow ? (shared?.farm as string | undefined) : undefined],
@@ -246,7 +247,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
             const shaped = f === 'farm' || f === 'assumes' ? html.split('\n').map((l, i) => `<span class="${i ? 'note' : 'headline'}">${l}</span>`).join('') : html;
             return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html: shaped, cls: f };
           });
-        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts, compare: comparePanel(co, m.req('t')), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
+        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts, compare: comparePanel(co, m.req('t'), m.section), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
       });
       if (html) buckets[m.section].push({ sort: m.sectionReq ?? -Infinity, html });
     }

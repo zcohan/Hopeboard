@@ -107,7 +107,7 @@
         {
           "h": "The sections",
           "p": [
-            "Pricey: the price needs profit to grow at 14% a year or more. Normal: 10% to 14%. Bargain: under 10%. Losing money: the company lost money last year, so there is no profit to price."
+            "Pricey: the price needs profit to grow at 14% a year or more. Normal: 10% to 14%. Bargain: under 10%. Not profitable: the company lost money last year, or made so little (under 0.5% of its price) that a growth rate means nothing; these cards say instead how much profit the price needs by 2036."
           ]
         },
         {
@@ -168,8 +168,8 @@
       "priceyThen": "Pricey then",
       "normalThen": "Normal then",
       "bargainThen": "Bargain then",
-      "loss": "Losing money",
-      "lossThen": "Losing money then",
+      "loss": "Not profitable",
+      "lossThen": "Not profitable then",
       "notes": []
     },
     {
@@ -181,7 +181,7 @@
     },
     {
       "id": "company-lines",
-      "farm": "**{earns}** of its price a year\n{earnsVsBond} the safe US bond{pays}",
+      "farm": "**{earns}** of its stock price a year\n{earnsVsBond} the safe US bond{pays}",
       "forecast": "Analysts expect {fcastValue} next year",
       "notes": [
         "Shared by every company card. farm: what the business earns each year as a share of its price (one over years of profit), against the safe US bond: Buffett's farm in percent. Left off when the company lost money.",
@@ -1797,17 +1797,15 @@
     {
       "id": "PANW:now",
       "about": "Cybersecurity software",
-      "assumes": "**{reqSigned}** growth/year",
-      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "assumes": "**{reqProfit}** profit/year by 2036\nMade {p:last:bare} last year, after paying staff {p:sharePay:bare} in shares.",
+      "consequence": "If profit grows to the cash its business already brings in ({p:cash:bare} a year), {outcome}.",
       "scenario": {
-        "anchor": "average"
+        "anchor": "profit",
+        "key": "cash"
       },
       "bullets": [
-        "Official profit last year was close to nothing",
+        "Most of what it earns goes to staff as shares, which shrinks every holder’s slice",
         "Revenue grew {rev} last year; the price assumes profit catches up"
-      ],
-      "notes": [
-        "Profit near zero last year (two loss quarters); the cause wasn’t checked."
       ]
     },
     {
@@ -1958,13 +1956,14 @@
     {
       "id": "CRWD:now",
       "about": "Cybersecurity software",
-      "assumes": "**{reqSigned}** growth/year",
-      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "assumes": "**{reqProfit}** profit/year by 2036\nMade {p:last:bare} last year, after paying staff {p:sharePay:bare} in shares.",
+      "consequence": "If profit grows to the cash its business already brings in ({p:cash:bare} a year), {outcome}.",
       "scenario": {
-        "anchor": "average"
+        "anchor": "profit",
+        "key": "cash"
       },
       "bullets": [
-        "Official profit last year was close to nothing",
+        "Most of what it earns goes to staff as shares, which shrinks every holder’s slice",
         "A faulty update crashed millions of Windows computers in July 2024"
       ]
     },

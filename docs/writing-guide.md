@@ -273,7 +273,7 @@ Company cards show three labelled sections (labels in `company-lines.labels`), e
 
 | Label | Headline | Notes |
 | --- | --- | --- |
-| EARNS | **0.7%** of its price a year | 4.5% less than the safe US bond; dividends, when 1% or more |
+| EARNS | **0.7%** of its stock price a year | 4.5% less than the safe US bond; dividends, when 1% or more |
 | PRICED FOR | **+35%** growth/year | Up from the 15%/year of the last decade; Analysts expect 107% profit growth next year |
 | RISK, or CUSHION when the outcome is good news | If profit only grows at 13%/year (the average big US company), you're liable to lose 55% of your investment. | |
 
