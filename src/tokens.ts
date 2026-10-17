@@ -38,6 +38,11 @@ function nowTokens(m: NowModel, basis: Basis, F: Figures, scenario: Scenario | u
     opening: () => (m.section === 'pricey' || m.section === 'loss' ? 'Only if' : 'If'),
     req: (a) => approx(req(), a),
     cmp: () => compare(req(), need(m.last, 'last-decade growth')),
+    /** "Up from the 15%/year of the last decade", or "The same rate as over the last decade": a note under the requirement */
+    vsLastNote: () => {
+      const c = compare(req(), need(m.last, 'last-decade growth'));
+      return c === 'the same as' ? 'The same rate as over the last decade' : `${c[0].toUpperCase()}${c.slice(1)} the ${approx(m.last!, [])}/year of the last decade`;
+    },
     /** "— up from the ~15%/year of the last decade", or "— the same rate as over the last decade" (no repeated figure). */
     vsLast: () => {
       const c = compare(req(), need(m.last, 'last-decade growth'));

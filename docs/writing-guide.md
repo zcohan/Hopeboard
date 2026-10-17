@@ -265,16 +265,17 @@ For a no-profit card, give the scale with two anchors the reader knows: last yea
 
 Every company card carries two lines written once for all cards, in the `company-lines` entry. Don't write them per card.
 
-Company cards show four labelled rows (labels in `company-lines.labels`):
+Company cards show three labelled sections (labels in `company-lines.labels`), each a headline figure with small notes under it:
 
-| Label | Field | Reads like |
+| Label | Headline | Notes |
 | --- | --- | --- |
-| EARNS | farm (shared) | **~0.7%** of its price a year / ~4.5% less than the safe US bond / (dividends, when 1%+) — one per line |
-| REASONABLY PRICED | `assumes` | Only if profit grows at **~35%/year**. |
-| EXPECTED NEXT YEAR | forecast (shared) | ~107% profit growth |
-| RISK, or CUSHION when the outcome is good news | `consequence` | If profit only grows at 11%/year (the average big US company), you're liable to lose 62% of your investment. |
+| EARNS | **0.7%** of its price a year | 4.5% less than the safe US bond; dividends, when 1% or more |
+| REASONABLY PRICED IF | **35%** profit growth a year | Up from the 15%/year of the last decade; Analysts expect 107% profit growth next year |
+| RISK, or CUSHION when the outcome is good news | If profit only grows at 13%/year (the average big US company), you're liable to lose 55% of your investment. | |
 
-Each row holds one number. Background (when it became profitable, what fell since when) goes in the bubble; only a comparison that makes the requirement readable stays in the row ("— up from the ~15%/year of the last decade", "Apple earns ~$130 billion"). Write `assumes` to follow its label: it starts "Only if…", "If…" or "Even if…", never "Reasonably priced…". `{opening}` gives "Only if" (Pricey and Losing money) or "If". On a card that lost money there is no farm line, and the opening line leads.
+`assumes` holds the headline, a newline, then its note: `**{req}** profit growth a year\n{vsLastNote}.` The forecast note is added by the app.
+
+Each row holds one number. Background (when it became profitable, what fell since when) goes in the bubble; only a comparison that makes the requirement readable stays in the row ("— up from the ~15%/year of the last decade", "Apple earns ~$130 billion"). On a card that lost money there is no farm line, and the opening line leads.
 
 **The farm line** says what the business earns each year as a share of its price, against the safe US bond. It is Buffett's farm: a farm that costs $1,000 and earns $70 a year earns 7% of its price.
 

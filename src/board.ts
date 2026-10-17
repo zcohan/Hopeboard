@@ -231,8 +231,9 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         // the farm line leads; the rest reads as commentary under it
         const tpl: [string, string | undefined][] = [
           ['farm', earnsNow ? (shared?.farm as string | undefined) : undefined],
-          ['assumes', e.assumes as string | undefined],
-          ['forecast', co.now.forecast !== undefined && co.now.forecast !== null ? (shared?.forecast as string | undefined) : undefined],
+          // the analysts' forecast sits under the requirement as a note, so the two growth figures read together
+          ['assumes', e.assumes === undefined ? undefined : (e.assumes as string) + (co.now.forecast !== undefined && co.now.forecast !== null && shared?.forecast ? `\n${shared.forecast as string}` : '')],
+
           ['consequence', e.consequence as string | undefined],
         ];
         const labels = (shared?.labels ?? {}) as Record<string, string>;
@@ -241,8 +242,8 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
             const html = fill(t!, tk, `${id} ${f}`);
             // the risk row is good news on cheap cards: no loss, and no "less than"
             const good = f === 'consequence' && !html.includes('class="loss"') && !html.includes('/year less</b>');
-            // EARNS reads as a headline figure with notes under it (the bond comparison, dividends)
-            const shaped = f === 'farm' ? html.split('\n').map((l, i) => `<span class="${i ? 'note' : 'headline'}">${l}</span>`).join('') : html;
+            // EARNS and REASONABLY PRICED IF read as a headline figure with notes under it
+            const shaped = f === 'farm' || f === 'assumes' ? html.split('\n').map((l, i) => `<span class="${i ? 'note' : 'headline'}">${l}</span>`).join('') : html;
             return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html: shaped, cls: f };
           });
         return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts, compare: comparePanel(co, m.req('t')), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);

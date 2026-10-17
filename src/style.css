@@ -201,7 +201,7 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 /* a name with no description sits level with the middle of the logo */
 .head .name:not(:has(small)){align-self:flex-start; min-height:44px; display:flex; align-items:center}
 /* EARNS: the headline figure, with the bond comparison and dividends as small notes under it */
-.facts .farm dd{white-space:normal}
-.facts .farm .headline{display:block; font-size:16px}
-.facts .farm .headline b{font-size:22px; font-weight:600; letter-spacing:-0.02em; margin-right:2px}
-.facts .farm .note{display:block; font-size:13px; color:var(--ink-3); line-height:1.4; margin-top:1px}
+.facts :is(.farm, .assumes) dd{white-space:normal}
+.facts :is(.farm, .assumes) .headline{display:block; font-size:16px}
+.facts :is(.farm, .assumes) .headline b{font-size:22px; font-weight:600; letter-spacing:-0.02em; margin-right:2px}
+.facts :is(.farm, .assumes) .note{display:block; font-size:13px; color:var(--ink-3); line-height:1.4; margin-top:1px}

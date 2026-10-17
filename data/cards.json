@@ -182,17 +182,17 @@
     {
       "id": "company-lines",
       "farm": "**{earns}** of its price a year\n{earnsVsBond} the safe US bond{pays}",
-      "forecast": "{fcastValue}",
+      "forecast": "Analysts expect {fcastValue} next year",
       "notes": [
         "Shared by every company card. farm: what the business earns each year as a share of its price (one over years of profit), against the safe US bond: Buffett's farm in percent. Left off when the company lost money.",
         "forecast: analysts' average forecast for the next fiscal year against this one (Alpha Vantage). Replaced the industry line in October 2026.",
         "Company cards show labelled rows (owner’s layout, October 2026): Earns, Reasonably priced, Expected next year, Risk.",
-        "The Risk row is labelled Cushion when its outcome is good news (no loss, and at least as much as the yardstick)."
+        "The Risk row is labelled Cushion when its outcome is good news (no loss, and at least as much as the yardstick).",
+        "The forecast is a note under the requirement (owner, October 2026), no longer its own row."
       ],
       "labels": {
         "farm": "Earns",
-        "assumes": "Reasonably priced",
-        "forecast": "Expected next year",
+        "assumes": "Reasonably priced if",
         "consequence": "Risk",
         "consequenceGood": "Cushion"
       }
@@ -382,7 +382,7 @@
     {
       "id": "TSLA:now",
       "about": "Electric cars & batteries",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit only grows at {g}/year (the average big US company) and buyers stop paying extra for the story, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -414,7 +414,7 @@
     {
       "id": "PLTR:now",
       "about": "AI software for governments & companies",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -437,7 +437,7 @@
     {
       "id": "COST:now",
       "about": "Members-only warehouse stores",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -466,7 +466,7 @@
     {
       "id": "AAPL:now",
       "about": "iPhone, Mac & services",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -501,7 +501,7 @@
     {
       "id": "NVDA:now",
       "about": "Chips that power AI",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}, ending on a boom year.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}, ending on a boom year.",
       "consequence": "If profit doesn’t grow from this year’s level, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -530,7 +530,7 @@
     {
       "id": "MSFT:now",
       "about": "Windows, Office & Azure servers",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -559,7 +559,7 @@
     {
       "id": "META:now",
       "about": "Facebook & Instagram",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -591,7 +591,7 @@
     {
       "id": "TSM:now",
       "about": "Makes Apple’s & Nvidia’s chips",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -620,7 +620,7 @@
     {
       "id": "AMZN:now",
       "about": "Online shopping & cloud computing",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}, from almost nothing.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}, from almost nothing.",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -649,7 +649,7 @@
     {
       "id": "ORCL:now",
       "about": "Business software & cloud servers",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -678,7 +678,7 @@
     {
       "id": "GOOGL:now",
       "about": "Google search & YouTube",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome:index}.",
       "scenario": {
         "anchor": "average"
@@ -707,7 +707,7 @@
     {
       "id": "XOM:now",
       "about": "Oil & gas",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}, from a bad year for oil.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}, from a bad year for oil.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -742,7 +742,7 @@
     {
       "id": "AVGO:now",
       "about": "Chips for phones, networks & AI",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -759,7 +759,7 @@
     {
       "id": "AMD:now",
       "about": "Computer & AI chips",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -772,7 +772,7 @@
     {
       "id": "INTC:now",
       "about": "Chips for PCs & chip factories",
-      "assumes": "Only if Intel earns **{reqProfit}** a year by 2036. Intel lost {p:last:abs} last year. Its best years were {p:best}.",
+      "assumes": "**{reqProfit}** profit a year by 2036\nIntel lost {p:last:abs} last year. Its best years were {p:best}.",
       "consequence": "If profit reaches Intel’s best year ({p:best}), {outcome}.",
       "scenario": {
         "anchor": "profit",
@@ -790,7 +790,7 @@
     {
       "id": "ASML:now",
       "about": "Machines that make chips",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -803,7 +803,7 @@
     {
       "id": "MU:now",
       "about": "Memory chips for computers & phones",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit falls back to half this year’s level, {outcome}.",
       "scenario": {
         "anchor": "endsAt",
@@ -823,7 +823,7 @@
     {
       "id": "NOW:now",
       "about": "Office software for big companies",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -839,7 +839,7 @@
     {
       "id": "SHOP:now",
       "about": "Software for running an online shop",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -855,7 +855,7 @@
     {
       "id": "CRM:now",
       "about": "Software for sales teams",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -871,7 +871,7 @@
     {
       "id": "ADBE:now",
       "about": "Photoshop & PDF software",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -890,7 +890,7 @@
     {
       "id": "ABNB:now",
       "about": "Holiday home rentals",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -907,7 +907,7 @@
     {
       "id": "NFLX:now",
       "about": "Streaming TV & films",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -925,7 +925,7 @@
     {
       "id": "UBER:now",
       "about": "Rides & food delivery",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -942,7 +942,7 @@
     {
       "id": "CSCO:now",
       "about": "Routers & internet infrastructure",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -959,7 +959,7 @@
     {
       "id": "DELL:now",
       "about": "Computers & AI servers",
-      "assumes": "{opening} profit grows at **{req}/year**.",
+      "assumes": "**{req}** profit growth a year",
       "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -977,7 +977,7 @@
       "id": "SPCX:now",
       "about": "Rockets & Starlink satellite internet",
       "unit": "of last year’s revenue",
-      "assumes": "Only if profit grows to **{reqProfit}** a year by 2036. SpaceX lost {p:last:abs} on {p:revenue:bare} of revenue last year. Apple earns {p:apple}.",
+      "assumes": "**{reqProfit}** profit a year by 2036\nSpaceX lost {p:last:abs} on {p:revenue:bare} of revenue last year. Apple earns {p:apple}.",
       "consequence": "If profit reaches Apple’s level ({p:apple}), {outcome}.",
       "scenario": {
         "anchor": "profit",
@@ -995,7 +995,7 @@
     {
       "id": "BRK.B:now",
       "about": "Buffett’s company: buys & holds undervalued businesses",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -1027,7 +1027,7 @@
     {
       "id": "JPM:now",
       "about": "America’s biggest bank",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1056,7 +1056,7 @@
     {
       "id": "BAC:now",
       "about": "Banking for US households",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1084,7 +1084,7 @@
     {
       "id": "WFC:now",
       "about": "Everyday banking & home loans",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1112,7 +1112,7 @@
     {
       "id": "C:now",
       "about": "Bank for big companies worldwide",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1140,7 +1140,7 @@
     {
       "id": "GS:now",
       "about": "Advises on big deals & trades shares",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1168,7 +1168,7 @@
     {
       "id": "MS:now",
       "about": "Looks after wealthy people’s money",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1196,7 +1196,7 @@
     {
       "id": "V:now",
       "about": "Credit cards",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -1225,7 +1225,7 @@
     {
       "id": "MA:now",
       "about": "Credit cards",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -1254,7 +1254,7 @@
     {
       "id": "VZ:now",
       "about": "Mobile phone & home internet",
-      "assumes": "Even if profit shrinks **{req:abs}/year**. Over the last decade it shrank {last:abs}/year.",
+      "assumes": "Even if profit shrinks **{req:abs}** a year\nOver the last decade it shrank {last:abs}/year.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1283,7 +1283,7 @@
     {
       "id": "T:now",
       "about": "Phone plans & fibre internet",
-      "assumes": "Even if profit shrinks **{req:abs}/year**. Over the last decade it grew {last}/year.",
+      "assumes": "Even if profit shrinks **{req:abs}** a year\nOver the last decade it grew {last}/year.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1315,7 +1315,7 @@
     {
       "id": "TMUS:now",
       "about": "Mobile phone plans",
-      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "assumes": "**{req}** profit growth a year\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
