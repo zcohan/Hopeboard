@@ -16,7 +16,7 @@ const state: BoardState = {
   basis: 't',
   category: 'all',
   section: 'pricey',
-  compare: 'm12',
+  compare: null,
 };
 
 const app = document.getElementById('app')!;
@@ -69,7 +69,7 @@ function render() {
       ? `<div class="toggle pills" role="group" aria-label="Industry">${pill('cat', 'all', pills.all as string, state.category === 'all')}${CATEGORIES.map((c) => pill('cat', c, pills[c] as string, state.category === c)).join('')}</div>`
       : '') +
     (state.era === 'now' && state.basis === 't'
-      ? `<div class="compare" role="group" aria-label="${esc(copy.label('compare', 'label'))}"><span class="tl">${esc(copy.label('compare', 'label'))}</span><div class="seg">${COMPARES.map((c) => `<button type="button" data-cmp="${c}" class="${state.compare === c ? 'on' : ''}">${esc(copy.label('compare', c))}</button>`).join('')}</div></div>`
+      ? `<div class="compare" role="group" aria-label="${esc(copy.label('compare', 'label'))}"><span class="tl">${esc(copy.label('compare', 'label'))}</span><div class="seg">${COMPARES.map((c) => `<button type="button" data-cmp="${c}" aria-pressed="${state.compare === c}" class="${state.compare === c ? 'on' : ''}">${esc(copy.label('compare', c))}</button>`).join('')}</div></div>`
       : '') +
     `${companies}</div><p class="foot">${foot}</p>${sourcesHtml(copy)}`;
 
@@ -77,7 +77,11 @@ function render() {
   app.querySelectorAll<HTMLButtonElement>('button[data-basis]').forEach((b) => b.addEventListener('click', () => { state.basis = b.dataset.basis as Basis; render(); }));
   placeLogos();
   app.querySelector<HTMLButtonElement>('.theme')?.addEventListener('click', () => { setTheme(theme() === 'dark' ? 'light' : 'dark', true); render(); });
-  app.querySelectorAll<HTMLButtonElement>('button[data-cmp]').forEach((b) => b.addEventListener('click', () => { state.compare = b.dataset.cmp as Compare; render(); }));
+  // off by default; picking a time scale shows the badges, and clicking it again hides them
+  app.querySelectorAll<HTMLButtonElement>('button[data-cmp]').forEach((b) => b.addEventListener('click', () => {
+    state.compare = state.compare === b.dataset.cmp ? null : (b.dataset.cmp as Compare);
+    render();
+  }));
   app.querySelectorAll<HTMLButtonElement>('button[data-sec]').forEach((b) => b.addEventListener('click', () => { state.section = b.dataset.sec as Section; render(); }));
   app.querySelectorAll<HTMLButtonElement>('button[data-cat]').forEach((b) => b.addEventListener('click', () => { state.category = b.dataset.cat as BoardState['category']; render(); }));
 }

@@ -13,8 +13,8 @@ export interface BoardState {
   category: Category | 'all';
   /** The section tab shown; 'all' renders every section under its heading (tests). */
   section: Section | 'all';
-  /** What each company card's deal badge compares against. */
-  compare: Compare;
+  /** What each company card's deal badge compares against; null shows no badges (the default). */
+  compare: Compare | null;
 }
 
 export class Copy {
@@ -124,6 +124,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
   const L = (field: string) => copy.label('page', field);
   // better, worse or the same deal than at the chosen time: lower required growth is better
   const dealBadge = (co: Company, now: number | null): string | undefined => {
+    if (!s.compare) return undefined;
     const then = co.now.then?.[s.compare];
     if (s.basis !== 't' || now === null || !then) return undefined;
     const was = requiredGrowth(then.y, then.pe);

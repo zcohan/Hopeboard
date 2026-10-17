@@ -58,7 +58,7 @@
     },
     {
       "id": "compare",
-      "label": "Compared with",
+      "label": "Compare with",
       "w1": "1 week",
       "m1": "1 month",
       "m3": "3 months",
@@ -68,7 +68,8 @@
       "same": "Same deal",
       "detail": "needed {then}, now {now}",
       "notes": [
-        "The badge on each company card (owner chose option A, October 2026): the growth the price needed at the chosen time, with the filings known then, against today. Lower is a better deal. Shown on the Now view with last year’s profit."
+        "The badge on each company card (owner chose option A, October 2026): the growth the price needed at the chosen time, with the filings known then, against today. Lower is a better deal. Shown on the Now view with last year’s profit.",
+        "Off by default (owner, October 2026): no badges until a time scale is picked; clicking it again turns them off."
       ],
       "detailSame": "needs {now}"
     },
