@@ -144,7 +144,7 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .aside{color:var(--ink-2)} .aside b{font-weight:500; color:var(--ink)}
 
 /* Company cards: labelled rows */
-.facts{margin:0; display:flex; flex-direction:column; gap:12px}
+.facts{margin:0; display:flex; flex-direction:column; gap:18px}
 .facts dt{font-size:13px; font-weight:500; color:var(--ink-3); margin:0 0 2px; text-transform:uppercase; letter-spacing:0.06em}
 .facts dd{margin:0; font-size:15px; color:var(--ink); line-height:1.45}
 .facts dd b{font-weight:600}
