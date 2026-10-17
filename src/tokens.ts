@@ -37,6 +37,8 @@ function nowTokens(m: NowModel, basis: Basis, F: Figures, scenario: Scenario | u
     ...common(F),
     opening: () => (m.section === 'pricey' || m.section === 'loss' ? 'Only if' : 'If'),
     req: (a) => approx(req(), a),
+    /** "+47%" or "−1%": the required growth with its sign, as a headline */
+    reqSigned: () => { const p = pct(req()); return p.startsWith('−') || p === '0%' ? p : `+${p}`; },
     cmp: () => compare(req(), need(m.last, 'last-decade growth')),
     /** "Up from the 15%/year of the last decade", or "The same rate as over the last decade": a note under the requirement */
     vsLastNote: () => {
