@@ -9,7 +9,7 @@ import { parseFig, sectionOf } from '../src/engine';
 import type { Company, Figures, PastEra } from '../src/types';
 import { SOURCES } from './sources';
 import { loadSupplements } from './xbrl';
-import { bondHighSince, barOn, bond, computeOn, Filings, forecast, lastDate, lastDecade, yearsBefore, type Computed } from './compute';
+import { barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
 
 const WRITE = process.argv.includes('--write');
 await loadSupplements(SOURCES);
@@ -72,6 +72,20 @@ for (const s of SOURCES) {
   // a company whose filings gave no recent profit keeps its figures and their source
   if (now.eps !== null) co.src = { ...co.src, pe: 'sec-eod', y: 'sec-eod', last: 'sec-eod', ...(fc ? { forecast: 'alphavantage' } : {}) };
 
+  // the stock's path and the business's size, for hand-written lines that quote them
+  const r4 = (x: number | null | undefined) => (x === null || x === undefined || !Number.isFinite(x) ? undefined : Math.round(x * 10000) / 10000);
+  const yearAgo = computeOn(f, yearsBefore(today, 1), today);
+  const firstBar = series(s.eod)[0].date;
+  const listedRecently = firstBar > yearsBefore(today, 1);
+  Object.assign(co.now, {
+    ytd: r4(yearToDate(s.eod, today)),
+    fromHigh: (() => { const h = fromHigh(s.eod, today); const m = month(h.date); return { below: r4(h.below)!, month: h.date.slice(0, 4) === today.slice(0, 4) ? m.split(' ')[0] : m }; })(),
+    revenueGrowth: now.revenue && yearAgo?.revenue ? r4(now.revenue / yearAgo.revenue - 1) : undefined,
+    capex: (() => { const c = f.ttm(f.capex, today); return c && c.end > yearsBefore(today, 1) ? Math.round(Math.abs(c.val) / 1e9) : undefined; })(),
+    listing: listedRecently ? (() => { const l = sinceListing(s.eod); return { low: r4(l.low)!, high: r4(l.high)!, month: l.month }; })() : undefined,
+  });
+  for (const k of ['ytd', 'revenueGrowth', 'capex', 'listing'] as const) if (co.now[k] === undefined) delete co.now[k];
+
   // past views: only filings published by then
   for (const [era, n] of ERAS) {
     const d = yearsBefore(today, n);
@@ -85,6 +99,10 @@ for (const s of SOURCES) {
     p.profit = then.eps !== null && then.eps > 0 && now.eps !== null && now.eps > 0 ? r3(Math.pow(now.eps / then.eps, 1 / n) - 1)! : undefined;
     p.stock = r3(Math.pow(after.adjusted_close / before.adjusted_close, 1 / n) - 1)!;
     if (p.profit === undefined) delete p.profit;
+    const before1 = computeOn(f, yearsBefore(d, 1), today);
+    const rg = then.revenue && before1?.revenue ? r4(then.revenue / before1.revenue - 1) : undefined;
+    if (rg !== undefined) p.revenueGrowth = rg; else delete p.revenueGrowth;
+    p.maxFall = r4(maxFall(s.eod, d, today))!;
   }
   if (now.eps !== null) co.src.past = 'sec-eod';
 
@@ -99,6 +117,9 @@ const goldNow = barOn('XAUUSD.FOREX', today)!.close;
 F.eras.now.bond = r3(bond(today))!;
 (F.eras.now as { bondHighSince?: string | null }).bondHighSince = bondHighSince(today);
 F.eras.now.gold = Math.round(goldNow);
+F.eras.now.oil = Math.round(barOn('BZ.COMM', today)!.close);
+const lr = longRun();
+if (lr) F.eras.now.longRun = { stocks: r3(lr.stocks)!, bonds: r3(lr.bonds)!, from: 1928, to: lr.to };
 F.eras.now.label = month(today);
 for (const [era, n] of ERAS) {
   const d = yearsBefore(today, n);
@@ -108,6 +129,8 @@ for (const [era, n] of ERAS) {
   const g = barOn('XAUUSD.FOREX', d)!.close;
   E.gold = Math.round(g);
   E.goldReturn = r3(Math.pow(goldNow / g, 1 / n) - 1)!;
+  const oil = barOn('BZ.COMM', d);
+  if (oil) E.oil = Math.round(oil.close);
 }
 F.asOf = month(today);
 F.sources['sec-eod'] = {

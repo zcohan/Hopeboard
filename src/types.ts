@@ -36,6 +36,12 @@ export interface NowFigures {
   yearsOfRevenue?: Fig;
   /** Analysts' expected profit growth next year (their fiscal year after this one). */
   forecast?: number | null;
+  /** The stock's path and the business's size, for hand-written lines that quote them. */
+  ytd?: number; // change since the end of last year
+  fromHigh?: { below: number; month: string }; // below the year's highest close
+  revenueGrowth?: number; // revenue, last twelve months against the twelve before
+  capex?: number; // $ billions spent on buildings and equipment, last twelve months
+  listing?: { low: number; high: number; month: string }; // a new listing's range against its first close
 }
 
 export interface PastFigures {
@@ -43,6 +49,8 @@ export interface PastFigures {
   y?: number; // defaults to the company's current cash returned
   profit?: number; // profit growth since (one year: total; five or ten years: per year)
   stock?: number; // the stock's return since, same convention
+  revenueGrowth?: number; // revenue then, against the year before
+  maxFall?: number; // the biggest fall from a high between then and now
 }
 
 export interface Company {
@@ -62,6 +70,9 @@ export interface EraFigures {
   bond: number;
   gold: Fig; // $ an ounce
   goldReturn?: number; // now: per year since 1971; past: since then
+  oil?: number; // Brent, $ a barrel
+  /** Damodaran's yearly returns since 1928, compounded: the S&P 500 with dividends, and the 10-year Treasury. */
+  longRun?: { stocks: number; bonds: number; from: number; to: number };
   /** The year the bond was last this high, when it's the highest of the past year. */
   bondHighSince?: string | null;
   spx: { pe: Fig; pef?: Fig; y: number; last?: number; profit?: number; stock?: number };

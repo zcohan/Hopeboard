@@ -51,7 +51,7 @@ async function main() {
   }
 
   // EOD: daily prices from 2015, plus gold, the S&P 500 and currency where needed
-  const symbols = [...SOURCES.map((s) => s.eod), 'GSPC.INDX', 'XAUUSD.FOREX', ...new Set(SOURCES.flatMap((s) => (s.fx ? [s.fx] : [])))];
+  const symbols = [...SOURCES.map((s) => s.eod), 'GSPC.INDX', 'XAUUSD.FOREX', 'BZ.COMM', ...new Set(SOURCES.flatMap((s) => (s.fx ? [s.fx] : [])))];
   for (const sym of symbols) log.push(`eod ${sym} ${await get(eod(`eod/${sym}`, '&from=2015-01-01'), `.cache/eod/${sym}.json`, DAY / 2)}`);
   for (const s of SOURCES) log.push(`dividends ${s.id} ${await get(eod(`div/${s.eod}`, '&from=2014-01-01'), `.cache/div/${s.eod}.json`, DAY)}`);
   for (const s of SOURCES) log.push(`splits ${s.id} ${await get(eod(`splits/${s.eod}`, '&from=2000-01-01'), `.cache/splits/${s.eod}.json`, 7 * DAY)}`);
@@ -59,6 +59,9 @@ async function main() {
     const age = year === new Date().getFullYear() ? DAY / 2 : 365 * DAY;
     log.push(`ust ${year} ${await get(eod('ust/yield-rates', `&filter[year]=${year}`), `.cache/ust/${year}.json`, age)}`);
   }
+
+  // Damodaran's yearly returns on stocks and bonds since 1928 (the S&P's long-run average, and stocks' extra over bonds)
+  log.push(`damodaran ${await get('https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html', '.cache/damodaran/histretSP.html', 30 * DAY, { 'User-Agent': 'Mozilla/5.0' })}`);
 
   // Alpha Vantage: forecasts, oldest first, until the daily limit
   if (!AV) log.push('alphavantage skipped: ALPHAVANTAGE_API_KEY missing');

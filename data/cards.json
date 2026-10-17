@@ -90,7 +90,7 @@
     },
     {
       "id": "foot:past",
-      "text": "Figures for {era} are reconstructed and approximate: years of profit to within a few, growth and returns rounded, returns are share price plus dividends where noted. “Reasonable” uses the same rule as the current board. Stories are one-line summaries of what the market was saying at the time. All figures are rounded and approximate. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything."
+      "text": "Figures for {era} use only the company filings published by then and that day’s prices; stock returns include dividends. “Reasonable” uses the same rule as the current board. Stories are one-line summaries of what the market was saying at the time. All figures are rounded and approximate. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything."
     },
     {
       "id": "bond:now",
@@ -101,8 +101,8 @@
       "heading": "Why it matters",
       "bullets": [
         "The floor every other return is measured against",
-        "When this goes up, every stock’s hope is worth less",
-        "Stocks have returned 5%/year more than this over the long run, for taking the risk"
+        "When this goes up, every stock has to promise more to be worth the risk",
+        "Since 1928 stocks have returned {premium}/year more than this, for taking the risk"
       ],
       "notes": [
         "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
@@ -137,7 +137,7 @@
       "heading": "Why so pricey?",
       "bullets": [
         "Record profit margins hold",
-        "Nothing goes wrong with the ten names that are 40% of it",
+        "Nothing goes wrong with the ten biggest companies, which make up a large part of it",
         "The average now carries Tesla, Palantir and a boom-year Nvidia"
       ],
       "notes": [
@@ -163,8 +163,8 @@
     },
     {
       "id": "spx:y1",
-      "story": "The AI boom in full swing; the index at 27 years of profit, the top ten already 38% of it.",
-      "happened": "Profit grew {profit}. The index returned {stock}.",
+      "story": "The AI boom in full swing; the index at {pe} years of profit.",
+      "happened": "Profit {profitMove}. The index returned {stock}.",
       "notes": [
         "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
       ]
@@ -181,15 +181,15 @@
       "unit": "an ounce then, no profit",
       "assumes": "No profit to price. Reasonable only if someone paid more later.",
       "story": "Inflation arriving and gold oddly flat; bitcoin called the new gold.",
-      "happened": "Up {goldReturn}/year — most of it in 2024 and 2025.",
+      "happened": "Up {goldReturn}/year, most of it since 2024.",
       "notes": [
         "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
       ]
     },
     {
       "id": "spx:y5",
-      "story": "Zero interest rates, pandemic stimulus, everything expensive at once; the index at 25 years of profit.",
-      "happened": "Profit grew {profit}/year. The index returned {stock}/year — hope held up, rates didn’t matter as much as feared.",
+      "story": "Zero interest rates, pandemic stimulus, everything expensive at once; the index at {pe} years of profit.",
+      "happened": "Profit {profitMove}. The index returned {stock}/year.",
       "notes": [
         "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
       ]
@@ -214,7 +214,7 @@
     {
       "id": "spx:y10",
       "story": "Post-Brexit, pre-election, slow growth; “bond-proxy” stocks in fashion, tech cheap by today’s standards.",
-      "happened": "Profit grew {profit}/year. The index returned {stock}/year.",
+      "happened": "Profit {profitMove}. The index returned {stock}/year.",
       "notes": [
         "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
       ]
@@ -239,17 +239,17 @@
     {
       "id": "TSLA:y1",
       "story": "Robotaxi promises, a $1 trillion pay package for Musk, car sales falling.",
-      "happened": "Profit fell {profit:abs}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "TSLA:y5",
-      "story": "Just crossed $1 trillion on a Hertz order; the most hoped-for stock on earth.",
-      "happened": "Profit per share fell {profit:abs}/year. The stock returned {stock}/year — hope stayed absurd, which is the only reason it wasn’t worse."
+      "story": "Close to a $1 trillion value; the stock everyone was discussing.",
+      "happened": "Profit per share {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "TSLA:y10",
-      "story": "Model 3 about to launch, burning cash, bankruptcy a live question.",
-      "happened": "From a loss to a thin profit. The stock returned {stock}/year — a story that came true, then kept being priced as a story."
+      "story": "Model 3 still a year away; burning cash.",
+      "happened": "From a loss to a thin profit. The stock returned {stock}/year."
     },
     {
       "id": "PLTR:now",
@@ -267,7 +267,7 @@
     {
       "id": "PLTR:y1",
       "story": "The hottest AI software stock; government and enterprise growth accelerating.",
-      "happened": "Profit grew {profit} (from a tiny base). The stock returned {stock}."
+      "happened": "Profit {profitMove} (from a tiny base). The stock returned {stock}."
     },
     {
       "id": "PLTR:y5",
@@ -284,24 +284,24 @@
       },
       "bullets": [
         "Priced as a company that can’t fail",
-        "Certainty, not growth",
+        "The price pays for certainty more than for growth",
         "Mid-single-digit growth, forever, with no surprises"
       ]
     },
     {
       "id": "COST:y1",
       "story": "Priced for perfection; the safest growth story in retail.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "COST:y5",
       "story": "Pandemic favourite; membership renewals at record highs.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year — hope rose further."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year, and the years of profit people paid {peMove}."
     },
     {
       "id": "COST:y10",
       "story": "A membership machine growing high single digits; nobody called it exciting.",
-      "happened": "Profit grew {profit}/year — exactly what was required. The stock returned {stock}/year because hope rose from {pe:bare} to {peNow:bare}."
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year because the years of profit people paid {peMove}."
     },
     {
       "id": "AAPL:now",
@@ -312,7 +312,7 @@
         "anchor": "average"
       },
       "bullets": [
-        "Priced for reliability, not growth",
+        "The price pays for reliability more than for growth",
         "The iPhone never fades, the lock-in holds",
         "A single flat year isn’t allowed for"
       ],
@@ -323,20 +323,20 @@
     {
       "id": "AAPL:y1",
       "story": "The AI laggard; Siri delayed, tariffs threatening the supply chain.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "AAPL:y5",
       "story": "Pandemic winner; services growing, buybacks enormous.",
-      "happened": "Profit grew {profit}/year — short of the {req:bare} required. The stock returned {stock}/year anyway, because hope rose from 28 to 38.",
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year because the years of profit people paid {peMove}.",
       "notes": [
         "Typed numbers left in the wording (not computed): 28, 38"
       ]
     },
     {
       "id": "AAPL:y10",
-      "story": "“Peak iPhone.” Sales had just fallen 8%; Icahn had sold; Buffett had quietly started buying.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year — the record beat a tiny requirement and hope tripled on top."
+      "story": "“Peak iPhone.” Sales were falling for the first time in years; Icahn had sold; Buffett had started buying.",
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year, and the years of profit people paid {peMove}."
     },
     {
       "id": "NVDA:now",
@@ -355,17 +355,17 @@
     {
       "id": "NVDA:y1",
       "story": "The AI king; every hyperscaler’s capex went through it.",
-      "happened": "Profit grew {profit}. The stock returned {stock} — profit outran hope, so the years-of-profit figure fell from {pe:bare} to {peNow:bare}."
+      "happened": "Profit {profitMove}. The stock returned {stock}, and the years of profit people paid {peMove}."
     },
     {
       "id": "NVDA:y5",
-      "story": "Gaming, crypto mining and a promising data-centre line; 90 years of profit looked insane.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year. The insane price turned out to be cheap."
+      "story": "Gaming, crypto mining and a promising data-centre line; {pe} years of profit looked wild.",
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year."
     },
     {
       "id": "NVDA:y10",
       "story": "A gaming-chip company; AI a research sideline.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "MSFT:now",
@@ -377,24 +377,24 @@
       },
       "bullets": [
         "Azure and Office keep growing mid-teens",
-        "The $175bn a year on AI data centres earns a normal return",
+        "The {capex} it spent on buildings and equipment last year, mostly AI data centres, earns a normal return",
         "Growth already in the price: profits grew this year, the stock didn’t"
       ]
     },
     {
       "id": "MSFT:y1",
       "story": "OpenAI’s partner; Copilot everywhere; capex ramping.",
-      "happened": "Profit grew {profit}. The stock returned {stock} — hope came in from {pe:bare} to {peNow:bare}."
+      "happened": "Profit {profitMove}. The stock returned {stock}, and the years of profit people paid {peMove}."
     },
     {
       "id": "MSFT:y5",
       "story": "The cloud king at the top of the zero-rate boom.",
-      "happened": "Profit grew {profit}/year — just short of what was required. The stock returned {stock}/year."
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year."
     },
     {
       "id": "MSFT:y10",
       "story": "Nadella two years in; “cloud turnaround” still a question; Windows seen as a dinosaur.",
-      "happened": "Profit grew {profit}/year — triple the requirement. The stock returned {stock}/year."
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year."
     },
     {
       "id": "META:now",
@@ -405,28 +405,28 @@
         "anchor": "average"
       },
       "bullets": [
-        "Ads keep growing 20%+ a year",
+        "Ad sales keep growing (revenue grew {rev} last year)",
         "Ads pay for the AI spend",
         "A slice of the price is trust in Zuckerberg’s bets"
       ]
     },
     {
       "id": "META:y1",
-      "story": "Hiring a “superintelligence” lab at nine-figure salaries; ads growing 20%+.",
-      "happened": "Profit grew {profit}. The stock returned {stock} — hope faded exactly as fast as profit grew."
+      "story": "Hiring for a “superintelligence” lab at huge salaries; ad sales still growing fast.",
+      "happened": "Profit {profitMove}. The stock returned {stock}, and the years of profit people paid {peMove}."
     },
     {
       "id": "META:y5",
       "story": "The Facebook Files, the rename to Meta, the metaverse pivot; investors sceptical.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year — including a 70% fall and full recovery in between.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year, including a {maxFall} fall and a full recovery in between.",
       "notes": [
         "Typed numbers left in the wording (not computed): 70%"
       ]
     },
     {
       "id": "META:y10",
-      "story": "The ad machine, growing 50%/year; fake-news backlash beginning.",
-      "happened": "Profit grew {profit}/year — more than required. The stock returned {stock}/year; hope fell from {pe:bare} to {peNow:bare}."
+      "story": "The ad machine, revenue up {rev} in a year; the fake-news backlash beginning.",
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year, and the years of profit people paid {peMove}."
     },
     {
       "id": "TSM:now",
@@ -445,17 +445,17 @@
     {
       "id": "TSM:y1",
       "story": "The only foundry that can make the AI chips; Taiwan risk the permanent discount.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "TSM:y5",
       "story": "The chip shortage; everyone discovered who actually makes chips.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "TSM:y10",
       "story": "Apple’s chip supplier; a good, boring foundry.",
-      "happened": "Profit grew {profit}/year — four times the requirement. The stock returned {stock}/year."
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year."
     },
     {
       "id": "AMZN:now",
@@ -467,24 +467,24 @@
       },
       "bullets": [
         "AWS keeps its lead",
-        "$220bn a year of building keeps paying",
+        "The {capex} it spent on buildings and equipment last year keeps paying",
         "Nothing paid out until the building stops"
       ]
     },
     {
       "id": "AMZN:y1",
       "story": "Capex doubling for AI; AWS growth questioned.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "AMZN:y5",
-      "story": "Pandemic hangover beginning; still 60 years of profit.",
-      "happened": "Profit grew {profit}/year — short of the {req:bare} required. The stock returned {stock}/year."
+      "story": "Pandemic hangover beginning; still {pe} years of profit.",
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year."
     },
     {
       "id": "AMZN:y10",
-      "story": "AWS newly discovered; retail barely profitable; 190 years of a tiny profit.",
-      "happened": "Profit grew {profit}/year — it met a requirement nobody thought meetable. The stock returned {stock}/year."
+      "story": "AWS newly discovered; retail barely profitable; {pe} years of a tiny profit.",
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year."
     },
     {
       "id": "ORCL:now",
@@ -497,26 +497,23 @@
       "bullets": [
         "OpenAI has to pay its bills in full",
         "The construction debt has to refinance",
-        "The price halved in a year: the belief shrank, not the business"
+        "The stock is {ytd} this year while the business kept growing"
       ]
     },
     {
       "id": "ORCL:y1",
-      "story": "The $300bn OpenAI contract had just been announced; the stock at an all-time high.",
-      "happened": "Profit grew {profit}. The stock returned {stock} — the belief shrank, the business didn’t."
+      "story": "The OpenAI cloud contract had just been announced; the stock near its all-time high.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "ORCL:y5",
       "story": "A dinosaur that had missed the cloud, buying back its own shares.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year, including a record high in September 2025 and a halving since.",
-      "notes": [
-        "Rewritten to drop the dollar share price ($345). “Record high in September 2025” is unchecked."
-      ]
+      "happened": "Profit {profitMove}. The stock returned {stock}/year, including a {maxFall} fall along the way."
     },
     {
       "id": "ORCL:y10",
       "story": "Losing the cloud race to Amazon and Microsoft.",
-      "happened": "Profit grew {profit}/year — more than required. The stock returned {stock}/year."
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year."
     },
     {
       "id": "GOOGL:now",
@@ -535,17 +532,17 @@
     {
       "id": "GOOGL:y1",
       "story": "Survived the antitrust ruling; Gemini catching up; search-is-dead worries.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "GOOGL:y5",
       "story": "Ads booming out of the pandemic.",
-      "happened": "Profit grew {profit}/year — exactly what was required. The stock returned {stock}/year."
+      "happened": "Profit {profitMove} {vsReq}. The stock returned {stock}/year."
     },
     {
       "id": "GOOGL:y10",
       "story": "The search monopoly; antitrust in Europe; “other bets” losing money.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "XOM:now",
@@ -556,7 +553,7 @@
         "anchor": "none"
       },
       "bullets": [
-        "Oil stays near $100",
+        "Oil stays near today’s {oil} a barrel",
         "Its profit rises and falls with the oil price",
         "Dividends are most of what you get while you wait"
       ],
@@ -566,8 +563,8 @@
     },
     {
       "id": "XOM:y1",
-      "story": "Oil in the $60s; the dividend the whole story.",
-      "happened": "Profit grew {profit} as oil rose above $100. The stock returned {stock}.",
+      "story": "Oil at {oil} a barrel; the dividend the whole story.",
+      "happened": "Profit {profitMove} as oil rose. The stock returned {stock}.",
       "notes": [
         "Typed numbers left in the wording (not computed): $100"
       ]
@@ -575,12 +572,12 @@
     {
       "id": "XOM:y5",
       "story": "Recovering from a 2020 loss; kicked out of the Dow the year before; ESG money leaving.",
-      "happened": "From a loss back to record profit. The stock returned {stock}/year with dividends — the most unloved stock of 2020 was the decade’s quiet winner."
+      "happened": "From a loss back to a large profit. The stock returned {stock}/year with dividends."
     },
     {
       "id": "XOM:y10",
-      "story": "Oil at $50; profit at a trough; dividend-cut worries.",
-      "happened": "Profit grew {profit}/year from the trough — just above the requirement. The stock returned {stock}/year with dividends."
+      "story": "Oil at {oil} a barrel; profit at a trough; dividend-cut worries.",
+      "happened": "Profit {profitMove} from the trough {vsReq}. The stock returned {stock}/year with dividends."
     },
     {
       "id": "AVGO:now",
@@ -608,7 +605,7 @@
         "anchor": "average"
       },
       "bullets": [
-        "Data-centre sales were up 57% last quarter",
+        "Revenue grew {rev} last year, led by AI chips",
         "The price assumes AMD keeps gaining ground on Nvidia"
       ]
     },
@@ -622,7 +619,7 @@
         "key": "best"
       },
       "bullets": [
-        "The stock has risen 160% this year",
+        "The stock is {ytd} this year",
         "The price assumes the chip-factory business wins outside customers"
       ],
       "notes": [
@@ -672,8 +669,7 @@
         "anchor": "average"
       },
       "bullets": [
-        "Revenue is growing 24% a year",
-        "Its AI products passed $1 billion in annual contracts",
+        "Revenue grew {rev} last year",
         "The price assumes AI helps it rather than hurts it"
       ],
       "notes": [
@@ -689,8 +685,8 @@
         "anchor": "average"
       },
       "bullets": [
-        "Revenue is growing 32% a year, but profit fell 18% last year",
-        "The price assumes the profit catches up"
+        "Revenue grew {rev} last year",
+        "The price assumes profit grows into it"
       ],
       "notes": [
         "Draft said “~5% less”; the board’s form is “~X%/year less”."
@@ -706,7 +702,7 @@
       },
       "bullets": [
         "Investors fear AI lets customers build their own software",
-        "The stock is down 14% this year, after rising more than 50% from its June low"
+        "The stock is {ytd} this year"
       ],
       "notes": [
         "Cash returned (~5%) is a guess and is what pushes required growth so low."
@@ -721,7 +717,7 @@
         "anchor": "none"
       },
       "bullets": [
-        "The stock is down more than 30% this year on fears that AI makes creative tools cheap",
+        "The stock is {ytd} this year on fears that AI makes creative tools cheap",
         "The price assumes AI tools don’t take its customers"
       ],
       "notes": [
@@ -740,7 +736,7 @@
         "anchor": "average"
       },
       "bullets": [
-        "Revenue is growing 14% a year",
+        "Revenue grew {rev} last year",
         "The price assumes AI assistants don’t start booking trips without Airbnb"
       ],
       "notes": [
@@ -759,7 +755,7 @@
       "bullets": [
         "The ad tier keeps adding sign-ups",
         "YouTube doesn’t take more of the viewing time",
-        "The stock is down 26% this year while revenue grew"
+        "The stock is {ytd} this year, while revenue grew {rev}"
       ],
       "notes": [
         "Industry bucket (entertainment, ~6%) is a judgement call.",
@@ -793,7 +789,7 @@
       },
       "bullets": [
         "AI networking demand keeps lifting sales",
-        "In March 2000 the price was 150 years of profit"
+        "The 2000 boom priced it so high that the stock went nowhere for well over a decade"
       ],
       "notes": [
         "No industry line: Damodaran’s telecom equipment bucket reads ~40%, which would not be used.",
@@ -810,7 +806,7 @@
       },
       "bullets": [
         "Its AI server backlog turns into profit",
-        "The stock is down 19% from its September record after a Barclays downgrade",
+        "The stock is {fromHigh} below its high in {highMonth}",
         "Higher memory costs squeeze its margins"
       ],
       "notes": [
@@ -828,7 +824,7 @@
         "key": "apple"
       },
       "bullets": [
-        "Since listing in June the stock has ranged from 22% below its listing price to 67% above",
+        "Since listing in {listMonth} the stock has ranged from {listLow} below its first price to {listHigh} above",
         "It now includes Musk’s AI company xAI, bought in February",
         "The price ignores new shares it will have to issue"
       ],
@@ -856,17 +852,17 @@
     {
       "id": "BRK.B:y1",
       "story": "Buffett had announced he would hand over to Greg Abel at the end of the year.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "BRK.B:y5",
       "story": "Buying back its own shares, with few big deals in sight.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "BRK.B:y10",
       "story": "Had just bought Precision Castparts and its first Apple shares.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "JPM:now",
@@ -885,17 +881,17 @@
     {
       "id": "JPM:y1",
       "story": "Record profits as interest rates stayed high.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "JPM:y5",
       "story": "Profits rebounding as the feared pandemic loan losses never came.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "JPM:y10",
       "story": "Rates near zero squeezed what banks earned on loans.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "BAC:now",
@@ -913,17 +909,17 @@
     {
       "id": "BAC:y1",
       "story": "Higher rates for longer lifting what it earns on deposits.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "BAC:y5",
       "story": "Waiting for rates to rise from near zero.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "BAC:y10",
       "story": "Still putting the crisis years behind it.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "WFC:now",
@@ -941,17 +937,17 @@
     {
       "id": "WFC:y1",
       "story": "Freed in June from the cap regulators put on its size.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "WFC:y5",
       "story": "Held under the cap, cutting costs.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "WFC:y10",
       "story": "The fake-accounts scandal had just broken.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "C:now",
@@ -969,17 +965,17 @@
     {
       "id": "C:y1",
       "story": "The overhaul showing results; selling part of its Mexican bank.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "C:y5",
       "story": "Fined over weak controls; a new chief executive starting the overhaul.",
-      "happened": "Profit fell {profit:abs}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "C:y10",
       "story": "Still shrinking after the crisis.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "GS:now",
@@ -997,17 +993,17 @@
     {
       "id": "GS:y1",
       "story": "Deal-making and trading picking up.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "GS:y5",
       "story": "Record deal-making in the 2021 boom.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "GS:y10",
       "story": "Trading slow under the post-crisis rules.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "MS:now",
@@ -1025,17 +1021,17 @@
     {
       "id": "MS:y1",
       "story": "Wealth management growing and trading strong.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "MS:y5",
       "story": "Had bought E*Trade and Eaton Vance to grow wealth management.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "MS:y10",
       "story": "Shifting from trading toward managing money.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "V:now",
@@ -1054,17 +1050,17 @@
     {
       "id": "V:y1",
       "story": "Card spending steady; fights over the fees it charges shops.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "V:y5",
       "story": "Travel spending coming back after the pandemic.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "V:y10",
       "story": "Had just bought Visa Europe.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "MA:now",
@@ -1083,17 +1079,17 @@
     {
       "id": "MA:y1",
       "story": "Card spending steady; travel abroad growing.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "MA:y5",
       "story": "Fees on spending abroad coming back after the pandemic.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "MA:y10",
       "story": "Cards replacing cash around the world.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "VZ:now",
@@ -1112,17 +1108,17 @@
     {
       "id": "VZ:y1",
       "story": "A new chief executive; buying Frontier for its fibre lines.",
-      "happened": "Profit fell {profit:abs}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "VZ:y5",
       "story": "Spending heavily on airwaves for 5G.",
-      "happened": "Profit fell {profit:abs}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "VZ:y10",
       "story": "Buying Yahoo’s web business.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "T:now",
@@ -1144,7 +1140,7 @@
     {
       "id": "T:y1",
       "story": "Selling its stake in DirecTV and building fibre.",
-      "happened": "Profit grew {profit}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "T:y5",
@@ -1154,7 +1150,7 @@
     {
       "id": "T:y10",
       "story": "In talks to buy Time Warner.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "TMUS:now",
@@ -1172,17 +1168,17 @@
     {
       "id": "TMUS:y1",
       "story": "Competition for phone customers heating up.",
-      "happened": "Profit fell {profit:abs}. The stock returned {stock}."
+      "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
       "id": "TMUS:y5",
       "story": "Absorbing Sprint.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     },
     {
       "id": "TMUS:y10",
       "story": "Winning customers from bigger rivals with its “Un-carrier” plans.",
-      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
     }
   ]
 }

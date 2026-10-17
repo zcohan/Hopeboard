@@ -95,6 +95,7 @@ const DPS = ['CommonStockDividendsPerShareDeclared', 'CommonStockDividendsPerSha
 const DIVIDENDS = ['PaymentsOfDividends', 'PaymentsOfDividendsCommonStock', 'DividendsPaidClassifiedAsFinancingActivities', 'PaymentsOfOrdinaryDividends'];
 const REVENUE = ['Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax', 'Revenue'];
 const NET_INCOME = ['NetIncomeLoss', 'ProfitLossAttributableToOwnersOfParent'];
+const CAPEX = ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsToAcquireProductiveAssets'];
 
 export class Filings {
   private facts: Record<string, Record<string, Record<string, Fact[]>>> = {};
@@ -232,6 +233,7 @@ export class Filings {
   eps = EPS;
   dividends = DIVIDENDS;
   revenue = REVENUE;
+  capex = CAPEX;
   netIncome = NET_INCOME;
 }
 
@@ -316,4 +318,54 @@ export function forecast(id: string, today: string): Forecast | null {
   const i = years.findIndex((y) => y.date >= today);
   if (i < 0 || !years[i + 1]) return null;
   return { fy0: years[i], fy1: years[i + 1] };
+}
+
+// ---------- the stock's path (for the hand-written lines, so they quote computed moves) ----------
+
+/** Change in the stock (dividends reinvested) from `from` to `to`. */
+export function moveBetween(sym: string, from: string, to: string): number | null {
+  const a = barOn(sym, from), b = barOn(sym, to);
+  return a && b ? b.adjusted_close / a.adjusted_close - 1 : null;
+}
+
+/** The stock's change since the last close of the previous year. */
+export const yearToDate = (sym: string, d: string) => moveBetween(sym, `${+d.slice(0, 4) - 1}-12-31`, d);
+
+/** The highest close in the year to `d`, its date, and how far below it `d` is. */
+export function fromHigh(sym: string, d: string): { below: number; date: string } {
+  const from = yearsBefore(d, 1);
+  const s = series(sym).filter((x) => x.date > from && x.date <= d);
+  const top = s.reduce((a, b) => (b.adjusted_close > a.adjusted_close ? b : a));
+  return { below: 1 - s[s.length - 1].adjusted_close / top.adjusted_close, date: top.date };
+}
+
+/** The biggest fall from a high to a later low between `from` and `to`. */
+export function maxFall(sym: string, from: string, to: string): number {
+  let peak = 0, worst = 0;
+  for (const x of series(sym)) {
+    if (x.date < from || x.date > to) continue;
+    peak = Math.max(peak, x.adjusted_close);
+    worst = Math.max(worst, 1 - x.adjusted_close / peak);
+  }
+  return worst;
+}
+
+/** Since the first close on record (a new listing): the lowest and highest closes against that first one. */
+export function sinceListing(sym: string): { low: number; high: number; month: string } {
+  const s = series(sym);
+  const first = s[0].close;
+  const month = new Date(s[0].date + 'T00:00:00Z').toLocaleString('en-US', { month: 'long', timeZone: 'UTC' });
+  return { low: Math.min(...s.map((x) => x.close)) / first - 1, high: Math.max(...s.map((x) => x.close)) / first - 1, month };
+}
+
+/** Yearly compound returns from Damodaran's table: S&P 500 with dividends, and the 10-year US Treasury bond. */
+export function longRun(from = 1928): { stocks: number; bonds: number; to: number } | null {
+  const p = '.cache/damodaran/histretSP.html';
+  if (!existsSync(p)) return null;
+  const t = readFileSync(p, 'latin1').replace(/<[^>]+>/g, '|').replace(/\s+/g, ' ').replace(/(\|\s*)+/g, '|');
+  const rows = [...t.matchAll(/\|\s*(19[2-9]\d|20[0-4]\d)\s*\|\s*(-?[\d.]+)%\s*\|\s*(-?[\d.]+)%\s*\|\s*(-?[\d.]+)%\s*\|\s*(-?[\d.]+)%/g)]
+    .map((m) => ({ year: +m[1], stocks: +m[2] / 100, bonds: +m[5] / 100 })).filter((r) => r.year >= from);
+  if (!rows.length) return null;
+  const cagr = (k: 'stocks' | 'bonds') => Math.pow(rows.reduce((x, r) => x * (1 + r[k]), 1), 1 / rows.length) - 1;
+  return { stocks: cagr('stocks'), bonds: cagr('bonds'), to: rows[rows.length - 1].year };
 }
