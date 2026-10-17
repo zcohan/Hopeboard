@@ -1,0 +1,83 @@
+# Daily refresh: download new prices, dividends, filings and forecasts, recompute
+# data/figures.json, and publish only if every card still passes the tests (the
+# wording checks catch lines the new numbers have made untrue). Replaces the
+# launchd job that ran scripts/refresh.sh on a Mac.
+#
+# Needs repository secrets: EOD_API_KEY, ALPHAVANTAGE_API_KEY, SEC_CONTACT,
+# CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID.
+name: Daily refresh
+
+on:
+  schedule:
+    - cron: '30 22 * * *' # 22:30 UTC, after the US market's close is published
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    # off until the repository variable REFRESH is set to "on" (Settings → Secrets and variables → Actions → Variables)
+    if: vars.REFRESH == 'on'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # The downloads are kept between runs, so each run only fetches what's new
+      # (Alpha Vantage's free plan allows 25 calls a day).
+      - uses: actions/cache@v4
+        with:
+          path: .cache
+          key: data-${{ github.run_id }}
+          restore-keys: data-
+
+      - name: Keys
+        run: |
+          {
+            echo "EOD_API_KEY=${{ secrets.EOD_API_KEY }}"
+            echo "ALPHAVANTAGE_API_KEY=${{ secrets.ALPHAVANTAGE_API_KEY }}"
+            echo "SEC_CONTACT=${{ secrets.SEC_CONTACT }}"
+          } > .env.local
+
+      - name: Download
+        run: |
+          npx tsx scripts/fetch.ts
+          npx tsx scripts/supplements.ts
+
+      - name: Compute
+        run: npx tsx scripts/figures.ts --write
+
+      - name: Check every card
+        run: npx vitest run
+
+      - name: Build
+        run: npx vite build
+
+      - name: Publish
+        run: npx wrangler@3.114.0 pages deploy dist --project-name=hopeboard --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      # Keep the repo's figures the same as the site's.
+      - name: Commit the figures
+        run: |
+          if ! git diff --quiet data/figures.json; then
+            git config user.name "hopeboard-refresh"
+            git config user.email "hopeboard-refresh@users.noreply.github.com"
+            git add data/figures.json
+            git commit -m "Daily figures"
+            git push
+          fi
