@@ -44,15 +44,18 @@
         "Shared by every company card. farm: what the business earns each year as a share of its price (one over years of profit), against the safe US bond: Buffett's farm in percent. Left off when the company lost money.",
         "forecast: analysts' average forecast for the next fiscal year against this one (Alpha Vantage). Replaced the industry line in October 2026.",
         "Company cards show labelled rows (owner’s layout, October 2026): Earns, Reasonably priced, Expected next year, Risk.",
-        "The Risk row is labelled Cushion when its outcome is good news (no loss, and at least as much as the yardstick)."
+        "The Risk row is labelled Cushion when its outcome is good news (no loss, and at least as much as the yardstick).",
+        "Over time: required growth now against a month, three months and a year ago, with the filings known then (last year’s profit only). Lower is a better deal."
       ],
       "labels": {
         "farm": "Earns",
         "assumes": "Reasonably priced",
         "forecast": "Expected next year",
         "consequence": "Risk",
-        "consequenceGood": "Cushion"
-      }
+        "consequenceGood": "Cushion",
+        "moves": "Over time"
+      },
+      "moves": "{dealMoves}"
     },
     {
       "id": "pills",

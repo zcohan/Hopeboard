@@ -42,6 +42,8 @@ export interface NowFigures {
   revenueGrowth?: number; // revenue, last twelve months against the twelve before
   capex?: number; // $ billions spent on buildings and equipment, last twelve months
   listing?: { low: number; high: number; month: string }; // a new listing's range against its first close
+  /** Years of profit and dividends a month, a quarter and a year ago, with the filings known then. */
+  then?: Partial<Record<'m1' | 'm3' | 'm12', { pe: number; y: number }>>;
 }
 
 export interface PastFigures {

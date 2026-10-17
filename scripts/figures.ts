@@ -9,7 +9,7 @@ import { parseFig, sectionOf } from '../src/engine';
 import type { Company, Figures, PastEra } from '../src/types';
 import { SOURCES } from './sources';
 import { loadSupplements } from './xbrl';
-import { barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
+import { monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
 
 const WRITE = process.argv.includes('--write');
 await loadSupplements(SOURCES);
@@ -85,6 +85,13 @@ for (const s of SOURCES) {
     listing: listedRecently ? (() => { const l = sinceListing(s.eod); return { low: r4(l.low)!, high: r4(l.high)!, month: l.month }; })() : undefined,
   });
   for (const k of ['ytd', 'revenueGrowth', 'capex', 'listing'] as const) if (co.now[k] === undefined) delete co.now[k];
+
+  // how the deal has moved: years of profit and dividends a month, a quarter and a year ago, as known then
+  const then = Object.fromEntries((([['m1', 1], ['m3', 3], ['m12', 12]]) as [string, number][]).flatMap(([k, n]) => {
+    const c = computeOn(f, monthsBefore(today, n), today);
+    return c && c.pe !== null && c.dividendYield !== null ? [[k, { pe: Math.round(c.pe * 10) / 10, y: r3(c.dividendYield)! }]] : [];
+  }));
+  if (Object.keys(then).length && now.eps !== null && now.eps > 0) co.now.then = then; else delete co.now.then;
 
   // past views: only filings published by then
   for (const [era, n] of ERAS) {

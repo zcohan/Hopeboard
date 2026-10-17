@@ -9,6 +9,10 @@ import type { Source } from './sources';
 const DAY = 86_400_000;
 const ms = (d: string) => Date.parse(d + 'T00:00:00Z');
 const iso = (t: number) => new Date(t).toISOString().slice(0, 10);
+export const monthsBefore = (d: string, n: number) => {
+  const t = new Date(Date.UTC(+d.slice(0, 4), +d.slice(5, 7) - 1 - n, +d.slice(8, 10)));
+  return iso(t.getTime());
+};
 export const yearsBefore = (d: string, n: number) => iso(Date.UTC(+d.slice(0, 4) - n, +d.slice(5, 7) - 1, +d.slice(8, 10)));
 const read = (p: string) => JSON.parse(readFileSync(p, 'utf8'));
 

@@ -207,6 +207,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         const tpl: [string, string | undefined][] = [
           ['farm', earnsNow ? (shared?.farm as string | undefined) : undefined],
           ['assumes', e.assumes as string | undefined],
+          ['moves', s.basis === 't' && co.now.then ? (shared?.moves as string | undefined) : undefined],
           ['forecast', co.now.forecast !== undefined && co.now.forecast !== null ? (shared?.forecast as string | undefined) : undefined],
           ['consequence', e.consequence as string | undefined],
         ];
