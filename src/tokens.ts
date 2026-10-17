@@ -85,7 +85,7 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
   };
   return {
     ...nowTokens(m, basis, F, entry.scenario as Scenario | undefined),
-    earns: () => `${decPct(earns())}`,
+    earns: () => (earns() < 0.001 ? 'Under 0.1%' : decPct(earns())),
     earnsVsBond: () => vsBondPhrase(earns(), F.eras.now.bond),
     pays: () => (co.now.y >= 0.01 ? `\n${decPct(co.now.y)} of it paid to you as dividends` : ''),
     fcast: () => {

@@ -228,7 +228,10 @@
         "Category of each company comes from docs/new-cards.md."
       ],
       "Financials": "Financials",
-      "Telecoms": "Telecoms"
+      "Telecoms": "Telecoms",
+      "Health": "Health",
+      "Consumer": "Shops & brands",
+      "Industry": "Energy & industry"
     },
     {
       "id": "past-frame",
@@ -296,7 +299,7 @@
         "anchor": "last"
       },
       "bullets": [
-        "Record profit margins hold",
+        "Companies keep a record share of their sales as profit, and that holds",
         "Nothing goes wrong with the ten biggest companies, which make up a large part of it",
         "The average now carries Tesla, Palantir and a boom-year Nvidia"
       ],
@@ -514,7 +517,7 @@
     },
     {
       "id": "NVDA:y1",
-      "story": "The AI king; every hyperscaler’s capex went through it.",
+      "story": "The AI king; every big cloud company’s spending on data centres went through it.",
       "happened": "Profit {profitMove}. The stock returned {stock}, and the years of profit people paid {peMove}."
     },
     {
@@ -543,7 +546,7 @@
     },
     {
       "id": "MSFT:y1",
-      "story": "OpenAI’s partner; Copilot everywhere; capex ramping.",
+      "story": "OpenAI’s partner; Copilot everywhere; spending on data centres climbing fast.",
       "happened": "Profit {profitMove}. The stock returned {stock}, and the years of profit people paid {peMove}."
     },
     {
@@ -633,7 +636,7 @@
     },
     {
       "id": "AMZN:y1",
-      "story": "Capex doubling for AI; AWS growth questioned.",
+      "story": "Spending on AI data centres doubling; doubts over how fast AWS was growing.",
       "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
@@ -965,9 +968,9 @@
         "anchor": "average"
       },
       "bullets": [
-        "Its AI server backlog turns into profit",
+        "Companies have ordered a lot of its AI servers; the price assumes those orders turn into profit",
         "The stock is {fromHigh} below its high in {highMonth}",
-        "Higher memory costs squeeze its margins"
+        "Memory chips have got more expensive, which cuts what it keeps from each sale"
       ],
       "notes": [
         "The draft’s prose was split into bullets."
@@ -1338,6 +1341,664 @@
     {
       "id": "TMUS:y10",
       "story": "Winning customers from bigger rivals with its “Un-carrier” plans.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "LLY:now",
+      "about": "Weight-loss and diabetes drugs",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Weight-loss drugs drive the growth: revenue grew {rev} last year",
+        "The price assumes rivals and cheaper versions don’t force those drug prices down fast"
+      ]
+    },
+    {
+      "id": "LLY:y1",
+      "story": "Its weight-loss drugs selling as fast as it could make them.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "LLY:y5",
+      "story": "Diabetes drugs strong; the weight-loss trials still to report.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "LLY:y10",
+      "story": "Waiting on a big Alzheimer’s drug trial.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "WMT:now",
+      "about": "The biggest US shop, in stores and online",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Priced like a tech company, on online sales, advertising and membership fees",
+        "Revenue grew {rev} last year, a fraction of the growth the price needs"
+      ]
+    },
+    {
+      "id": "WMT:y1",
+      "story": "Online sales and advertising growing; priced more and more like a tech company.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "WMT:y5",
+      "story": "The pandemic shopping boom fading.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "WMT:y10",
+      "story": "Spending on wages and online shopping after buying Jet.com.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "JNJ:now",
+      "about": "Medicines and medical devices",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Medicines and devices only, since it split off its consumer brands in 2023",
+        "Lawsuits over talc have been a cost for years"
+      ]
+    },
+    {
+      "id": "JNJ:y1",
+      "story": "Its medicines selling well; the talc lawsuits dragging on.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "JNJ:y5",
+      "story": "Covid vaccine a small part of sales; talc lawsuits growing.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "JNJ:y10",
+      "story": "Medicines plus baby shampoo and plasters; a safe dividend stock.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "ABBV:now",
+      "about": "Medicines, including Botox",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Official profit is held down by charges for buying other drug makers’ research",
+        "Its newer drugs Skyrizi and Rinvoq have to keep replacing Humira, which lost its US patent in 2023"
+      ]
+    },
+    {
+      "id": "ABBV:y1",
+      "story": "Skyrizi and Rinvoq replacing Humira faster than expected.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "ABBV:y5",
+      "story": "Humira’s US patent loss a little over a year away.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "ABBV:y10",
+      "story": "Most of its profit from one drug, Humira.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "CVX:now",
+      "about": "Oil & gas",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Its profit rises and falls with the oil price, now {oil} a barrel",
+        "Bought Hess in 2025 for its share of the oil found off Guyana"
+      ]
+    },
+    {
+      "id": "CVX:y1",
+      "story": "Had just completed buying Hess; oil at {oil} a barrel.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "CVX:y5",
+      "story": "Oil recovering from the pandemic slump.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "CVX:y10",
+      "story": "Losing money with oil at {oil} a barrel.",
+      "happened": "The stock returned {stock}/year."
+    },
+    {
+      "id": "KO:now",
+      "about": "Soft drinks",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Sells drinks in almost every country, growing slowly and steadily",
+        "Berkshire Hathaway has been its biggest holder since 1988"
+      ]
+    },
+    {
+      "id": "KO:y1",
+      "story": "Steady sales; weight-loss drugs a new worry for snack and drink makers.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "KO:y5",
+      "story": "Recovering as restaurants and stadiums reopened.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "KO:y10",
+      "story": "Selling its bottling plants to become a lighter business.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "PG:now",
+      "about": "Tide, Pampers & Gillette",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Household brands that grow slowly and steadily",
+        "The price assumes it can keep raising prices without losing shoppers to cheaper brands"
+      ]
+    },
+    {
+      "id": "PG:y1",
+      "story": "Raising prices while shoppers traded down.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "PG:y5",
+      "story": "Pandemic cleaning boom; raising prices.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "PG:y10",
+      "story": "Selling dozens of smaller brands to focus on its biggest.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "BLK:now",
+      "about": "The biggest money manager",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Earns a small fee on the money it manages, so its profit follows the markets",
+        "Buying private-investment firms to earn higher fees"
+      ]
+    },
+    {
+      "id": "BLK:y1",
+      "story": "Buying private-investment firms to grow its fees.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "BLK:y5",
+      "story": "Money pouring into its index funds.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "BLK:y10",
+      "story": "Index funds winning money from traditional fund managers.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "UNH:now",
+      "about": "The biggest US health insurer",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "America’s biggest health insurer, and a large health-services business",
+        "Profit per share {profit1y} over the last year as medical costs ran ahead of what it charged"
+      ]
+    },
+    {
+      "id": "UNH:y1",
+      "story": "Medical costs running ahead of premiums; its chief executive replaced in May.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "UNH:y5",
+      "story": "Steady growth from insurance and its health-services arm.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "UNH:y10",
+      "story": "Pulling out of most of the Obamacare markets.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "MRK:now",
+      "about": "Medicines and vaccines, including Keytruda",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Profit per share {profit1y} over the last year; if that came from one-off charges, the price is cheaper than its years of profit suggest",
+        "Keytruda, its biggest cancer drug, starts losing its main patent protection in 2028"
+      ],
+      "notes": [
+        "Profit fell 81% in a year; the cause wasn’t checked. If it was one-off charges, say so once confirmed."
+      ]
+    },
+    {
+      "id": "MRK:y1",
+      "story": "Keytruda selling strongly; its vaccine sales slumping in China.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "MRK:y5",
+      "story": "Its Covid pill close to approval.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "MRK:y10",
+      "story": "Strong lung-cancer trial results for Keytruda.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "CAT:now",
+      "about": "Diggers, mining trucks & engines",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Its sales follow building, mining and energy spending",
+        "Data centres buying its engines and generators for power have lifted sales"
+      ]
+    },
+    {
+      "id": "CAT:y1",
+      "story": "Data-centre power demand lifting engine sales.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "CAT:y5",
+      "story": "Construction and mining recovering after the pandemic.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "CAT:y10",
+      "story": "A mining slump; sales falling for a fourth year.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "LRCX:now",
+      "about": "Machines that make chips",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Makes the machines that etch and lay down the layers of a chip",
+        "Its sales follow chip makers’ spending, which swings with the chip cycle"
+      ]
+    },
+    {
+      "id": "LRCX:y1",
+      "story": "Chip makers spending on AI chips and memory.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "LRCX:y5",
+      "story": "The chip shortage; record orders.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "LRCX:y10",
+      "story": "Had just dropped its plan to buy KLA.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "GE:now",
+      "about": "Jet engines",
+      "assumes": "**{reqSigned}** growth/year",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Jet engines only, after the old GE split into three companies",
+        "Most of its profit comes from servicing engines already flying"
+      ]
+    },
+    {
+      "id": "GE:y1",
+      "story": "Jet engines only, after splitting off GE Vernova in 2024.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "GE:y5",
+      "story": "Losing money; selling businesses to pay down debt.",
+      "happened": "The stock returned {stock}/year."
+    },
+    {
+      "id": "GE:y10",
+      "story": "Still a conglomerate, selling off its finance arm.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "AMAT:now",
+      "about": "Machines that make chips",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "The biggest maker of chip-making machines",
+        "Sales to China are a large part of its business, and US export rules limit them"
+      ]
+    },
+    {
+      "id": "AMAT:y1",
+      "story": "New US limits on what it can sell to China.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "AMAT:y5",
+      "story": "Record orders as chip makers rushed to build.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "AMAT:y10",
+      "story": "Selling well to memory-chip makers.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "PM:now",
+      "about": "Marlboro & nicotine pouches outside the US",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Cigarettes outside the US, plus a growing business in heated tobacco and Zyn pouches",
+        "Much of what holders get is the dividend"
+      ]
+    },
+    {
+      "id": "PM:y1",
+      "story": "Zyn pouches and heated tobacco growing fast.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "PM:y5",
+      "story": "Pushing heated tobacco to replace cigarettes.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "PM:y10",
+      "story": "Cigarette sales falling; heated tobacco newly launched.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "HD:now",
+      "about": "DIY & building supplies",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Its sales follow home sales and renovations, which high mortgage rates have slowed",
+        "The stock is {ytd} this year"
+      ]
+    },
+    {
+      "id": "HD:y1",
+      "story": "High mortgage rates slowing home sales and renovations.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "HD:y5",
+      "story": "The pandemic home-improvement boom.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "HD:y10",
+      "story": "The housing recovery lifting renovations.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "PANW:now",
+      "about": "Cybersecurity software",
+      "assumes": "**{reqSigned}** growth/year",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Official profit last year was close to nothing",
+        "Revenue grew {rev} last year; the price assumes profit catches up"
+      ],
+      "notes": [
+        "Profit near zero last year (two loss quarters); the cause wasn’t checked."
+      ]
+    },
+    {
+      "id": "PANW:y1",
+      "story": "Agreed to buy CyberArk to grow in identity security.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "PANW:y5",
+      "story": "Losing money on paper as customers moved to subscriptions.",
+      "happened": "The stock returned {stock}/year."
+    },
+    {
+      "id": "PANW:y10",
+      "story": "Losing money on paper; firewall sales growing.",
+      "happened": "The stock returned {stock}/year."
+    },
+    {
+      "id": "RTX:now",
+      "about": "Jet engines & missiles",
+      "assumes": "**{reqSigned}** growth/year",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Pratt & Whitney jet engines and Raytheon missiles",
+        "A defect in some of its engines has cost it billions in inspections and repairs"
+      ]
+    },
+    {
+      "id": "RTX:y1",
+      "story": "Working through the engine defect; defence orders rising.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "RTX:y5",
+      "story": "A year after Raytheon and United Technologies merged.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "RTX:y10",
+      "story": "Still United Technologies, selling off divisions.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "TMO:now",
+      "about": "Lab equipment & supplies",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Sells the tools and supplies that drug makers and labs use",
+        "Profit has grown slowly since the pandemic testing boom ended"
+      ]
+    },
+    {
+      "id": "TMO:y1",
+      "story": "Drug makers cutting spending on lab supplies.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "TMO:y5",
+      "story": "The pandemic testing boom at its peak.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "TMO:y10",
+      "story": "Buying FEI and other lab-equipment makers.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "TXN:now",
+      "about": "Basic chips for cars & factories",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Makes basic chips that go into cars, factories and appliances",
+        "Spending heavily on new chip factories in Texas and Utah"
+      ]
+    },
+    {
+      "id": "TXN:y1",
+      "story": "Big new factories coming online; demand from industry slow.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "TXN:y5",
+      "story": "The chip shortage pushing prices up.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "TXN:y10",
+      "story": "Steady chip sales; buying back shares.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "GEV:now",
+      "about": "Gas turbines, wind turbines & power grids",
+      "assumes": "**{reqSigned}** growth/year",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Gas turbines, wind turbines and grid equipment, split off from GE in 2024",
+        "Demand for power from data centres has filled its order book"
+      ]
+    },
+    {
+      "id": "GEV:y1",
+      "story": "Half a year after leaving GE; gas turbine orders booming.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "AMGN:now",
+      "about": "Biotech medicines",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Several of its older drugs face cheaper copies",
+        "The price assumes its obesity drug, still in testing, works out"
+      ]
+    },
+    {
+      "id": "AMGN:y1",
+      "story": "Testing an obesity drug; older drugs facing cheaper copies.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "AMGN:y5",
+      "story": "Steady; buying back shares.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "AMGN:y10",
+      "story": "Facing cheaper copies of its oldest drugs.",
+      "happened": "Profit {profitMove}. The stock returned {stock}/year."
+    },
+    {
+      "id": "CRWD:now",
+      "about": "Cybersecurity software",
+      "assumes": "**{reqSigned}** growth/year",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Official profit last year was close to nothing",
+        "A faulty update crashed millions of Windows computers in July 2024"
+      ]
+    },
+    {
+      "id": "CRWD:y1",
+      "story": "Growing fast again after the July 2024 outage.",
+      "happened": "The stock returned {stock}."
+    },
+    {
+      "id": "CRWD:y5",
+      "story": "Growing fast and losing money on paper.",
+      "happened": "The stock returned {stock}/year."
+    },
+    {
+      "id": "LIN:now",
+      "about": "Industrial gases",
+      "assumes": "**{reqSigned}** growth/year",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "The biggest maker of industrial gases, mostly sold on long contracts",
+        "Formed in 2018 when Linde and Praxair merged"
+      ]
+    },
+    {
+      "id": "LIN:y1",
+      "story": "Steady growth while industrial demand was slow.",
+      "happened": "Profit {profitMove}. The stock returned {stock}."
+    },
+    {
+      "id": "LIN:y5",
+      "story": "Three years after Linde and Praxair merged.",
       "happened": "Profit {profitMove}. The stock returned {stock}/year."
     }
   ]

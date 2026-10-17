@@ -277,7 +277,7 @@
       "id": "COST",
       "name": "Costco",
       "color": "#1D4F91",
-      "category": "Other",
+      "category": "Consumer",
       "industry": "retail",
       "now": {
         "pe": 48,
@@ -917,7 +917,7 @@
       "id": "XOM",
       "name": "Exxon",
       "color": "#B5121B",
-      "category": "Other",
+      "category": "Industry",
       "industry": "oil",
       "now": {
         "pe": 23,
@@ -2464,6 +2464,1605 @@
           "stock": 0.137,
           "revenueGrowth": 0.0781,
           "maxFall": 0.4399
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "LLY",
+      "name": "Eli Lilly",
+      "color": "#D52B1E",
+      "category": "Health",
+      "now": {
+        "pe": 42,
+        "pef": null,
+        "y": 0.005,
+        "last": 0.261,
+        "ytd": 0.1753,
+        "fromHigh": {
+          "below": 0.0182,
+          "month": "August"
+        },
+        "revenueGrowth": 0.4958,
+        "then": {
+          "w1": {
+            "pe": 39.6,
+            "y": 0.006
+          },
+          "m1": {
+            "pe": 38.2,
+            "y": 0.006
+          },
+          "m3": {
+            "pe": 41.5,
+            "y": 0.006
+          },
+          "m12": {
+            "pe": 53.6,
+            "y": 0.007
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 54,
+          "y": 0.007,
+          "profit": 0.947,
+          "stock": 0.544,
+          "revenueGrowth": 0.3683,
+          "maxFall": 0.2318
+        },
+        "y5": {
+          "pe": 36,
+          "y": 0.014,
+          "profit": 0.35,
+          "stock": 0.408,
+          "revenueGrowth": 0.1646,
+          "maxFall": 0.3448
+        },
+        "y10": {
+          "pe": 34,
+          "y": 0.026,
+          "profit": 0.291,
+          "stock": 0.339,
+          "revenueGrowth": 0.0502,
+          "maxFall": 0.3448
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "WMT",
+      "name": "Walmart",
+      "color": "#0071CE",
+      "category": "Consumer",
+      "now": {
+        "pe": 43,
+        "pef": null,
+        "y": 0.008,
+        "last": 0.06,
+        "ytd": 0.0732,
+        "fromHigh": {
+          "below": 0.1126,
+          "month": "May"
+        },
+        "revenueGrowth": 0.0616,
+        "capex": 29,
+        "then": {
+          "w1": {
+            "pe": 40.3,
+            "y": 0.009
+          },
+          "m1": {
+            "pe": 38.9,
+            "y": 0.009
+          },
+          "m3": {
+            "pe": 40.5,
+            "y": 0.008
+          },
+          "m12": {
+            "pe": 40.2,
+            "y": 0.009
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 40,
+          "y": 0.009,
+          "profit": 0.042,
+          "stock": 0.125,
+          "revenueGrowth": 0.0423,
+          "maxFall": 0.2334
+        },
+        "y5": {
+          "pe": 39,
+          "y": 0.016,
+          "profit": 0.184,
+          "stock": 0.22,
+          "revenueGrowth": 0.0445,
+          "maxFall": 0.2574
+        },
+        "y10": {
+          "pe": 15,
+          "y": 0.029,
+          "profit": 0.06,
+          "stock": 0.199,
+          "revenueGrowth": -0.0037,
+          "maxFall": 0.2574
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "JNJ",
+      "name": "Johnson & Johnson",
+      "color": "#D51900",
+      "category": "Health",
+      "now": {
+        "pe": 30,
+        "pef": null,
+        "y": 0.021,
+        "last": 0.072,
+        "ytd": 0.2548,
+        "fromHigh": {
+          "below": 0.0821,
+          "month": "September"
+        },
+        "revenueGrowth": 0.0806,
+        "capex": 5,
+        "then": {
+          "w1": {
+            "pe": 30.3,
+            "y": 0.02
+          },
+          "m1": {
+            "pe": 31,
+            "y": 0.02
+          },
+          "m3": {
+            "pe": 29,
+            "y": 0.021
+          },
+          "m12": {
+            "pe": 20.6,
+            "y": 0.026
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 21,
+          "y": 0.026,
+          "profit": -0.077,
+          "stock": 0.36,
+          "revenueGrowth": 0.0468,
+          "maxFall": 0.1096
+        },
+        "y5": {
+          "pe": 24,
+          "y": 0.026,
+          "profit": 0.053,
+          "stock": 0.127,
+          "revenueGrowth": 0.1079,
+          "maxFall": 0.1841
+        },
+        "y10": {
+          "pe": 22,
+          "y": 0.026,
+          "profit": 0.048,
+          "stock": 0.111,
+          "maxFall": 0.2737
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "ABBV",
+      "name": "AbbVie",
+      "color": "#071D49",
+      "category": "Health",
+      "now": {
+        "pe": 81,
+        "pef": null,
+        "y": 0.024,
+        "last": -0.028,
+        "ytd": 0.2865,
+        "fromHigh": {
+          "below": 0,
+          "month": "October"
+        },
+        "revenueGrowth": 0.1039,
+        "capex": 1,
+        "then": {
+          "w1": {
+            "pe": 78.1,
+            "y": 0.025
+          },
+          "m1": {
+            "pe": 74.2,
+            "y": 0.026
+          },
+          "m3": {
+            "pe": 125.3,
+            "y": 0.027
+          },
+          "m12": {
+            "pe": 108,
+            "y": 0.029
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 108,
+          "y": 0.029,
+          "profit": 0.686,
+          "stock": 0.296,
+          "revenueGrowth": 0.0605,
+          "maxFall": 0.1574
+        },
+        "y5": {
+          "pe": 30,
+          "y": 0.048,
+          "profit": -0.009,
+          "stock": 0.255,
+          "revenueGrowth": 0.4831,
+          "maxFall": 0.2192
+        },
+        "y10": {
+          "pe": 17,
+          "y": 0.038,
+          "profit": 0.002,
+          "stock": 0.217,
+          "maxFall": 0.4509
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "CVX",
+      "name": "Chevron",
+      "color": "#0054A4",
+      "category": "Industry",
+      "now": {
+        "pe": 22,
+        "pef": null,
+        "y": 0.031,
+        "last": 0.105,
+        "ytd": 0.5174,
+        "fromHigh": {
+          "below": 0,
+          "month": "October"
+        },
+        "revenueGrowth": 0.1021,
+        "capex": 18,
+        "then": {
+          "w1": {
+            "pe": 20.4,
+            "y": 0.033
+          },
+          "m1": {
+            "pe": 20.4,
+            "y": 0.033
+          },
+          "m3": {
+            "pe": 32,
+            "y": 0.038
+          },
+          "m12": {
+            "pe": 19.5,
+            "y": 0.045
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 20,
+          "y": 0.045,
+          "profit": 0.337,
+          "stock": 0.541,
+          "revenueGrowth": -0.029,
+          "maxFall": 0.2081
+        },
+        "y5": {
+          "pe": 59,
+          "y": 0.048,
+          "profit": 0.409,
+          "stock": 0.202,
+          "revenueGrowth": 0.0159,
+          "maxFall": 0.2495
+        },
+        "y10": {
+          "pe": "loss",
+          "y": 0.042,
+          "stock": 0.13,
+          "revenueGrowth": -0.3375,
+          "maxFall": 0.5577
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "KO",
+      "name": "Coca-Cola",
+      "color": "#F40009",
+      "category": "Consumer",
+      "now": {
+        "pe": 30,
+        "pef": null,
+        "y": 0.022,
+        "last": 0.062,
+        "ytd": 0.3692,
+        "fromHigh": {
+          "below": 0,
+          "month": "October"
+        },
+        "revenueGrowth": 0.0472,
+        "capex": 2,
+        "then": {
+          "w1": {
+            "pe": 27.7,
+            "y": 0.024
+          },
+          "m1": {
+            "pe": 27.6,
+            "y": 0.024
+          },
+          "m3": {
+            "pe": 26.7,
+            "y": 0.024
+          },
+          "m12": {
+            "pe": 24,
+            "y": 0.03
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 24,
+          "y": 0.03,
+          "profit": 0.128,
+          "stock": 0.426,
+          "revenueGrowth": 0.0128,
+          "maxFall": 0.0787
+        },
+        "y5": {
+          "pe": 29,
+          "y": 0.031,
+          "profit": 0.112,
+          "stock": 0.148,
+          "revenueGrowth": 0.0608,
+          "maxFall": 0.1727
+        },
+        "y10": {
+          "pe": 24,
+          "y": 0.033,
+          "profit": 0.062,
+          "stock": 0.119,
+          "maxFall": 0.3699
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "PG",
+      "name": "Procter & Gamble",
+      "color": "#003DA5",
+      "category": "Consumer",
+      "now": {
+        "pe": 24,
+        "pef": null,
+        "y": 0.027,
+        "last": 0.06,
+        "ytd": 0.1367,
+        "fromHigh": {
+          "below": 0.0326,
+          "month": "February"
+        },
+        "revenueGrowth": 0.0326,
+        "capex": 4,
+        "then": {
+          "w1": {
+            "pe": 22.8,
+            "y": 0.028
+          },
+          "m1": {
+            "pe": 22.2,
+            "y": 0.029
+          },
+          "m3": {
+            "pe": 22.1,
+            "y": 0.028
+          },
+          "m12": {
+            "pe": 23,
+            "y": 0.028
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 23,
+          "y": 0.028,
+          "profit": 0.017,
+          "stock": 0.096,
+          "revenueGrowth": 0.0029,
+          "maxFall": 0.1552
+        },
+        "y5": {
+          "pe": 26,
+          "y": 0.023,
+          "profit": 0.038,
+          "stock": 0.046,
+          "revenueGrowth": 0.0728,
+          "maxFall": 0.2377
+        },
+        "y10": {
+          "pe": 24,
+          "y": 0.03,
+          "profit": 0.06,
+          "stock": 0.09,
+          "revenueGrowth": 0,
+          "maxFall": 0.2377
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "BLK",
+      "name": "BlackRock",
+      "color": "#000000",
+      "category": "Financials",
+      "now": {
+        "pe": 27,
+        "pef": null,
+        "y": 0.02,
+        "last": 0.06,
+        "ytd": 0.0772,
+        "fromHigh": {
+          "below": 0.036,
+          "month": "August"
+        },
+        "revenueGrowth": 0.2654,
+        "capex": 0,
+        "then": {
+          "w1": {
+            "pe": 25.9,
+            "y": 0.021
+          },
+          "m1": {
+            "pe": 24.9,
+            "y": 0.022
+          },
+          "m3": {
+            "pe": 27.4,
+            "y": 0.02
+          },
+          "m12": {
+            "pe": 28.3,
+            "y": 0.018
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 28,
+          "y": 0.018,
+          "profit": 0.009,
+          "stock": -0.011,
+          "revenueGrowth": 0.1545,
+          "maxFall": 0.2039
+        },
+        "y5": {
+          "pe": 26,
+          "y": 0.018,
+          "profit": 0.033,
+          "stock": 0.071,
+          "revenueGrowth": 0.2022,
+          "maxFall": 0.439
+        },
+        "y10": {
+          "pe": 19,
+          "y": 0.025,
+          "profit": 0.083,
+          "stock": 0.151,
+          "maxFall": 0.439
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "UNH",
+      "name": "UnitedHealth",
+      "color": "#002677",
+      "category": "Health",
+      "now": {
+        "pe": 26,
+        "pef": null,
+        "y": 0.023,
+        "last": 0.082,
+        "ytd": 0.2401,
+        "fromHigh": {
+          "below": 0.0744,
+          "month": "July"
+        },
+        "revenueGrowth": 0.0646,
+        "capex": 3,
+        "then": {
+          "w1": {
+            "pe": 24.4,
+            "y": 0.024
+          },
+          "m1": {
+            "pe": 24.1,
+            "y": 0.024
+          },
+          "m3": {
+            "pe": 31.9,
+            "y": 0.021
+          },
+          "m12": {
+            "pe": 15.4,
+            "y": 0.024
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 15,
+          "y": 0.024,
+          "profit": -0.326,
+          "stock": 0.155,
+          "revenueGrowth": 0.097,
+          "maxFall": 0.2856
+        },
+        "y5": {
+          "pe": 28,
+          "y": 0.013,
+          "profit": 0.005,
+          "stock": 0.005,
+          "revenueGrowth": 0.098,
+          "maxFall": 0.6139
+        },
+        "y10": {
+          "pe": 21,
+          "y": 0.017,
+          "profit": 0.093,
+          "stock": 0.135,
+          "revenueGrowth": 0.2741,
+          "maxFall": 0.6139
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "MRK",
+      "name": "Merck",
+      "color": "#00857C",
+      "category": "Health",
+      "now": {
+        "pe": 117,
+        "pef": null,
+        "y": 0.023,
+        "last": 0.172,
+        "ytd": 0.4152,
+        "fromHigh": {
+          "below": 0.0616,
+          "month": "August"
+        },
+        "revenueGrowth": 0.0464,
+        "capex": 4,
+        "then": {
+          "w1": {
+            "pe": 116.5,
+            "y": 0.023
+          },
+          "m1": {
+            "pe": 115.9,
+            "y": 0.023
+          },
+          "m3": {
+            "pe": 36,
+            "y": 0.026
+          },
+          "m12": {
+            "pe": 12.9,
+            "y": 0.039
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 13,
+          "y": 0.039,
+          "profit": -0.807,
+          "stock": 0.79,
+          "revenueGrowth": 0.0182,
+          "maxFall": 0.1137
+        },
+        "y5": {
+          "pe": 38,
+          "y": 0.032,
+          "profit": -0.095,
+          "stock": 0.168,
+          "revenueGrowth": 0.0676,
+          "maxFall": 0.4344
+        },
+        "y10": {
+          "pe": 34,
+          "y": 0.03,
+          "profit": -0.032,
+          "stock": 0.128,
+          "revenueGrowth": 0,
+          "maxFall": 0.4344
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "CAT",
+      "name": "Caterpillar",
+      "color": "#FFCD11",
+      "category": "Industry",
+      "now": {
+        "pe": 31,
+        "pef": null,
+        "y": 0.008,
+        "last": 0.162,
+        "ytd": 0.2834,
+        "fromHigh": {
+          "below": 0.3125,
+          "month": "June"
+        },
+        "revenueGrowth": 0.1836,
+        "capex": 3,
+        "then": {
+          "w1": {
+            "pe": 34.5,
+            "y": 0.008
+          },
+          "m1": {
+            "pe": 33.7,
+            "y": 0.008
+          },
+          "m3": {
+            "pe": 43.7,
+            "y": 0.007
+          },
+          "m12": {
+            "pe": 27.5,
+            "y": 0.011
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 28,
+          "y": 0.011,
+          "profit": 0.182,
+          "stock": 0.363,
+          "revenueGrowth": -0.0487,
+          "maxFall": 0.3125
+        },
+        "y5": {
+          "pe": 25,
+          "y": 0.021,
+          "profit": 0.239,
+          "stock": 0.32,
+          "revenueGrowth": -0.0138,
+          "maxFall": 0.3405
+        },
+        "y10": {
+          "pe": 39,
+          "y": 0.035,
+          "profit": 0.263,
+          "stock": 0.264,
+          "revenueGrowth": -0.2086,
+          "maxFall": 0.4336
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "LRCX",
+      "name": "Lam Research",
+      "color": "#0060A9",
+      "category": "Chips",
+      "now": {
+        "pe": 46,
+        "pef": null,
+        "y": 0.004,
+        "last": 0.271,
+        "ytd": 0.5465,
+        "fromHigh": {
+          "below": 0.3903,
+          "month": "June"
+        },
+        "revenueGrowth": 0.2602,
+        "capex": 1,
+        "then": {
+          "w1": {
+            "pe": 55.4,
+            "y": 0.003
+          },
+          "m1": {
+            "pe": 46.7,
+            "y": 0.004
+          },
+          "m3": {
+            "pe": 60.7,
+            "y": 0.003
+          },
+          "m12": {
+            "pe": 34.3,
+            "y": 0.007
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 34,
+          "y": 0.007,
+          "profit": 0.388,
+          "stock": 0.862,
+          "revenueGrowth": 0.2368,
+          "maxFall": 0.4176
+        },
+        "y5": {
+          "pe": 21,
+          "y": 0.01,
+          "profit": 0.164,
+          "stock": 0.375,
+          "revenueGrowth": 0.4561,
+          "maxFall": 0.5639
+        },
+        "y10": {
+          "pe": 19,
+          "y": 0.012,
+          "profit": 0.271,
+          "stock": 0.408,
+          "revenueGrowth": 0,
+          "maxFall": 0.5639
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "GE",
+      "name": "GE Aerospace",
+      "color": "#005EB8",
+      "category": "Industry",
+      "now": {
+        "pe": 37,
+        "pef": null,
+        "y": 0.006,
+        "last": null,
+        "ytd": 0.0231,
+        "fromHigh": {
+          "below": 0.1755,
+          "month": "August"
+        },
+        "revenueGrowth": 0.217,
+        "capex": 1,
+        "then": {
+          "w1": {
+            "pe": 36.3,
+            "y": 0.006
+          },
+          "m1": {
+            "pe": 36.9,
+            "y": 0.005
+          },
+          "m3": {
+            "pe": 40.8,
+            "y": 0.005
+          },
+          "m12": {
+            "pe": 41.8,
+            "y": 0.005
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 42,
+          "y": 0.005,
+          "profit": 0.183,
+          "stock": 0.052,
+          "revenueGrowth": -0.4005,
+          "maxFall": 0.2085
+        },
+        "y5": {
+          "pe": "loss",
+          "y": 0.003,
+          "stock": 0.377,
+          "revenueGrowth": -0.1041,
+          "maxFall": 0.4494
+        },
+        "y10": {
+          "pe": 25,
+          "y": 0.032,
+          "profit": 0.044,
+          "stock": 0.097,
+          "revenueGrowth": -0.0574,
+          "maxFall": 0.8094
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "AMAT",
+      "name": "Applied Materials",
+      "color": "#7AB4E2",
+      "category": "Chips",
+      "now": {
+        "pe": 35,
+        "pef": null,
+        "y": 0.005,
+        "last": 0.227,
+        "ytd": 0.5983,
+        "fromHigh": {
+          "below": 0.4333,
+          "month": "June"
+        },
+        "revenueGrowth": 0.0777,
+        "capex": 3,
+        "then": {
+          "w1": {
+            "pe": 43.7,
+            "y": 0.004
+          },
+          "m1": {
+            "pe": 35.8,
+            "y": 0.005
+          },
+          "m3": {
+            "pe": 52.8,
+            "y": 0.003
+          },
+          "m12": {
+            "pe": 27.2,
+            "y": 0.008
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 27,
+          "y": 0.008,
+          "profit": 0.383,
+          "stock": 0.807,
+          "revenueGrowth": 0.0655,
+          "maxFall": 0.4333
+        },
+        "y5": {
+          "pe": 23,
+          "y": 0.007,
+          "profit": 0.15,
+          "stock": 0.265,
+          "revenueGrowth": 0.3295,
+          "maxFall": 0.5514
+        },
+        "y10": {
+          "pe": 22,
+          "y": 0.014,
+          "profit": 0.247,
+          "stock": 0.321,
+          "maxFall": 0.5514
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "PM",
+      "name": "Philip Morris",
+      "color": "#003087",
+      "category": "Consumer",
+      "now": {
+        "pe": 30,
+        "pef": null,
+        "y": 0.029,
+        "last": 0.051,
+        "ytd": 0.3126,
+        "fromHigh": {
+          "below": 0.0018,
+          "month": "October"
+        },
+        "revenueGrowth": 0.0893,
+        "capex": 2,
+        "then": {
+          "w1": {
+            "pe": 28.9,
+            "y": 0.03
+          },
+          "m1": {
+            "pe": 27.6,
+            "y": 0.031
+          },
+          "m3": {
+            "pe": 26.7,
+            "y": 0.031
+          },
+          "m12": {
+            "pe": 29.6,
+            "y": 0.035
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 30,
+          "y": 0.035,
+          "profit": 0.319,
+          "stock": 0.362,
+          "revenueGrowth": 0.0716,
+          "maxFall": 0.1854
+        },
+        "y5": {
+          "pe": 17,
+          "y": 0.049,
+          "profit": 0.042,
+          "stock": 0.213,
+          "revenueGrowth": 0.0312,
+          "maxFall": 0.2278
+        },
+        "y10": {
+          "pe": 23,
+          "y": 0.043,
+          "profit": 0.052,
+          "stock": 0.133,
+          "maxFall": 0.4287
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "HD",
+      "name": "Home Depot",
+      "color": "#F96302",
+      "category": "Consumer",
+      "now": {
+        "pe": 22,
+        "pef": null,
+        "y": 0.03,
+        "last": 0.101,
+        "ytd": -0.0806,
+        "fromHigh": {
+          "below": 0.191,
+          "month": "February"
+        },
+        "revenueGrowth": 0.025,
+        "capex": 4,
+        "then": {
+          "w1": {
+            "pe": 20.3,
+            "y": 0.032
+          },
+          "m1": {
+            "pe": 21.2,
+            "y": 0.031
+          },
+          "m3": {
+            "pe": 24.7,
+            "y": 0.027
+          },
+          "m12": {
+            "pe": 26.3,
+            "y": 0.024
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 26,
+          "y": 0.024,
+          "profit": -0.029,
+          "stock": -0.178,
+          "revenueGrowth": 0.0852,
+          "maxFall": 0.2654
+        },
+        "y5": {
+          "pe": 25,
+          "y": 0.018,
+          "profit": 0.001,
+          "stock": 0.001,
+          "revenueGrowth": 0.2103,
+          "maxFall": 0.3473
+        },
+        "y10": {
+          "pe": 21,
+          "y": 0.021,
+          "profit": 0.092,
+          "stock": 0.121,
+          "revenueGrowth": 0,
+          "maxFall": 0.3799
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "PANW",
+      "name": "Palo Alto Networks",
+      "color": "#FA582D",
+      "category": "Software",
+      "now": {
+        "pe": 855,
+        "pef": null,
+        "y": 0,
+        "last": null,
+        "ytd": 0.8567,
+        "fromHigh": {
+          "below": 0.1855,
+          "month": "October"
+        },
+        "revenueGrowth": 0.2449,
+        "capex": 0,
+        "then": {
+          "w1": {
+            "pe": 1046.9,
+            "y": 0
+          },
+          "m1": {
+            "pe": 939.1,
+            "y": 0
+          },
+          "m3": {
+            "pe": 307.8,
+            "y": 0
+          },
+          "m12": {
+            "pe": 128.4,
+            "y": 0
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 128,
+          "y": 0,
+          "profit": -0.75,
+          "stock": 0.664,
+          "revenueGrowth": 0.1487,
+          "maxFall": 0.3601
+        },
+        "y5": {
+          "pe": "loss",
+          "y": 0,
+          "stock": 0.322,
+          "revenueGrowth": 0.2487,
+          "maxFall": 0.3601
+        },
+        "y10": {
+          "pe": "loss",
+          "y": 0,
+          "stock": 0.299,
+          "revenueGrowth": 0.4854,
+          "maxFall": 0.4798
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "RTX",
+      "name": "RTX",
+      "color": "#CE1126",
+      "category": "Industry",
+      "now": {
+        "pe": 34,
+        "pef": null,
+        "y": 0.015,
+        "last": -0.009,
+        "ytd": 0.0688,
+        "fromHigh": {
+          "below": 0.14,
+          "month": "August"
+        },
+        "revenueGrowth": 0.1184,
+        "capex": 3,
+        "then": {
+          "w1": {
+            "pe": 32.7,
+            "y": 0.015
+          },
+          "m1": {
+            "pe": 34.7,
+            "y": 0.014
+          },
+          "m3": {
+            "pe": 36.5,
+            "y": 0.014
+          },
+          "m12": {
+            "pe": 34.5,
+            "y": 0.017
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 35,
+          "y": 0.017,
+          "profit": 0.248,
+          "stock": 0.253,
+          "revenueGrowth": 0.1544,
+          "maxFall": 0.2006
+        },
+        "y5": {
+          "pe": 51,
+          "y": 0.022,
+          "profit": 0.26,
+          "stock": 0.189,
+          "revenueGrowth": 0.2848,
+          "maxFall": 0.3284
+        },
+        "y10": {
+          "pe": 11,
+          "y": 0.028,
+          "profit": 0.007,
+          "stock": 0.153,
+          "revenueGrowth": 0,
+          "maxFall": 0.5197
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "TMO",
+      "name": "Thermo Fisher",
+      "color": "#E71316",
+      "category": "Health",
+      "now": {
+        "pe": 37,
+        "pef": null,
+        "y": 0.003,
+        "last": 0.137,
+        "ytd": 0.1941,
+        "fromHigh": {
+          "below": 0.0093,
+          "month": "October"
+        },
+        "revenueGrowth": 0.0723,
+        "capex": 2,
+        "then": {
+          "w1": {
+            "pe": 35.4,
+            "y": 0.003
+          },
+          "m1": {
+            "pe": 34.9,
+            "y": 0.003
+          },
+          "m3": {
+            "pe": 29.9,
+            "y": 0.003
+          },
+          "m12": {
+            "pe": 31,
+            "y": 0.003
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 31,
+          "y": 0.003,
+          "profit": 0.075,
+          "stock": 0.29,
+          "revenueGrowth": 0.0205,
+          "maxFall": 0.3138
+        },
+        "y5": {
+          "pe": 27,
+          "y": 0.002,
+          "profit": -0.03,
+          "stock": 0.037,
+          "revenueGrowth": 0.4573,
+          "maxFall": 0.4095
+        },
+        "y10": {
+          "pe": 30,
+          "y": 0.004,
+          "profit": 0.14,
+          "stock": 0.167,
+          "revenueGrowth": 0.0446,
+          "maxFall": 0.4095
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "TXN",
+      "name": "Texas Instruments",
+      "color": "#CC0000",
+      "category": "Chips",
+      "now": {
+        "pe": 42,
+        "pef": null,
+        "y": 0.021,
+        "last": 0.068,
+        "ytd": 0.6204,
+        "fromHigh": {
+          "below": 0.1637,
+          "month": "June"
+        },
+        "revenueGrowth": 0.1666,
+        "capex": 3,
+        "then": {
+          "w1": {
+            "pe": 43.1,
+            "y": 0.02
+          },
+          "m1": {
+            "pe": 39.6,
+            "y": 0.022
+          },
+          "m3": {
+            "pe": 49.8,
+            "y": 0.019
+          },
+          "m12": {
+            "pe": 32.1,
+            "y": 0.031
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 32,
+          "y": 0.031,
+          "profit": 0.203,
+          "stock": 0.616,
+          "revenueGrowth": 0.0362,
+          "maxFall": 0.2337
+        },
+        "y5": {
+          "pe": 27,
+          "y": 0.021,
+          "profit": -0.017,
+          "stock": 0.104,
+          "revenueGrowth": 0.2245,
+          "maxFall": 0.3341
+        },
+        "y10": {
+          "pe": 23,
+          "y": 0.022,
+          "profit": 0.083,
+          "stock": 0.182,
+          "maxFall": 0.3341
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "GEV",
+      "name": "GE Vernova",
+      "color": "#005E60",
+      "category": "Industry",
+      "now": {
+        "pe": 26,
+        "pef": null,
+        "y": 0.002,
+        "last": null,
+        "ytd": 0.4121,
+        "fromHigh": {
+          "below": 0.2159,
+          "month": "June"
+        },
+        "revenueGrowth": 0.1298,
+        "capex": 2,
+        "then": {
+          "w1": {
+            "pe": 28.8,
+            "y": 0.002
+          },
+          "m1": {
+            "pe": 26.5,
+            "y": 0.002
+          },
+          "m3": {
+            "pe": 30.3,
+            "y": 0.002
+          },
+          "m12": {
+            "pe": 145.8,
+            "y": 0.001
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 146,
+          "y": 0.001,
+          "profit": 7.446,
+          "stock": 0.534,
+          "revenueGrowth": 0.0845,
+          "maxFall": 0.2554
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "AMGN",
+      "name": "Amgen",
+      "color": "#0063C3",
+      "category": "Health",
+      "now": {
+        "pe": 27,
+        "pef": null,
+        "y": 0.023,
+        "last": 0.046,
+        "ytd": 0.3484,
+        "fromHigh": {
+          "below": 0.0262,
+          "month": "September"
+        },
+        "revenueGrowth": 0.091,
+        "capex": 2,
+        "then": {
+          "w1": {
+            "pe": 25.8,
+            "y": 0.024
+          },
+          "m1": {
+            "pe": 23.4,
+            "y": 0.026
+          },
+          "m3": {
+            "pe": 25.9,
+            "y": 0.026
+          },
+          "m12": {
+            "pe": 24.2,
+            "y": 0.032
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 24,
+          "y": 0.032,
+          "profit": 0.316,
+          "stock": 0.503,
+          "revenueGrowth": 0.1288,
+          "maxFall": 0.1657
+        },
+        "y5": {
+          "pe": 21,
+          "y": 0.033,
+          "profit": 0.103,
+          "stock": 0.194,
+          "revenueGrowth": 0.0487,
+          "maxFall": 0.2486
+        },
+        "y10": {
+          "pe": 17,
+          "y": 0.023,
+          "profit": 0.051,
+          "stock": 0.137,
+          "revenueGrowth": 0.0823,
+          "maxFall": 0.2486
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "CRWD",
+      "name": "CrowdStrike",
+      "color": "#EC0000",
+      "category": "Software",
+      "now": {
+        "pe": 6064,
+        "pef": null,
+        "y": 0,
+        "last": null,
+        "ytd": 0.9404,
+        "fromHigh": {
+          "below": 0.1846,
+          "month": "October"
+        },
+        "capex": 0,
+        "then": {
+          "w1": {
+            "pe": 7334.4,
+            "y": 0
+          },
+          "m1": {
+            "pe": 6436.3,
+            "y": 0
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": "loss",
+          "y": 0,
+          "stock": 0.886,
+          "maxFall": 0.3718
+        },
+        "y5": {
+          "pe": "loss",
+          "y": 0,
+          "stock": 0.272,
+          "maxFall": 0.6769
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "LIN",
+      "name": "Linde",
+      "color": "#00539B",
+      "category": "Industry",
+      "now": {
+        "pe": 32,
+        "pef": null,
+        "y": 0.013,
+        "last": null,
+        "ytd": 0.1805,
+        "fromHigh": {
+          "below": 0.0852,
+          "month": "July"
+        },
+        "revenueGrowth": 0.0663,
+        "capex": 6,
+        "then": {
+          "w1": {
+            "pe": 31.2,
+            "y": 0.013
+          },
+          "m1": {
+            "pe": 29.8,
+            "y": 0.014
+          },
+          "m3": {
+            "pe": 34.5,
+            "y": 0.012
+          },
+          "m12": {
+            "pe": 31.6,
+            "y": 0.013
+          }
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 32,
+          "y": 0.013,
+          "profit": 0.102,
+          "stock": 0.137,
+          "revenueGrowth": 0.0128,
+          "maxFall": 0.1603
+        },
+        "y5": {
+          "pe": 49,
+          "y": 0.013,
+          "profit": 0.2,
+          "stock": 0.116,
+          "revenueGrowth": 0.0646,
+          "maxFall": 0.2282
         }
       },
       "src": {

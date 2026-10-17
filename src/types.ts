@@ -15,8 +15,8 @@ export type Basis = 't' | 'f'; // last year's profit, next year's forecast
 export type Compare = 'w1' | 'm1' | 'm3' | 'm12';
 export const COMPARES: Compare[] = ['w1', 'm1', 'm3', 'm12'];
 
-export type Category = 'Chips' | 'Software' | 'Internet' | 'Hardware' | 'Financials' | 'Telecoms' | 'Other';
-export const CATEGORIES: Category[] = ['Chips', 'Software', 'Internet', 'Hardware', 'Financials', 'Telecoms', 'Other'];
+export type Category = 'Chips' | 'Software' | 'Internet' | 'Hardware' | 'Health' | 'Consumer' | 'Financials' | 'Industry' | 'Telecoms' | 'Other';
+export const CATEGORIES: Category[] = ['Chips', 'Software', 'Internet', 'Hardware', 'Health', 'Consumer', 'Financials', 'Industry', 'Telecoms', 'Other'];
 
 export interface Source {
   name: string;

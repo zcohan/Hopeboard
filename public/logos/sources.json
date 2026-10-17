@@ -122,7 +122,7 @@
   "license": "Public domain"
  },
  "ABNB": {
-  "file": "Airbnb Logo Bélo.svg",
+  "file": "Airbnb Logo B\u00e9lo.svg",
   "page": "https://commons.wikimedia.org/wiki/File:Airbnb_Logo_B%C3%A9lo.svg",
   "license": "Public domain",
   "cropped": "0 0 96 100"
@@ -171,7 +171,7 @@
   "license": "Public domain"
  },
  "V": {
-  "file": "Visa Inc. logo (2021–present).svg",
+  "file": "Visa Inc. logo (2021\u2013present).svg",
   "page": "https://commons.wikimedia.org/wiki/File:Visa_Inc._logo_(2021%E2%80%93present).svg",
   "license": "Public domain"
  },
@@ -194,6 +194,104 @@
  "TMUS": {
   "file": "T-Mobile logo 2022.svg",
   "page": "https://commons.wikimedia.org/wiki/File:T-Mobile_logo_2022.svg",
+  "license": "Public domain"
+ },
+ "LLY": {
+  "file": "Lilly-Logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Lilly-Logo.svg",
+  "license": "Public domain"
+ },
+ "WMT": {
+  "file": "Walmart Spark (2007).svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Walmart_Spark_(2007).svg",
+  "license": "Public domain"
+ },
+ "ABBV": {
+  "file": "AbbVie logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:AbbVie_logo.svg",
+  "license": "Public domain"
+ },
+ "CVX": {
+  "file": "Chevron Logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Chevron_Logo.svg",
+  "license": "Public domain"
+ },
+ "PG": {
+  "file": "P&G logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:P%26G_logo.svg",
+  "license": "Public domain"
+ },
+ "BLK": {
+  "file": "BlackRock wordmark.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:BlackRock_wordmark.svg",
+  "license": "Public domain"
+ },
+ "MRK": {
+  "file": "Merck & Co.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Merck_%26_Co.svg",
+  "license": "Public domain",
+  "cropped": "0 0 23 23"
+ },
+ "CAT": {
+  "file": "Caterpillar-shortened.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Caterpillar-shortened.svg",
+  "license": "Public domain"
+ },
+ "LRCX": {
+  "file": "Lam Research logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Lam_Research_logo.svg",
+  "license": "Public domain",
+  "cropped": "0 0 89 78"
+ },
+ "GE": {
+  "file": "GE Aerospace logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:GE_Aerospace_logo.svg",
+  "license": "Public domain",
+  "cropped": "0 0 297.2 297.2"
+ },
+ "AMAT": {
+  "file": "Applied Materials Logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Applied_Materials_Logo.svg",
+  "license": "Public domain",
+  "cropped": "17 17 198 198"
+ },
+ "HD": {
+  "file": "The Home Depot logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Home_Depot_logo.svg",
+  "license": "Public domain"
+ },
+ "PANW": {
+  "file": "PaloAltoNetworks 2020 Logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:PaloAltoNetworks_2020_Logo.svg",
+  "license": "Public domain",
+  "cropped": "0 0 91 66"
+ },
+ "RTX": {
+  "file": "RTX Raytheon Technologies logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:RTX_Raytheon_Technologies_logo.svg",
+  "license": "Public domain",
+  "cropped": "0 0 72 72"
+ },
+ "TMO": {
+  "file": "Thermo Fisher Scientific logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Thermo_Fisher_Scientific_logo.svg",
+  "license": "Public domain"
+ },
+ "TXN": {
+  "file": "Texas Instruments logo 2024.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Texas_Instruments_logo_2024.svg",
+  "license": "Public domain",
+  "cropped": "60 60 170 160"
+ },
+ "GEV": {
+  "file": "GE Vernova logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:GE_Vernova_logo.svg",
+  "license": "Public domain",
+  "cropped": "0 0 281.3 281.3"
+ },
+ "AMGN": {
+  "file": "Amgen.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Amgen.svg",
   "license": "Public domain"
  }
 }

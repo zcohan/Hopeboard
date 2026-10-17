@@ -14,7 +14,7 @@ export interface Parsed {
 
 export function parseFig(f: Fig): Parsed {
   if (f === null || f === undefined) return { v: null, text: '', loss: false };
-  if (typeof f === 'number') return { v: f, text: String(f), loss: false };
+  if (typeof f === 'number') return { v: f, text: f >= 1000 ? f.toLocaleString('en-US') : String(f), loss: false };
   if (f === 'loss') return { v: null, text: 'loss', loss: true };
   const range = /^(\d+(?:\.\d+)?)[–-](\d+(?:\.\d+)?)$/.exec(f);
   if (range) return { v: (Number(range[1]) + Number(range[2])) / 2, text: f, loss: false };

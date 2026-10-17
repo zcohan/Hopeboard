@@ -99,6 +99,8 @@ for (const s of SOURCES) {
     const d = yearsBefore(today, n);
     const then = computeOn(f, d, today);
     const p = co.past[era];
+    // no data that far back (a later listing or spin-off): no past card
+    if (p && (!then || (then.eps === null && typeof p.pe !== 'string'))) { delete co.past[era]; continue; }
     if (!then || !p) continue;
     const before = barOn(s.eod, d)!, after = barOn(s.eod, today)!;
     if (then.eps !== null) p.pe = years(then.pe, then.loss);

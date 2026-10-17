@@ -138,6 +138,10 @@ Use one word for one thing, everywhere. If the reader learns a word on one card,
 | priced at 35 years of last year's profit | P/E, multiple, valuation, multiple expansion, rerating |
 | next year's forecast | forward P/E, forward earnings, consensus |
 | profit (always per share) | earnings, EPS, net income, bottom line |
+| what it keeps from each sale | margins |
+| orders it hasn't delivered yet | backlog |
+| spending on buildings and equipment, data centres | capex |
+| big cloud companies | hyperscalers |
 | the price needs profit to grow ~X%/year | the ask, asks, implied growth, priced in, baked in |
 | profit grows at ~X%/year | profit grows ~X%/year (drops the "at") |
 | returns, make, lose | pays, yields, total shareholder return |
