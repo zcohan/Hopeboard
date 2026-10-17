@@ -10,7 +10,7 @@ export interface BoardState {
   era: Era;
   basis: Basis;
   category: Category | 'all';
-  /** The section tab shown; 'all' renders every section under its heading (tests, reconcile). */
+  /** The section tab shown; 'all' renders every section under its heading (tests). */
   section: Section | 'all';
 }
 
