@@ -198,3 +198,5 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .doc .sources ul{padding-left:18px}
 .doc .sources li{margin:0 0 6px}
 @media (max-width:560px){.masthead{flex-wrap:wrap; row-gap:12px} .nav{width:100%; gap:16px; font-size:14px} .nav .theme{margin-left:auto}}
+/* a name with no description sits level with the middle of the logo */
+.head .name:not(:has(small)){align-self:flex-start; min-height:44px; display:flex; align-items:center}
