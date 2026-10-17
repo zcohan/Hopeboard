@@ -57,38 +57,77 @@ export function dividendsTtm(sym: string, d: string): number {
     .reduce((sum, x) => sum + (x.unadjustedValue ?? x.value) / splitFactor(sym, x.date, d), 0);
 }
 
+/** The Treasury's daily 10-year yields, oldest first, in percent. */
+let treasuryRows: { date: string; rate: number }[] | null = null;
+function treasury(): { date: string; rate: number }[] {
+  if (treasuryRows) return treasuryRows;
+  const rows: { date: string; rate: number }[] = [];
+  for (let y = 1990; y <= new Date().getFullYear(); y++) {
+    const p = `.cache/treasury/${y}.csv`;
+    if (!existsSync(p)) continue;
+    const [head, ...lines] = readFileSync(p, 'utf8').trim().split('\n');
+    const col = head.split(',').findIndex((h) => h.replace(/"/g, '').trim() === '10 Yr');
+    for (const l of lines) {
+      const c = l.split(','), [m, dd, yy] = c[0].split('/');
+      const rate = Number(c[col]);
+      if (col > 0 && Number.isFinite(rate) && c[col] !== '') rows.push({ date: `${yy}-${m}-${dd}`, rate });
+    }
+  }
+  return (treasuryRows = rows.sort((a, b) => a.date.localeCompare(b.date)));
+}
+
 /**
  * The bond's high of the past year and the year it was last that high: "Highest since 2007" when the high
- * is today, else "It reached ~5.3% in October, the highest since 2007". Null when the high isn't a record.
+ * is today, else "It reached 5.3% in October, the highest since 2007". Null when the high isn't a record.
  */
 export function bondHighSince(d: string): string | null {
-  const rows: { date: string; rate: number }[] = [];
-  for (let y = 1990; y <= +d.slice(0, 4); y++) {
-    const p = `.cache/ust/${y}.json`;
-    if (existsSync(p)) rows.push(...(read(p).data as { date: string; tenor: string; rate: number }[]).filter((r) => r.tenor === '10Y' && r.date <= d));
-  }
+  const rows = treasury().filter((r) => r.date <= d);
   const yearAgo = yearsBefore(d, 1);
   const recent = rows.filter((r) => r.date >= yearAgo);
-  const today = recent.reduce((a, b) => (b.date > a.date ? b : a));
+  if (!recent.length) return null;
+  const today = recent[recent.length - 1];
   const peak = recent.reduce((a, b) => (b.rate > a.rate || (b.rate === a.rate && b.date > a.date) ? b : a));
   const before = rows.filter((r) => r.date < yearAgo && r.rate >= peak.rate);
   if (!before.length) return null;
-  const year = before.reduce((a, b) => (b.date > a.date ? b : a)).date.slice(0, 4);
+  const year = before[before.length - 1].date.slice(0, 4);
   if (+year > +d.slice(0, 4) - 5) return null; // not much of a record
   if (peak.date === today.date) return `Highest since ${year}`;
   const month = new Date(peak.date + 'T00:00:00Z').toLocaleString('en-US', { month: 'long', timeZone: 'UTC' });
-  return `It reached ${(peak.rate).toFixed(1)}% in ${month}, the highest since ${year}`;
+  return `It reached ${peak.rate.toFixed(1)}% in ${month}, the highest since ${year}`;
 }
 
-/** The 10-year US Treasury yield on or before `d`, as a fraction. */
+/** The 10-year US Treasury yield on or before `d`, as a fraction (the Treasury's own daily figure). */
 export function bond(d: string): number | null {
-  for (let y = +d.slice(0, 4); y >= +d.slice(0, 4) - 1; y--) {
-    const p = `.cache/ust/${y}.json`;
-    if (!existsSync(p)) continue;
-    const rows = (read(p).data as { date: string; tenor: string; rate: number }[]).filter((r) => r.tenor === '10Y' && r.date <= d);
-    if (rows.length) return rows.reduce((a, b) => (b.date > a.date ? b : a)).rate / 100;
+  const rows = treasury().filter((r) => r.date <= d);
+  return rows.length ? rows[rows.length - 1].rate / 100 : null;
+}
+
+/** Brent crude, $ a barrel, on or before `d` (Energy Information Administration). */
+let brentRows: { date: string; price: number }[] | null = null;
+export function oilOn(d: string): number | null {
+  if (!brentRows) {
+    const wb = XLSX.read(readFileSync('.cache/eia/RBRTEd.xls'));
+    const rows = XLSX.utils.sheet_to_json<unknown[]>(wb.Sheets['Data 1'], { header: 1, raw: true });
+    brentRows = rows.filter((r) => typeof r[0] === 'number' && typeof r[1] === 'number')
+      .map((r) => ({ date: iso(Date.UTC(1899, 11, 30) + (r[0] as number) * DAY), price: r[1] as number }));
   }
-  return null;
+  const s = brentRows.filter((r) => r.date <= d);
+  return s.length && ms(d) - ms(s[s.length - 1].date) < 14 * DAY ? s[s.length - 1].price : null;
+}
+
+/** Exchange rates from the Federal Reserve's H.10: USDTWD is Taiwan dollars per dollar, EURUSD dollars per euro. */
+const fxRows = new Map<string, { date: string; rate: number }[]>();
+export function fxOn(pair: string, d: string): number | null {
+  const code = pair.startsWith('USDTWD') ? 'ta' : pair.startsWith('EURUSD') ? 'eu' : null;
+  if (!code) return null;
+  if (!fxRows.has(code)) {
+    const html = readFileSync(`.cache/fed/h10_${code}.htm`, 'latin1');
+    const mon: Record<string, string> = { JAN: '01', FEB: '02', MAR: '03', APR: '04', MAY: '05', JUN: '06', JUL: '07', AUG: '08', SEP: '09', OCT: '10', NOV: '11', DEC: '12' };
+    fxRows.set(code, [...html.matchAll(/<th[^>]*>\s*(\d{1,2})-([A-Z]{3})-(\d{2})\s*<\/th>\s*<td[^>]*>\s*([\d.]+)\s*<\/td>/g)]
+      .map((m) => ({ date: `20${m[3]}-${mon[m[2]]}-${m[1].padStart(2, '0')}`, rate: Number(m[4]) })));
+  }
+  const s = fxRows.get(code)!.filter((r) => r.date <= d);
+  return s.length && ms(d) - ms(s[s.length - 1].date) < 14 * DAY ? s[s.length - 1].rate : null;
 }
 
 // ---------- SEC filings ----------
@@ -264,7 +303,7 @@ export function computeOn(f: Filings, d: string, today: string): Computed | null
   const s = f.src;
   const bar = barOn(s.eod, d);
   if (!bar) return null;
-  const fx = s.fx ? barOn(s.fx, d)?.close ?? null : 1;
+  const fx = s.fx ? fxOn(s.fx, d) : 1;
   if (fx === null) return null;
   // reported currency → dollars: EURUSD is dollars per euro; USDTWD is Taiwan dollars per dollar
   const toUsd = (v: number) => (s.fx?.startsWith('USD') ? v / fx : v * fx);
@@ -297,7 +336,7 @@ export function computeOn(f: Filings, d: string, today: string): Computed | null
 /** Profit-per-share growth per year over the last ten fiscal years. */
 export function lastDecade(f: Filings, today: string): { g: number; from: string; to: string } | null {
   const s = f.src;
-  const fx = s.fx ? barOn(s.fx, today)?.close ?? 1 : 1;
+  const fx = s.fx ? fxOn(s.fx, today) ?? 1 : 1;
   const toUsd = (v: number) => (s.fx?.startsWith('USD') ? v / fx : v * fx); // one rate for both ends: growth in the reporting currency
   const adj = (x: Fact) => (toUsd(x.val) * (s.perShare ?? 1)) / splitFactor(s.eod, x.filed, today);
   const latest = f.latestAnnualEnd(f.eps, today);

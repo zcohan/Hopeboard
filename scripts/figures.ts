@@ -9,7 +9,7 @@ import { parseFig, sectionOf } from '../src/engine';
 import type { Company, Figures, PastEra } from '../src/types';
 import { SOURCES } from './sources';
 import { loadSupplements } from './xbrl';
-import { shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
+import { oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
 
 const WRITE = process.argv.includes('--write');
 await loadSupplements(SOURCES);
@@ -127,7 +127,7 @@ const goldNow = barOn('XAUUSD.FOREX', today)!.close;
 F.eras.now.bond = r3(bond(today))!;
 (F.eras.now as { bondHighSince?: string | null }).bondHighSince = bondHighSince(today);
 F.eras.now.gold = Math.round(goldNow);
-F.eras.now.oil = Math.round(barOn('BZ.COMM', today)!.close);
+F.eras.now.oil = Math.round(oilOn(today)!);
 const lr = longRun();
 if (lr) F.eras.now.longRun = { stocks: r3(lr.stocks)!, bonds: r3(lr.bonds)!, from: 1928, to: lr.to };
 F.eras.now.label = month(today);
@@ -139,8 +139,8 @@ for (const [era, n] of ERAS) {
   const g = barOn('XAUUSD.FOREX', d)!.close;
   E.gold = Math.round(g);
   E.goldReturn = r3(Math.pow(goldNow / g, 1 / n) - 1)!;
-  const oil = barOn('BZ.COMM', d);
-  if (oil) E.oil = Math.round(oil.close);
+  const oil = oilOn(d);
+  if (oil) E.oil = Math.round(oil);
 }
 // the S&P 500 from Robert Shiller's monthly data: profit and dividends per index share, total return
 {

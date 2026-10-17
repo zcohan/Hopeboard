@@ -35,6 +35,15 @@ async function get(url: string, path: string, maxAge: number, headers: Record<st
   return 'fetched';
 }
 
+async function getBinary(url: string, path: string, maxAge: number): Promise<'cached' | 'fetched'> {
+  if (fresh(path, maxAge)) return 'cached';
+  const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+  if (!res.ok) throw new Error(`${res.status} for ${url}`);
+  mkdirSync(path.slice(0, path.lastIndexOf('/')), { recursive: true });
+  writeFileSync(path, Buffer.from(await res.arrayBuffer()));
+  return 'fetched';
+}
+
 const eod = (path: string, q = '') => `https://eodhd.com/api/${path}?api_token=${EOD}&fmt=json${q}`;
 
 async function main() {
@@ -51,14 +60,20 @@ async function main() {
   }
 
   // EOD: daily prices from 2015, plus gold, the S&P 500 and currency where needed
-  const symbols = [...SOURCES.map((s) => s.eod), 'GSPC.INDX', 'XAUUSD.FOREX', 'BZ.COMM', ...new Set(SOURCES.flatMap((s) => (s.fx ? [s.fx] : [])))];
+  const symbols = [...SOURCES.map((s) => s.eod), 'GSPC.INDX', 'XAUUSD.FOREX'];
   for (const sym of symbols) log.push(`eod ${sym} ${await get(eod(`eod/${sym}`, '&from=2015-01-01'), `.cache/eod/${sym}.json`, DAY / 2)}`);
   for (const s of SOURCES) log.push(`dividends ${s.id} ${await get(eod(`div/${s.eod}`, '&from=2014-01-01'), `.cache/div/${s.eod}.json`, DAY)}`);
   for (const s of SOURCES) log.push(`splits ${s.id} ${await get(eod(`splits/${s.eod}`, '&from=2000-01-01'), `.cache/splits/${s.eod}.json`, 7 * DAY)}`);
+  // US government data, free to republish: the Treasury's daily yields, the Energy Information
+  // Administration's Brent price, and the Federal Reserve's exchange rates (H.10)
+  const browser = { 'User-Agent': 'Mozilla/5.0' };
   for (let year = 1990; year <= new Date().getFullYear(); year++) {
     const age = year === new Date().getFullYear() ? DAY / 2 : 365 * DAY;
-    log.push(`ust ${year} ${await get(eod('ust/yield-rates', `&filter[year]=${year}`), `.cache/ust/${year}.json`, age)}`);
+    const url = `https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/${year}/all?type=daily_treasury_yield_curve&field_tdr_date_value=${year}&page&_format=csv`;
+    log.push(`treasury ${year} ${await get(url, `.cache/treasury/${year}.csv`, age, browser)}`);
   }
+  log.push(`eia brent ${await getBinary('https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls', '.cache/eia/RBRTEd.xls', DAY / 2)}`);
+  for (const c of ['ta', 'eu']) log.push(`fed ${c} ${await get(`https://www.federalreserve.gov/releases/h10/hist/dat00_${c}.htm`, `.cache/fed/h10_${c}.htm`, DAY / 2, browser)}`);
 
   // Damodaran's yearly returns on stocks and bonds since 1928 (the S&P's long-run average, and stocks' extra over bonds)
   log.push(`damodaran ${await get('https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html', '.cache/damodaran/histretSP.html', 30 * DAY, { 'User-Agent': 'Mozilla/5.0' })}`);
