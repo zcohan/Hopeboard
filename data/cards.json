@@ -260,7 +260,7 @@
       "id": "bond:now",
       "name": "US Bond",
       "badge": "US10Y",
-      "unit": "a year, guaranteed",
+      "unit": "of its yearly interest",
       "assumes": "Returns **{bond}/year** for ten years, guaranteed. {highSince}. Every stock below has to promise more than this, or it isn’t worth the risk.",
       "heading": "Why it matters",
       "bullets": [

@@ -160,26 +160,10 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     const now = copy.get('bond:now');
     return tile({
       id: bondId, badge: 'US10Y', ...BASE.bond, name: (now?.name as string) ?? 'US Bond', base: true,
-      price: { n: '≈' + decPctFixed(E.bond), unit: (now?.unit as string) ?? '' },
+      // the bond in the board's own unit: years of its yearly interest, like years of profit for a stock
+      price: { pre: L('pricedAt'), n: `${Math.round(1 / E.bond)} ${L('years')}`, unit: (now?.unit as string) ?? '' },
       lines: [{ cls: 'makes', html: fill(e.assumes as string, et, bondId) }],
       why: s.era === 'now' ? { heading: e.heading as string, bullets: bulletsOf(e, et) } : undefined,
-    }, copy);
-  }));
-  const goldId = `gold:${s.era}`;
-  base.push(safe(goldId, () => {
-    const e = copy.get(goldId);
-    if (!e) return null;
-    const now = copy.get('gold:now');
-    return tile({
-      id: goldId, badge: 'GOLD', ...BASE.gold, name: (now?.name as string) ?? 'Gold', base: true,
-      price: { n: '≈' + usd(parseFig(E.gold).v ?? 0), unit: e.unit as string },
-      lines: [
-        { cls: 'makes', html: fill(e.assumes as string, et, goldId) },
-        ...(e.consequence ? [{ cls: 'miss' as const, html: fill(e.consequence as string, et, goldId) }] : []),
-      ],
-      why: s.era === 'now'
-        ? { heading: e.heading as string, bullets: bulletsOf(e, et) }
-        : { story: [[copy.label('past-frame', 'storyHeading'), fill(e.story as string, et, goldId)], [copy.label('past-frame', 'sinceHeading'), fill(e.happened as string, et, goldId)]] },
     }, copy);
   }));
   const spxId = `spx:${s.era}`;
@@ -208,6 +192,23 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     }, copy);
   }));
   // today's prices are live, so only a past view names its date
+  const goldId = `gold:${s.era}`;
+  base.push(safe(goldId, () => {
+    const e = copy.get(goldId);
+    if (!e) return null;
+    const now = copy.get('gold:now');
+    return tile({
+      id: goldId, badge: 'GOLD', ...BASE.gold, name: (now?.name as string) ?? 'Gold', base: true,
+      price: { n: '≈' + usd(parseFig(E.gold).v ?? 0), unit: e.unit as string },
+      lines: [
+        { cls: 'makes', html: fill(e.assumes as string, et, goldId) },
+        ...(e.consequence ? [{ cls: 'miss' as const, html: fill(e.consequence as string, et, goldId) }] : []),
+      ],
+      why: s.era === 'now'
+        ? { heading: e.heading as string, bullets: bulletsOf(e, et) }
+        : { story: [[copy.label('past-frame', 'storyHeading'), fill(e.story as string, et, goldId)], [copy.label('past-frame', 'sinceHeading'), fill(e.happened as string, et, goldId)]] },
+    }, copy);
+  }));
   const baselines = section(copy.label('sections', 'baselines') + (s.era === 'now' ? '' : ` — ${E.label}`), base.filter(Boolean));
   let board = '';
 
