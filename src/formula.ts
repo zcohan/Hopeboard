@@ -3,7 +3,6 @@
 
 export const INDEX_RETURN = 0.10; // the S&P 500's long-run average, per year
 export const NORMAL_YEARS = 18; // years of profit people ordinarily pay, assumed for 2036
-export const AVERAGE_COMPANY_GROWTH = 0.11; // the average big US company's profit growth
 export const DECADE = 10;
 
 /** Yearly return over ten years, given profit growth g, cash returned y and years of profit pe. */

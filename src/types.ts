@@ -97,7 +97,7 @@ export type Scenario =
   | { anchor: 'industry' }
   | { anchor: 'none' } // profit doesn't grow
   | { anchor: 'last' } // the company's own last decade
-  | { anchor: 'average' } // the average big US company, ~11%/year
+  | { anchor: 'average' } // the average big US company: the S&P 500's last-decade profit growth
   | { anchor: 'endsAt'; factor: number } // profit ends the decade at factor × today's
   | { anchor: 'profit'; key: string } // dollar cards: profit reaches a named level
   | { anchor: 'unanchored'; g: number }; // flagged: needs the owner's call

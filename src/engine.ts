@@ -1,7 +1,7 @@
 // Turns figures.json into the numbers each card shows. Nothing here is typed in:
 // every return and required growth comes from src/formula.ts.
 import {
-  AVERAGE_COMPANY_GROWTH, INDEX_RETURN, NORMAL_YEARS,
+  INDEX_RETURN, NORMAL_YEARS,
   annualReturn, annualReturnFromProfit, decadeChange, requiredGrowth, requiredProfit,
 } from './formula';
 import type { Basis, Company, Fig, Figures, NowFigures, PastEra, Scenario } from './types';
@@ -85,7 +85,8 @@ export function nowModel(co: { now: NowFigures; industry?: string }, F: Figures)
       case 'last':
         if (last === null) throw new Error('Last-decade scenario on a card with no decade of profit');
         return last;
-      case 'average': return AVERAGE_COMPANY_GROWTH;
+      // the average big US company: the S&P 500's profit growth over the last decade, computed from data
+      case 'average': return F.eras.now.spx.last ?? (() => { throw new Error('S&P last-decade growth missing'); })();
       case 'endsAt': return Math.pow(s.factor, 1 / 10) - 1;
       case 'unanchored': return s.g;
       case 'profit': return NaN; // dollar scenario, see r()

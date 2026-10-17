@@ -72,7 +72,7 @@ function footer(copy: Copy): string {
 function page(copy: Copy, id: 'philosophy' | 'methodology'): string {
   const e = copy.get(`page:${id}`);
   if (!e) return '';
-  const tk = { index: () => '10%', normalYears: () => '18' };
+  const tk = { index: () => '10%', normalYears: () => '18', avg: () => `${Math.round((F.eras.now.spx.last ?? 0) * 100)}%` };
   const sections = (e.sections as { h: string; p: string[]; formula?: string; sources?: boolean }[]).map((sec) =>
     `<section><h2>${esc(sec.h)}</h2>${sec.p.map((x) => `<p>${fill(x, tk, `page:${id}`)}</p>`).join('')}` +
     (sec.formula ? `<pre class="formula">${esc(sec.formula)}</pre>` : '') +
