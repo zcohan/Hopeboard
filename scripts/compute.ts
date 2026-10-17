@@ -4,6 +4,7 @@
 // so a value reported before a split compares with one reported after it. Each
 // past view only uses filings that had been published by that date.
 import { existsSync, readFileSync } from 'node:fs';
+import * as XLSX from 'xlsx';
 import type { Source } from './sources';
 
 const DAY = 86_400_000;
@@ -372,4 +373,36 @@ export function longRun(from = 1928): { stocks: number; bonds: number; to: numbe
   if (!rows.length) return null;
   const cagr = (k: 'stocks' | 'bonds') => Math.pow(rows.reduce((x, r) => x * (1 + r[k]), 1), 1 / rows.length) - 1;
   return { stocks: cagr('stocks'), bonds: cagr('bonds'), to: rows[rows.length - 1].year };
+}
+
+// ---------- the S&P 500 (Robert Shiller's monthly data) ----------
+
+export interface ShillerMonth { month: string; P: number; D: number | null; E: number | null; CPI: number; realTR: number | null }
+
+let shillerRows: ShillerMonth[] | null = null;
+/** Monthly rows: index level, twelve-month dividends and profit per index share, consumer prices, real total return. */
+export function shiller(): ShillerMonth[] {
+  if (shillerRows) return shillerRows;
+  const wb = XLSX.read(readFileSync('.cache/shiller/ie_data.xls'));
+  const rows = XLSX.utils.sheet_to_json<unknown[]>(wb.Sheets['Data'], { header: 1, raw: true });
+  const num = (x: unknown) => (typeof x === 'number' && Number.isFinite(x) ? x : null);
+  shillerRows = rows.filter((r) => typeof r[0] === 'number').map((r) => {
+    const v = r[0] as number, y = Math.floor(v), m = Math.round((v - y) * 100);
+    return { month: `${y}-${String(m).padStart(2, '0')}`, P: r[1] as number, D: num(r[2]), E: num(r[3]), CPI: r[4] as number, realTR: num(r[9]) };
+  });
+  return shillerRows;
+}
+
+/** The latest month on or before `d` whose profit would have been reported by `d` (about three months after). */
+export function shillerKnown(d: string, lagMonths = 3): ShillerMonth | null {
+  const cutoff = monthsBefore(d, lagMonths).slice(0, 7);
+  const rows = shiller().filter((r) => r.E !== null && r.month <= cutoff);
+  return rows[rows.length - 1] ?? null;
+}
+
+/** The S&P 500's total return with dividends, in dollars, from month `a` to month `b` (YYYY-MM). */
+export function shillerTotalReturn(a: string, b: string): number | null {
+  const ra = shiller().find((r) => r.month === a), rb = shiller().find((r) => r.month === b);
+  if (!ra?.realTR || !rb?.realTR) return null;
+  return (rb.realTR * rb.CPI) / (ra.realTR * ra.CPI) - 1;
 }

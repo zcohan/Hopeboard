@@ -63,6 +63,20 @@ async function main() {
   // Damodaran's yearly returns on stocks and bonds since 1928 (the S&P's long-run average, and stocks' extra over bonds)
   log.push(`damodaran ${await get('https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html', '.cache/damodaran/histretSP.html', 30 * DAY, { 'User-Agent': 'Mozilla/5.0' })}`);
 
+  // Robert Shiller's monthly S&P 500 data: the index's profit, dividends and total return since 1871.
+  // The file's address changes with each update, so read it from the data page.
+  if (!fresh('.cache/shiller/ie_data.xls', 7 * DAY)) {
+    const page = await (await fetch('https://shillerdata.com/', { headers: { 'User-Agent': 'Mozilla/5.0' } })).text();
+    const href = /href="([^"]*ie_data\.xls[^"]*)"/.exec(page)?.[1];
+    if (!href) log.push('shiller: data link not found on shillerdata.com');
+    else {
+      const res = await fetch(href.startsWith('//') ? 'https:' + href : href, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+      mkdirSync('.cache/shiller', { recursive: true });
+      writeFileSync('.cache/shiller/ie_data.xls', Buffer.from(await res.arrayBuffer()));
+      log.push('shiller fetched');
+    }
+  }
+
   // Alpha Vantage: forecasts, oldest first, until the daily limit
   if (!AV) log.push('alphavantage skipped: ALPHAVANTAGE_API_KEY missing');
   else {

@@ -170,7 +170,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         id: spxId, badge: 'SPX', ...BASE.spx, name, base: true,
         price: { pre: L('pricedAt'), n: `${shown.years.text} ${L('years')}`, unit: yearsUnit(shown.basis) },
         lines: [{ cls: 'makes', html: fill(e.assumes as string, tk, spxId) }, { cls: 'miss', html: fill(e.consequence as string, tk, spxId) }],
-        why: { heading: e.heading as string, bullets: bulletsOf(e, tk) },
+        why: { heading: heading(m.section === 'loss' ? 'pricey' : m.section), bullets: bulletsOf(e, tk) },
       }, copy);
     }
     const frame = copy.get('past-frame');

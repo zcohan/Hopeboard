@@ -36,6 +36,11 @@
       "name": "Design-stage estimate",
       "rough": true,
       "note": "SpaceX: its listing document has no machine-readable figures; replaced at its first annual report."
+    },
+    "shiller": {
+      "name": "Robert Shiller’s S&P 500 data (profit, dividends and total return per index share)",
+      "url": "https://shillerdata.com/",
+      "date": "2026-06"
     }
   },
   "industries": {
@@ -83,10 +88,10 @@
       "gold": 4165,
       "goldReturn": 0.08,
       "spx": {
-        "pe": "≈28",
-        "y": 0.02,
+        "pe": 26,
+        "y": 0.011,
         "pef": "≈23",
-        "last": 0.11
+        "last": 0.13
       },
       "bondHighSince": "It reached 5.3% in October, the highest since 2002",
       "oil": 110,
@@ -103,10 +108,10 @@
       "gold": 4333,
       "goldReturn": -0.039,
       "spx": {
-        "pe": "≈27",
-        "y": 0.02,
-        "profit": 0.12,
-        "stock": 0.16
+        "pe": 29,
+        "y": 0.012,
+        "profit": 0.303,
+        "stock": 0.156
       },
       "oil": 61
     },
@@ -116,10 +121,10 @@
       "gold": 1767,
       "goldReturn": 0.187,
       "spx": {
-        "pe": "≈25",
-        "y": 0.02,
-        "profit": 0.06,
-        "stock": 0.14
+        "pe": 27,
+        "y": 0.013,
+        "profit": 0.124,
+        "stock": 0.131
       },
       "oil": 85
     },
@@ -129,10 +134,10 @@
       "gold": 1251,
       "goldReturn": 0.128,
       "spx": {
-        "pe": "≈24",
-        "y": 0.02,
-        "profit": 0.11,
-        "stock": 0.15
+        "pe": 24,
+        "y": 0.021,
+        "profit": 0.129,
+        "stock": 0.155
       },
       "oil": 52
     }

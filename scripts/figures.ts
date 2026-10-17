@@ -9,7 +9,7 @@ import { parseFig, sectionOf } from '../src/engine';
 import type { Company, Figures, PastEra } from '../src/types';
 import { SOURCES } from './sources';
 import { loadSupplements } from './xbrl';
-import { monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
+import { shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
 
 const WRITE = process.argv.includes('--write');
 await loadSupplements(SOURCES);
@@ -139,6 +139,34 @@ for (const [era, n] of ERAS) {
   const oil = barOn('BZ.COMM', d);
   if (oil) E.oil = Math.round(oil.close);
 }
+// the S&P 500 from Robert Shiller's monthly data: profit and dividends per index share, total return
+{
+  const level = (d: string) => barOn('GSPC.INDX', d)!.close;
+  const known = shillerKnown(today)!;
+  const withD = shiller().filter((r) => r.D !== null && r.month <= known.month).at(-1)!;
+  const decadeAgo = shiller().find((r) => r.month === `${+known.month.slice(0, 4) - 10}${known.month.slice(4)}`);
+  const spx = F.eras.now.spx;
+  spx.pe = Math.round(level(today) / known.E!);
+  spx.y = r3(withD.D! / level(today))!;
+  spx.last = decadeAgo?.E ? r3(Math.pow(known.E! / decadeAgo.E, 1 / 10) - 1)! : spx.last;
+  const lastTR = shiller().filter((r) => r.realTR !== null).at(-1)!.month;
+  for (const [era, n] of ERAS) {
+    const d = yearsBefore(today, n);
+    const k = shillerKnown(d)!;
+    const kd = shiller().filter((r) => r.D !== null && r.month <= k.month).at(-1)!;
+    const E = F.eras[era].spx;
+    E.pe = Math.round(level(d) / k.E!);
+    E.y = r3(kd.D! / level(d))!;
+    E.profit = r3(Math.pow(known.E! / k.E!, 1 / n) - 1)!;
+    const tr = shillerTotalReturn(d.slice(0, 7), lastTR);
+    if (tr !== null) {
+      const yrs = (Date.parse(lastTR + '-15') - Date.parse(d)) / (365.25 * 86_400_000);
+      E.stock = r3(Math.pow(1 + tr, 1 / yrs) - 1)!;
+    }
+  }
+}
+F.sources['shiller'] = { name: 'Robert Shiller’s S&P 500 data (profit, dividends and total return per index share)', url: 'https://shillerdata.com/', date: shillerKnown(today)!.month } as never;
+
 F.asOf = month(today);
 F.sources['sec-eod'] = {
   name: 'Company filings (SEC EDGAR) and prices (EOD Historical Data)',
