@@ -45,7 +45,7 @@ interface TileParts {
   /** The card's compare panel (time buttons and one badge per time scale), opened from a link at the foot. */
   compare?: { link: string; panel: string };
   /** Labelled rows (company cards): Earns, Reasonably priced, Expected next year, Risk. */
-  facts?: { label: string; html: string }[];
+  facts?: { label: string; html: string; cls?: string }[];
   why?: { heading: string; bullets: string[] } | { story: [string, string][] };
   base?: boolean;
 }
@@ -71,7 +71,7 @@ function tile(t: TileParts, copy: Copy): string {
     (t.icon ? `<div class="logo" style="background:${t.color}" aria-hidden="true">${t.icon}</div>` : t.logo ? `<div class="logo img" data-logo="${esc(t.logo)}"></div>` : `<div class="logo" style="background:${t.color}">${esc(t.badge)}</div>`) +
     `<div class="name">${esc(t.name)}${t.about ? `<small>${esc(t.about)}</small>` : ''}</div>${price}</div>` +
     t.lines.map((l) => `<p class="${l.cls}">${l.html}</p>`).join('') +
-    (t.facts?.length ? `<dl class="facts">${t.facts.map((x) => `<div><dt>${esc(x.label)}</dt><dd>${x.html}</dd></div>`).join('')}</dl>` : '') +
+    (t.facts?.length ? `<dl class="facts">${t.facts.map((x) => `<div class="${x.cls ?? ''}"><dt>${esc(x.label)}</dt><dd>${x.html}</dd></div>`).join('')}</dl>` : '') +
     (link || t.compare
       ? `<div class="foot-links">${t.compare?.panel ?? ''}<div class="links">${link ? `<button type="button" class="whylink" popovertarget="${pop}">${link}</button>` : ''}${t.compare?.link ?? ''}</div></div>`
       : '') +
@@ -241,7 +241,9 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
             const html = fill(t!, tk, `${id} ${f}`);
             // the risk row is good news on cheap cards: no loss, and no "less than"
             const good = f === 'consequence' && !html.includes('class="loss"') && !html.includes('/year less</b>');
-            return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html };
+            // EARNS reads as a headline figure with notes under it (the bond comparison, dividends)
+            const shaped = f === 'farm' ? html.split('\n').map((l, i) => `<span class="${i ? 'note' : 'headline'}">${l}</span>`).join('') : html;
+            return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html: shaped, cls: f };
           });
         return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts, compare: comparePanel(co, m.req('t')), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
       });
