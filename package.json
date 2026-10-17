@@ -7,7 +7,6 @@
     "build": "npm test && vite build",
     "preview": "vite preview",
     "test": "tsc && vitest run",
-    "reconcile": "tsx scripts/reconcile.ts",
     "fetch": "tsx scripts/fetch.ts",
     "figures": "tsx scripts/figures.ts",
     "refresh": "zsh scripts/refresh.sh",

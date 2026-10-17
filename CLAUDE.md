@@ -11,7 +11,7 @@ If something is not in these files, ask the owner.
 3. `docs/principles.md`: the spec. The formula, the board and card anatomy, wording, data and sources, design, decisions made and rejected, open items.
 4. `docs/writing-guide.md`: how card copy is written. Voice, what to emphasise, word lists, number rules, every card part with good and bad examples. Read it before writing any copy.
 5. `README.md`: commands, data setup and code layout.
-6. `mockup/hopeboard.html`: the original design mockup, kept for reference (`npm run reconcile` compares the board with it).
+6. `mockup/hopeboard.html`: the original design mockup, kept for reference.
 
 ## How we work
 

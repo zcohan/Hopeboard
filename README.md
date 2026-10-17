@@ -11,7 +11,6 @@ npm install
 npm run dev          # board at http://localhost:5173
 npm test             # typecheck, formula tests against the spec tables, card and writing-guide checks
 npm run build        # production build
-npm run reconcile    # every card vs the mockup, line by line (add `f` for the forecast view)
 ```
 
 ## Data
@@ -39,7 +38,7 @@ Sources: company filings from SEC EDGAR (profit per share, share classes, Berksh
 - `data/figures.json`: every number and its source, written by `scripts/figures.ts`. Required growth, returns and gains or losses are never stored. They are computed.
 - `data/cards.json`: every word on the board, written to `docs/writing-guide.md`. `notes` are flags for whoever writes next and never reach the board (the build strips them).
 - `src/formula.ts`: the formula. `src/engine.ts`: figures to numbers. `src/tokens.ts` and `src/copy.ts`: placeholders in the wording (`{req}`, `{outcome}`, …). `src/board.ts`: the board HTML. `src/popover.ts`: places the comment bubble under its link.
-- `scripts/`: `fetch.ts`, `xbrl.ts` and `supplements.ts` download; `compute.ts` and `figures.ts` compute; `reconcile.ts` compares every card with the mockup's own rendering.
+- `scripts/`: `fetch.ts`, `xbrl.ts` and `supplements.ts` download; `compute.ts` and `figures.ts` compute.
 - `public/logos/`: company logos from Wikimedia Commons; `sources.json` lists each file's page and licence.
 
 ## Placeholders
