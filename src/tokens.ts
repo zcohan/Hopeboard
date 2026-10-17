@@ -86,18 +86,6 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
       const p = pct(Math.abs(g));
       return p === '0%' ? 'stay the same' : `${g > 0 ? 'grow' : 'fall'} ${p}`;
     },
-    /** One line per window: "Better than a month ago, when it needed 22%/year". Lower required growth is a better deal. */
-    dealMoves: () => {
-      const now = need(m.req('t'), 'required growth');
-      const windows = [['m1', 'a month ago'], ['m3', 'three months ago'], ['m12', 'a year ago']] as const;
-      return windows.flatMap(([k, when]) => {
-        const t = co.now.then?.[k];
-        if (!t) return [];
-        const was = requiredGrowth(t.y, t.pe);
-        const verdict = pct(was) === pct(now) ? 'The same as' : was > now ? 'Better than' : 'Worse than';
-        return [`${verdict} ${when}, when it needed ${pct(was)}/year`];
-      }).join('\n');
-    },
     ytd: () => move(need(co.now.ytd, 'change this year')),
     fromHigh: () => pct(need(co.now.fromHigh, 'year high').below),
     highMonth: () => need(co.now.fromHigh, 'year high').month,

@@ -150,3 +150,19 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .facts dd b{font-weight:600}
 .facts b.loss{color:var(--loss); font-weight:500}
 .facts dd{white-space:pre-line}
+
+/* Deal badge and its time switch (owner's option A) */
+.compare{display:flex; align-items:center; gap:10px; margin:14px 0 0; font-size:14px; color:var(--ink-2); flex-wrap:wrap}
+.seg{display:inline-flex; border:1px solid var(--edge); border-radius:999px; padding:3px; gap:2px; background:var(--tile)}
+.seg button{font:inherit; font-size:13px; border:0; background:none; padding:5px 12px; border-radius:999px; color:var(--ink-2); cursor:pointer; white-space:nowrap}
+.seg button.on{background:var(--ink); color:var(--paper)}
+.seg button:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+.deal{align-self:flex-start; font-size:13px; font-weight:500; padding:4px 10px; border-radius:999px; margin:-2px 0 2px}
+.deal.better{background:#E6F4EC; color:#1D6B43}
+.deal.worse{background:#FBF0DD; color:#8A5A12}
+.deal.same{background:#EEF0EC; color:var(--ink-2)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .deal.better{background:#173826; color:#8FD6AE} :root:not([data-theme="light"]) .deal.worse{background:#3A2C12; color:#E8C27A} :root:not([data-theme="light"]) .deal.same{background:#252B27}}
+:root[data-theme="dark"] .deal.better{background:#173826; color:#8FD6AE}
+:root[data-theme="dark"] .deal.worse{background:#3A2C12; color:#E8C27A}
+:root[data-theme="dark"] .deal.same{background:#252B27}
+.compare + .tabs, .pills + .compare + .tabs{margin-top:20px}

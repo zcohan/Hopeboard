@@ -13,19 +13,19 @@ describe('every card renders in every view', () => {
   for (const era of ERAS)
     for (const basis of ['t', 'f'] as const)
       it(`${era}, ${basis === 't' ? 'last year’s profit' : 'next year’s forecast'}`, () => {
-        expect(renderBoard(F, C, { era, basis, category: 'all', section: 'all' }).errors).toEqual([]);
+        expect(renderBoard(F, C, { era, basis, category: 'all', section: 'all', compare: 'm12' }).errors).toEqual([]);
       });
 
   it('every category filter shows only its companies', () => {
     for (const cat of CATEGORIES) {
-      const { board } = renderBoard(F, C, { era: 'now', basis: 't', category: cat, section: 'all' });
+      const { board } = renderBoard(F, C, { era: 'now', basis: 't', category: cat, section: 'all', compare: 'm12' });
       for (const co of F.companies) expect(board.includes(`data-copy="${co.id}:now"`)).toBe(co.category === cat);
     }
   });
 });
 
 describe('wording stays true to the numbers', () => {
-  const all = ERAS.flatMap((era) => (['t', 'f'] as const).map((basis) => text(renderBoard(F, C, { era, basis, category: 'all', section: 'all' }).board)));
+  const all = ERAS.flatMap((era) => (['t', 'f'] as const).map((basis) => text(renderBoard(F, C, { era, basis, category: 'all', section: 'all', compare: 'm12' }).board)));
 
   it('“still” only where the result beats the comparison', () => {
     for (const t of all) expect(t).not.toMatch(/still make [^.]*less than/);
@@ -65,7 +65,7 @@ describe('writing guide', () => {
   // A dollar figure that isn't a company-wide amount (bn, billion, trillion) or an oil price is a share price.
   const SHARE_PRICE = /\$\d[\d,.]*(?:–\d+)?(?![\d,.–]|\s*(bn|billion|trillion)|s\b)/;
   const cards = ERAS.flatMap((era) => {
-    const { board } = renderBoard(F, C, { era, basis: 't', category: 'all', section: 'all' });
+    const { board } = renderBoard(F, C, { era, basis: 't', category: 'all', section: 'all', compare: 'm12' });
     // Card wording only: drop the top-right figure (the gold price lives there) and split on block ends.
     return board.split('<div class="tile').slice(1).map((t) => ({
       id: /data-copy="([^"]+)"/.exec(t)![1],

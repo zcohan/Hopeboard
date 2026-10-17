@@ -54,7 +54,8 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 **Card anatomy (company cards)**
 
 1. Logo, name, a one-line description of the business, and a right-aligned stack: "priced at", the number of years, "of last year's profit".
-2. Labelled rows: EARNS (what the business earns as a share of its price, against the safe US bond, and dividends where they are 1% or more), REASONABLY PRICED (the growth the price needs, against the last decade), OVER TIME (better or worse than a month, three months and a year ago), EXPECTED NEXT YEAR (the analysts' forecast), RISK (what happens if growth falls short; CUSHION when that is good news).
+   Under it, a badge: better, worse or the same deal than at the time picked by the switch above the cards (1 week, 1 month, 3 months, 1 year), with what the price needed then and needs now.
+2. Labelled rows: EARNS (what the business earns as a share of its price, against the safe US bond, and dividends where they are 1% or more), REASONABLY PRICED (the growth the price needs, against the last decade), EXPECTED NEXT YEAR (the analysts' forecast), RISK (what happens if growth falls short; CUSHION when that is good news).
 3. A link at the foot ("Why so pricey?", "What the price assumes", "Why so cheap?") opens two or three points on why the price is what it is.
 
 `docs/writing-guide.md` has the wording rules for every part.

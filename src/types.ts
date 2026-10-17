@@ -11,6 +11,10 @@ export type Era = 'now' | 'y1' | 'y5' | 'y10';
 export const ERAS: Era[] = ['now', 'y1', 'y5', 'y10'];
 export type PastEra = Exclude<Era, 'now'>;
 export type Basis = 't' | 'f'; // last year's profit, next year's forecast
+/** The time scale the board compares the deal against. */
+export type Compare = 'w1' | 'm1' | 'm3' | 'm12';
+export const COMPARES: Compare[] = ['w1', 'm1', 'm3', 'm12'];
+
 export type Category = 'Chips' | 'Software' | 'Internet' | 'Hardware' | 'Financials' | 'Telecoms' | 'Other';
 export const CATEGORIES: Category[] = ['Chips', 'Software', 'Internet', 'Hardware', 'Financials', 'Telecoms', 'Other'];
 
@@ -42,8 +46,8 @@ export interface NowFigures {
   revenueGrowth?: number; // revenue, last twelve months against the twelve before
   capex?: number; // $ billions spent on buildings and equipment, last twelve months
   listing?: { low: number; high: number; month: string }; // a new listing's range against its first close
-  /** Years of profit and dividends a month, a quarter and a year ago, with the filings known then. */
-  then?: Partial<Record<'m1' | 'm3' | 'm12', { pe: number; y: number }>>;
+  /** Years of profit and dividends a week, a month, a quarter and a year ago, with the filings known then. */
+  then?: Partial<Record<Compare, { pe: number; y: number }>>;
 }
 
 export interface PastFigures {

@@ -86,9 +86,10 @@ for (const s of SOURCES) {
   });
   for (const k of ['ytd', 'revenueGrowth', 'capex', 'listing'] as const) if (co.now[k] === undefined) delete co.now[k];
 
-  // how the deal has moved: years of profit and dividends a month, a quarter and a year ago, as known then
-  const then = Object.fromEntries((([['m1', 1], ['m3', 3], ['m12', 12]]) as [string, number][]).flatMap(([k, n]) => {
-    const c = computeOn(f, monthsBefore(today, n), today);
+  // how the deal has moved: years of profit and dividends a week, a month, a quarter and a year ago, as known then
+  const daysBefore = (n: number) => new Date(Date.parse(today) - n * 86_400_000).toISOString().slice(0, 10);
+  const then = Object.fromEntries((([['w1', 0], ['m1', 1], ['m3', 3], ['m12', 12]]) as [string, number][]).flatMap(([k, n]) => {
+    const c = computeOn(f, k === 'w1' ? daysBefore(7) : monthsBefore(today, n), today);
     return c && c.pe !== null && c.dividendYield !== null ? [[k, { pe: Math.round(c.pe * 10) / 10, y: r3(c.dividendYield)! }]] : [];
   }));
   if (Object.keys(then).length && now.eps !== null && now.eps > 0) co.now.then = then; else delete co.now.then;

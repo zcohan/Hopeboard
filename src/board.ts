@@ -2,9 +2,10 @@
 import logos from '../public/logos/sources.json';
 import { fill, type Tokens } from './copy';
 import { nowModel, parseFig, pastModel, type Section } from './engine';
-import { decPctFixed, usd } from './format';
+import { requiredGrowth } from './formula';
+import { decPctFixed, pct, usd } from './format';
 import { companyNowTokens, companyPastTokens, eraTokens, spxNowTokens } from './tokens';
-import type { Basis, CardsFile, Category, Company, CopyEntry, Era, Figures, PastEra } from './types';
+import type { Basis, CardsFile, Category, Company, Compare, CopyEntry, Era, Figures, PastEra } from './types';
 
 export interface BoardState {
   era: Era;
@@ -12,6 +13,8 @@ export interface BoardState {
   category: Category | 'all';
   /** The section tab shown; 'all' renders every section under its heading (tests). */
   section: Section | 'all';
+  /** What each company card's deal badge compares against. */
+  compare: Compare;
 }
 
 export class Copy {
@@ -41,6 +44,8 @@ interface TileParts {
   about?: string; // one line on what the business does
   price: { pre?: string; n: string; unit: string };
   lines: { cls: 'makes' | 'miss'; html: string }[];
+  /** The deal badge under the header: better, worse or the same deal than at the chosen time. */
+  deal?: string;
   /** Labelled rows (company cards): Earns, Reasonably priced, Expected next year, Risk. */
   facts?: { label: string; html: string }[];
   why?: { heading: string; bullets: string[] } | { story: [string, string][] };
@@ -67,6 +72,7 @@ function tile(t: TileParts, copy: Copy): string {
     `<div class="top"><div class="head">` +
     (t.icon ? `<div class="logo" style="background:${t.color}" aria-hidden="true">${t.icon}</div>` : t.logo ? `<div class="logo img" data-logo="${esc(t.logo)}"></div>` : `<div class="logo" style="background:${t.color}">${esc(t.badge)}</div>`) +
     `<div class="name">${esc(t.name)}${t.about ? `<small>${esc(t.about)}</small>` : ''}</div>${price}</div>` +
+    (t.deal ?? '') +
     t.lines.map((l) => `<p class="${l.cls}">${l.html}</p>`).join('') +
     (t.facts?.length ? `<dl class="facts">${t.facts.map((x) => `<div><dt>${esc(x.label)}</dt><dd>${x.html}</dd></div>`).join('')}</dl>` : '') +
     (link ? `<button type="button" class="whylink" popovertarget="${pop}">${link}</button>` : '') +
@@ -116,6 +122,16 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     }
   };
   const L = (field: string) => copy.label('page', field);
+  // better, worse or the same deal than at the chosen time: lower required growth is better
+  const dealBadge = (co: Company, now: number | null): string | undefined => {
+    const then = co.now.then?.[s.compare];
+    if (s.basis !== 't' || now === null || !then) return undefined;
+    const was = requiredGrowth(then.y, then.pe);
+    const kind = pct(was) === pct(now) ? 'same' : was > now ? 'better' : 'worse';
+    const arrow = { better: '↓', worse: '↑', same: '=' }[kind];
+    const detail = fill(copy.label('compare', kind === 'same' ? 'detailSame' : 'detail'), { then: () => pct(was), now: () => pct(now) }, `${co.id} deal`);
+    return `<div class="deal ${kind}">${arrow} ${esc(copy.label('compare', kind))} · ${detail}</div>`;
+  };
   const yearsUnit = (b: Basis) => L(b === 't' ? 'unitT' : 'unitF');
   const heading = (sec: Section) => copy.label('comment-headings', sec);
   const bulletsOf = (e: CopyEntry, tk: Tokens) => ((e.bullets as string[]) ?? []).map((b, i) => fill(b, tk, `${e.id} bullet ${i + 1}`));
@@ -207,7 +223,6 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         const tpl: [string, string | undefined][] = [
           ['farm', earnsNow ? (shared?.farm as string | undefined) : undefined],
           ['assumes', e.assumes as string | undefined],
-          ['moves', s.basis === 't' && co.now.then ? (shared?.moves as string | undefined) : undefined],
           ['forecast', co.now.forecast !== undefined && co.now.forecast !== null ? (shared?.forecast as string | undefined) : undefined],
           ['consequence', e.consequence as string | undefined],
         ];
@@ -222,7 +237,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
             const full = lowYears ? `${html} ${fill(shared!.lowYears as string, tk, `${id} lowYears`)}` : html;
             return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html: full };
           });
-        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts, why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
+        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts, deal: dealBadge(co, m.req('t')), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
       });
       if (html) buckets[m.section].push({ sort: m.sectionReq ?? -Infinity, html });
     }
