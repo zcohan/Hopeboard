@@ -1,0 +1,126 @@
+// Computes the board's figures from the downloads and compares them with
+// data/figures.json. Prints every change; `--write` saves them.
+//
+//   npm run figures            show what would change
+//   npm run figures -- --write save it
+import { readFileSync, writeFileSync } from 'node:fs';
+import { requiredGrowth } from '../src/formula';
+import { parseFig, sectionOf } from '../src/engine';
+import type { Company, Figures, PastEra } from '../src/types';
+import { SOURCES } from './sources';
+import { loadSupplements } from './xbrl';
+import { bondHighSince, barOn, bond, computeOn, Filings, forecast, lastDate, lastDecade, yearsBefore, type Computed } from './compute';
+
+const WRITE = process.argv.includes('--write');
+await loadSupplements(SOURCES);
+const F: Figures = JSON.parse(readFileSync('data/figures.json', 'utf8'));
+const today = lastDate('AAPL.US');
+const ERAS: [PastEra, number][] = [['y1', 1], ['y5', 5], ['y10', 10]];
+const month = (d: string) => new Date(d + 'T00:00:00Z').toLocaleString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+const round = (x: number, step: number) => Math.round(x / step) * step;
+const years = (pe: number | null, loss: boolean): number | string | null => (loss ? 'loss' : pe === null ? null : pe < 10 ? Math.round(pe * 10) / 10 : Math.round(pe));
+const r3 = (x: number | null) => (x === null ? null : Math.round(x * 1000) / 1000);
+const pct = (x: number | null | undefined) => (x === null || x === undefined || Number.isNaN(x) ? '—' : `${(x * 100).toFixed(1)}%`);
+const show = (v: unknown) => (v === null || v === undefined ? '—' : typeof v === 'number' ? (Math.abs(v) < 1 ? pct(v) : String(v)) : String(v));
+
+const notes: string[] = [];
+const rows: string[][] = [];
+
+for (const s of SOURCES) {
+  const co = F.companies.find((c) => c.id === s.id) as Company | undefined;
+  if (!co) continue;
+  const f = new Filings(s);
+  const now = computeOn(f, today, today);
+  if (!now) { notes.push(`${s.id}: no price for ${today}`); continue; }
+  const old = structuredClone(co.now);
+  const dollar = co.now.value !== undefined || co.now.yearsOfRevenue !== undefined;
+
+  // years of last year's profit, cash returned, last decade
+  const pe = years(now.pe, now.loss);
+  if (now.annualOnly) notes.push(`${s.id}: only a full-year profit is filed (to ${now.epsEnd}); used as last year's`);
+  if (now.eps === null) notes.push(`${s.id}: no recent profit in the filings; kept the current figures`);
+  const dec = lastDecade(f, today);
+  const fc = forecast(s.id, today);
+  let pef: number | string | null = co.now.pef;
+  let fcNote = 'kept (no forecast downloaded yet)';
+  if (fc && now.eps !== null) {
+    if (now.eps > 0 && fc.fy0.eps > 0 && fc.fy1.eps > 0) {
+      const growth = fc.fy1.eps / fc.fy0.eps - 1;
+      pef = years(now.price / (now.eps * (1 + growth)), false);
+      co.now.forecast = r3(growth);
+      fcNote = `official profit grown ${pct(growth)} (analysts, ${fc.fy0.date.slice(0, 4)}→${fc.fy1.date.slice(0, 4)})`;
+    } else if (fc.fy1.eps > 0) {
+      co.now.forecast = null; // no profit this year to grow from
+      // no official profit to grow: the analysts' own figure
+      pef = years(now.price / fc.fy1.eps, false);
+      fcNote = `analysts' ${fc.fy1.date.slice(0, 4)} profit (no official profit to grow)`;
+    } else { pef = null; fcNote = 'analysts expect a loss'; }
+  }
+
+  if (now.eps !== null && !dollar) co.now.pe = pe;
+  if (now.eps !== null && dollar && !now.loss) co.now.pe = pe;
+  co.now.pef = pef;
+  if (now.dividendYield !== null) co.now.y = r3(now.dividendYield)!;
+  co.now.last = dec ? r3(dec.g) : null;
+  if (dollar && now.value !== null) co.now.value = Math.round(now.value);
+  if (dollar && co.now.profits) {
+    if (now.netIncome !== null) co.now.profits.last = Math.round(now.netIncome);
+    if (now.revenue !== null && co.now.profits.revenue !== undefined) co.now.profits.revenue = Math.round(now.revenue);
+  }
+  if (co.now.yearsOfRevenue !== undefined && now.value !== null && now.revenue) co.now.yearsOfRevenue = Math.round(now.value / now.revenue);
+  // a company whose filings gave no recent profit keeps its figures and their source
+  if (now.eps !== null) co.src = { ...co.src, pe: 'sec-eod', y: 'sec-eod', last: 'sec-eod', ...(fc ? { forecast: 'alphavantage' } : {}) };
+
+  // past views: only filings published by then
+  for (const [era, n] of ERAS) {
+    const d = yearsBefore(today, n);
+    const then = computeOn(f, d, today);
+    const p = co.past[era];
+    if (!then || !p) continue;
+    const before = barOn(s.eod, d)!, after = barOn(s.eod, today)!;
+    if (then.eps !== null) p.pe = years(then.pe, then.loss);
+    if (s.operating && f.usedEstimate(d) && typeof p.pe === 'number') p.pe = `≈${p.pe}`;
+    if (then.dividendYield !== null) p.y = r3(then.dividendYield)!;
+    p.profit = then.eps !== null && then.eps > 0 && now.eps !== null && now.eps > 0 ? r3(Math.pow(now.eps / then.eps, 1 / n) - 1)! : undefined;
+    p.stock = r3(Math.pow(after.adjusted_close / before.adjusted_close, 1 / n) - 1)!;
+    if (p.profit === undefined) delete p.profit;
+  }
+  if (now.eps !== null) co.src.past = 'sec-eod';
+
+  const reqOf = (n: typeof co.now) => { const v = parseFig(n.pe).v; return v === null ? null : requiredGrowth(n.y, v); };
+  const a = reqOf(old), b = reqOf(co.now);
+  rows.push([s.id, show(old.pe) + ' → ' + show(co.now.pe), show(old.pef) + ' → ' + show(co.now.pef), pct(old.y) + ' → ' + pct(co.now.y),
+    pct(old.last) + ' → ' + pct(co.now.last), pct(a) + ' → ' + pct(b), (a === null ? '—' : sectionOf(a)) + ' → ' + (b === null ? '—' : sectionOf(b)), fcNote]);
+}
+
+// eras: the bond, gold
+const goldNow = barOn('XAUUSD.FOREX', today)!.close;
+F.eras.now.bond = r3(bond(today))!;
+(F.eras.now as { bondHighSince?: string | null }).bondHighSince = bondHighSince(today);
+F.eras.now.gold = Math.round(goldNow);
+F.eras.now.label = month(today);
+for (const [era, n] of ERAS) {
+  const d = yearsBefore(today, n);
+  const E = F.eras[era];
+  E.label = month(d);
+  E.bond = r3(bond(d))!;
+  const g = barOn('XAUUSD.FOREX', d)!.close;
+  E.gold = Math.round(g);
+  E.goldReturn = r3(Math.pow(goldNow / g, 1 / n) - 1)!;
+}
+F.asOf = month(today);
+F.sources['sec-eod'] = {
+  name: 'Company filings (SEC EDGAR) and prices (EOD Historical Data)',
+  url: 'https://www.sec.gov/edgar/search/',
+  date: today,
+  note: 'Profit is the twelve months to the latest quarterly report, per share after dilution. Cash returned is dividends paid over the last twelve months (EOD); buybacks show up in profit-per-share growth. Next year’s profit is last year’s, grown at the analysts’ forecast rate (Alpha Vantage).',
+} as never;
+
+const w = rows[0].map((_, i) => Math.max(...[['', 'years', 'next year', 'cash', 'last decade', 'needs', 'section', 'forecast'], ...rows].map((r) => r[i].length)));
+const line = (r: string[]) => r.map((c, i) => c.padEnd(w[i])).join('  ');
+console.log(`Prices ${today}. Bond ${pct(F.eras.now.bond)}. Gold $${F.eras.now.gold}.\n`);
+console.log(line(['', 'years', 'next year', 'cash', 'last decade', 'needs', 'section', 'forecast']));
+for (const r of rows) console.log(line(r));
+if (notes.length) console.log('\n' + notes.join('\n'));
+if (WRITE) { writeFileSync('data/figures.json', JSON.stringify(F, null, 2) + '\n'); console.log('\nwrote data/figures.json'); }

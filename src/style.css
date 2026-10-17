@@ -1,0 +1,152 @@
+:root{
+  --sans:"Geist",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+
+  --paper:#F7F8F6; --ink:#1C2622; --ink-2:#4F5B55; --ink-3:#8A948F;
+  --loss:#B3261E; --tile:#FFFFFF; --wash:#FAFBF9; --rule:#E3E6E1; --edge:#CDD3CC;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --loss:#E5857A; --paper:#171B18; --ink:#E4E7DF; --ink-2:#B4BBB3; --ink-3:#7E8984;
+    --tile:#1F2420; --wash:#1A1F1B; --rule:#2E3531; --edge:#3B443F; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --loss:#E5857A; --paper:#171B18; --ink:#E4E7DF; --ink-2:#B4BBB3; --ink-3:#7E8984;
+  --tile:#1F2420; --wash:#1A1F1B; --rule:#2E3531; --edge:#3B443F; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px; line-height:1.45; -webkit-font-smoothing:antialiased}
+main{max-width:1360px; margin:0 auto; padding:40px 20px 80px}
+h1{font-weight:600; font-size:26px; line-height:1.15; margin:0; letter-spacing:-0.025em}
+h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
+#board h2:first-child{margin-top:8px}
+.sub{color:var(--ink); margin:3px 0 0; font-size:15px; max-width:60ch}
+.grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px}
+@media (max-width:1020px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.grid{grid-template-columns:minmax(0,1fr); gap:14px}}
+.tile{display:flex; flex-direction:column; min-width:0}
+.top{flex:1; background:var(--tile); border:1px solid var(--edge); border-radius:10px; padding:22px 24px 20px; display:flex; flex-direction:column; gap:12px}
+.head{display:flex; flex-wrap:nowrap; align-items:flex-start; gap:12px; min-width:0}
+.head .name{flex:1 1 0; min-width:0; overflow-wrap:normal; hyphens:manual}
+
+/* The comment bubble: a popover opened from the link at the foot of each card. */
+.whylink{margin-top:auto; align-self:flex-start; font:inherit; font-size:14px; font-weight:500; color:var(--ink);
+  background:none; border:0; padding:2px 0; cursor:pointer; text-decoration:underline; text-decoration-color:var(--ink-3);
+  text-underline-offset:3px}
+.whylink:hover{text-decoration-color:var(--ink)}
+.whylink:focus-visible{outline:2px solid var(--ink); outline-offset:2px; border-radius:3px}
+.why{background:var(--wash,var(--tile)); border:1px solid var(--edge); border-radius:10px; padding:14px 18px 14px; color:var(--ink)}
+.why[popover]{position:absolute; inset:auto; margin:0; width:min(320px, calc(100vw - 32px)); overflow:visible;
+  box-shadow:0 8px 28px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08)}
+.why::before{content:""; position:absolute; top:-7px; left:var(--arrow,28px); width:12px; height:12px; background:inherit;
+  border-left:1px solid var(--rule); border-top:1px solid var(--rule); transform:rotate(45deg)}
+.price{flex:none; margin-left:auto; text-align:right; line-height:1.1; font-variant-numeric:tabular-nums}
+.price .n{display:block; font-size:17px; color:var(--ink); white-space:nowrap; margin:2px 0}
+.price .u{display:block; font-size:11px; color:var(--ink-3)}
+.makes{margin:0; font-size:14.5px; color:var(--ink)}
+.makes b{font-weight:500}
+.miss{margin:0; font-size:14px; color:var(--ink-2)}
+.miss b{font-weight:500; color:var(--ink)}
+.miss b.loss{color:var(--loss)}
+.paying{margin:0; font-size:13px; color:var(--ink-3)}
+.why h4{margin:0 0 4px; font-size:13px; font-weight:600; color:var(--ink)}
+.why ul{margin:0; padding:0 0 0 16px; color:var(--ink-2); font-size:14px}
+.why li{margin:0 0 3px}
+.base .makes{color:var(--ink)}
+.logo{width:52px; height:44px; border-radius:11px; display:grid; place-items:center; flex:none;
+  font-weight:600; font-size:12px; color:#fff; letter-spacing:0.03em}
+.name{font-weight:500; font-size:16px; line-height:1.2}
+.tag small{display:block; font-weight:400; font-size:12px; line-height:1.3; color:var(--ink-3); margin-top:2px}
+
+.toggles{display:flex; flex-wrap:wrap; gap:8px 24px; margin:0 0 24px; align-items:center}
+.toggle{display:flex; align-items:center; gap:6px; font-size:14px}
+.story{margin:0 0 8px; font-size:14px; color:var(--ink-2)}
+.why h4 + .story{margin-top:0}
+.toggle .tl{color:var(--ink-3); margin-right:4px}
+.toggle button{font:inherit; font-size:14px; padding:6px 12px; border:1px solid var(--edge); background:var(--tile); color:var(--ink-2); border-radius:999px; cursor:pointer}
+.toggle button.on{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.toggle button:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+.foot{margin-top:28px; font-size:13px; color:var(--ink-3)}
+.foot{margin-top:28px; font-size:13px; color:var(--ink-3)}
+
+/* Category pills (build step 7) */
+.pills{display:flex; flex-wrap:wrap; gap:8px; margin:40px 0 0}
+
+/* Development only: drafts, errors, the review screen */
+.tile.error .top{border-color:var(--loss)}
+.devbar{display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; margin:0 0 20px; padding:8px 12px; border:1px dashed var(--ink-3);
+  border-radius:10px; font-size:13px; color:var(--ink-2)}
+.devbar a{color:var(--ink)}
+.devbar label{display:flex; gap:6px; align-items:center}
+.devbar .errs{color:var(--loss)}
+.sources{margin-top:12px; font-size:13px; color:var(--ink-3)}
+.sources ul{margin:4px 0 0; padding-left:16px}
+.sources a{color:inherit}
+
+.review h2{margin-top:32px}
+.entry{border:1px solid var(--rule); background:var(--tile); border-radius:10px; padding:14px 16px; margin:0 0 14px;
+  display:grid; grid-template-columns:minmax(0,1fr) 260px; gap:16px}
+@media (max-width:760px){ .entry{grid-template-columns:1fr} }
+.entry header{display:flex; gap:10px; align-items:baseline; grid-column:1/-1}
+.entry header code{font-size:13px}
+.entry .status{font-size:12px; padding:1px 8px; border-radius:999px; border:1px solid var(--rule)}
+.entry .status.ok{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.entry .status.changed{color:var(--loss); border-color:var(--loss)}
+.entry label{display:block; font-size:12px; color:var(--ink-3); margin:8px 0 2px}
+.entry textarea{width:100%; font:inherit; font-size:14px; color:var(--ink); background:var(--paper); border:1px solid var(--rule);
+  border-radius:6px; padding:6px 8px; resize:vertical}
+.entry .notes{margin:8px 0 0; padding-left:16px; font-size:13px; color:var(--ink-2)}
+.entry .actions{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap}
+.entry button{font:inherit; font-size:13px; padding:5px 12px; border-radius:999px; border:1px solid var(--rule); background:var(--paper); color:var(--ink); cursor:pointer}
+.entry button.primary{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.entry .preview .tile{display:flex; flex-direction:column; gap:10px}
+.entry .preview .tile .top{padding:14px}
+.entry .msg{font-size:13px; color:var(--ink-3)}
+.review .filter{display:flex; gap:8px; margin:0 0 16px}
+
+/* Company logos sit on white in both themes: most are drawn for a light background */
+.logo.img{background:#fff; box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.logo.img img{max-width:38px; max-height:30px; display:block}
+
+/* Section tabs: Pricey / Normal / Bargain */
+.tabs{display:flex; gap:4px; margin:40px 0 16px; border-bottom:1px solid var(--rule); overflow-x:auto}
+.tabs button{font-family:inherit; font-weight:600; font-size:20px; letter-spacing:-0.02em;
+  color:var(--ink-3); background:none; border:0; border-bottom:2px solid transparent; margin-bottom:-1px;
+  padding:6px 14px 10px; cursor:pointer; white-space:nowrap; display:flex; align-items:baseline; gap:8px}
+.tabs button:first-child{padding-left:0}
+.tabs button[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--ink)}
+.tabs button:disabled{opacity:.4; cursor:default}
+.tabs button:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+.tabs .count{font-family:var(--sans); font-size:13px; font-weight:400; color:var(--ink-3)}
+
+/* Baseline icons: a white glyph on the badge colour */
+.logo svg{width:26px; height:26px; color:#fff}
+
+/* Header: title with the theme toggle on the right */
+.masthead{display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:0 0 22px; margin:0 0 24px; border-bottom:1px solid var(--rule)}
+.brand{display:flex; align-items:center; gap:14px; min-width:0}
+.mark{flex:none; width:48px; height:48px; border-radius:13px; display:grid; place-items:center;
+  background:linear-gradient(140deg,#FFB547 0%,#FF7A59 55%,#E8508A 100%); box-shadow:0 4px 14px rgba(255,122,89,.28)}
+.mark svg{width:30px; height:30px}
+.theme{flex:none; width:36px; height:36px; border-radius:999px; border:1px solid var(--edge); background:var(--tile);
+  color:var(--ink); display:grid; place-items:center; cursor:pointer; padding:0}
+.theme svg{width:18px; height:18px}
+.theme:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+.pills + .tabs{margin-top:20px}
+.toggle{flex-wrap:wrap} .toggle button{white-space:nowrap}
+.name small{display:block; font-weight:400; font-size:13px; line-height:1.3; color:var(--ink-3); margin-top:2px}
+.aside{color:var(--ink-2)} .aside b{font-weight:500; color:var(--ink)}
+
+/* Company cards: labelled rows */
+.facts{margin:0; display:flex; flex-direction:column; gap:12px}
+.facts dt{font-size:13px; font-weight:500; color:var(--ink-3); margin:0 0 2px; text-transform:uppercase; letter-spacing:0.06em}
+.facts dd{margin:0; font-size:15px; color:var(--ink); line-height:1.45}
+.facts dd b{font-weight:600}
+.facts b.loss{color:var(--loss); font-weight:500}
+.facts dd{white-space:pre-line}

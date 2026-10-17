@@ -1,0 +1,199 @@
+{
+ "TSLA": {
+  "file": "Tesla T symbol.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tesla_T_symbol.svg",
+  "license": "Public domain"
+ },
+ "PLTR": {
+  "file": "Palantir Technologies logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Palantir_Technologies_logo.svg",
+  "license": "Public domain",
+  "cropped": "0 0 16 20"
+ },
+ "COST": {
+  "file": "Costco Wholesale logo 2010-10-26.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Costco_Wholesale_logo_2010-10-26.svg",
+  "license": "Public domain"
+ },
+ "AAPL": {
+  "file": "Apple logo black.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Apple_logo_black.svg",
+  "license": "Public domain"
+ },
+ "NVDA": {
+  "file": "NVIDIA logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:NVIDIA_logo.svg",
+  "license": "Apache License 2.0",
+  "cropped": "0 0 45.3 30"
+ },
+ "MSFT": {
+  "file": "Microsoft logo (2012).svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Microsoft_logo_(2012).svg",
+  "license": "Public domain",
+  "cropped": "0 0 72 72"
+ },
+ "META": {
+  "file": "Meta Platforms Inc. logo (cropped).svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Meta_Platforms_Inc._logo_(cropped).svg",
+  "license": "Public domain"
+ },
+ "TSM": {
+  "file": "TSMC wordmark.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:TSMC_wordmark.svg",
+  "license": "Public domain"
+ },
+ "AMZN": {
+  "file": "Amazon icon.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Amazon_icon.svg",
+  "license": "Public domain"
+ },
+ "ORCL": {
+  "file": "Oracle logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Oracle_logo.svg",
+  "license": "Public domain"
+ },
+ "GOOGL": {
+  "file": "Google \"G\" logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Google_%22G%22_logo.svg",
+  "license": "Public domain"
+ },
+ "XOM": {
+  "file": "ExxonMobil Logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:ExxonMobil_Logo.svg",
+  "license": "Public domain"
+ },
+ "AVGO": {
+  "file": "Broadcom logo (2016-present).svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Broadcom_logo_(2016-present).svg",
+  "license": "Public domain",
+  "cropped": "0 0 33 33"
+ },
+ "AMD": {
+  "file": "AMD Logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:AMD_Logo.svg",
+  "license": "Public domain"
+ },
+ "INTC": {
+  "file": "Intel logo 2023.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Intel_logo_2023.svg",
+  "license": "Public domain"
+ },
+ "ASML": {
+  "file": "ASML Logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:ASML_Logo.svg",
+  "license": "Public domain",
+  "cropped": "0 0 209.2 209.2"
+ },
+ "MU": {
+  "file": "Micron Technology logo 2024.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Micron_Technology_logo_2024.svg",
+  "license": "Public domain"
+ },
+ "CRM": {
+  "file": "Salesforce.com logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Salesforce.com_logo.svg",
+  "license": "Public domain"
+ },
+ "ADBE": {
+  "file": "Adobe Corporate logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Adobe_Corporate_logo.svg",
+  "license": "Public domain",
+  "cropped": "0 0 16.2 14.3"
+ },
+ "NOW": {
+  "file": "ServiceNow logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:ServiceNow_logo.svg",
+  "license": "Public domain"
+ },
+ "SHOP": {
+  "file": "Shopify logo 2018.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Shopify_logo_2018.svg",
+  "license": "Public domain",
+  "cropped": "0 308 150.3 171.4"
+ },
+ "NFLX": {
+  "file": "Netflix 2016 N logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Netflix_2016_N_logo.svg",
+  "license": "Public domain"
+ },
+ "UBER": {
+  "file": "Uber logo 2018.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Uber_logo_2018.svg",
+  "license": "Public domain"
+ },
+ "ABNB": {
+  "file": "Airbnb Logo Bélo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Airbnb_Logo_B%C3%A9lo.svg",
+  "license": "Public domain",
+  "cropped": "0 0 96 100"
+ },
+ "CSCO": {
+  "file": "Cisco logo blue 2016.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Cisco_logo_blue_2016.svg",
+  "license": "Public domain",
+  "cropped": "0 0 216 59.3"
+ },
+ "DELL": {
+  "file": "Dell logo 2016.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Dell_logo_2016.svg",
+  "license": "Public domain"
+ },
+ "SPCX": {
+  "file": "SpaceX-Logo-Xonly.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:SpaceX-Logo-Xonly.svg",
+  "license": "Public domain"
+ },
+ "JPM": {
+  "file": "JPMorgan Chase.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:JPMorgan_Chase.svg",
+  "license": "Public domain",
+  "cropped": "151 0 18 18"
+ },
+ "BAC": {
+  "file": "Bank of America 2018 logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Bank_of_America_2018_logo.svg",
+  "license": "Public domain",
+  "cropped": "815 0 185 100"
+ },
+ "WFC": {
+  "file": "Wells Fargo Logo (2020).svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Wells_Fargo_Logo_(2020).svg",
+  "license": "Public domain"
+ },
+ "C": {
+  "file": "Citi logo March 2023.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Citi_logo_March_2023.svg",
+  "license": "Public domain"
+ },
+ "GS": {
+  "file": "Goldman Sachs logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Goldman_Sachs_logo.svg",
+  "license": "Public domain"
+ },
+ "V": {
+  "file": "Visa Inc. logo (2021–present).svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Visa_Inc._logo_(2021%E2%80%93present).svg",
+  "license": "Public domain"
+ },
+ "MA": {
+  "file": "Mastercard 2019 logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Mastercard_2019_logo.svg",
+  "license": "Public domain"
+ },
+ "VZ": {
+  "file": "Verizon 2024 (symbol).svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Verizon_2024_(symbol).svg",
+  "license": "Public domain"
+ },
+ "T": {
+  "file": "AT&T logo 2016.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:AT%26T_logo_2016.svg",
+  "license": "Public domain",
+  "cropped": "-0.1 -42.2 411.2 411.1"
+ },
+ "TMUS": {
+  "file": "T-Mobile logo 2022.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:T-Mobile_logo_2022.svg",
+  "license": "Public domain"
+ }
+}

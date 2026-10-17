@@ -1,0 +1,25 @@
+{
+  "name": "hopeboard",
+  "version": "1.0.0",
+  "description": "Teaches ordinary people how to read a stock price.",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm test && vite build",
+    "preview": "vite preview",
+    "test": "tsc && vitest run",
+    "reconcile": "tsx scripts/reconcile.ts",
+    "fetch": "tsx scripts/fetch.ts",
+    "figures": "tsx scripts/figures.ts",
+    "refresh": "zsh scripts/refresh.sh",
+    "refresh:install": "sed \"s|__HOPEBOARD__|$PWD|\" scripts/com.hopeboard.refresh.plist > ~/Library/LaunchAgents/com.hopeboard.refresh.plist && launchctl bootout gui/$(id -u)/com.hopeboard.refresh 2>/dev/null; launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.hopeboard.refresh.plist"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.4",
+    "vitest": "^3.2.7"
+  },
+  "private": true
+}

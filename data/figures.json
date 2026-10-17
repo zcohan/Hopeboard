@@ -1,0 +1,1397 @@
+{
+  "asOf": "October 2026",
+  "sources": {
+    "treasury": {
+      "name": "10-year US Treasury yield (EOD Historical Data, from the US Treasury)",
+      "date": "October 2026"
+    },
+    "gold": {
+      "name": "Gold price (EOD Historical Data)",
+      "date": "October 2026"
+    },
+    "damodaran-returns": {
+      "name": "Damodaran, NYU Stern, yearly S&P 500 returns with dividends",
+      "url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html",
+      "date": "January 2026",
+      "note": "1928 to 2025 compounds to 10.0% a year: the ~10% every card is measured against."
+    },
+    "sec-eod": {
+      "name": "Company filings (SEC EDGAR) and prices (EOD Historical Data)",
+      "url": "https://www.sec.gov/edgar/search/",
+      "date": "2026-10-16",
+      "note": "Profit is the twelve months to the latest quarterly report, per share after dilution. Cash returned is dividends paid over the last twelve months (EOD); buybacks show up in profit-per-share growth. Next year’s profit is last year’s, grown at the analysts’ forecast rate (Alpha Vantage)."
+    },
+    "alphavantage": {
+      "name": "Alpha Vantage, analysts’ average profit-per-share forecasts",
+      "url": "https://www.alphavantage.co/",
+      "note": "Next year’s profit grows last year’s official profit at the forecast rate for the next fiscal year."
+    },
+    "spx-quotes": {
+      "name": "S&P 500 years of profit and growth: quoted figures (Yahoo Finance, StockAnalysis)",
+      "date": "October 2026",
+      "rough": true,
+      "note": "Not yet computed from data."
+    },
+    "rough": {
+      "name": "Design-stage estimate",
+      "rough": true,
+      "note": "SpaceX: its listing document has no machine-readable figures; replaced at its first annual report."
+    }
+  },
+  "industries": {
+    "chips": {
+      "label": "chip companies",
+      "growth": 0.23
+    },
+    "chipEquipment": {
+      "label": "chip equipment makers",
+      "growth": 0.19
+    },
+    "software": {
+      "label": "software companies",
+      "growth": 0.23
+    },
+    "internet": {
+      "label": "internet companies",
+      "growth": 0.21
+    },
+    "hardware": {
+      "label": "computer hardware companies",
+      "growth": 0.25
+    },
+    "retail": {
+      "label": "general retailers",
+      "growth": 0.12
+    },
+    "entertainment": {
+      "label": "entertainment companies",
+      "growth": 0.06
+    },
+    "autos": {
+      "label": "carmakers",
+      "growth": 0.1
+    },
+    "oil": {
+      "label": "oil majors",
+      "growth": 0.04
+    }
+  },
+  "eras": {
+    "now": {
+      "label": "October 2026",
+      "bond": 0.051,
+      "gold": 4165,
+      "goldReturn": 0.08,
+      "spx": {
+        "pe": "≈28",
+        "y": 0.02,
+        "pef": "≈23",
+        "last": 0.11
+      },
+      "bondHighSince": "It reached 5.3% in October, the highest since 2002"
+    },
+    "y1": {
+      "label": "October 2025",
+      "bond": 0.04,
+      "gold": 4333,
+      "goldReturn": -0.039,
+      "spx": {
+        "pe": "≈27",
+        "y": 0.02,
+        "profit": 0.12,
+        "stock": 0.16
+      }
+    },
+    "y5": {
+      "label": "October 2021",
+      "bond": 0.016,
+      "gold": 1767,
+      "goldReturn": 0.187,
+      "spx": {
+        "pe": "≈25",
+        "y": 0.02,
+        "profit": 0.06,
+        "stock": 0.14
+      }
+    },
+    "y10": {
+      "label": "October 2016",
+      "bond": 0.018,
+      "gold": 1251,
+      "goldReturn": 0.128,
+      "spx": {
+        "pe": "≈24",
+        "y": 0.02,
+        "profit": 0.11,
+        "stock": 0.15
+      }
+    }
+  },
+  "companies": [
+    {
+      "id": "TSLA",
+      "name": "Tesla",
+      "color": "#B8232A",
+      "category": "Other",
+      "industry": "autos",
+      "now": {
+        "pe": 328,
+        "pef": "≈180",
+        "y": 0,
+        "last": null
+      },
+      "past": {
+        "y1": {
+          "pe": 255,
+          "profit": -0.357,
+          "stock": -0.173,
+          "y": 0
+        },
+        "y5": {
+          "pe": 437,
+          "profit": 0.109,
+          "stock": 0.048,
+          "y": 0
+        },
+        "y10": {
+          "pe": "loss",
+          "stock": 0.391,
+          "y": 0
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "past": "sec-eod",
+        "last": "sec-eod"
+      }
+    },
+    {
+      "id": "PLTR",
+      "name": "Palantir",
+      "color": "#1B1B1B",
+      "category": "Software",
+      "industry": "software",
+      "now": {
+        "pe": 159,
+        "pef": "≈105",
+        "y": 0,
+        "last": null
+      },
+      "past": {
+        "y1": {
+          "pe": 594,
+          "profit": 2.9,
+          "stock": 0.044,
+          "y": 0
+        },
+        "y5": {
+          "pe": "loss",
+          "stock": 0.506,
+          "y": 0
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "past": "sec-eod",
+        "last": "sec-eod"
+      }
+    },
+    {
+      "id": "COST",
+      "name": "Costco",
+      "color": "#1D4F91",
+      "category": "Other",
+      "industry": "retail",
+      "now": {
+        "pe": 48,
+        "pef": "≈47",
+        "y": 0.006,
+        "last": 0.146
+      },
+      "past": {
+        "y1": {
+          "pe": 51,
+          "profit": 0.14,
+          "stock": 0.075,
+          "y": 0.005
+        },
+        "y5": {
+          "pe": 40,
+          "profit": 0.13,
+          "stock": 0.182,
+          "y": 0.029
+        },
+        "y10": {
+          "pe": 28,
+          "profit": 0.146,
+          "stock": 0.228,
+          "y": 0.011
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "AAPL",
+      "name": "Apple",
+      "color": "#555",
+      "category": "Hardware",
+      "industry": "hardware",
+      "now": {
+        "pe": 39,
+        "pef": "≈35",
+        "y": 0.003,
+        "last": 0.125
+      },
+      "past": {
+        "y1": {
+          "pe": 38,
+          "profit": 0.323,
+          "stock": 0.393,
+          "y": 0.004
+        },
+        "y5": {
+          "pe": 28,
+          "profit": 0.112,
+          "stock": 0.194,
+          "y": 0.006
+        },
+        "y10": {
+          "pe": 14,
+          "profit": 0.15,
+          "stock": 0.29,
+          "y": 0.019
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "NVDA",
+      "name": "Nvidia",
+      "color": "#6DAA2C",
+      "category": "Chips",
+      "industry": "chips",
+      "now": {
+        "pe": 27,
+        "pef": 16,
+        "y": 0.002,
+        "last": 0.682,
+        "forecast": 0.709
+      },
+      "past": {
+        "y1": {
+          "pe": 52,
+          "profit": 1.254,
+          "stock": 0.181,
+          "y": 0
+        },
+        "y5": {
+          "pe": 78,
+          "profit": 0.951,
+          "stock": 0.58,
+          "y": 0.001
+        },
+        "y10": {
+          "pe": 43,
+          "profit": 0.704,
+          "stock": 0.63,
+          "y": 0.007
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "MSFT",
+      "name": "Microsoft",
+      "color": "#2B7CD3",
+      "category": "Software",
+      "industry": "software",
+      "now": {
+        "pe": 29,
+        "pef": 25,
+        "y": 0.007,
+        "last": 0.215,
+        "forecast": 0.198
+      },
+      "past": {
+        "y1": {
+          "pe": 38,
+          "profit": 0.316,
+          "stock": 0.043,
+          "y": 0.006
+        },
+        "y5": {
+          "pe": 38,
+          "profit": 0.174,
+          "stock": 0.126,
+          "y": 0.007
+        },
+        "y10": {
+          "pe": 27,
+          "profit": 0.239,
+          "stock": 0.264,
+          "y": 0.025
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "META",
+      "name": "Meta",
+      "color": "#2E6FE8",
+      "category": "Internet",
+      "industry": "internet",
+      "now": {
+        "pe": 27,
+        "pef": 24,
+        "y": 0.003,
+        "last": 0.337,
+        "forecast": 0.105
+      },
+      "past": {
+        "y1": {
+          "pe": 26,
+          "profit": -0.037,
+          "stock": 0,
+          "y": 0.003
+        },
+        "y5": {
+          "pe": 24,
+          "profit": 0.145,
+          "stock": 0.171,
+          "y": 0
+        },
+        "y10": {
+          "pe": 61,
+          "profit": 0.289,
+          "stock": 0.188,
+          "y": 0
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "TSM",
+      "name": "TSMC",
+      "color": "#B03A2E",
+      "category": "Chips",
+      "industry": "chips",
+      "now": {
+        "pe": 41,
+        "pef": 32,
+        "y": 0.008,
+        "last": 0.188,
+        "forecast": 0.295
+      },
+      "past": {
+        "y1": {
+          "pe": 41,
+          "profit": 0.384,
+          "stock": 0.389,
+          "y": 0.008
+        },
+        "y5": {
+          "pe": 33,
+          "profit": 0.234,
+          "stock": 0.311,
+          "y": 0.016
+        },
+        "y10": {
+          "pe": 17,
+          "stock": 0.326,
+          "y": 0.025,
+          "profit": 0.185
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "AMZN",
+      "name": "Amazon",
+      "color": "#E8862B",
+      "category": "Internet",
+      "industry": "internet",
+      "now": {
+        "pe": 20,
+        "pef": 25,
+        "y": 0,
+        "last": 0.607,
+        "forecast": -0.183
+      },
+      "past": {
+        "y1": {
+          "pe": 33,
+          "profit": 0.895,
+          "stock": 0.166,
+          "y": 0
+        },
+        "y5": {
+          "pe": 59,
+          "profit": 0.341,
+          "stock": 0.08,
+          "y": 0
+        },
+        "y10": {
+          "pe": 205,
+          "profit": 0.511,
+          "stock": 0.198,
+          "y": 0
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "ORCL",
+      "name": "Oracle",
+      "color": "#C0392B",
+      "category": "Software",
+      "industry": "software",
+      "now": {
+        "pe": 20,
+        "pef": 15,
+        "y": 0.016,
+        "last": 0.109,
+        "forecast": 0.351
+      },
+      "past": {
+        "y1": {
+          "pe": 72,
+          "profit": 0.477,
+          "stock": -0.585,
+          "y": 0.006
+        },
+        "y5": {
+          "pe": 20,
+          "profit": 0.063,
+          "stock": 0.076,
+          "y": 0.013
+        },
+        "y10": {
+          "pe": 18,
+          "profit": 0.118,
+          "stock": 0.145,
+          "y": 0.016
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "GOOGL",
+      "name": "Alphabet",
+      "color": "#D64B3A",
+      "category": "Internet",
+      "industry": "internet",
+      "now": {
+        "pe": 17,
+        "pef": 23,
+        "y": 0.003,
+        "last": 0.252,
+        "forecast": -0.269
+      },
+      "past": {
+        "y1": {
+          "pe": 27,
+          "profit": 1.12,
+          "stock": 0.358,
+          "y": 0.003
+        },
+        "y5": {
+          "pe": 31,
+          "profit": 0.34,
+          "stock": 0.195,
+          "y": 0
+        },
+        "y10": {
+          "pe": 31,
+          "stock": 0.239,
+          "y": 0,
+          "profit": 0.315
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "XOM",
+      "name": "Exxon",
+      "color": "#B5121B",
+      "category": "Other",
+      "industry": "oil",
+      "now": {
+        "pe": 23,
+        "pef": 25,
+        "y": 0.023,
+        "last": 0.057,
+        "forecast": -0.082
+      },
+      "past": {
+        "y1": {
+          "pe": 16,
+          "profit": 0.104,
+          "stock": 0.665,
+          "y": 0.036
+        },
+        "y5": {
+          "pe": "loss",
+          "stock": 0.278,
+          "y": 0.056
+        },
+        "y10": {
+          "pe": 34,
+          "profit": 0.119,
+          "stock": 0.123,
+          "y": 0.034
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "AVGO",
+      "name": "Broadcom",
+      "color": "#CC092F",
+      "category": "Chips",
+      "industry": "chips",
+      "now": {
+        "pe": 42,
+        "pef": 25,
+        "y": 0.008,
+        "last": null,
+        "forecast": 0.664
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "AMD",
+      "name": "AMD",
+      "color": "#1A1A1A",
+      "category": "Chips",
+      "industry": "chips",
+      "now": {
+        "pe": 136,
+        "pef": 65,
+        "y": 0,
+        "last": null,
+        "forecast": 1.072
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "INTC",
+      "name": "Intel",
+      "color": "#0068B5",
+      "category": "Chips",
+      "industry": "chips",
+      "now": {
+        "pe": null,
+        "pef": 43,
+        "y": 0,
+        "value": 453,
+        "profits": {
+          "last": -11,
+          "best": 21
+        },
+        "last": null,
+        "forecast": null
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "ASML",
+      "name": "ASML",
+      "color": "#10069F",
+      "category": "Chips",
+      "industry": "chipEquipment",
+      "now": {
+        "pe": 59,
+        "pef": 43,
+        "y": 0.006,
+        "last": 0.226,
+        "forecast": 0.361
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "MU",
+      "name": "Micron",
+      "color": "#2D5BA8",
+      "category": "Chips",
+      "industry": "chips",
+      "now": {
+        "pe": 12,
+        "pef": 10,
+        "y": 0.001,
+        "last": null,
+        "forecast": 0.162
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "CRM",
+      "name": "Salesforce",
+      "color": "#00A1E0",
+      "category": "Software",
+      "industry": "software",
+      "now": {
+        "pe": 22,
+        "pef": 23,
+        "y": 0.007,
+        "last": null,
+        "forecast": -0.044
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "ADBE",
+      "name": "Adobe",
+      "color": "#D7261E",
+      "category": "Software",
+      "industry": "software",
+      "now": {
+        "pe": 14,
+        "pef": 12,
+        "y": 0,
+        "last": 0.297,
+        "forecast": 0.13
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "NOW",
+      "name": "ServiceNow",
+      "color": "#3D7A5F",
+      "category": "Software",
+      "industry": "software",
+      "now": {
+        "pe": 89,
+        "pef": 72,
+        "y": 0,
+        "last": null,
+        "forecast": 0.231
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "SHOP",
+      "name": "Shopify",
+      "color": "#5E8E3E",
+      "category": "Software",
+      "industry": "internet",
+      "now": {
+        "pe": 115,
+        "pef": 89,
+        "y": 0,
+        "last": null,
+        "forecast": 0.285
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "NFLX",
+      "name": "Netflix",
+      "color": "#B20710",
+      "category": "Internet",
+      "industry": "entertainment",
+      "now": {
+        "pe": 22,
+        "pef": 21,
+        "y": 0,
+        "last": 0.569,
+        "forecast": 0.063
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "UBER",
+      "name": "Uber",
+      "color": "#222",
+      "category": "Internet",
+      "industry": "internet",
+      "now": {
+        "pe": 15,
+        "pef": 11,
+        "y": 0,
+        "last": null,
+        "forecast": 0.427
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "ABNB",
+      "name": "Airbnb",
+      "color": "#E0565B",
+      "category": "Internet",
+      "now": {
+        "pe": 40,
+        "pef": 34,
+        "y": 0,
+        "last": null,
+        "forecast": 0.179
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "CSCO",
+      "name": "Cisco",
+      "color": "#1BA0D7",
+      "category": "Hardware",
+      "now": {
+        "pe": 32,
+        "pef": 30,
+        "y": 0.016,
+        "last": 0.047,
+        "forecast": 0.092
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "DELL",
+      "name": "Dell",
+      "color": "#007DB8",
+      "category": "Hardware",
+      "industry": "hardware",
+      "now": {
+        "pe": 26,
+        "pef": 25,
+        "y": 0.005,
+        "last": null,
+        "forecast": 0.035
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "SPCX",
+      "name": "SpaceX",
+      "color": "#3A3F44",
+      "category": "Other",
+      "now": {
+        "pe": null,
+        "pef": null,
+        "y": 0,
+        "yearsOfRevenue": "≈86",
+        "profits": {
+          "last": -9,
+          "revenue": 23,
+          "apple": 130
+        },
+        "last": null
+      },
+      "past": {},
+      "src": {
+        "pe": "rough",
+        "y": "rough",
+        "past": "rough"
+      }
+    },
+    {
+      "id": "BRK.B",
+      "name": "Berkshire Hathaway",
+      "color": "#1F3A68",
+      "category": "Financials",
+      "now": {
+        "pe": 26,
+        "pef": null,
+        "y": 0,
+        "last": 0.085
+      },
+      "past": {
+        "y1": {
+          "pe": "≈25",
+          "y": 0,
+          "profit": 0.046,
+          "stock": 0.088
+        },
+        "y5": {
+          "pe": "≈27",
+          "y": 0,
+          "profit": 0.137,
+          "stock": 0.134
+        },
+        "y10": {
+          "pe": "≈20",
+          "y": 0,
+          "profit": 0.106,
+          "stock": 0.139
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "JPM",
+      "name": "JPMorgan Chase",
+      "color": "#5E4B3C",
+      "category": "Financials",
+      "now": {
+        "pe": 15,
+        "pef": null,
+        "y": 0.018,
+        "last": 0.128
+      },
+      "past": {
+        "y1": {
+          "pe": 15,
+          "y": 0.019,
+          "profit": 0.197,
+          "stock": 0.16
+        },
+        "y5": {
+          "pe": 11,
+          "y": 0.022,
+          "profit": 0.093,
+          "stock": 0.182
+        },
+        "y10": {
+          "pe": 11,
+          "y": 0.027,
+          "profit": 0.147,
+          "stock": 0.206
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "BAC",
+      "name": "Bank of America",
+      "color": "#C8102E",
+      "category": "Financials",
+      "now": {
+        "pe": 12,
+        "pef": null,
+        "y": 0.023,
+        "last": 0.113
+      },
+      "past": {
+        "y1": {
+          "pe": 15,
+          "y": 0.021,
+          "profit": 0.27,
+          "stock": 0.037
+        },
+        "y5": {
+          "pe": 15,
+          "y": 0.016,
+          "profit": 0.076,
+          "stock": 0.045
+        },
+        "y10": {
+          "pe": 13,
+          "y": 0.014,
+          "profit": 0.138,
+          "stock": 0.149
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "WFC",
+      "name": "Wells Fargo",
+      "color": "#D71E28",
+      "category": "Financials",
+      "now": {
+        "pe": 12,
+        "pef": null,
+        "y": 0.022,
+        "last": 0.043
+      },
+      "past": {
+        "y1": {
+          "pe": 14,
+          "y": 0.02,
+          "profit": 0.182,
+          "stock": 0.02
+        },
+        "y5": {
+          "pe": 13,
+          "y": 0.01,
+          "profit": 0.129,
+          "stock": 0.144
+        },
+        "y10": {
+          "pe": 11,
+          "y": 0.034,
+          "profit": 0.054,
+          "stock": 0.095
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "C",
+      "name": "Citigroup",
+      "color": "#056DAE",
+      "category": "Financials",
+      "now": {
+        "pe": 13,
+        "pef": null,
+        "y": 0.02,
+        "last": 0.026
+      },
+      "past": {
+        "y1": {
+          "pe": 14,
+          "y": 0.024,
+          "profit": 0.373,
+          "stock": 0.318
+        },
+        "y5": {
+          "pe": 7.4,
+          "y": 0.028,
+          "profit": -0.01,
+          "stock": 0.153
+        },
+        "y10": {
+          "pe": 10,
+          "y": 0.006,
+          "profit": 0.07,
+          "stock": 0.132
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "GS",
+      "name": "Goldman Sachs",
+      "color": "#7399C6",
+      "category": "Financials",
+      "now": {
+        "pe": 14,
+        "pef": null,
+        "y": 0.02,
+        "last": 0.155
+      },
+      "past": {
+        "y1": {
+          "pe": 17,
+          "y": 0.017,
+          "profit": 0.426,
+          "stock": 0.185
+        },
+        "y5": {
+          "pe": 7.4,
+          "y": 0.014,
+          "profit": 0.034,
+          "stock": 0.196
+        },
+        "y10": {
+          "pe": 16,
+          "y": 0.015,
+          "profit": 0.198,
+          "stock": 0.203
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "MS",
+      "name": "Morgan Stanley",
+      "color": "#002B51",
+      "category": "Financials",
+      "now": {
+        "pe": 15,
+        "pef": null,
+        "y": 0.023,
+        "last": 0.134
+      },
+      "past": {
+        "y1": {
+          "pe": 18,
+          "y": 0.024,
+          "profit": 0.402,
+          "stock": 0.154
+        },
+        "y5": {
+          "pe": 14,
+          "y": 0.017,
+          "profit": 0.104,
+          "stock": 0.157
+        },
+        "y10": {
+          "pe": 15,
+          "y": 0.02,
+          "profit": 0.19,
+          "stock": 0.223
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "V",
+      "name": "Visa",
+      "color": "#1A1F71",
+      "category": "Financials",
+      "now": {
+        "pe": 34,
+        "pef": null,
+        "y": 0.007,
+        "last": 0.147
+      },
+      "past": {
+        "y1": {
+          "pe": 33,
+          "y": 0.007,
+          "profit": 0.147,
+          "stock": 0.21
+        },
+        "y5": {
+          "pe": 47,
+          "y": 0.006,
+          "profit": 0.189,
+          "stock": 0.126
+        },
+        "y10": {
+          "pe": 36,
+          "y": 0.007,
+          "profit": 0.177,
+          "stock": 0.18
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "MA",
+      "name": "Mastercard",
+      "color": "#EB001B",
+      "category": "Financials",
+      "now": {
+        "pe": 34,
+        "pef": null,
+        "y": 0.006,
+        "last": 0.173
+      },
+      "past": {
+        "y1": {
+          "pe": 37,
+          "y": 0.006,
+          "profit": 0.226,
+          "stock": 0.13
+        },
+        "y5": {
+          "pe": 49,
+          "y": 0.005,
+          "profit": 0.204,
+          "stock": 0.123
+        },
+        "y10": {
+          "pe": 30,
+          "y": 0.008,
+          "profit": 0.182,
+          "stock": 0.206
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "VZ",
+      "name": "Verizon",
+      "color": "#EE0000",
+      "category": "Telecoms",
+      "now": {
+        "pe": 12,
+        "pef": null,
+        "y": 0.063,
+        "last": -0.007
+      },
+      "past": {
+        "y1": {
+          "pe": 9.4,
+          "y": 0.067,
+          "profit": -0.107,
+          "stock": 0.184
+        },
+        "y5": {
+          "pe": 11,
+          "y": 0.048,
+          "profit": -0.045,
+          "stock": 0.034
+        },
+        "y10": {
+          "pe": 14,
+          "y": 0.045,
+          "profit": 0.008,
+          "stock": 0.044
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "T",
+      "name": "AT&T",
+      "color": "#00A8E0",
+      "category": "Telecoms",
+      "now": {
+        "pe": 7.8,
+        "pef": null,
+        "y": 0.047,
+        "last": 0.054
+      },
+      "past": {
+        "y1": {
+          "pe": 15,
+          "y": 0.042,
+          "profit": 0.726,
+          "stock": -0.063
+        },
+        "y5": {
+          "pe": "loss",
+          "y": 0.107,
+          "stock": 0.1
+        },
+        "y10": {
+          "pe": 17,
+          "y": 0.065,
+          "profit": 0.056,
+          "stock": 0.047
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    },
+    {
+      "id": "TMUS",
+      "name": "T-Mobile",
+      "color": "#E20074",
+      "category": "Telecoms",
+      "now": {
+        "pe": 17,
+        "pef": null,
+        "y": 0.026,
+        "last": 0.281
+      },
+      "past": {
+        "y1": {
+          "pe": 21,
+          "y": 0.016,
+          "profit": -0.097,
+          "stock": -0.283
+        },
+        "y5": {
+          "pe": 37,
+          "y": 0,
+          "profit": 0.247,
+          "stock": 0.073
+        },
+        "y10": {
+          "pe": 36,
+          "y": 0,
+          "profit": 0.221,
+          "stock": 0.137
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod"
+      }
+    }
+  ]
+}

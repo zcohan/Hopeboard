@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hopeboard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..700,0..100&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#EDEFE8; --ink:#1C2622; --ink-2:#4F5B55; --ink-3:#8A948F;
+  --loss:#B3261E; --tile:#F6F7F3; --wash:#F0F2EC; --rule:#D5D9D1;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --loss:#E5857A; --paper:#171B18; --ink:#E4E7DF; --ink-2:#B4BBB3; --ink-3:#7E8984;
+    --tile:#1F2420; --wash:#1A1F1B; --rule:#2E3531; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --loss:#E5857A; --paper:#171B18; --ink:#E4E7DF; --ink-2:#B4BBB3; --ink-3:#7E8984;
+  --tile:#1F2420; --wash:#1A1F1B; --rule:#2E3531; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:15px; line-height:1.45; -webkit-font-smoothing:antialiased}
+main{max-width:1040px; margin:0 auto; padding:40px 20px 80px}
+h1{font-family:"Fraunces","Iowan Old Style",Georgia,serif; font-weight:500; font-size:30px; margin:0 0 12px; letter-spacing:-0.01em}
+h2{font-family:"Fraunces","Iowan Old Style",Georgia,serif; font-weight:500; font-size:22px; margin:40px 0 14px; letter-spacing:-0.01em}
+#board h2:first-child{margin-top:8px}
+.sub{color:var(--ink-2); margin:0 0 16px; font-size:15px; max-width:60ch}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px}
+.grid{grid-auto-rows:auto}
+.tile{display:grid; grid-row:span 2; grid-template-rows:subgrid; gap:10px; background:none; border:0; padding:0}
+.top{background:var(--tile); border:1px solid var(--rule); border-radius:10px; padding:18px 18px 16px; display:flex; flex-direction:column; gap:12px}
+.why{background:var(--wash,var(--tile)); border:1px solid var(--rule); border-radius:10px; padding:14px 18px 14px; position:relative}
+.why::before{content:""; position:absolute; top:-7px; left:28px; width:12px; height:12px; background:inherit; border-left:1px solid var(--rule); border-top:1px solid var(--rule); transform:rotate(45deg)}
+@supports not (grid-template-rows:subgrid){ .tile{display:flex; flex-direction:column} }
+.head{display:flex; align-items:center; gap:12px}
+.head .name{flex:1}
+.price{text-align:right; line-height:1.1; font-variant-numeric:tabular-nums}
+.price .n{display:block; font-size:17px; color:var(--ink); white-space:nowrap; margin:2px 0}
+.price .u{display:block; font-size:11px; color:var(--ink-3)}
+.makes{margin:0; font-size:14.5px; color:var(--ink)}
+.makes b{font-weight:500}
+.miss{margin:0; font-size:14px; color:var(--ink-2)}
+.miss b{font-weight:500; color:var(--ink)}
+.miss b.loss{color:var(--loss)}
+.paying{margin:0; font-size:13px; color:var(--ink-3)}
+.why h4{margin:0 0 4px; font-size:13px; font-weight:600; color:var(--ink)}
+.why ul{margin:0; padding:0 0 0 16px; color:var(--ink-2); font-size:14px}
+.why li{margin:0 0 3px}
+.base .makes{color:var(--ink)}
+.logo{width:52px; height:44px; border-radius:11px; display:grid; place-items:center; flex:none;
+  font-weight:600; font-size:12px; color:#fff; letter-spacing:0.03em}
+.name{font-weight:500; font-size:16px; line-height:1.2}
+.tag small{display:block; font-weight:400; font-size:12px; line-height:1.3; color:var(--ink-3); margin-top:2px}
+
+.toggles{display:flex; flex-wrap:wrap; gap:8px 24px; margin:0 0 24px; align-items:center}
+.toggle{display:flex; align-items:center; gap:6px; font-size:14px}
+.story{margin:0 0 8px; font-size:14px; color:var(--ink-2)}
+.why h4 + .story{margin-top:0}
+.toggle .tl{color:var(--ink-3); margin-right:4px}
+.toggle button{font:inherit; font-size:14px; padding:6px 12px; border:1px solid var(--rule); background:var(--tile); color:var(--ink-2); border-radius:999px; cursor:pointer}
+.toggle button.on{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.toggle button:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+body.fwd .t{display:none}
+body:not(.fwd) .f{display:none}
+.foot{margin-top:28px; font-size:13px; color:var(--ink-3)}
+</style>
+</head>
+<body>
+<main>
+<h1>Hopeboard</h1>
+<p class="sub">Where people park money for a decade, and what each spot actually promises.</p>
+<div class="toggles">
+<div class="toggle" role="group" aria-label="When"><button type="button" class="on" data-era="now">Now</button><button type="button" data-era="y1">1 year ago</button><button type="button" data-era="y5">5 years ago</button><button type="button" data-era="y10">10 years ago</button></div>
+<div class="toggle basis" role="group" aria-label="Which profit to count"><button type="button" class="on" data-mode="t">last year’s profit</button><button type="button" data-mode="f">next year’s forecast</button></div>
+</div>
+<div id="board"></div>
+<p class="foot" id="foot"></p>
+</main>
+<script>
+var ERA = {
+  now: {label:'October 2026', gold:{price:'≈$4,160',req:'Pays nothing and produces nothing, so there is no profit to grow. This price is reasonable only if someone pays more for it later.',miss:'If the fear fades, there is no profit underneath to catch it: from 1980 to 2000 gold lost about half its value after inflation.',why:'Why people buy it',bullets:['Nobody can default on it or print more of it','Central banks have been buying since 2022','It’s what you hold when you don’t trust the other cards']}, bond:'≈5.3%', bondReq:'~5.3%', bondNote:'Highest since 2002. Every stock below has to promise more than this, or it isn’t worth the risk.', spx:{pe:'≈28',pef:'≈23',req:'~13%',reqf:'~11%',cmp:'up from',cmpf:'the same as',last:11,miss:'If profit grows 11%/year like the last decade, you’d make <b>~2%/year less</b> than its ~10% average.',why:'Why so expensive?',bullets:['Record profit margins hold','Nothing goes wrong with the ten names that are 40% of it','The average now carries Tesla, Palantir and a boom-year Nvidia']}},
+  y1:  {label:'October 2025', gold:{price:'≈$4,000',story:'A new record almost every week; central banks and retail buying together.',happened:'Up ~4%.'}, bond:'≈4.0%', bondReq:'~4%', bondNote:'What a bondholder got, guaranteed. Over the year since, the stocks below did what they did.', spx:{pe:'≈27',req:'~12%',story:'The AI boom in full swing; the index at 27 years of profit, the top ten already 38% of it.',happened:'Profit grew ~12%. The index returned ~16%.'}},
+  y5:  {label:'October 2021', gold:{price:'≈$1,780',story:'Inflation arriving and gold oddly flat; bitcoin called the new gold.',happened:'Up ~18%/year — most of it in 2024 and 2025.'}, bond:'≈1.6%', bondReq:'~1.6%', bondNote:'Near zero. With the safe US bond paying almost nothing, almost any stock price looked reasonable by comparison — which is how 2021 happened.', spx:{pe:'≈25',req:'~11%',story:'Zero interest rates, pandemic stimulus, everything expensive at once; the index at 25 years of profit.',happened:'Profit grew ~6%/year. The index returned ~14%/year — hope held up, rates didn’t matter as much as feared.'}},
+  y10: {label:'October 2016', gold:{price:'≈$1,270',story:'Out of fashion; five years below its 2011 high; “a pet rock.”',happened:'Up ~13%/year.'}, bond:'≈1.8%', bondReq:'~1.8%', bondNote:'Low for a decade. The bond was the thing nobody wanted; stocks priced accordingly.', spx:{pe:'≈24',req:'~10%',story:'Post-Brexit, pre-election, slow growth; “bond-proxy” stocks in fashion, tech cheap by today’s standards.',happened:'Profit grew ~11%/year. The index returned ~15%/year.'}}
+};
+var CO = [
+ {t:'TSLA',c:'#B8232A',n:'Tesla',
+  now:{pe:'346',pef:'≈180',req:'~48%',reqf:'~39%',norate:'Tesla became reliably profitable in 2020, and profit per share has fallen since 2022.',ind:'Analysts expect carmakers to grow profit ~10%/year.',miss:'If profit only grows 10%/year (the average for carmakers), you’re liable to lose <b class="loss">87% of your investment</b>.',why:'Why so expensive?',bullets:['Priced for Elon Musk continuing to pull rabbits out of hats','Assumes robots &amp; robotaxis are deployed at scale within ten years','Car profits don’t matter at this price']},
+  y1:{pe:'≈250',req:'~43%',story:'Robotaxi promises, a $1 trillion pay package for Musk, car sales falling.',happened:'Profit fell ~30%. The stock returned ~−12%.'},
+  y5:{pe:'≈350',req:'~48%',story:'Just crossed $1 trillion on a Hertz order; the most hoped-for stock on earth.',happened:'Profit per share fell ~7%/year. The stock returned ~7%/year — hope stayed absurd, which is the only reason it wasn’t worse.'},
+  y10:{pe:'loss',req:'n/a',story:'Model 3 about to launch, burning cash, bankruptcy a live question.',happened:'From a loss to a thin profit. The stock returned ~40%/year — a story that came true, then kept being priced as a story.'}},
+ {t:'PLTR',c:'#1B1B1B',n:'Palantir',
+  now:{pe:'160',pef:'≈105',req:'~37%',reqf:'~31%',norate:'Palantir has been profitable since 2023.',ind:'Analysts expect software companies to grow profit ~23%/year.',miss:'If profit only grows 23%/year (the average for software), you’re liable to lose <b class="loss">11% of your investment</b>.',why:'Why so expensive?',bullets:['Priced to grow profits 40%+ a year for a decade','Has to become one of the biggest software companies on earth','Excellence is assumed, not a bonus']},
+  y1:{pe:'≈270',req:'~44%',story:'The hottest AI software stock; government and enterprise growth accelerating.',happened:'Profit grew ~290% (from a tiny base). The stock returned ~5%.'},
+  y5:{pe:'loss',req:'n/a',story:'A year after listing, still losing money, retail favourite.',happened:'From a loss to a profit. The stock returned ~50%/year, nearly all of it since 2024.'},
+  y10:null},
+ {t:'COST',c:'#1D4F91',n:'Costco',
+  now:{pe:'≈50',pef:'≈47',req:'~21%',reqf:'~20%',cmp:'up from',cmpf:'up from',last:14,ind:'Analysts expect general retailers to grow profit ~12%/year.',miss:'If the last decade’s 14%/year growth repeats, you’d make <b>~2%/year less</b> than the safe US bond.',why:'Why so expensive?',bullets:['Priced as a company that can’t fail','Certainty, not growth','Mid-single-digit growth, forever, with no surprises']},
+  y1:{pe:'≈55',req:'~22%',story:'Priced for perfection; the safest growth story in retail.',happened:'Profit grew ~10%. The stock returned ~7%.'},
+  y5:{pe:'≈45',req:'~19%',story:'Pandemic favourite; membership renewals at record highs.',happened:'Profit grew ~12%/year. The stock returned ~17%/year — hope rose further.'},
+  y10:{pe:'≈29',req:'~14%',story:'A membership machine growing high single digits; nobody called it exciting.',happened:'Profit grew ~14%/year — exactly what was required. The stock returned ~21%/year because hope rose from 29 to 50.'}},
+ {t:'AAPL',c:'#555',n:'Apple',
+  now:{pe:'35–38',pef:'≈35',req:'~15%',reqf:'~15%',cmp:'the same as',cmpf:'the same as',last:15,makes:'profit keeps growing at the same rate as over the last decade (~15%/year).',ind:'Analysts expect computer hardware companies to grow profit ~25%/year.',miss:'If growth drops to only 8%/year, you’d make <b>~2%/year less</b> than the safe US bond.',why:'Why so expensive?',bullets:['Priced for reliability, not growth','The iPhone never fades, the lock-in holds','A single flat year isn’t allowed for']},
+  y1:{pe:'≈37',req:'~15%',story:'The AI laggard; Siri delayed, tariffs threatening the supply chain.',happened:'Profit grew ~20%. The stock returned ~39%.'},
+  y5:{pe:'≈28',req:'~11%',story:'Pandemic winner; services growing, buybacks enormous.',happened:'Profit grew ~8%/year — short of the 11% required. The stock returned ~18%/year anyway, because hope rose from 28 to 38.'},
+  y10:{pe:'≈13',req:'~1%',story:'“Peak iPhone.” Sales had just fallen 8%; Icahn had sold; Buffett had quietly started buying.',happened:'Profit grew ~15%/year. The stock returned ~28%/year — the record beat a tiny requirement and hope tripled on top.'}},
+ {t:'NVDA',c:'#6DAA2C',n:'Nvidia',
+  now:{pe:'30',pef:'≈26',req:'~15%',reqf:'~13%',cmp:'down from',cmpf:'down from',last:70,lastnote:', ending on a boom year',ind:'Analysts expect chip companies to grow profit ~23%/year.',miss:'If profit doesn’t grow from this year’s level, you’re liable to lose <b class="loss">33% of your investment</b>.',why:'Why so expensive?',bullets:['Priced as if this year’s boom profit is the new normal','Data-centre spending never pauses','Nobody else makes the chip']},
+  y1:{pe:'≈55',req:'~22%',story:'The AI king; every hyperscaler’s capex went through it.',happened:'Profit grew ~60%. The stock returned ~24% — profit outran hope, so the years-of-profit figure fell from 55 to 30.'},
+  y5:{pe:'≈90',req:'~29%',story:'Gaming, crypto mining and a promising data-centre line; 90 years of profit looked insane.',happened:'Profit grew ~115%/year. The stock returned ~63%/year. The insane price turned out to be cheap.'},
+  y10:{pe:'≈40',req:'~18%',story:'A gaming-chip company; AI a research sideline.',happened:'Profit grew ~70%/year. The stock returned ~64%/year.'}},
+ {t:'MSFT',c:'#2B7CD3',n:'Microsoft',
+  now:{pe:'29',pef:'≈26',req:'~14%',reqf:'~12%',cmp:'down from',cmpf:'down from',last:20,ind:'Analysts expect software companies to grow profit ~23%/year.',miss:'If profit only grows 10%/year, you’d still make <b>~1%/year more</b> than the safe US bond.',why:'Why so expensive?',bullets:['Azure and Office keep growing mid-teens','The $175bn a year on AI data centres earns a normal return','Growth already in the price: profits grew this year, the stock didn’t']},
+  y1:{pe:'≈38',req:'~17%',story:'OpenAI’s partner; Copilot everywhere; capex ramping.',happened:'Profit grew ~15%. The stock returned ~2% — hope came in from 38 to 29.'},
+  y5:{pe:'≈37',req:'~16%',story:'The cloud king at the top of the zero-rate boom.',happened:'Profit grew ~15%/year — just short of what was required. The stock returned ~12%/year.'},
+  y10:{pe:'≈20',req:'~7%',story:'Nadella two years in; “cloud turnaround” still a question; Windows seen as a dinosaur.',happened:'Profit grew ~20%/year — triple the requirement. The stock returned ~25%/year.'}},
+ {t:'META',c:'#2E6FE8',n:'Meta',
+  now:{pe:'27',pef:'≈22',req:'~13%',reqf:'~11%',cmp:'down from',cmpf:'down from',last:23,ind:'Analysts expect internet companies to grow profit ~21%/year.',miss:'If profit only grows 10%/year, you’d still make <b>~2%/year more</b> than the safe US bond.',why:'Priced without surprises assuming…',bullets:['Ads keep growing 20%+ a year','Ads pay for the AI spend','A slice of the price is trust in Zuckerberg’s bets']},
+  y1:{pe:'≈27',req:'~13%',story:'Hiring a “superintelligence” lab at nine-figure salaries; ads growing 20%+.',happened:'Profit grew ~15%. The stock returned ~−1% — hope faded exactly as fast as profit grew.'},
+  y5:{pe:'≈24',req:'~12%',story:'The Facebook Files, the rename to Meta, the metaverse pivot; investors sceptical.',happened:'Profit grew ~14%/year. The stock returned ~17%/year — including a 70% fall and full recovery in between.'},
+  y10:{pe:'≈45',req:'~21%',story:'The ad machine, growing 50%/year; fake-news backlash beginning.',happened:'Profit grew ~23%/year — more than required. The stock returned ~19%/year; hope fell from 45 to 27.'}},
+ {t:'TSM',c:'#B03A2E',n:'TSMC',
+  now:{pe:'≈24',pef:'≈21',req:'~12%',reqf:'~10%',cmp:'down from',cmpf:'down from',last:18,ind:'Analysts expect chip companies to grow profit ~23%/year.',miss:'If profit only grows 10%/year, you’d still make <b>~3%/year more</b> than the safe US bond.',why:'Priced without surprises assuming…',bullets:['Every AI chip still gets made here','The 2-nanometre lead holds','Discount for the Taiwan Strait']},
+  y1:{pe:'≈28',req:'~13%',story:'The only foundry that can make the AI chips; Taiwan risk the permanent discount.',happened:'Profit grew ~40%. The stock returned ~37%.'},
+  y5:{pe:'≈30',req:'~14%',story:'The chip shortage; everyone discovered who actually makes chips.',happened:'Profit grew ~25%/year. The stock returned ~29%/year.'},
+  y10:{pe:'≈15',req:'~4%',story:'Apple’s chip supplier; a good, boring foundry.',happened:'Profit grew ~18%/year — four times the requirement. The stock returned ~29%/year.'}},
+ {t:'AMZN',c:'#E8862B',n:'Amazon',
+  now:{pe:'20',pef:'≈24',req:'~11%',reqf:'~13%',cmp:'down from',cmpf:'down from',last:40,lastnote:', from almost nothing',ind:'Analysts expect internet companies to grow profit ~21%/year.',miss:'If profit only grows 10%/year, you’d still make <b>~3.5%/year more</b> than the safe US bond.',why:'Priced without surprises assuming…',bullets:['AWS keeps its lead','$220bn a year of building keeps paying','Nothing paid out until the building stops']},
+  y1:{pe:'≈35',req:'~18%',story:'Capex doubling for AI; AWS growth questioned.',happened:'Profit grew ~25%. The stock returned ~18%.'},
+  y5:{pe:'≈60',req:'~24%',story:'Pandemic hangover beginning; still 60 years of profit.',happened:'Profit grew ~17%/year — short of the 24% required. The stock returned ~10%/year.'},
+  y10:{pe:'≈190',req:'~39%',story:'AWS newly discovered; retail barely profitable; 190 years of a tiny profit.',happened:'Profit grew ~40%/year — it met a requirement nobody thought meetable. The stock returned ~20%/year.'}},
+ {t:'ORCL',c:'#C0392B',n:'Oracle',
+  now:{pe:'≈18',pef:'≈18',req:'~8%',reqf:'~8%',cmp:'down from',cmpf:'down from',last:9,ind:'Analysts expect software companies to grow profit ~23%/year.',miss:'If profit doesn’t grow, you’d make <b>~4%/year less</b> than the safe US bond.',why:'Why so cheap?',bullets:['OpenAI has to pay its bills in full','The construction debt has to refinance','The price halved in a year: the belief shrank, not the business']},
+  y1:{pe:'≈55',req:'~22%',story:'The $300bn OpenAI contract had just been announced; the stock at an all-time high.',happened:'Profit grew ~10%. The stock returned ~−56% — the belief shrank, the business didn’t.'},
+  y5:{pe:'≈25',req:'~9%',story:'A dinosaur that had missed the cloud, buying back its own shares.',happened:'Profit grew ~2%/year. The stock returned ~7%/year, including a round trip to $345 and back.'},
+  y10:{pe:'≈19',req:'~5%',story:'Losing the cloud race to Amazon and Microsoft.',happened:'Profit grew ~9%/year — more than required. The stock returned ~13%/year.'}},
+ {t:'GOOGL',c:'#D64B3A',n:'Alphabet',
+  now:{pe:'17',pef:'≈23',req:'~8%',reqf:'~11%',cmp:'down from',cmpf:'down from',last:23,ind:'Analysts expect internet companies to grow profit ~21%/year.',miss:'If profit only grows 10%/year, you’d still make <b>~2.5%/year more</b> than the index’s ~10% average.',why:'Why so cheap?',bullets:['The market isn’t sure search survives the AI answer box','Cloud and YouTube priced as a sideshow','The doubt is the discount']},
+  y1:{pe:'≈27',req:'~13%',story:'Survived the antitrust ruling; Gemini catching up; search-is-dead worries.',happened:'Profit grew ~30%. The stock returned ~39%.'},
+  y5:{pe:'≈29',req:'~15%',story:'Ads booming out of the pandemic.',happened:'Profit grew ~15%/year — exactly what was required. The stock returned ~20%/year.'},
+  y10:{pe:'≈30',req:'~16%',story:'The search monopoly; antitrust in Europe; “other bets” losing money.',happened:'Profit grew ~23%/year. The stock returned ~25%/year.'}},
+ {t:'XOM',c:'#B5121B',n:'Exxon',
+  now:{pe:'≈20',pef:'≈16',req:'~6%',reqf:'~4%',cmp:'down from',cmpf:'down from',last:14,lastnote:', from a bad year for oil',ind:'Analysts expect oil majors to grow profit ~4%/year.',miss:'If profit doesn’t grow, you’d make ~4%/year, nearly all from dividends and buybacks — <b>~1.5%/year less</b> than the safe US bond.',why:'Why so cheap?',bullets:['Oil stays near $100','No growth expected beyond that','You get paid now: ~5% a year in dividends and buybacks']},
+  y1:{pe:'≈16',req:'~4%',story:'Oil in the $60s; the dividend the whole story.',happened:'Profit grew ~20% as oil rose above $100. The stock returned ~47%.'},
+  y5:{pe:'loss',req:'n/a',story:'Recovering from a 2020 loss; kicked out of the Dow the year before; ESG money leaving.',happened:'From a loss back to record profit. The stock returned ~27%/year with dividends — the most unloved stock of 2020 was the decade’s quiet winner.'},
+  y10:{pe:'≈35',req:'~13%',story:'Oil at $50; profit at a trough; dividend-cut worries.',happened:'Profit grew ~14%/year from the trough — just above the requirement. The stock returned ~8%/year with dividends.'}},
+];
+var HIST = [
+ {t:'CSCO',c:'#8A948F',n:'Cisco, March 2000',pe:'150',pef:'≈100',req:'~36%',reqf:'~31%',miss:'It managed ~14%/year — good, and not enough. The stock lost ~70% over the decade.',why:'Why so expensive?',bullets:['The internet needs routers forever','No one else makes them','The stock took 25 years to get back to $80']},
+ {t:'AAPL',c:'#8A948F',n:'Apple, May 2016',pe:'11',pef:'≈10',req:'~1%',reqf:'~0%',miss:'It managed ~15%/year, and people went from paying 11 years to 38. The stock did ~28%/year.',why:'Why so cheap?',bullets:['Hits fade, and sales had just fallen 8%','Priced as Nokia, a few years early','The buyer only had to believe the lock-in would hold']}
+];
+function esc(s){return s}
+function tf(a,b){return '<span class="t">'+a+'</span><span class="f">'+b+'</span>';}
+function reqNum(r){ var m=/-?\d+/.exec(r); return m?parseInt(m[0]):999; }
+function cardNow(co){
+  var d=co.now, tail;
+  if(d.norate) tail='. '+d.norate;
+  else tail=' — '+tf(d.cmp,d.cmpf)+' the ~'+d.last+'%/year of the last decade'+(d.lastnote||'')+'.';
+  return '<div class="tile"><div class="top"><div class="head"><div class="logo" style="background:'+co.c+'">'+co.t+'</div><div class="name">'+co.n+'</div>'+
+   '<div class="price"><span class="u">priced at</span><span class="n">'+tf(d.pe,d.pef)+' years</span><span class="u">'+tf('of last year’s profit','of next year’s forecast profit')+'</span></div></div>'+
+   '<p class="makes">'+(reqNum(d.req)>=14?'Reasonably priced only if you assume ':'Reasonably priced if you assume ')+(d.makes?d.makes:'profit grows <b>'+tf(d.req,d.reqf)+'/year</b>'+tail)+'</p>'+
+   (d.ind?'<p class="miss">'+d.ind+' This price needs <b>'+tf(d.req,d.reqf)+'</b>.</p>':'')+'<p class="miss">'+d.miss+'</p></div>'+
+   '<div class="why"><h4>'+d.why+'</h4><ul>'+d.bullets.map(function(b){return '<li>'+b+'</li>'}).join('')+'</ul></div></div>';
+}
+function cardPast(co,era){
+  var d=co[era]; if(!d) return '';
+  var makes = d.req==='n/a' ? 'No profit to price: it was losing money.' : 'This price was reasonable assuming profit grew <b>'+d.req+'/year</b> over the following decade.';
+  return '<div class="tile"><div class="top"><div class="head"><div class="logo" style="background:'+co.c+'">'+co.t+'</div><div class="name">'+co.n+'</div>'+
+   '<div class="price"><span class="u">priced at</span><span class="n">'+d.pe+' years</span><span class="u">of that year’s profit</span></div></div>'+
+   '<p class="makes">'+makes+'</p></div>'+
+   '<div class="why"><h4>The story then</h4><p class="story">'+d.story+'</p><h4>What happened since</h4><p class="story">'+d.happened+'</p></div></div>';
+}
+function section(h,inner){ return '<h2>'+h+'</h2><div class="grid">'+inner+'</div>'; }
+function render(){
+  var era=document.body.dataset.era||'now', E=ERA[era], html='';
+  var bond='<div class="tile base"><div class="top"><div class="head"><div class="logo" style="background:#4A5A6A">US10Y</div><div class="name">US Bond</div><div class="price"><span class="n">'+E.bond+'</span><span class="u">a year, guaranteed</span></div></div>'+
+    '<p class="makes">'+(era==='now'?'Returns':'Returned')+' <b>'+E.bondReq+'/year</b> for ten years, guaranteed. '+E.bondNote+'</p></div>'+
+    (era==='now'?'<div class="why"><h4>Why it matters</h4><ul><li>The floor every other return is measured against</li><li>When this goes up, every stock’s hope is worth less</li><li>Stocks have historically paid ~5 points more than this, for taking the risk</li></ul></div>':'')+'</div>';
+  var g=E.gold, gold;
+  if(era==='now'){
+    gold='<div class="tile base"><div class="top"><div class="head"><div class="logo" style="background:#4A5A6A">GOLD</div><div class="name">Gold</div><div class="price"><span class="n">'+g.price+'</span><span class="u">an ounce, no profit</span></div></div>'+
+     '<p class="makes">'+g.req+' Has returned <b>~8%/year</b> since 1971, with twenty-year stretches of nothing.</p>'+
+     '<p class="miss">'+g.miss+'</p></div><div class="why"><h4>'+g.why+'</h4><ul>'+g.bullets.map(function(b){return '<li>'+b+'</li>'}).join('')+'</ul></div></div>';
+  } else {
+    gold='<div class="tile base"><div class="top"><div class="head"><div class="logo" style="background:#4A5A6A">GOLD</div><div class="name">Gold</div><div class="price"><span class="n">'+g.price+'</span><span class="u">an ounce then, no profit</span></div></div>'+
+     '<p class="makes">No profit to price. Reasonable only if someone paid more later.</p></div>'+
+     '<div class="why"><h4>The story then</h4><p class="story">'+g.story+'</p><h4>What happened since</h4><p class="story">'+g.happened+'</p></div></div>';
+  }
+  var s=E.spx, spx;
+  if(era==='now'){
+    spx='<div class="tile base"><div class="top"><div class="head"><div class="logo" style="background:#4A5A6A">SPX</div><div class="name">S&amp;P 500</div><div class="price"><span class="u">priced at</span><span class="n">'+tf(s.pe,s.pef)+' years</span><span class="u">'+tf('of last year’s profit','of next year’s forecast profit')+'</span></div></div>'+
+     '<p class="makes">Has returned <b>~10%/year</b> on average since 1926, dividends included. Today’s price is reasonable assuming profit grows <b>'+tf(s.req,s.reqf)+'/year</b> — '+tf(s.cmp,s.cmpf)+' the ~'+s.last+'%/year of the last decade. People normally pay ~18 years of profit; today it’s 28.</p>'+
+     '<p class="miss">'+s.miss+'</p></div><div class="why"><h4>'+s.why+'</h4><ul>'+s.bullets.map(function(b){return '<li>'+b+'</li>'}).join('')+'</ul></div></div>';
+  } else {
+    spx='<div class="tile base"><div class="top"><div class="head"><div class="logo" style="background:#4A5A6A">SPX</div><div class="name">S&amp;P 500</div><div class="price"><span class="u">priced at</span><span class="n">'+s.pe+' years</span><span class="u">of that year’s profit</span></div></div>'+
+     '<p class="makes">This price was reasonable assuming profit grew <b>'+s.req+'/year</b> over the following decade.</p></div>'+
+     '<div class="why"><h4>The story then</h4><p class="story">'+s.story+'</p><h4>What happened since</h4><p class="story">'+s.happened+'</p></div></div>';
+  }
+  html+=section('Baselines — '+E.label, bond+gold+spx);
+  if(era==='now'){
+    var ex=[],no=[],ch=[];
+    CO.forEach(function(co){ var r=reqNum(co.now.req); (r>=14?ex:(r>=10?no:ch)).push(cardNow(co)); });
+    html+=section('Pricey',ex.join(''))+section('Normal',no.join(''))+section('Bargain',ch.join(''));
+    html+=section('History', HIST.map(function(h){
+      return '<div class="tile"><div class="top"><div class="head"><div class="logo" style="background:'+h.c+'">'+h.t+'</div><div class="name">'+h.n+'</div><div class="price"><span class="u">priced at</span><span class="n">'+tf(h.pe,h.pef)+' years</span><span class="u">'+tf('of last year’s profit','of next year’s forecast profit')+'</span></div></div>'+
+       '<p class="makes">This price was reasonable assuming profit grew <b>'+tf(h.req,h.reqf)+'/year</b>.</p><p class="miss">'+h.miss+'</p></div>'+
+       '<div class="why"><h4>'+h.why+'</h4><ul>'+h.bullets.map(function(b){return '<li>'+b+'</li>'}).join('')+'</ul></div></div>';
+    }).join(''));
+  } else {
+    var rows=CO.filter(function(co){return co[era]}).sort(function(a,b){return reqNum(b[era].req)-reqNum(a[era].req)});
+    var ex=[],no=[],ch=[];
+    rows.forEach(function(co){ var r=reqNum(co[era].req); (r>=14?ex:(r>=10?no:ch)).push(cardPast(co,era)); });
+    html+=section('Pricey then',ex.join(''))+section('Normal then',no.join(''))+section('Bargain then',ch.join(''));
+  }
+  document.getElementById('board').innerHTML=html;
+  document.querySelector('.toggle.basis').style.display = era==='now' ? '' : 'none';
+  document.getElementById('foot').innerHTML = era==='now'
+   ? '“Years of last year’s profit” is the P/E — the share price divided by the most recent twelve months of reported profit per share (the last four quarterly reports added up) — early-to-mid October 2026, from Yahoo, Morningstar, StockAnalysis and AP; ≈ means approximate. “Next year’s forecast” is the forward P/E: the share price divided by analysts’ average estimate of profit per share for the next twelve months. “Profit” is profit per share. “Reasonable” means the stock would match the S&amp;P 500’s long-run average of ~10%/year, assuming people are paying an ordinary 18 years of profit ten years out; dividends and buybacks count toward the return. The “if” lines use the same assumptions. Last-decade growth is 2016 to 2026, rounded. Tickers stand in for logos.'
+   : 'Figures for '+E.label+' are reconstructed and approximate: years of profit to within a few, growth and returns rounded, returns are share price plus dividends where noted. “Reasonable” uses the same rule as the current board. Stories are one-line summaries of what the market was saying at the time.';
+}
+document.querySelectorAll('.toggle button[data-era]').forEach(function(b){ b.addEventListener('click',function(){
+  document.body.dataset.era=b.dataset.era;
+  document.querySelectorAll('.toggle button[data-era]').forEach(function(x){x.classList.toggle('on',x===b)});
+  render();
+});});
+document.querySelectorAll('.toggle button[data-mode]').forEach(function(b){ b.addEventListener('click',function(){
+  document.body.classList.toggle('fwd', b.dataset.mode==='f');
+  document.querySelectorAll('.toggle button[data-mode]').forEach(function(x){x.classList.toggle('on',x===b)});
+});});
+render();
+</script>
+</body>
+</html>

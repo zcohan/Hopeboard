@@ -1,0 +1,1188 @@
+{
+  "entries": [
+    {
+      "id": "page",
+      "title": "Hopeboard",
+      "subtitle": "Laying out the assumptions built into the current market price of popular investments.",
+      "eraNow": "Now",
+      "eraY1": "1 year ago",
+      "eraY5": "5 years ago",
+      "eraY10": "10 years ago",
+      "basisT": "last year’s profit",
+      "basisF": "next year’s forecast",
+      "pricedAt": "priced at",
+      "years": "years",
+      "unitT": "of last year’s profit",
+      "unitF": "of next year’s forecast profit",
+      "unitPast": "of that year’s profit"
+    },
+    {
+      "id": "sections",
+      "baselines": "Baselines",
+      "pricey": "Pricey",
+      "normal": "Normal",
+      "bargain": "Bargain",
+      "priceyThen": "Pricey then",
+      "normalThen": "Normal then",
+      "bargainThen": "Bargain then",
+      "loss": "Losing money",
+      "lossThen": "Losing money then",
+      "notes": []
+    },
+    {
+      "id": "comment-headings",
+      "pricey": "Why so pricey?",
+      "normal": "What the price assumes",
+      "bargain": "Why so cheap?",
+      "loss": "Why this price?"
+    },
+    {
+      "id": "company-lines",
+      "farm": "**{earns}** of its price a year\n{earnsVsBond} the safe US bond{pays}",
+      "forecast": "{fcastValue}",
+      "notes": [
+        "Shared by every company card. farm: what the business earns each year as a share of its price (one over years of profit), against the safe US bond: Buffett's farm in percent. Left off when the company lost money.",
+        "forecast: analysts' average forecast for the next fiscal year against this one (Alpha Vantage). Replaced the industry line in October 2026.",
+        "Company cards show labelled rows (owner’s layout, October 2026): Earns, Reasonably priced, Expected next year, Risk.",
+        "The Risk row is labelled Cushion when its outcome is good news (no loss, and at least as much as the yardstick)."
+      ],
+      "labels": {
+        "farm": "Earns",
+        "assumes": "Reasonably priced",
+        "forecast": "Expected next year",
+        "consequence": "Risk",
+        "consequenceGood": "Cushion"
+      }
+    },
+    {
+      "id": "pills",
+      "all": "All",
+      "Chips": "Chips",
+      "Software": "Software",
+      "Internet": "Internet",
+      "Hardware": "Hardware",
+      "Other": "Other",
+      "notes": [
+        "New: category filter pills (build step 7). “All” is a new label.",
+        "Category of each company comes from docs/new-cards.md."
+      ],
+      "Financials": "Financials",
+      "Telecoms": "Telecoms"
+    },
+    {
+      "id": "past-frame",
+      "assumes": "This price was reasonable assuming profit grew **{req}/year** over the following decade.",
+      "noProfit": "No profit to price: it was losing money.",
+      "storyHeading": "The story then",
+      "sinceHeading": "What happened since"
+    },
+    {
+      "id": "foot:now",
+      "text": "“Years of last year’s profit” is the P/E: the share price divided by the last twelve months of reported profit per share after dilution, from the companies’ own filings (SEC EDGAR) and the latest closing price (EOD). “Next year’s forecast” grows that profit at the analysts’ average forecast rate for the next fiscal year (Alpha Vantage). “Earns” is one over the years of profit. Dividends are those paid over the last twelve months; buybacks count through profit per share. “Reasonable” means the stock would match the S&P 500’s 10%/year since 1928, assuming people pay an ordinary 18 years of profit ten years out. The “if” lines use the same assumptions. Last-decade growth compares the latest fiscal year’s profit per share with the one ten years before. All figures are rounded and approximate; ≈ marks rough estimates. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything."
+    },
+    {
+      "id": "sources",
+      "heading": "Sources",
+      "rough": "rough, to be replaced with sourced data",
+      "notes": [
+        "New: a list of sources built from data/figures.json, shown under the footer. Rough sources are marked."
+      ]
+    },
+    {
+      "id": "foot:past",
+      "text": "Figures for {era} are reconstructed and approximate: years of profit to within a few, growth and returns rounded, returns are share price plus dividends where noted. “Reasonable” uses the same rule as the current board. Stories are one-line summaries of what the market was saying at the time. All figures are rounded and approximate. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything."
+    },
+    {
+      "id": "bond:now",
+      "name": "US Bond",
+      "badge": "US10Y",
+      "unit": "a year, guaranteed",
+      "assumes": "Returns **{bond}/year** for ten years, guaranteed. {highSince}. Every stock below has to promise more than this, or it isn’t worth the risk.",
+      "heading": "Why it matters",
+      "bullets": [
+        "The floor every other return is measured against",
+        "When this goes up, every stock’s hope is worth less",
+        "Stocks have returned 5%/year more than this over the long run, for taking the risk"
+      ],
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "gold:now",
+      "name": "Gold",
+      "badge": "GOLD",
+      "unit": "an ounce, no profit",
+      "assumes": "Pays nothing and produces nothing, so there is no profit to grow. This price is reasonable only if someone pays more for it later. Has returned **{goldReturn}/year** since 1971, with twenty-year stretches of nothing.",
+      "consequence": "If the fear fades, there is no profit underneath to catch it: from 1980 to 2000 gold lost half its value after inflation.",
+      "heading": "Why people buy it",
+      "bullets": [
+        "Nobody can default on it or print more of it",
+        "Central banks have been buying since 2022",
+        "It’s what you hold when you don’t trust the other cards"
+      ],
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "spx:now",
+      "name": "S&P 500",
+      "badge": "SPX",
+      "assumes": "Has returned **{index}/year** on average since 1928, dividends included. Today’s price is reasonable assuming profit grows at **{req}/year** {vsLast}. People normally pay {normalYears} years of profit; today it’s {pe:bare}.",
+      "consequence": "If profit grows at {g}/year like the last decade, {outcome:its}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "heading": "Why so pricey?",
+      "bullets": [
+        "Record profit margins hold",
+        "Nothing goes wrong with the ten names that are 40% of it",
+        "The average now carries Tesla, Palantir and a boom-year Nvidia"
+      ],
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "bond:y1",
+      "assumes": "Returned **{bond}/year** for ten years, guaranteed. What a bondholder got, guaranteed. Over the year since, the stocks below did what they did.",
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "gold:y1",
+      "unit": "an ounce then, no profit",
+      "assumes": "No profit to price. Reasonable only if someone paid more later.",
+      "story": "A new record almost every week; central banks and retail buying together.",
+      "happened": "Up {goldReturn}.",
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "spx:y1",
+      "story": "The AI boom in full swing; the index at 27 years of profit, the top ten already 38% of it.",
+      "happened": "Profit grew {profit}. The index returned {stock}.",
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "bond:y5",
+      "assumes": "Returned **{bond}/year** for ten years, guaranteed. Near zero. With the safe US bond paying almost nothing, almost any stock price looked reasonable by comparison — which is how 2021 happened.",
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "gold:y5",
+      "unit": "an ounce then, no profit",
+      "assumes": "No profit to price. Reasonable only if someone paid more later.",
+      "story": "Inflation arriving and gold oddly flat; bitcoin called the new gold.",
+      "happened": "Up {goldReturn}/year — most of it in 2024 and 2025.",
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "spx:y5",
+      "story": "Zero interest rates, pandemic stimulus, everything expensive at once; the index at 25 years of profit.",
+      "happened": "Profit grew {profit}/year. The index returned {stock}/year — hope held up, rates didn’t matter as much as feared.",
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "bond:y10",
+      "assumes": "Returned **{bond}/year** for ten years, guaranteed. Low for a decade. The safe US bond was the thing nobody wanted; stocks priced accordingly.",
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "gold:y10",
+      "unit": "an ounce then, no profit",
+      "assumes": "No profit to price. Reasonable only if someone paid more later.",
+      "story": "Out of fashion; five years below its 2011 high; “a pet rock.”",
+      "happened": "Up {goldReturn}/year.",
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "spx:y10",
+      "story": "Post-Brexit, pre-election, slow growth; “bond-proxy” stocks in fashion, tech cheap by today’s standards.",
+      "happened": "Profit grew {profit}/year. The index returned {stock}/year.",
+      "notes": [
+        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+      ]
+    },
+    {
+      "id": "TSLA:now",
+      "about": "Electric cars & batteries",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit only grows at {g}/year (the average big US company) and buyers stop paying extra for the story, {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Priced for Elon Musk continuing to pull rabbits out of hats",
+        "Assumes robots & robotaxis are deployed at scale within ten years",
+        "Car profits don’t matter at this price: profit per share has fallen since 2022"
+      ],
+      "notes": [
+        "The consequence names the story because the loss comes mostly from buyers paying an ordinary 18 years of profit in 2036 instead of today’s hundreds (owner’s suggestion, October 2026)."
+      ]
+    },
+    {
+      "id": "TSLA:y1",
+      "story": "Robotaxi promises, a $1 trillion pay package for Musk, car sales falling.",
+      "happened": "Profit fell {profit:abs}. The stock returned {stock}."
+    },
+    {
+      "id": "TSLA:y5",
+      "story": "Just crossed $1 trillion on a Hertz order; the most hoped-for stock on earth.",
+      "happened": "Profit per share fell {profit:abs}/year. The stock returned {stock}/year — hope stayed absurd, which is the only reason it wasn’t worse."
+    },
+    {
+      "id": "TSLA:y10",
+      "story": "Model 3 about to launch, burning cash, bankruptcy a live question.",
+      "happened": "From a loss to a thin profit. The stock returned {stock}/year — a story that came true, then kept being priced as a story."
+    },
+    {
+      "id": "PLTR:now",
+      "about": "AI software for governments & companies",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Profitable only since 2023, so there’s little record to go on",
+        "Has to become one of the biggest software companies on earth"
+      ]
+    },
+    {
+      "id": "PLTR:y1",
+      "story": "The hottest AI software stock; government and enterprise growth accelerating.",
+      "happened": "Profit grew {profit} (from a tiny base). The stock returned {stock}."
+    },
+    {
+      "id": "PLTR:y5",
+      "story": "A year after listing, still losing money, retail favourite.",
+      "happened": "From a loss to a profit. The stock returned {stock}/year, nearly all of it since 2024."
+    },
+    {
+      "id": "COST:now",
+      "about": "Members-only warehouse stores",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Priced as a company that can’t fail",
+        "Certainty, not growth",
+        "Mid-single-digit growth, forever, with no surprises"
+      ]
+    },
+    {
+      "id": "COST:y1",
+      "story": "Priced for perfection; the safest growth story in retail.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "COST:y5",
+      "story": "Pandemic favourite; membership renewals at record highs.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year — hope rose further."
+    },
+    {
+      "id": "COST:y10",
+      "story": "A membership machine growing high single digits; nobody called it exciting.",
+      "happened": "Profit grew {profit}/year — exactly what was required. The stock returned {stock}/year because hope rose from {pe:bare} to {peNow:bare}."
+    },
+    {
+      "id": "AAPL:now",
+      "about": "iPhone, Mac & services",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Priced for reliability, not growth",
+        "The iPhone never fades, the lock-in holds",
+        "A single flat year isn’t allowed for"
+      ],
+      "notes": [
+        "This sentence is only true while the required growth rounds to the last decade’s. The app checks it."
+      ]
+    },
+    {
+      "id": "AAPL:y1",
+      "story": "The AI laggard; Siri delayed, tariffs threatening the supply chain.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "AAPL:y5",
+      "story": "Pandemic winner; services growing, buybacks enormous.",
+      "happened": "Profit grew {profit}/year — short of the {req:bare} required. The stock returned {stock}/year anyway, because hope rose from 28 to 38.",
+      "notes": [
+        "Typed numbers left in the wording (not computed): 28, 38"
+      ]
+    },
+    {
+      "id": "AAPL:y10",
+      "story": "“Peak iPhone.” Sales had just fallen 8%; Icahn had sold; Buffett had quietly started buying.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year — the record beat a tiny requirement and hope tripled on top."
+    },
+    {
+      "id": "NVDA:now",
+      "about": "Chips that power AI",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}, ending on a boom year.",
+      "consequence": "If profit doesn’t grow from this year’s level, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Priced as if this year’s boom profit is the new normal",
+        "Data-centre spending never pauses",
+        "Nobody else makes the chip"
+      ]
+    },
+    {
+      "id": "NVDA:y1",
+      "story": "The AI king; every hyperscaler’s capex went through it.",
+      "happened": "Profit grew {profit}. The stock returned {stock} — profit outran hope, so the years-of-profit figure fell from {pe:bare} to {peNow:bare}."
+    },
+    {
+      "id": "NVDA:y5",
+      "story": "Gaming, crypto mining and a promising data-centre line; 90 years of profit looked insane.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year. The insane price turned out to be cheap."
+    },
+    {
+      "id": "NVDA:y10",
+      "story": "A gaming-chip company; AI a research sideline.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "MSFT:now",
+      "about": "Windows, Office & Azure servers",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Azure and Office keep growing mid-teens",
+        "The $175bn a year on AI data centres earns a normal return",
+        "Growth already in the price: profits grew this year, the stock didn’t"
+      ]
+    },
+    {
+      "id": "MSFT:y1",
+      "story": "OpenAI’s partner; Copilot everywhere; capex ramping.",
+      "happened": "Profit grew {profit}. The stock returned {stock} — hope came in from {pe:bare} to {peNow:bare}."
+    },
+    {
+      "id": "MSFT:y5",
+      "story": "The cloud king at the top of the zero-rate boom.",
+      "happened": "Profit grew {profit}/year — just short of what was required. The stock returned {stock}/year."
+    },
+    {
+      "id": "MSFT:y10",
+      "story": "Nadella two years in; “cloud turnaround” still a question; Windows seen as a dinosaur.",
+      "happened": "Profit grew {profit}/year — triple the requirement. The stock returned {stock}/year."
+    },
+    {
+      "id": "META:now",
+      "about": "Facebook & Instagram",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Ads keep growing 20%+ a year",
+        "Ads pay for the AI spend",
+        "A slice of the price is trust in Zuckerberg’s bets"
+      ]
+    },
+    {
+      "id": "META:y1",
+      "story": "Hiring a “superintelligence” lab at nine-figure salaries; ads growing 20%+.",
+      "happened": "Profit grew {profit}. The stock returned {stock} — hope faded exactly as fast as profit grew."
+    },
+    {
+      "id": "META:y5",
+      "story": "The Facebook Files, the rename to Meta, the metaverse pivot; investors sceptical.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year — including a 70% fall and full recovery in between.",
+      "notes": [
+        "Typed numbers left in the wording (not computed): 70%"
+      ]
+    },
+    {
+      "id": "META:y10",
+      "story": "The ad machine, growing 50%/year; fake-news backlash beginning.",
+      "happened": "Profit grew {profit}/year — more than required. The stock returned {stock}/year; hope fell from {pe:bare} to {peNow:bare}."
+    },
+    {
+      "id": "TSM:now",
+      "about": "Makes Apple’s & Nvidia’s chips",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Every AI chip still gets made here",
+        "The 2-nanometre lead holds",
+        "Discount for the Taiwan Strait"
+      ]
+    },
+    {
+      "id": "TSM:y1",
+      "story": "The only foundry that can make the AI chips; Taiwan risk the permanent discount.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "TSM:y5",
+      "story": "The chip shortage; everyone discovered who actually makes chips.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "TSM:y10",
+      "story": "Apple’s chip supplier; a good, boring foundry.",
+      "happened": "Profit grew {profit}/year — four times the requirement. The stock returned {stock}/year."
+    },
+    {
+      "id": "AMZN:now",
+      "about": "Online shopping & cloud computing",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}, from almost nothing.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "AWS keeps its lead",
+        "$220bn a year of building keeps paying",
+        "Nothing paid out until the building stops"
+      ]
+    },
+    {
+      "id": "AMZN:y1",
+      "story": "Capex doubling for AI; AWS growth questioned.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "AMZN:y5",
+      "story": "Pandemic hangover beginning; still 60 years of profit.",
+      "happened": "Profit grew {profit}/year — short of the {req:bare} required. The stock returned {stock}/year."
+    },
+    {
+      "id": "AMZN:y10",
+      "story": "AWS newly discovered; retail barely profitable; 190 years of a tiny profit.",
+      "happened": "Profit grew {profit}/year — it met a requirement nobody thought meetable. The stock returned {stock}/year."
+    },
+    {
+      "id": "ORCL:now",
+      "about": "Business software & cloud servers",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "OpenAI has to pay its bills in full",
+        "The construction debt has to refinance",
+        "The price halved in a year: the belief shrank, not the business"
+      ]
+    },
+    {
+      "id": "ORCL:y1",
+      "story": "The $300bn OpenAI contract had just been announced; the stock at an all-time high.",
+      "happened": "Profit grew {profit}. The stock returned {stock} — the belief shrank, the business didn’t."
+    },
+    {
+      "id": "ORCL:y5",
+      "story": "A dinosaur that had missed the cloud, buying back its own shares.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year, including a record high in September 2025 and a halving since.",
+      "notes": [
+        "Rewritten to drop the dollar share price ($345). “Record high in September 2025” is unchecked."
+      ]
+    },
+    {
+      "id": "ORCL:y10",
+      "story": "Losing the cloud race to Amazon and Microsoft.",
+      "happened": "Profit grew {profit}/year — more than required. The stock returned {stock}/year."
+    },
+    {
+      "id": "GOOGL:now",
+      "about": "Google search & YouTube",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome:index}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "The market isn’t sure search survives the AI answer box",
+        "Cloud and YouTube priced as a sideshow",
+        "The doubt is the discount"
+      ]
+    },
+    {
+      "id": "GOOGL:y1",
+      "story": "Survived the antitrust ruling; Gemini catching up; search-is-dead worries.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "GOOGL:y5",
+      "story": "Ads booming out of the pandemic.",
+      "happened": "Profit grew {profit}/year — exactly what was required. The stock returned {stock}/year."
+    },
+    {
+      "id": "GOOGL:y10",
+      "story": "The search monopoly; antitrust in Europe; “other bets” losing money.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "XOM:now",
+      "about": "Oil & gas",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}, from a bad year for oil.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Oil stays near $100",
+        "Its profit rises and falls with the oil price",
+        "Dividends are most of what you get while you wait"
+      ],
+      "notes": [
+        "Open item: Exxon sits in Bargain, yet its price needs more growth (~6%) than analysts expect for oil (~4%). Decide how the card says so."
+      ]
+    },
+    {
+      "id": "XOM:y1",
+      "story": "Oil in the $60s; the dividend the whole story.",
+      "happened": "Profit grew {profit} as oil rose above $100. The stock returned {stock}.",
+      "notes": [
+        "Typed numbers left in the wording (not computed): $100"
+      ]
+    },
+    {
+      "id": "XOM:y5",
+      "story": "Recovering from a 2020 loss; kicked out of the Dow the year before; ESG money leaving.",
+      "happened": "From a loss back to record profit. The stock returned {stock}/year with dividends — the most unloved stock of 2020 was the decade’s quiet winner."
+    },
+    {
+      "id": "XOM:y10",
+      "story": "Oil at $50; profit at a trough; dividend-cut worries.",
+      "happened": "Profit grew {profit}/year from the trough — just above the requirement. The stock returned {stock}/year with dividends."
+    },
+    {
+      "id": "AVGO:now",
+      "about": "Chips for phones, networks & AI",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "AI chip sales more than doubled last year",
+        "A handful of large customers drive that demand",
+        "The software business adds steady profit"
+      ],
+      "notes": [
+        "Sources disagree on next year’s forecast: 19 to 53 years. ≈30 is a middle value."
+      ]
+    },
+    {
+      "id": "AMD:now",
+      "about": "Computer & AI chips",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Data-centre sales were up 57% last quarter",
+        "The price assumes AMD keeps gaining ground on Nvidia"
+      ]
+    },
+    {
+      "id": "INTC:now",
+      "about": "Chips for PCs & chip factories",
+      "assumes": "Only if Intel earns **{reqProfit}** a year by 2036. Intel lost {p:last:abs} last year. Its best years were {p:best}.",
+      "consequence": "If profit reaches Intel’s best year ({p:best}), {outcome}.",
+      "scenario": {
+        "anchor": "profit",
+        "key": "best"
+      },
+      "bullets": [
+        "The stock has risen 160% this year",
+        "The price assumes the chip-factory business wins outside customers"
+      ],
+      "notes": [
+        "Intel’s value differs by source: ~$470 billion or ~$650 billion. The card shows both ends until one source is picked.",
+        "No-profit card: placed in Pricey by its forecast figure."
+      ]
+    },
+    {
+      "id": "ASML:now",
+      "about": "Machines that make chips",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "ASML is the only maker of the machines that print the most advanced chips",
+        "Its customers have to keep raising their factory spending"
+      ]
+    },
+    {
+      "id": "MU:now",
+      "about": "Memory chips for computers & phones",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit falls back to half this year’s level, {outcome}.",
+      "scenario": {
+        "anchor": "endsAt",
+        "factor": 0.5
+      },
+      "bullets": [
+        "This year’s profit is a memory-chip boom profit",
+        "Micron lost money as recently as 2023",
+        "Profit this high rarely lasts"
+      ],
+      "notes": [
+        "Sources disagree on next year’s forecast: 5 to 15 years.",
+        "The “half this year’s level” scenario is not one of the four allowed anchors.",
+        "Open question: at ≈12.5 years, assuming people pay 18 by 2036 means they pay more than today. Assuming no more than today, required growth is ~9%."
+      ]
+    },
+    {
+      "id": "NOW:now",
+      "about": "Office software for big companies",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Revenue is growing 24% a year",
+        "Its AI products passed $1 billion in annual contracts",
+        "The price assumes AI helps it rather than hurts it"
+      ],
+      "notes": [
+        "Last year’s figure was not found. The card uses next year’s forecast in both views, and is placed in Pricey by it."
+      ]
+    },
+    {
+      "id": "SHOP:now",
+      "about": "Software for running an online shop",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Revenue is growing 32% a year, but profit fell 18% last year",
+        "The price assumes the profit catches up"
+      ],
+      "notes": [
+        "Draft said “~5% less”; the board’s form is “~X%/year less”."
+      ]
+    },
+    {
+      "id": "CRM:now",
+      "about": "Software for sales teams",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Investors fear AI lets customers build their own software",
+        "The stock is down 14% this year, after rising more than 50% from its June low"
+      ],
+      "notes": [
+        "Cash returned (~5%) is a guess and is what pushes required growth so low."
+      ]
+    },
+    {
+      "id": "ADBE:now",
+      "about": "Photoshop & PDF software",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "The stock is down more than 30% this year on fears that AI makes creative tools cheap",
+        "The price assumes AI tools don’t take its customers"
+      ],
+      "notes": [
+        "Cash returned (~10%) is a guess and is what pushes required growth below zero.",
+        "The “falls 5%/year” scenario is not one of the four allowed anchors.",
+        "Open question: at ≈13 years, assuming 18 by 2036 flatters the price. At no more than today, required growth is ~0%.",
+        "October 2026: with buybacks no longer counted as cash returned, Adobe needs growth; the “even if profit shrinks” frame was dropped."
+      ]
+    },
+    {
+      "id": "ABNB:now",
+      "about": "Holiday home rentals",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Revenue is growing 14% a year",
+        "The price assumes AI assistants don’t start booking trips without Airbnb"
+      ],
+      "notes": [
+        "No industry line. Damodaran’s internet bucket (~21%) is the candidate.",
+        "Sources disagree on next year’s forecast: 28 to 35 years."
+      ]
+    },
+    {
+      "id": "NFLX:now",
+      "about": "Streaming TV & films",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "The ad tier keeps adding sign-ups",
+        "YouTube doesn’t take more of the viewing time",
+        "The stock is down 26% this year while revenue grew"
+      ],
+      "notes": [
+        "Industry bucket (entertainment, ~6%) is a judgement call.",
+        "The draft’s prose was split into bullets."
+      ]
+    },
+    {
+      "id": "UBER:now",
+      "about": "Rides & food delivery",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "The price assumes riders and drivers keep coming to Uber first",
+        "Robotaxis could cut out the drivers it connects riders to"
+      ],
+      "notes": [
+        "Sources disagree on next year’s forecast: 15 to 23 years.",
+        "Open question: at ≈15 years, assuming 18 by 2036 flatters the price. At no more than today, required growth is ~7%."
+      ]
+    },
+    {
+      "id": "CSCO:now",
+      "about": "Routers & internet infrastructure",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "AI networking demand keeps lifting sales",
+        "In March 2000 the price was 150 years of profit"
+      ],
+      "notes": [
+        "No industry line: Damodaran’s telecom equipment bucket reads ~40%, which would not be used.",
+        "The draft’s prose was split into bullets."
+      ]
+    },
+    {
+      "id": "DELL:now",
+      "about": "Computers & AI servers",
+      "assumes": "{opening} profit grows at **{req}/year**.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Its AI server backlog turns into profit",
+        "The stock is down 19% from its September record after a Barclays downgrade",
+        "Higher memory costs squeeze its margins"
+      ],
+      "notes": [
+        "The draft’s prose was split into bullets."
+      ]
+    },
+    {
+      "id": "SPCX:now",
+      "about": "Rockets & Starlink satellite internet",
+      "unit": "of last year’s revenue",
+      "assumes": "Only if profit grows to **{reqProfit}** a year by 2036. SpaceX lost {p:last:abs} on {p:revenue:bare} of revenue last year. Apple earns {p:apple}.",
+      "consequence": "If profit reaches Apple’s level ({p:apple}), {outcome}.",
+      "scenario": {
+        "anchor": "profit",
+        "key": "apple"
+      },
+      "bullets": [
+        "Since listing in June the stock has ranged from 22% below its listing price to 67% above",
+        "It now includes Musk’s AI company xAI, bought in February",
+        "The price ignores new shares it will have to issue"
+      ],
+      "notes": [
+        "Value is ≈86 years of $23 billion revenue, ≈$1.98 trillion."
+      ]
+    },
+    {
+      "id": "BRK.B:now",
+      "about": "Buffett’s company: buys & holds undervalued businesses",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Profit here leaves out paper gains on its stock holdings, the way Berkshire reports it itself",
+        "Greg Abel took over from Warren Buffett at the start of 2026",
+        "A large part of its value is cash waiting for something to buy"
+      ],
+      "notes": [
+        "Profit is operating profit: official profit less investment gains and the tax on them, all as filed. Some early quarters don’t tag that tax; it is estimated at 21% there and those views are marked ≈."
+      ]
+    },
+    {
+      "id": "BRK.B:y1",
+      "story": "Buffett had announced he would hand over to Greg Abel at the end of the year.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "BRK.B:y5",
+      "story": "Buying back its own shares, with few big deals in sight.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "BRK.B:y10",
+      "story": "Had just bought Precision Castparts and its first Apple shares.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "JPM:now",
+      "about": "America’s biggest bank",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Loan losses stay low",
+        "Profit this high leans on interest rates staying up",
+        "The biggest US bank, and the one that came through 2008 in the best shape"
+      ]
+    },
+    {
+      "id": "JPM:y1",
+      "story": "Record profits as interest rates stayed high.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "JPM:y5",
+      "story": "Profits rebounding as the feared pandemic loan losses never came.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "JPM:y10",
+      "story": "Rates near zero squeezed what banks earned on loans.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "BAC:now",
+      "about": "Banking for US households",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Loan losses stay low",
+        "It still holds bonds bought when rates were low, which pay little"
+      ]
+    },
+    {
+      "id": "BAC:y1",
+      "story": "Higher rates for longer lifting what it earns on deposits.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "BAC:y5",
+      "story": "Waiting for rates to rise from near zero.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "BAC:y10",
+      "story": "Still putting the crisis years behind it.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "WFC:now",
+      "about": "Everyday banking & home loans",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Regulators lifted the cap on its size in 2025, years after the fake-accounts scandal",
+        "The price assumes it can grow again now the cap is gone"
+      ]
+    },
+    {
+      "id": "WFC:y1",
+      "story": "Freed in June from the cap regulators put on its size.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "WFC:y5",
+      "story": "Held under the cap, cutting costs.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "WFC:y10",
+      "story": "The fake-accounts scandal had just broken.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "C:now",
+      "about": "Bank for big companies worldwide",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "In the middle of a long overhaul, selling businesses abroad",
+        "The price assumes the overhaul finally lifts profit"
+      ]
+    },
+    {
+      "id": "C:y1",
+      "story": "The overhaul showing results; selling part of its Mexican bank.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "C:y5",
+      "story": "Fined over weak controls; a new chief executive starting the overhaul.",
+      "happened": "Profit fell {profit:abs}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "C:y10",
+      "story": "Still shrinking after the crisis.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "GS:now",
+      "about": "Advises on big deals & trades shares",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Profit rises and falls with deal-making and trading",
+        "Busy markets stay busy"
+      ]
+    },
+    {
+      "id": "GS:y1",
+      "story": "Deal-making and trading picking up.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "GS:y5",
+      "story": "Record deal-making in the 2021 boom.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "GS:y10",
+      "story": "Trading slow under the post-crisis rules.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "MS:now",
+      "about": "Looks after wealthy people’s money",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Most of its profit now comes from managing people’s money, which is steadier than trading",
+        "Markets stay busy"
+      ]
+    },
+    {
+      "id": "MS:y1",
+      "story": "Wealth management growing and trading strong.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "MS:y5",
+      "story": "Had bought E*Trade and Eaton Vance to grow wealth management.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "MS:y10",
+      "story": "Shifting from trading toward managing money.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "V:now",
+      "about": "Credit cards",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "Takes a small cut of a huge share of the world’s card payments",
+        "Cash keeps giving way to cards and phones",
+        "Regulators and new payment systems are the threat to its cut"
+      ]
+    },
+    {
+      "id": "V:y1",
+      "story": "Card spending steady; fights over the fees it charges shops.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "V:y5",
+      "story": "Travel spending coming back after the pandemic.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "V:y10",
+      "story": "Had just bought Visa Europe.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "MA:now",
+      "about": "Credit cards",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If the last decade’s {g}/year growth repeats, {outcome}.",
+      "scenario": {
+        "anchor": "last"
+      },
+      "bullets": [
+        "The other half of the card-network pair with Visa",
+        "Spending abroad, where its fees are highest, keeps rising",
+        "Governments pushing their own payment systems are the threat"
+      ]
+    },
+    {
+      "id": "MA:y1",
+      "story": "Card spending steady; travel abroad growing.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "MA:y5",
+      "story": "Fees on spending abroad coming back after the pandemic.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "MA:y10",
+      "story": "Cards replacing cash around the world.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "VZ:now",
+      "about": "Mobile phone & home internet",
+      "assumes": "Even if profit shrinks **{req:abs}/year**. Over the last decade it shrank {last:abs}/year.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Most of what you get is the dividend",
+        "Phone customers don’t leave for cheaper rivals or cable companies",
+        "Its large debt has to keep being paid"
+      ]
+    },
+    {
+      "id": "VZ:y1",
+      "story": "A new chief executive; buying Frontier for its fibre lines.",
+      "happened": "Profit fell {profit:abs}. The stock returned {stock}."
+    },
+    {
+      "id": "VZ:y5",
+      "story": "Spending heavily on airwaves for 5G.",
+      "happened": "Profit fell {profit:abs}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "VZ:y10",
+      "story": "Buying Yahoo’s web business.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "T:now",
+      "about": "Phone plans & fibre internet",
+      "assumes": "Even if profit shrinks **{req:abs}/year**. Over the last decade it grew {last}/year.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Profit jumped in the last year; if that was a one-off, the price is less cheap than it looks",
+        "Most of what you get is the dividend",
+        "Fibre to homes is its bet for growth"
+      ],
+      "notes": [
+        "Last year’s profit is well above its usual level; check whether one-off gains are in it before leaning on the low figure."
+      ]
+    },
+    {
+      "id": "T:y1",
+      "story": "Selling its stake in DirecTV and building fibre.",
+      "happened": "Profit grew {profit}. The stock returned {stock}."
+    },
+    {
+      "id": "T:y5",
+      "story": "Losing money on write-downs as it undid its media bets.",
+      "happened": "The stock returned {stock}/year."
+    },
+    {
+      "id": "T:y10",
+      "story": "In talks to buy Time Warner.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "TMUS:now",
+      "about": "Mobile phone plans",
+      "assumes": "{opening} profit grows at **{req}/year** {vsLast}.",
+      "consequence": "If profit doesn’t grow, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Profit grew fast after it bought Sprint in 2020",
+        "The price assumes it keeps winning customers from Verizon and AT&T"
+      ]
+    },
+    {
+      "id": "TMUS:y1",
+      "story": "Competition for phone customers heating up.",
+      "happened": "Profit fell {profit:abs}. The stock returned {stock}."
+    },
+    {
+      "id": "TMUS:y5",
+      "story": "Absorbing Sprint.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    },
+    {
+      "id": "TMUS:y10",
+      "story": "Winning customers from bigger rivals with its “Un-carrier” plans.",
+      "happened": "Profit grew {profit}/year. The stock returned {stock}/year."
+    }
+  ]
+}
