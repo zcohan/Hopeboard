@@ -206,7 +206,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     return tile({
       id: spxId, badge: 'SPX', ...BASE.spx, name, base: true,
       price: { pre: L('pricedAt'), n: `${parseFig(E.spx.pe).text} ${L('years')}`, unit: L('unitPast') },
-      lines: frame ? [{ cls: 'makes', html: fill(frame.assumes as string, et, spxId) }] : [],
+      lines: [], facts: frame ? facts(spxId, et, [['assumes', frame.assumes as string]]) : [],
       why: { story: [[copy.label('past-frame', 'storyHeading'), fill(e.story as string, et, spxId)], [copy.label('past-frame', 'sinceHeading'), fill(e.happened as string, et, spxId)]] },
     }, copy);
   }));
@@ -273,11 +273,12 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         const e = copy.get(id);
         if (!e || !frame) return null;
         const tk = companyPastTokens(co, era, F);
-        const makes = m.req === null ? fill(frame.noProfit as string, tk, id) : fill(frame.assumes as string, tk, id);
+        // the past in the same shape as today: Priced for, as a headline; a loss year says so instead
         return tile({
           id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id),
           price: { pre: L('pricedAt'), n: `${m.pe.text} ${L('years')}`, unit: L('unitPast') },
-          lines: [{ cls: 'makes', html: makes }],
+          lines: m.req === null ? [{ cls: 'makes', html: fill(frame.noProfit as string, tk, id) }] : [],
+          facts: m.req === null ? undefined : facts(id, tk, [['assumes', frame.assumes as string]]),
           why: { story: [[copy.label('past-frame', 'storyHeading'), fill(e.story as string, tk, id)], [copy.label('past-frame', 'sinceHeading'), fill(e.happened as string, tk, id)]] },
         }, copy);
       });

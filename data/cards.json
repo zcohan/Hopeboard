@@ -104,9 +104,9 @@
           ]
         },
         {
-          "h": "What “reasonably priced” means",
+          "h": "What “Priced for” means",
           "p": [
-            "A price is reasonable if the stock would return what the S&P 500 has averaged since 1928, {index} a year, with dividends. The return over ten years comes from three things: profit growth, the dividends paid along the way, and the change in how many years of profit people pay. Hopeboard assumes that in ten years people pay an ordinary {normalYears} years of profit, the long-run average, and works backwards to the growth each price needs."
+            "“Priced for” is the profit growth a year the stock needs to return what the S&P 500 has averaged since 1928, {index} a year, with dividends. The return over ten years comes from three things: profit growth, the dividends paid along the way, and the change in how many years of profit people pay. Hopeboard assumes that in ten years people pay an ordinary {normalYears} years of profit, the long-run average, and works backwards to the growth each price needs."
           ],
           "formula": "return per year = (1 + growth) × (1 + dividends) × (18 ÷ years of profit today)^(1/10) − 1"
         },
@@ -243,7 +243,7 @@
     },
     {
       "id": "past-frame",
-      "assumes": "This price was reasonable assuming profit grew **{req}/year** over the following decade.",
+      "assumes": "**{reqSigned}** growth/year",
       "noProfit": "No profit to price: it was losing money.",
       "storyHeading": "The story then",
       "sinceHeading": "What happened since"
@@ -262,7 +262,7 @@
     },
     {
       "id": "foot:past",
-      "text": "Figures for {era} use only the company filings published by then and that day’s prices; stock returns include dividends. “Reasonable” uses the same rule as the current board. Stories are one-line summaries of what the market was saying at the time. All figures are rounded and approximate. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything."
+      "text": "Figures for {era} use only the company filings published by then and that day’s prices; stock returns include dividends. “Priced for” uses the same rule as today’s board. Stories are one-line summaries of what the market was saying at the time. All figures are rounded and approximate. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything."
     },
     {
       "id": "bond:now",
@@ -273,12 +273,8 @@
       "consequence": "Stock prices generally promise a higher return than this, or they aren’t worth the uncertainty.",
       "heading": "Why it matters",
       "bullets": [
-        "The floor every other return is measured against",
-        "When this goes up, every stock has to promise more to be worth the risk",
+        "When its return rises, stock prices have to promise more too",
         "Since 1928 stocks have returned {premium}/year more than this, for taking the risk"
-      ],
-      "notes": [
-        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
@@ -291,9 +287,6 @@
       "bullets": [
         "Nobody can default on it or print more of it",
         "Central banks have been buying since 2022"
-      ],
-      "notes": [
-        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
@@ -307,9 +300,9 @@
         "anchor": "last"
       },
       "bullets": [
-        "Companies keep a record share of their sales as profit, and that holds",
-        "Nothing goes wrong with the ten biggest companies, which make up a large part of it",
-        "The average now carries Tesla, Palantir and a boom-year Nvidia"
+        "The price assumes companies keep a record share of their sales as profit",
+        "The ten biggest companies make up a large part of the index, so it depends on them",
+        "The index now includes highly priced companies like Tesla and Palantir"
       ],
       "notes": [
         "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
@@ -317,75 +310,50 @@
     },
     {
       "id": "bond:y1",
-      "assumes": "Returned **{bond}/year** for ten years, guaranteed. What a bondholder got, guaranteed. Over the year since, the stocks below did what they did.",
-      "notes": [
-        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
-      ]
+      "assumes": "Was guaranteed to return **{bond}/year** for ten years."
     },
     {
       "id": "gold:y1",
-      "assumes": "No profit to price. Reasonable only if someone paid more later.",
+      "assumes": "No profit to price.",
       "story": "A new record almost every week; central banks and retail buying together.",
-      "happened": "Up {goldReturn}.",
-      "notes": [
-        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
-      ]
+      "happened": "{goldMove}."
     },
     {
       "id": "spx:y1",
       "story": "The AI boom in full swing; the index at {pe} years of profit.",
-      "happened": "Profit {profitMove}. The index returned {stock}.",
-      "notes": [
-        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
-      ]
+      "happened": "Profit {profitMove}. The index returned {stock}."
     },
     {
       "id": "bond:y5",
-      "assumes": "Returned **{bond}/year** for ten years, guaranteed. Near zero. With the safe US bond paying almost nothing, almost any stock price looked reasonable by comparison — which is how 2021 happened.",
-      "notes": [
-        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
-      ]
+      "assumes": "Was guaranteed to return **{bond}/year** for ten years.",
+      "consequence": "With the safe US bond paying almost nothing, stocks didn’t have to promise much to beat it."
     },
     {
       "id": "gold:y5",
-      "assumes": "No profit to price. Reasonable only if someone paid more later.",
+      "assumes": "No profit to price.",
       "story": "Inflation arriving and gold oddly flat; bitcoin called the new gold.",
-      "happened": "Up {goldReturn}/year, most of it since 2024.",
-      "notes": [
-        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
-      ]
+      "happened": "{goldMove}/year, most of it since 2024."
     },
     {
       "id": "spx:y5",
       "story": "Zero interest rates, pandemic stimulus, everything expensive at once; the index at {pe} years of profit.",
-      "happened": "Profit {profitMove}. The index returned {stock}/year.",
-      "notes": [
-        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
-      ]
+      "happened": "Profit {profitMove}. The index returned {stock}/year."
     },
     {
       "id": "bond:y10",
-      "assumes": "Returned **{bond}/year** for ten years, guaranteed. Low for a decade. The safe US bond was the thing nobody wanted; stocks priced accordingly.",
-      "notes": [
-        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
-      ]
+      "assumes": "Was guaranteed to return **{bond}/year** for ten years.",
+      "consequence": "The safe US bond had paid little for years, so stocks didn’t have to promise much to beat it."
     },
     {
       "id": "gold:y10",
-      "assumes": "No profit to price. Reasonable only if someone paid more later.",
+      "assumes": "No profit to price.",
       "story": "Out of fashion; five years below its 2011 high; “a pet rock.”",
-      "happened": "Up {goldReturn}/year.",
-      "notes": [
-        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
-      ]
+      "happened": "{goldMove}/year."
     },
     {
       "id": "spx:y10",
       "story": "Post-Brexit, pre-election, slow growth; “bond-proxy” stocks in fashion, tech cheap by today’s standards.",
-      "happened": "Profit {profitMove}. The index returned {stock}/year.",
-      "notes": [
-        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
-      ]
+      "happened": "Profit {profitMove}. The index returned {stock}/year."
     },
     {
       "id": "TSLA:now",
@@ -396,9 +364,9 @@
         "anchor": "average"
       },
       "bullets": [
-        "Priced for Elon Musk continuing to pull rabbits out of hats",
-        "Assumes robots & robotaxis are deployed at scale within ten years",
-        "Car profits don’t matter at this price: profit per share has fallen since 2022"
+        "The price assumes Elon Musk keeps building big new businesses",
+        "It assumes robots and robotaxis are in wide use within ten years",
+        "Profit per share has fallen since 2022, so the price rests on the new businesses"
       ],
       "notes": [
         "The consequence names the story because the loss comes mostly from buyers paying an ordinary 18 years of profit in 2036 instead of today’s hundreds (owner’s suggestion, October 2026)."
@@ -451,9 +419,8 @@
         "anchor": "last"
       },
       "bullets": [
-        "Priced as a company that can’t fail",
-        "The price pays for certainty more than for growth",
-        "Mid-single-digit growth, forever, with no surprises"
+        "The price assumes steady growth with no bad years",
+        "Revenue grew {rev} last year"
       ]
     },
     {
@@ -480,9 +447,8 @@
         "anchor": "average"
       },
       "bullets": [
-        "The price pays for reliability more than for growth",
-        "The iPhone never fades, the lock-in holds",
-        "A single flat year isn’t allowed for"
+        "The price assumes people keep buying iPhones and stay with Apple’s services",
+        "It assumes no flat years"
       ],
       "notes": [
         "This sentence is only true while the required growth rounds to the last decade’s. The app checks it."
@@ -515,9 +481,8 @@
         "anchor": "none"
       },
       "bullets": [
-        "Priced as if this year’s boom profit is the new normal",
-        "Data-centre spending never pauses",
-        "Nobody else makes the chip"
+        "The price assumes this year’s boom profit is the new normal",
+        "It assumes data-centre spending doesn’t slow and no rival catches up"
       ]
     },
     {
@@ -544,9 +509,9 @@
         "anchor": "average"
       },
       "bullets": [
-        "Azure and Office keep growing mid-teens",
-        "The {capex} it spent on buildings and equipment last year, mostly AI data centres, earns a normal return",
-        "Growth already in the price: profits grew this year, the stock didn’t"
+        "The price assumes Azure, its cloud business, and Office keep growing fast",
+        "It assumes the {capex} it spent on buildings and equipment last year, mostly AI data centres, pays off",
+        "Profit grew this year while the stock didn’t"
       ]
     },
     {
@@ -573,9 +538,9 @@
         "anchor": "average"
       },
       "bullets": [
-        "Ad sales keep growing (revenue grew {rev} last year)",
-        "Ads pay for the AI spend",
-        "A slice of the price is trust in Zuckerberg’s bets"
+        "Revenue grew {rev} last year, almost all of it from ads",
+        "The price assumes ad sales keep paying for its AI spending",
+        "Mark Zuckerberg controls the company, so investors are trusting his bets"
       ]
     },
     {
@@ -605,14 +570,14 @@
         "anchor": "average"
       },
       "bullets": [
-        "Every AI chip still gets made here",
-        "The 2-nanometre lead holds",
-        "Discount for the Taiwan Strait"
+        "Makes almost all of the most advanced AI chips",
+        "The price assumes it keeps that lead",
+        "Part of the price reflects the risk of conflict over Taiwan"
       ]
     },
     {
       "id": "TSM:y1",
-      "story": "The only foundry that can make the AI chips; Taiwan risk the permanent discount.",
+      "story": "The only company that can make the most advanced AI chips; fear of conflict over Taiwan held the price down.",
       "happened": "Profit {profitMove}. The stock returned {stock}."
     },
     {
@@ -634,9 +599,9 @@
         "anchor": "average"
       },
       "bullets": [
-        "AWS keeps its lead",
-        "The {capex} it spent on buildings and equipment last year keeps paying",
-        "Nothing paid out until the building stops"
+        "The price assumes AWS, its cloud business, stays the leader",
+        "It assumes the {capex} it spent on buildings and equipment last year pays off",
+        "It pays no dividend while it keeps building"
       ]
     },
     {
@@ -663,8 +628,8 @@
         "anchor": "none"
       },
       "bullets": [
-        "OpenAI has to pay its bills in full",
-        "The construction debt has to refinance",
+        "The price assumes OpenAI, its biggest new customer, pays its bills in full",
+        "It borrowed heavily to build data centres, and that debt has to be repaid or replaced",
         "The stock is {ytd} this year while the business kept growing"
       ]
     },
@@ -687,14 +652,13 @@
       "id": "GOOGL:now",
       "about": "Google search & YouTube",
       "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
-      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome:index}.",
+      "consequence": "If profit only grows at {g}/year (the average big US company), {outcome}.",
       "scenario": {
         "anchor": "average"
       },
       "bullets": [
-        "The market isn’t sure search survives the AI answer box",
-        "Cloud and YouTube priced as a sideshow",
-        "The doubt is the discount"
+        "Investors doubt Google search holds up against AI chatbots",
+        "The price gives little value to its cloud business and YouTube"
       ]
     },
     {
@@ -819,8 +783,7 @@
       },
       "bullets": [
         "This year’s profit is a memory-chip boom profit",
-        "Micron lost money as recently as 2023",
-        "Profit this high rarely lasts"
+        "Micron lost money as recently as 2023"
       ],
       "notes": [
         "Sources disagree on next year’s forecast: 5 to 15 years.",
@@ -921,8 +884,8 @@
         "anchor": "average"
       },
       "bullets": [
-        "The ad tier keeps adding sign-ups",
-        "YouTube doesn’t take more of the viewing time",
+        "The price assumes its cheaper plan with ads keeps adding subscribers",
+        "It assumes YouTube doesn’t take more of people’s viewing time",
         "The stock is {ytd} this year, while revenue grew {rev}"
       ],
       "notes": [
@@ -1041,8 +1004,8 @@
         "anchor": "none"
       },
       "bullets": [
-        "Loan losses stay low",
-        "Profit this high leans on interest rates staying up",
+        "The price assumes few of its loans go bad",
+        "Profit this high depends on interest rates staying up",
         "The biggest US bank, and the one that came through 2008 in the best shape"
       ]
     },
@@ -1070,7 +1033,7 @@
         "anchor": "none"
       },
       "bullets": [
-        "Loan losses stay low",
+        "The price assumes few of its loans go bad",
         "It still holds bonds bought when rates were low, which pay little"
       ]
     },
@@ -1155,7 +1118,7 @@
       },
       "bullets": [
         "Profit rises and falls with deal-making and trading",
-        "Busy markets stay busy"
+        "The price assumes markets stay busy"
       ]
     },
     {
@@ -1183,7 +1146,7 @@
       },
       "bullets": [
         "Most of its profit now comes from managing people’s money, which is steadier than trading",
-        "Markets stay busy"
+        "The price assumes markets stay busy"
       ]
     },
     {
@@ -1262,7 +1225,7 @@
     {
       "id": "VZ:now",
       "about": "Mobile phone & home internet",
-      "assumes": "**{reqSigned}** growth/year\nProfit can shrink {req:abs} a year. Over the last decade it shrank {last:abs}/year.",
+      "assumes": "**{reqSigned}** growth/year\nOver the last decade it shrank {last:abs}/year.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1291,7 +1254,7 @@
     {
       "id": "T:now",
       "about": "Phone plans & fibre internet",
-      "assumes": "**{reqSigned}** growth/year\nProfit can shrink {req:abs} a year. Over the last decade it grew {last}/year.",
+      "assumes": "**{reqSigned}** growth/year\nOver the last decade it grew {last}/year.",
       "consequence": "If profit doesn’t grow, {outcome}.",
       "scenario": {
         "anchor": "none"

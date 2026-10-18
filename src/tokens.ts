@@ -21,6 +21,9 @@ export function compare(req: number, last: number): string {
   return a > b ? 'up from' : a < b ? 'down from' : 'the same as';
 }
 
+/** "+47%" or "−1%": a required growth with its sign, as a headline */
+const signed = (g: number) => { const p = pct(g); return p.startsWith('−') || p === '0%' ? p : `+${p}`; };
+
 function common(F: Figures): Tokens {
   return {
     index: (a) => approx(INDEX_RETURN, a),
@@ -38,7 +41,7 @@ function nowTokens(m: NowModel, basis: Basis, F: Figures, scenario: Scenario | u
     opening: () => (m.section === 'pricey' || m.section === 'loss' ? 'Only if' : 'If'),
     req: (a) => approx(req(), a),
     /** "+47%" or "−1%": the required growth with its sign, as a headline */
-    reqSigned: () => { const p = pct(req()); return p.startsWith('−') || p === '0%' ? p : `+${p}`; },
+    reqSigned: () => signed(req()),
     cmp: () => compare(req(), need(m.last, 'last-decade growth')),
     /** "Up from the 15%/year of the last decade", or "The same rate as over the last decade": a note under the requirement */
     vsLastNote: () => {
@@ -137,6 +140,9 @@ export function eraTokens(F: Figures, E: EraFigures): Tokens {
     bond: (a) => approx(E.bond, a, decPct),
     goldReturn: (a) => approx(need(E.goldReturn, 'gold return'), a),
     req: (a) => approx(requiredGrowth(E.spx.y, need(pe.v, 'S&P years of profit')), a),
+    reqSigned: () => signed(requiredGrowth(E.spx.y, need(pe.v, 'S&P years of profit'))),
+    /** "Rose 9%" or "Fell 4%": gold's return since then, by its sign */
+    goldMove: () => { const g = need(E.goldReturn, 'gold return'); return `${g >= 0 ? 'Rose' : 'Fell'} ${pct(Math.abs(g))}`; },
     pe: (a) => years(pe, a),
     peNow: (a) => years(parseFig(F.eras.now.spx.pe), a),
     profit: (a) => approx(need(E.spx.profit, 'S&P profit growth'), a),
@@ -159,6 +165,7 @@ export function companyPastTokens(co: Company, era: PastEra, F: Figures): Tokens
   return {
     ...common(F),
     req: (a) => approx(requiredGrowth(p.y ?? co.now.y, need(pe.v, 'years of profit')), a),
+    reqSigned: () => signed(requiredGrowth(p.y ?? co.now.y, need(pe.v, 'years of profit'))),
     pe: (a) => years(pe, a),
     peNow: (a) => years(parseFig(co.now.pe), a),
     profit: (a) => approx(need(p.profit, `${co.id} ${era} profit growth`), a),
