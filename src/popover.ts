@@ -13,6 +13,17 @@ function place(pop: HTMLElement) {
   pop.style.left = `${left + window.scrollX}px`;
   pop.style.top = `${r.bottom + window.scrollY + 12}px`;
   pop.style.setProperty('--arrow', `${Math.max(12, r.left - left + 8)}px`);
+  pop.classList.remove('up');
+}
+
+/** Once open and measurable: above the link instead when it would run off the bottom of the screen and fits above. */
+function flip(pop: HTMLElement) {
+  const link = document.querySelector<HTMLElement>(`[popovertarget="${CSS.escape(pop.id)}"]`);
+  if (!link) return;
+  const r = link.getBoundingClientRect(), h = pop.offsetHeight;
+  const up = r.bottom + 12 + h > window.innerHeight - GUTTER && r.top - 12 - h > GUTTER;
+  pop.classList.toggle('up', up);
+  if (up) pop.style.top = `${r.top + window.scrollY - 12 - h}px`;
 }
 
 export function installPopovers() {
@@ -21,5 +32,9 @@ export function installPopovers() {
     const ev = e as ToggleEvent;
     if (ev.newState === 'open' && (ev.target as HTMLElement).matches('.why[popover]')) place(ev.target as HTMLElement);
   }, true);
-  window.addEventListener('resize', () => document.querySelectorAll<HTMLElement>('.why[popover]:popover-open').forEach(place));
+  document.addEventListener('toggle', (e) => {
+    const ev = e as ToggleEvent;
+    if (ev.newState === 'open' && (ev.target as HTMLElement).matches('.why[popover]')) flip(ev.target as HTMLElement);
+  }, true);
+  window.addEventListener('resize', () => document.querySelectorAll<HTMLElement>('.why[popover]:popover-open').forEach((p) => { place(p); flip(p); }));
 }

@@ -45,6 +45,7 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
   box-shadow:0 8px 28px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08)}
 .why::before{content:""; position:absolute; top:-7px; left:var(--arrow,28px); width:12px; height:12px; background:inherit;
   border-left:1px solid var(--edge); border-top:1px solid var(--edge); transform:rotate(45deg)}
+.why.up::before{top:auto; bottom:-7px; transform:rotate(225deg)}
 .price{flex:none; margin-left:auto; text-align:right; line-height:1.1; font-variant-numeric:tabular-nums}
 .price .n{display:block; font-size:17px; color:var(--ink); white-space:nowrap; margin:2px 0}
 .price .u{display:block; font-size:11px; color:var(--ink-3)}

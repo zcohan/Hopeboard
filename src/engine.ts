@@ -50,7 +50,7 @@ export interface NowModel {
   /** Which basis the top-right figure shows; falls back when one is missing. */
   shown: (b: Basis) => { years: Parsed; basis: Basis } | null;
   req: (b: Basis) => number | null;
-  /** The required growth that decides the section (last year's profit when there is one). */
+  /** The required growth that decides the section, on the view's basis. */
   sectionReq: number | null;
   section: Section;
   y: number;
@@ -63,7 +63,10 @@ export interface NowModel {
   reqProfit: number[] | null;
 }
 
-export function nowModel(co: { now: NowFigures; industry?: string }, F: Figures): NowModel {
+/** `basis` is the view: last year's profit, or next year's forecast. The section, the scenario returns and the headline
+ * all follow it, so a company can change section on the forecast view (owner, October 2026). Not profitable stays set by
+ * last year's profit: those cards are written in dollars. */
+export function nowModel(co: { now: NowFigures; industry?: string }, F: Figures, basis: Basis = 't'): NowModel {
   const n = co.now;
   const pe = parseFig(n.pe), pef = parseFig(n.pef);
   const req = (b: Basis) => {
@@ -74,7 +77,7 @@ export function nowModel(co: { now: NowFigures; industry?: string }, F: Figures)
   // lost money last year: the section is set by last year's profit, so a forecast profit doesn't move it
   // lost money, or barely profitable (earning under 0.2% of its price: more than 500 years of profit)
   const lostMoney = pe.loss || (n.profits?.last ?? 0) < 0 || (pe.v !== null && pe.v > 500);
-  const sectionReq = dollar && pe.v === null && pef.v === null ? null : req('t');
+  const sectionReq = dollar && pe.v === null && pef.v === null ? null : req(basis);
   const industry = co.industry ? F.industries[co.industry]?.growth ?? null : null;
   const last = n.last ?? null;
   const g = (s: Scenario): number => {
@@ -99,7 +102,7 @@ export function nowModel(co: { now: NowFigures; industry?: string }, F: Figures)
       if (p === undefined) throw new Error(`No profit figure "${s.key}"`);
       return dollarValues(n).map((v) => annualReturnFromProfit(p, v, n.y));
     }
-    const base = pe.v ?? pef.v;
+    const base = basis === 'f' && pef.v !== null ? pef.v : pe.v ?? pef.v;
     if (base === null) throw new Error('No years of profit to compute a return from');
     return [annualReturn(g(s), n.y, base)];
   };
@@ -122,14 +125,17 @@ export interface PastModel {
   section: Section;
   profit?: number;
   stock?: number;
+  barely: boolean; // profitable, but by too little to price
 }
 
 export function pastModel(co: Company, era: PastEra): PastModel | null {
   const p = co.past[era];
   if (!p) return null;
   const pe = parseFig(p.pe);
-  const req = pe.v === null ? null : requiredGrowth(p.y ?? co.now.y, pe.v);
-  return { pe, req, section: sectionOf(req), profit: p.profit, stock: p.stock };
+  // barely profitable (more than 500 years of profit), as on today's board: a growth rate means nothing
+  const barely = pe.v !== null && pe.v > 500;
+  const req = pe.v === null || barely ? null : requiredGrowth(p.y ?? co.now.y, pe.v);
+  return { pe, req, section: barely || pe.loss ? 'loss' : sectionOf(req), profit: p.profit, stock: p.stock, barely };
 }
 
 export { INDEX_RETURN, NORMAL_YEARS, decadeChange };

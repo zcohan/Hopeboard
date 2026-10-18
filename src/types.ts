@@ -38,6 +38,8 @@ export interface NowFigures {
   value?: number | [number, number];
   /** Dollar cards: named profit levels in $ billions, used by the wording ({p:best}). */
   profits?: Record<string, number>;
+  /** Dollar cards with no twelve months on file yet: the stretch `profits` covers ("in the first half of 2026"). */
+  profitsPeriod?: string;
   /** Dollar cards priced on revenue (SpaceX). */
   yearsOfRevenue?: Fig;
   /** Analysts' expected profit growth next year (their fiscal year after this one). */
@@ -47,8 +49,9 @@ export interface NowFigures {
   fromHigh?: { below: number; month: string }; // below the year's highest close
   revenueGrowth?: number; // revenue, last twelve months against the twelve before
   capex?: number; // $ billions spent on buildings and equipment, last twelve months
-  /** Cash and debt on the latest balance sheet ($ billions), and a year's profit (value ÷ years of profit) to count them in */
-  balance?: { cash: number; debt: number; end: string; profit?: number };
+  /** Cash and debt on the latest balance sheet ($ billions), a year's profit to count them in, and stakes in other
+   * companies when they're worth half a year of profit or more */
+  balance?: { cash: number; debt: number; end: string; profit?: number; stakes?: number };
   /** Change in the number of shares per year (negative: bought back), over `years` (10, or as few as 5) */
   shares?: { rate: number; years: number };
   listing?: { low: number; high: number; month: string }; // a new listing's range against its first close

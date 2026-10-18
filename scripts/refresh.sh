@@ -20,9 +20,14 @@ if ! npx tsx scripts/figures.ts --write; then
   cp .cache/figures.before.json data/figures.json
   notify "Refresh failed computing figures; kept yesterday's. See .cache/refresh.log"; exit 1
 fi
-if ! npx vitest run; then
+if ! npm test; then
   cp .cache/figures.before.json data/figures.json
   notify "New figures broke a card's wording; kept yesterday's. See .cache/refresh.log"; exit 1
+fi
+
+# Publish only what's committed: uncommitted changes to the code or the wording would otherwise go live with the figures
+if [ -n "$(git status --porcelain -- src index.html public data/cards.json scripts)" ]; then
+  notify "New figures are saved, but the code or wording has uncommitted changes, so nothing was published"; exit 1
 fi
 
 # Publish to Cloudflare Pages. The token and account id live in .env.local.

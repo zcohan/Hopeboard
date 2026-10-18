@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { renderBoard } from '../src/board';
 import { nowModel } from '../src/engine';
 import { compare } from '../src/tokens';
+import { requiredGrowth } from '../src/formula';
 import { CATEGORIES, ERAS, type CardsFile, type Figures } from '../src/types';
 
 const F: Figures = JSON.parse(readFileSync('data/figures.json', 'utf8'));
@@ -29,6 +30,26 @@ describe('wording stays true to the numbers', () => {
 
   it('“still” only where the result beats the comparison', () => {
     for (const t of all) expect(t).not.toMatch(/still make [^.]*less than/);
+  });
+
+  it('each Compare over time badge quotes the growth its date’s card shows', () => {
+    const { board } = renderBoard(F, C, { era: 'now', basis: 't', category: 'all', section: 'all' });
+    const bad: string[] = [];
+    for (const t of board.split('<div class="tile').slice(1)) {
+      const id = /data-copy="([^"]+)"/.exec(t)![1];
+      for (const m of t.matchAll(/<div class="deal \w+" data-w="(\w+)">[^<]*?(?:needed|needs) ([−\d]+%)/g)) {
+        const card = new RegExp(`<dl class="facts" data-at="${m[1]}"[\\s\\S]*?</dl>`).exec(t)?.[0] ?? '';
+        const shown = /([+−]?\d+%)<\/b> growth\/year/.exec(card)?.[1]?.replace('+', '');
+        if (shown !== m[2]) bad.push(`${id} ${m[1]}: badge ${m[2]}, card ${shown}`);
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('the S&P 500’s “only grows at” holds: its last decade is below what its price needs', () => {
+    const spx = F.eras.now.spx;
+    const req = requiredGrowth(spx.y, Number(String(spx.pe).replace(/^≈/, '')));
+    expect(Math.round(spx.last! * 100)).toBeLessThan(Math.round(req * 100));
   });
 
   it('no decade record that rounds to nothing', () => {
@@ -71,15 +92,20 @@ describe('writing guide', () => {
     /\bmoat\b/i, /headwind|tailwind/i, /\bcatalyst\b/i, /\bupside\b|\bdownside\b/i, /\bbullish\b|\bbearish\b/i,
     /\bearnings\b/i, /\btrailing\b/i, /\b(up|down) from\b/i, /\bmight\b|\barguably\b/i, /\bgrows (?!at |to )[~\d]/, /\b(margins?|backlog|capex|hyperscalers?|guidance|valuation|priced in|tailwinds?|headwinds?|secular)\b/i,
   ];
-  // A dollar figure that isn't a company-wide amount (bn, billion, trillion) or an oil price is a share price.
-  const SHARE_PRICE = /\$\d[\d,.]*(?:–\d+)?(?![\d,.–]|\s*(bn|billion|trillion)|s\b)/;
-  const cards = ERAS.flatMap((era) => {
-    const { board } = renderBoard(F, C, { era, basis: 't', category: 'all', section: 'all' });
+  // A dollar figure that isn't a company-wide amount (bn, million, billion, trillion) or an oil price is a share price.
+  const SHARE_PRICE = /\$\d[\d,.]*(?:–\d+)?(?![\d,.–]|\s*(bn|million|billion|trillion)|s\b)/;
+  const cards = ERAS.flatMap((era) => (['t', 'f'] as const).flatMap((basis) => {
+    const { board } = renderBoard(F, C, { era, basis, category: 'all', section: 'all' });
     // Card wording only: drop the top-right years figure and split on block ends.
     return board.split('<div class="tile').slice(1).map((t) => ({
       id: /data-copy="([^"]+)"/.exec(t)![1],
       text: text(t.replace(/<div class="price">.*?<\/div>/, '').replace(/<\/(p|li|h4|button)>/g, '\n')),
     }));
+  }));
+
+  it('prints no broken figures', () => {
+    const hits = cards.filter((c) => /NaN|undefined|Infinity|\{[a-zA-Z:]+\}/.test(c.text)).map((c) => c.id);
+    expect(hits).toEqual([]);
   });
 
   it('uses none of the never-use words', () => {

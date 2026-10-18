@@ -153,9 +153,29 @@ function wireCommon() {
   }));
 }
 window.addEventListener('popstate', () => render());
-document.addEventListener('click', (ev) => { if (whenOpen && !(ev.target as HTMLElement).closest('.when')) { whenOpen = false; render(); } });
+/** Closes the time menu in place, without rebuilding the page, so the click that closed it still does its own job. */
+function closeWhen() {
+  whenOpen = false;
+  const menu = app.querySelector<HTMLElement>('.whenmenu');
+  if (menu) menu.hidden = true;
+  app.querySelector<HTMLButtonElement>('.whenbtn')?.setAttribute('aria-expanded', 'false');
+}
+document.addEventListener('click', (ev) => { if (whenOpen && !(ev.target as HTMLElement).closest('.when')) closeWhen(); });
 document.addEventListener('keydown', (ev) => {
-  if (ev.key === 'Escape' && whenOpen) { whenOpen = false; render(); app.querySelector<HTMLButtonElement>('.whenbtn')?.focus(); }
+  if (ev.key === 'Escape' && whenOpen) { closeWhen(); app.querySelector<HTMLButtonElement>('.whenbtn')?.focus(); return; }
+  // arrow keys: across the section tabs (choosing as they go), and up and down the time menu
+  const t = ev.target as HTMLElement;
+  const step = (list: HTMLButtonElement[], back: boolean) => {
+    const i = list.indexOf(t as HTMLButtonElement);
+    if (i < 0) return null;
+    ev.preventDefault();
+    return list[(i + (back ? -1 : 1) + list.length) % list.length];
+  };
+  if (t.matches('[role="tab"]') && (ev.key === 'ArrowLeft' || ev.key === 'ArrowRight')) {
+    const next = step([...app.querySelectorAll<HTMLButtonElement>('[role="tab"]:not([disabled])')], ev.key === 'ArrowLeft');
+    if (next) { const sec = next.dataset.sec; next.click(); app.querySelector<HTMLButtonElement>(`[role="tab"][data-sec="${sec}"]`)?.focus(); }
+  }
+  if (t.closest('.whenmenu') && (ev.key === 'ArrowUp' || ev.key === 'ArrowDown')) step([...app.querySelectorAll<HTMLButtonElement>('.whenmenu button')], ev.key === 'ArrowUp')?.focus();
 });
 
 /** The app's mark: the sun half risen over the horizon, drawn straight onto the page. */

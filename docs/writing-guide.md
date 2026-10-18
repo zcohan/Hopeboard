@@ -61,7 +61,7 @@ When there is room for only one point, take the first one on this list that appl
 This is the board's central fact. The Priced for section shows it on every card; the bullets and the Risk line should follow from it.
 
 - Costco needs 21%/year and has done 15%. The card is about that gap.
-- Alphabet needs 9%/year and has done 25%. The card is about that gap the other way.
+- Adobe needs 7%/year and has done 33%. The card is about that gap the other way.
 - Mastercard needs 17% and has done 17%. The card is about there being no gap.
 
 ### 3.2 What the reader would make or lose, in money
@@ -95,7 +95,7 @@ Each price rests on something specific. Find it and test it. This is what makes 
 
 ### 3.4 How long a good thing lasts
 
-Markets are good at facts and weaker on duration. When a price is low because people doubt something will last (Alphabet and AI chatbots, Apple in 2016 when iPhone sales fell), say what the doubt is in plain terms. When a price is high because people assume it will last (Costco, Walmart), say what that requires.
+Markets are good at facts and weaker on duration. When a price is low because people doubt something will last (Adobe and AI tools, Apple in 2016 when iPhone sales fell), say what the doubt is in plain terms. When a price is high because people assume it will last (Costco, Walmart), say what that requires.
 
 ### 3.5 Cash paid while you wait
 
@@ -292,13 +292,14 @@ The profit growth a year the price needs, as a headline, then notes:
 
 ### 8.3a Finances (shared, `company-lines`)
 
-A link at the foot of the card, "Finances", opens one bubble on the company's health. It stays out of the three sections, which are the card's core (owner, October 2026). Written once for every card; the app picks the wording from the data. Three small headings, each left off when its figure isn't in the data:
+A link at the foot of the card, "Finances", opens one bubble on the company's health. It stays out of the three sections, which are the card's core (owner, October 2026). Written once for every card; the app picks the wording from the data. Up to four small headings, each left off when its figure isn't in the data:
 
 > **Cash**: Holds **8 years** of profit in cash, beyond its debt
 > **Debt**: It would take **10 years** of profit to pay off its debt, after using its cash
 > **Cash & debt**: Cash and debt close to even (within a quarter of a year of profit)
+> **Investments**: Owns stakes in other companies worth **2 years** of profit (when worth half a year of profit and 1% of the price; not on Not profitable cards)
 > **Dividends**: Pays **2.4%** of its stock price a year as dividends / Pays no dividend
-> **Shares**: Bought back **4.3%** of its shares a year over the last 10 years, so each share owns a bigger slice / Issued **6.3%** more shares a year…, so each share owns a smaller slice
+> **Shares**: Bought back **4.3%** of its shares a year over the last 10 years / Issued **6.3%** more shares a year…
 
 Relative only: years of profit and percentages, no dollar amounts (owner, October 2026). Not profitable cards have no profit to measure against, so the cash line says only which is bigger: "Holds more in cash than it owes". Banks get no cash or debt line: their debts are mostly deposits. A missing figure never reads as zero.
 
@@ -311,6 +312,7 @@ One if-then sentence: the scenario, then `{outcome}`. The owner tried the result
 ```
 
 - `{corrects}` goes straight after the scenario. On Pricey cards it writes " & the stock corrects", because buyers going back to an ordinary 18 years of profit is most of the loss there. Elsewhere it writes nothing. (Tesla keeps its own clause, "and buyers stop paying extra for the story", which the owner likes.)
+- `{reqTimes}` follows the Priced for headline on today's cards: " (5.5x today's profit by 2036)", what the growth adds up to over ten years (the owner prefers "x" to "times"). Left off under 4%/year. Halves under 10x, whole numbers above.
 - The label is RISK when you'd make less than the safe US bond (a loss counts as less), and CUSHION when you'd make at least as much. The app sets it.
 
 Forms the app writes for `{outcome}`:
@@ -369,7 +371,7 @@ Good bullets, with why:
 | The price assumes this year's boom profit is the new normal | Nvidia | Names the belief the whole price rests on. |
 | Makes almost all of the most advanced AI chips | TSMC | A fact the reader can picture, and the reason people pay. |
 | Part of the price reflects the risk of conflict over Taiwan | TSMC | Why the price is lower than the record suggests, said plainly. |
-| Investors doubt Google search holds up against AI chatbots | Alphabet | The doubt that makes it cheap. |
+| The stock is down this year on fears that AI makes creative tools cheap | Adobe | The doubt that makes it cheap. |
 | The price assumes OpenAI, its biggest new customer, pays its bills in full | Oracle | Specific, checkable, and the hinge of the price. |
 | It pays no dividend while it keeps building | Amazon | Tells the reader why there's no cash return. |
 
@@ -506,11 +508,11 @@ Why: the requirement is below zero because most of the profit comes back as cash
 
 Why: there is no record to compare with, so Priced for stands alone and the fact goes in the bubble. Growing as fast as the average big US company still loses most of the money.
 
-### 12.5 Alphabet: priced for doubt
+### 12.5 Adobe: priced for doubt
 
-> PRICED FOR **+9%** growth/year / Less than the 25%/year of the last decade / Analysts expect 27% fall in profit next year
-> CUSHION If profit only grows at 13%/year (the average big US company), you'd still make **9%/year more** than the safe US bond.
-> Bubble ("Why so cheap?"): Investors doubt Google search holds up against AI chatbots / The price gives little value to its cloud business and YouTube
+> PRICED FOR **+7%** growth/year (2x today's profit by 2036) / Less than the 33%/year of the last decade. Analysts expect 13% profit growth next year.
+> RISK If profit doesn't grow, you'd make **2.5%/year less** than the safe US bond.
+> Bubble ("Why so cheap?"): The stock is down this year on fears that AI makes creative tools cheap / The price assumes AI tools don't take its customers
 
 Why: the price needs much less than the record, and the bubble names the doubt in plain words.
 

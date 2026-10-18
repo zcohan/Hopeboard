@@ -168,14 +168,22 @@ const EPS = ['EarningsPerShareDiluted', 'EarningsPerShareBasicAndDiluted', 'Dilu
 const DPS = ['CommonStockDividendsPerShareDeclared', 'CommonStockDividendsPerShareCashPaid'];
 const DIVIDENDS = ['PaymentsOfDividends', 'PaymentsOfDividendsCommonStock', 'DividendsPaidClassifiedAsFinancingActivities', 'PaymentsOfOrdinaryDividends'];
 const REVENUE = ['Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax', 'Revenue'];
-const NET_INCOME = ['NetIncomeLoss', 'ProfitLossAttributableToOwnersOfParent'];
+const NET_INCOME = ['NetIncomeLoss', 'ProfitLossAttributableToOwnersOfParent', 'ProfitLoss'];
+// gains and losses on investments: the first of these a company files for a period
+export const GAINS = ['DebtAndEquitySecuritiesGainLoss', 'GainLossOnInvestments', 'EquitySecuritiesFvNiGainLoss', 'EquitySecuritiesFvNiUnrealizedGainLoss'];
+// stakes in other companies whose rises and falls in value go through profit (equity-method stakes don't: their share
+// of profit is already in the company's own)
+const STAKES = ['EquitySecuritiesFvNi', 'EquitySecuritiesWithoutReadilyDeterminableFairValueAmount'];
+/** The US federal company tax rate, for taking gains out after their tax when a period's own rate doesn't read sensibly. */
+const US_TAX = 0.21;
+export const PRETAX = ['IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest', 'IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments'];
 const CAPEX = ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsToAcquireProductiveAssets'];
 const SHARE_PAY = ['ShareBasedCompensation', 'AllocatedShareBasedCompensationExpense'];
 const OPERATING_CASH = ['NetCashProvidedByUsedInOperatingActivities'];
 // cash and debt on the balance sheet. Cash counts what could be spent soon: cash, short-term investments and
 // long-term marketable securities (Apple keeps most of its pile there). Debt is borrowing, without leases.
 const CASH = ['CashAndCashEquivalentsAtCarryingValue', 'CashAndCashEquivalents', 'CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents', 'Cash'];
-const SHORT_INVESTMENTS = ['ShortTermInvestments', 'MarketableSecuritiesCurrent', 'AvailableForSaleSecuritiesDebtSecuritiesCurrent', 'CurrentInvestments'];
+const SHORT_INVESTMENTS = ['ShortTermInvestments', 'MarketableSecuritiesCurrent', 'AvailableForSaleSecuritiesDebtSecuritiesCurrent', 'CurrentInvestments', 'DebtSecuritiesCurrent'];
 const LONG_SECURITIES = ['MarketableSecuritiesNoncurrent', 'AvailableForSaleSecuritiesDebtSecuritiesNoncurrent'];
 const DEBT_ALL = ['DebtLongtermAndShorttermCombinedAmount'];
 const DEBT_LONG_ALL = ['LongTermDebt', 'LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities'];
@@ -199,6 +207,59 @@ export class Filings {
         ((this.facts.filed ??= {})[k] ??= {}).all = arr.filter((x) => !x.unit || !/usd|twd|eur/i.test(x.unit) || new RegExp(this.currency, 'i').test(x.unit));
     }
     if (src.operating) this.deriveOperating();
+    else if (!src.keepGains) this.leaveOutGains();
+  }
+
+  /** Profit per share without gains on investments (the company's stakes in other companies going up or down in value),
+   * period by period: the gains after tax (the period's own rate, else the 21% US rate), divided by that period's shares,
+   * come off profit per share.
+   * Where the period's share count isn't filed, they come off in proportion to pre-tax profit instead.
+   * Changes the profit-per-share facts in place, so every view (today, past, the last decade) uses the same profit. */
+  private leaveOutGains() {
+    const names = this.src.gains ?? GAINS;
+    const byPeriod = (concepts: string[], unit: (u: string) => boolean) => {
+      const out = new Map<string, Fact[]>();
+      for (const n of concepts)
+        for (const tax of Object.values(this.facts))
+          for (const [u, arr] of Object.entries(tax[n] ?? {})) {
+            if (!unit(u)) continue;
+            for (const x of arr) {
+              if (!x.start) continue;
+              const k = `${x.start}/${x.end}`;
+              if (!out.has(k)) out.set(k, []);
+              out.get(k)!.push({ ...x, unit: n });
+            }
+          }
+      return out;
+    };
+    const money = (u: string) => u === 'USD' || u === 'all';
+    const gains = byPeriod(names, money);
+    if (!gains.size) return;
+    const pretax = byPeriod(PRETAX, money), income = byPeriod(NET_INCOME, money), shares = byPeriod(WEIGHTED_SHARES, (u) => u === 'shares' || u === 'all');
+    // the figure for that period as filed with the profit per share, else the latest filed by then, else the first filed after
+    const at = (m: Map<string, Fact[]>, k: string, filed: string, order: string[]) => {
+      const all = m.get(k);
+      if (!all) return undefined;
+      const first = Math.min(...all.map((x) => order.indexOf(x.unit!)));
+      const c = all.filter((x) => order.indexOf(x.unit!) === first);
+      return c.find((x) => x.filed === filed) ?? c.filter((x) => x.filed <= filed).sort((a, b) => b.filed.localeCompare(a.filed))[0] ?? c.sort((a, b) => a.filed.localeCompare(b.filed))[0];
+    };
+    for (const n of EPS)
+      for (const tax of Object.values(this.facts))
+        for (const arr of Object.values(tax[n] ?? {}))
+          for (const e of arr) {
+            if (!e.start) continue;
+            const k = `${e.start}/${e.end}`;
+            const g = at(gains, k, e.filed, names);
+            if (!g || g.val === 0) continue;
+            const sh = at(shares, k, e.filed, WEIGHTED_SHARES);
+            const p = at(pretax, k, e.filed, PRETAX), ni = at(income, k, e.filed, NET_INCOME);
+            // the period's own tax rate when it reads sensibly, else the US rate
+            const own = p && ni && p.val > 0 ? 1 - ni.val / p.val : null;
+            const tax = own !== null && own >= 0 && own <= 0.4 ? own : US_TAX;
+            if (sh && sh.val > 0) { e.val -= (g.val * (1 - tax)) / sh.val; continue; }
+            if (p && p.val > 0 && g.val < p.val) e.val = (e.val * (p.val - g.val)) / p.val;
+          }
   }
 
   /** Profit per share without investment gains: EPS × (profit − gains + their tax) ÷ profit, period by period. */
@@ -243,7 +304,8 @@ export class Filings {
         const c = tax[n];
         if (!c) continue;
         // what had been filed by then, plus periods that ended long enough before to have been
-        // reported, as found in later filings (some figures only reach the data in later reports)
+        // reported, as found in later filings (some figures only reach the data in later reports).
+        // 120 days is the longest filing deadline (a foreign company's annual report), so these were public by then
         const reported = (x: Fact) => x.filed <= asOf || ms(x.end) < ms(asOf) - 120 * DAY;
         const f = Object.entries(c).filter(([u]) => !unit || unit(u)).flatMap(([, a]) => a).filter(reported).map((x) => ({ ...x, later: x.filed > asOf }));
         // prefer the concept with the most recent period: companies switch tags over the years
@@ -313,6 +375,36 @@ export class Filings {
     return best && ms(asOf) - ms(best.end) <= (this.src.fx ? 400 : 200) * DAY ? { val: best.val, end: best.end, name: best.name } : null;
   }
 
+  /** The longest stretch of the current fiscal year reported so far, for a company with no twelve months on file yet. */
+  yearToDate(names: string[], asOf: string): { val: number; start: string; end: string } | null {
+    const per = [...this.periods(this.pick(names, asOf)).values()];
+    const end = per.reduce((m, x) => (x.end > m ? x.end : m), '');
+    const ytd = per.filter((x) => x.end === end && ms(x.end) - ms(x.start!) < 300 * DAY).sort((a, b) => ms(a.start!) - ms(b.start!))[0];
+    return ytd ? { val: ytd.val, start: ytd.start!, end: ytd.end } : null;
+  }
+
+  /** The average number of shares after dilution in the latest reported period by `asOf` (all share classes). */
+  dilutedShares(asOf: string): { val: number; filed: string } | null {
+    // after dilution, else the basic count when a company stopped filing a diluted one (Exxon); never more than ~14 months old
+    for (const names of [WEIGHTED_SHARES, ['WeightedAverageNumberOfSharesOutstandingBasic']]) {
+      const per = [...this.periods(this.pick(names, asOf)).values()];
+      const end = per.reduce((m, x) => (x.end > m ? x.end : m), '');
+      if (!end || ms(asOf) - ms(end) > 430 * DAY) continue;
+      const last = per.filter((x) => x.end === end).sort((a, b) => ms(a.end) - ms(a.start!) - (ms(b.end) - ms(b.start!)))[0];
+      if (last) return { val: last.val, filed: last.filed };
+    }
+    return null;
+  }
+
+  /** What its stakes in other companies are worth on the latest balance sheet by `asOf`, in the reporting currency:
+   * the holdings whose gains leaveOutGains takes out of profit (0 for banks and Berkshire, whose profit keeps them). */
+  stakes(asOf: string): number {
+    if (this.src.operating || this.src.keepGains) return 0;
+    const found = [...STAKES, ...(this.src.stakesInCash ?? [])].map((n) => this.instant([n], asOf)).filter((x) => x !== null);
+    const end = found.reduce((m, x) => (x.end > m ? x.end : m), '');
+    return found.filter((x) => x.end === end).reduce((t, x) => t + x.val, 0);
+  }
+
   /** Cash and debt on the latest balance sheet by `asOf`, in the reporting currency. Null unless both are found:
    * a company whose debt isn't in the data must not read as having none. */
   balance(asOf: string): { cash: number; debt: number; end: string } | null {
@@ -330,12 +422,13 @@ export class Filings {
     const extra = (names: string[] = []) => names.reduce((t, n) => t + (same(g([n]))?.val ?? 0), 0);
     const extraDebt = this.src.balance?.debt;
     const debt = found !== null ? found + extra(extraDebt) : extraDebt?.length || this.src.debtFree ? extra(extraDebt) : null;
-    return debt === null ? null : { cash: spend + extra(this.src.balance?.cash), debt, end: cash.end };
+    return debt === null ? null : { cash: spend + extra(this.src.balance?.cash) - extra(this.src.stakesInCash), debt, end: cash.end };
   }
 
   /** Shares outstanding from the cover page closest to `d` (all share classes added). */
   sharesOn(d: string, asOf: string): { val: number; date: string } | null {
-    const dei = this.facts.dei?.EntityCommonStockSharesOutstanding;
+    // the SEC summary data, else the cover page read from the filed reports (sources.ts supplement)
+    const dei = this.facts.dei?.EntityCommonStockSharesOutstanding ?? this.facts.filed?.EntityCommonStockSharesOutstanding;
     if (!dei) return null;
     const f = Object.values(dei).flat().filter((x) => x.filed <= asOf && x.end <= d);
     if (!f.length) return null;
@@ -372,6 +465,9 @@ export interface Computed {
   value: number | null; // $ billions
   revenue: number | null; // $ billions, twelve months
   netIncome: number | null; // $ billions, twelve months
+  stakesShare: number; // the part of the price its stakes in other companies are worth
+  stakes: number; // what those stakes are worth, $ billions
+  profit: number | null; // a year's profit, the one years of profit count in: profit per share × shares, $ billions
 }
 
 export function computeOn(f: Filings, d: string, today: string): Computed | null {
@@ -391,21 +487,42 @@ export function computeOn(f: Filings, d: string, today: string): Computed | null
   const eps = fresh?.val ?? null;
   const shares = f.sharesOn(d, d);
   const value = shares ? (bar.close * shares.val) / perShare / 1e9 : null;
+  // the part of the price that buys its stakes in other companies, counted at today's value and taken off before
+  // counting years of profit, since the profit leaves out their gains (Mauboussin and Rappaport add them the same way)
+  const stakes = toUsd(f.stakes(d));
+  const diluted = f.dilutedShares(d);
+  // shares after dilution on today's basis, for amounts per US share (every share class counted)
+  const usShares = diluted ? (diluted.val * shareSplitFactor(s.eod, diluted.filed, today)) / perShare : null;
+  const stakesPerShare = usShares ? stakes / usShares : 0;
+  const stakesShare = price > 0 ? Math.min(stakesPerShare / price, 0.9) : 0;
   // dividends actually paid on the US-traded share (EOD), over its price that day
   const dividendYield = dividendsTtm(s.eod, bar.date) / bar.close;
   const before = shares ? f.sharesOn(yearsBefore(shares.date, 1), d) : null;
   const buybackRate = shares && before && ms(shares.date) - ms(before.date) > 300 * DAY
     ? 1 - (shares.val * splitFactor(s.eod, shares.date, today)) / (before.val * splitFactor(s.eod, before.date, today))
     : null;
-  const rev = f.ttm(f.revenue, d, (x) => toUsd(x.val));
-  const ni = f.ttm(f.netIncome, d, (x) => toUsd(x.val));
+  // like profit per share, only twelve months that end within ~14 months of the date
+  const recent = <T extends { end: string } | null>(t: T) => (t && ms(d) - ms(t.end) < 430 * DAY ? t : null);
+  const rev = recent(f.ttm(f.revenue, d, (x) => toUsd(x.val)));
+  const niAll = recent(f.ttm(f.netIncome, d, (x) => toUsd(x.val)));
+  // Berkshire: its official profit includes the paper gains its profit per share leaves out; scale it the same way
+  const repEps = s.operating ? recent(f.ttm(EPS, d, epsAdj)) : null;
+  const ni = niAll && repEps && eps !== null && repEps.val > 0 ? { ...niAll, val: (niAll.val * eps) / repEps.val } : niAll;
   return {
     date: bar.date, price, eps, epsEnd: fresh?.end ?? null, annualOnly: fresh?.annualOnly ?? false,
-    pe: eps !== null && eps > 0 ? price / eps : null, loss: eps !== null && eps <= 0,
+    pe: eps !== null && eps > 0 ? (price * (1 - stakesShare)) / eps : null, loss: eps !== null && eps <= 0, stakesShare,
+    stakes: stakes / 1e9, profit: eps !== null && usShares ? (eps * usShares) / 1e9 : null,
     dividendYield, buybackRate,
     y: dividendYield !== null && buybackRate !== null ? dividendYield + buybackRate : null,
     value, revenue: rev ? rev.val / 1e9 : null, netIncome: ni ? ni.val / 1e9 : null,
   };
+}
+
+/** Gains on investments as a share of pre-tax profit, over the twelve months to the latest report (0 when it has none). */
+export function gainsShare(f: Filings, d: string): number {
+  if (f.src.operating || f.src.keepGains) return 0;
+  const g = f.ttm(f.src.gains ?? GAINS, d), p = f.ttm(PRETAX, d);
+  return g && p && p.val > 0 && g.end === p.end ? g.val / p.val : 0;
 }
 
 /** Profit-per-share growth per year over the last ten fiscal years. */
@@ -429,17 +546,22 @@ export function lastDecade(f: Filings, today: string): { g: number; from: string
 
 // ---------- analysts' forecasts ----------
 
+/** The analysts' profit per share for this fiscal year (`fy0`, the one the filed twelve months end inside) and the next
+ * (`fy1`). Null when the filed twelve months are a whole fiscal year whose analysts' figure has left the list: then their
+ * growth for the year ahead can't be measured on one kind of profit. */
 export interface Forecast { fy0: { date: string; eps: number; n: number }; fy1: { date: string; eps: number; n: number } }
 
-export function forecast(id: string, today: string): Forecast | null {
+export function forecast(id: string, profitEnd: string | null): Forecast | null {
   const p = `.cache/av/${id}.json`;
-  if (!existsSync(p)) return null;
+  if (!profitEnd || !existsSync(p)) return null;
   const years = (read(p).estimates as { date: string; horizon: string; eps_estimate_average: string; eps_estimate_analyst_count: string }[])
     .filter((e) => e.horizon === 'fiscal year' && e.eps_estimate_average !== null)
     .map((e) => ({ date: e.date, eps: Number(e.eps_estimate_average), n: Number(e.eps_estimate_analyst_count) }))
     .sort((a, b) => a.date.localeCompare(b.date));
-  const i = years.findIndex((y) => y.date >= today);
-  if (i < 0 || !years[i + 1]) return null;
+  // this fiscal year: the first to end after the filed twelve months, which must end inside it
+  const i = years.findIndex((y) => ms(y.date) > ms(profitEnd) + 20 * DAY);
+  if (i < 0 || !years[i + 1] || ms(profitEnd) <= ms(years[i].date) - 345 * DAY) return null;
+  if (Math.abs(ms(years[i + 1].date) - ms(years[i].date) - 365 * DAY) > 20 * DAY) return null;
   return { fy0: years[i], fy1: years[i + 1] };
 }
 

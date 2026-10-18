@@ -15,6 +15,12 @@ const move = (x: number) => `${x >= 0 ? 'up' : 'down'} ${pct(Math.abs(x))}`;
 
 const years = (p: Parsed, args: string[]) => (args.includes('bare') ? p.text.replace(/^[≈~]/, '') : p.text.replace(/^~/, ''));
 
+/** "grew 11%/year", "fell 5%/year" or "barely changed" (one year: no "/year"), compared as printed */
+const moved = (g: number, perYear: boolean, up = 'grew', down = 'fell') => {
+  const p = pct(Math.abs(g));
+  return p === '0%' ? 'barely changed' : `${g > 0 ? up : down} ${p}${perYear ? '/year' : ''}`;
+};
+
 /** "more than", "less than" or "the same as", comparing the figures as shown. */
 export function compare(req: number, last: number): string {
   const a = Math.round(req * 100), b = Math.round(last * 100);
@@ -40,7 +46,19 @@ function nowTokens(m: NowModel, basis: Basis, F: Figures, scenario: Scenario | u
     ...common(F),
     opening: () => (m.section === 'pricey' || m.section === 'loss' ? 'Only if' : 'If'),
     /** " & the stock corrects" on Pricey cards, where buyers going back to ordinary years of profit drives the loss */
+    /** " & the stock corrects" on Pricey cards, where buyers going back to ordinary years of profit drives the loss */
     corrects: () => (m.section === 'pricey' ? ' & the stock corrects' : ''),
+    /** " (5.5x today’s profit by 2036)": the requirement as the profit it adds up to, from 4%/year */
+    reqTimes: () => {
+      // on the forecast view the growth starts from next year's profit, so "times today's" wouldn't hold
+      if (basis === 'f') return '';
+      // from the growth as the headline shows it, so equal headlines give equal multiples
+      const g = Math.round(req() * 100) / 100;
+      if (g < 0.04) return '';
+      const x = Math.pow(1 + g, 10);
+      const t = x >= 10 ? String(Math.round(x)) : String(Math.round(x * 2) / 2);
+      return ` (${t}x today’s profit by ${+(F.asOf.match(/\d{4}/)?.[0] ?? NaN) + 10})`;
+    },
     req: (a) => approx(req(), a),
     /** "+47%" or "−1%": the required growth with its sign, as a headline */
     reqSigned: () => signed(req()),
@@ -96,7 +114,7 @@ function farmTokens(m: ReturnType<typeof nowModel>, basis: Basis, F: Figures, y:
 }
 
 export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: CopyEntry): Tokens {
-  const m = nowModel(co, F);
+  const m = nowModel(co, F, basis);
   return {
     ...nowTokens(m, basis, F, entry.scenario as Scenario | undefined),
     ...farmTokens(m, basis, F, co.now.y),
@@ -120,7 +138,9 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
     fcastValue: () => {
       const g = need(co.now.forecast, 'forecast');
       const p = pct(Math.abs(g));
-      return p === '0%' ? 'Profit flat' : g > 0 ? `${p} profit growth` : `${p} fall in profit`;
+      // "an 8% fall", "an 18% fall", "a 27% fall": the article goes by how the number is said
+      const an = /^(8|11|18)/.test(p) ? 'an' : 'a';
+      return p === '0%' ? 'Profit flat' : g > 0 ? `${p} profit growth` : `${an} ${p} fall in profit`;
     },
     /** cash beyond debt (or debt beyond cash) in years of the card's own profit: "8 years", "1 year", "half a year" */
     netYears: () => {
@@ -128,6 +148,14 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
       const v = Math.abs(b.cash - b.debt) / need(b.profit, 'a year of profit');
       return v >= 1.5 ? `${Math.round(v)} years` : v >= 0.75 ? '1 year' : 'half a year';
     },
+    /** stakes in other companies in years of the card's own profit, worded like netYears */
+    stakeYears: () => {
+      const b = need(co.now.balance, 'cash and debt');
+      const v = need(b.stakes, 'stakes') / need(b.profit, 'a year of profit');
+      return v >= 1.5 ? `${Math.round(v)} years` : v >= 0.75 ? '1 year' : 'half a year';
+    },
+    /** when the dollar figures are from: "last year", or "in the first half of 2026" for a new listing */
+    profitsPeriod: () => co.now.profitsPeriod ?? 'last year',
     divYield: () => decPct(co.now.y),
     /** the yearly change in the share count, without its sign: "4%", "0.7%" */
     shareRate: () => decPct(Math.abs(need(co.now.shares, 'share count change').rate)),
@@ -135,14 +163,16 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
     p: ([key, ...a]) => {
       const v = need(co.now.profits?.[key], `profit figure ${key}`);
       const n = a.includes('abs') ? Math.abs(v) : v;
-      return (n < 0 ? '−' : '') + `$${Math.abs(n).toLocaleString('en-US')} billion`;
+      // under a billion in millions: "$50 million", not "$0.05 billion"
+      const m = Math.abs(n);
+      return (n < 0 ? '−' : '') + (m < 1 ? `$${Math.round(m * 100) * 10} million` : `$${m.toLocaleString('en-US')} billion`);
     },
   };
 }
 
 export function spxNowTokens(F: Figures, basis: Basis, entry: CopyEntry): Tokens {
   const s = F.eras.now.spx;
-  const m = nowModel({ now: { pe: s.pe, pef: s.pef ?? null, y: s.y, last: s.last } }, F);
+  const m = nowModel({ now: { pe: s.pe, pef: s.pef ?? null, y: s.y, last: s.last } }, F, basis);
   return { ...nowTokens(m, basis, F, entry.scenario as Scenario | undefined), ...farmTokens(m, basis, F, s.y) };
 }
 
@@ -163,9 +193,10 @@ export function eraTokens(F: Figures, E: EraFigures): Tokens {
     era: () => E.label,
     profitMove: () => {
       const g = need(E.spx.profit, 'S&P profit growth');
-      const yearOnly = E.label === F.eras.y1.label;
-      return `${g >= 0 ? 'grew' : 'fell'} ${pct(Math.abs(g))}${yearOnly ? '' : '/year'}`;
+      return moved(g, E.label !== F.eras.y1.label);
     },
+    /** "returned 9%/year", "lost 5%/year" or "barely changed"; `:year` adds "/year" */
+    returned: (a) => moved(need(E.spx.stock, 'S&P return'), a.includes('year'), 'returned', 'lost'),
     oil: () => `$${need(E.oil, 'oil price')}`,
     premium: () => { const l = need(F.eras.now.longRun, 'long-run returns'); return halfPct(l.stocks - l.bonds); },
     highSince: () => need(E.bondHighSince, 'year the bond was last this high'),
@@ -192,13 +223,17 @@ export function companyPastTokens(co: Company, era: PastEra, F: Figures): Tokens
     /** "rose from 28 to 38" or "fell from 52 to 27": the years of profit people paid, then and now */
     peMove: () => {
       const a = need(pe.v, 'years of profit then'), b = need(parseFig(co.now.pe).v, 'years of profit now');
-      return `${b >= a ? 'rose' : 'fell'} from ${years(pe, ['bare'])} to ${years(parseFig(co.now.pe), ['bare'])}`;
+      const was = years(pe, ['bare']), is = years(parseFig(co.now.pe), ['bare']);
+      // compared as printed, so it never reads "rose from 28 to 28"
+      return was === is ? `stayed at ${is}` : `${b > a ? 'rose' : 'fell'} from ${was} to ${is}`;
     },
     /** "grew 11%/year" or "fell 5%/year" (one year: "grew 32%"), from the data, so the direction is never typed */
     profitMove: () => {
       const g = need(p.profit, `${co.id} ${era} profit growth`);
-      return `${g >= 0 ? 'grew' : 'fell'} ${pct(Math.abs(g))}${era === 'y1' ? '' : '/year'}`;
+      return moved(g, era !== 'y1');
     },
+    /** "returned 22%/year", "lost 58%" or "barely changed"; `:year` adds "/year" */
+    returned: (a) => moved(need(p.stock, `${co.id} ${era} stock return`), a.includes('year'), 'returned', 'lost'),
     maxFall: () => pct(need(p.maxFall, `${co.id} ${era} biggest fall`)),
     rev: () => pct(need(p.revenueGrowth, `${co.id} ${era} revenue growth`)),
     oil: () => `$${need(F.eras[era].oil, 'oil price')}`,

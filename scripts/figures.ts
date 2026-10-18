@@ -3,13 +3,13 @@
 //
 //   npm run figures            show what would change
 //   npm run figures -- --write save it
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { requiredGrowth } from '../src/formula';
 import { parseFig, sectionOf } from '../src/engine';
 import type { Company, Figures, PastEra } from '../src/types';
 import { SOURCES } from './sources';
 import { loadSupplements } from './xbrl';
-import { shareChange, fxOn, oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
+import { gainsShare, shareChange, fxOn, oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
 
 const WRITE = process.argv.includes('--write');
 await loadSupplements(SOURCES);
@@ -44,22 +44,31 @@ for (const s of SOURCES) {
   if (now.annualOnly) notes.push(`${s.id}: only a full-year profit is filed (to ${now.epsEnd}); used as last year's`);
   if (now.eps === null) notes.push(`${s.id}: no recent profit in the filings; kept the current figures`);
   const dec = lastDecade(f, today);
-  const fc = forecast(s.id, today);
-  let pef: number | string | null = co.now.pef;
-  let fcNote = 'kept (no forecast downloaded yet)';
-  if (fc && now.eps !== null) {
+  const fc = forecast(s.id, now.epsEnd);
+  // next year: the filed profit grown at the analysts' growth rate, so it stays one kind of profit (analysts' own figures
+  // usually leave out costs such as pay in shares). Their rate is for the fiscal year ending six to eighteen months from now.
+  let pef: number | string | null = null;
+  let fcNote = 'no forecast downloaded';
+  co.now.forecast = undefined;
+  const gains = gainsShare(f, today);
+  if (now.stakesShare > 0.005) notes.push(`${s.id}: stakes in other companies are ${pct(now.stakesShare)} of the price, taken off before counting years of profit`);
+  if (fc && gains > 0.2) fcNote = `none: gains on investments were ${pct(gains)} of pre-tax profit, and the analysts' figures for this year include them`;
+  else if (fc && now.eps !== null) {
+    // the part of the price that buys stakes in other companies comes off, as it does for last year's profit
+    const price = now.price * (1 - now.stakesShare);
     if (now.eps > 0 && fc.fy0.eps > 0 && fc.fy1.eps > 0) {
       const growth = fc.fy1.eps / fc.fy0.eps - 1;
-      pef = years(now.price / (now.eps * (1 + growth)), false);
+      pef = years(price / (now.eps * (1 + growth)), false);
       co.now.forecast = r3(growth);
-      fcNote = `official profit grown ${pct(growth)} (analysts, ${fc.fy0.date.slice(0, 4)}→${fc.fy1.date.slice(0, 4)})`;
-    } else if (fc.fy1.eps > 0) {
+      fcNote = `filed profit grown ${pct(growth)} (analysts, ${fc.fy0.date.slice(0, 7)}→${fc.fy1.date.slice(0, 7)})`;
+    } else if (fc.fy1.eps > 0 && !(now.eps > 0)) {
       co.now.forecast = null; // no profit this year to grow from
-      // no official profit to grow: the analysts' own figure
-      pef = years(now.price / fc.fy1.eps, false);
-      fcNote = `analysts' ${fc.fy1.date.slice(0, 4)} profit (no official profit to grow)`;
-    } else { pef = null; fcNote = 'analysts expect a loss'; }
-  }
+      // no filed profit to grow: the analysts' own figure
+      pef = years(price / fc.fy1.eps, false);
+      fcNote = `analysts' ${fc.fy1.date.slice(0, 7)} profit (no filed profit to grow)`;
+    } else fcNote = 'analysts expect a loss';
+  } else if (!fc && existsSync(`.cache/av/${s.id}.json`)) fcNote = 'none: the filed profit is a whole year the analysts no longer list';
+  if (co.now.forecast === undefined) delete co.now.forecast;
 
   if (now.eps !== null && !dollar) co.now.pe = pe;
   if (now.eps !== null && dollar && !now.loss) co.now.pe = pe;
@@ -72,7 +81,19 @@ for (const s of SOURCES) {
     if (now.netIncome !== null) co.now.profits.last = Math.abs(now.netIncome) < 1 ? Math.round(now.netIncome * 100) / 100 : Math.abs(now.netIncome) < 10 ? Math.round(now.netIncome * 10) / 10 : Math.round(now.netIncome);
     if (now.revenue !== null && co.now.profits.revenue !== undefined) co.now.profits.revenue = Math.round(now.revenue);
   }
-  if (co.now.yearsOfRevenue !== undefined && now.value !== null && now.revenue) co.now.yearsOfRevenue = Math.round(now.value / now.revenue);
+  // valued from its price and share count once it's listed, instead of years of revenue
+  if (co.now.yearsOfRevenue !== undefined && now.value !== null) { co.now.value = Math.round(now.value); delete co.now.yearsOfRevenue; co.src = { ...co.src, pe: 'sec-eod', y: 'sec-eod' }; }
+  // no twelve months on file yet (a new listing): its loss and revenue so far this year, and the stretch they cover
+  if (dollar && co.now.profits && now.netIncome === null) {
+    const ni = f.yearToDate(f.netIncome, today), rev = f.yearToDate(f.revenue, today);
+    if (ni && rev && ni.start === rev.start && ni.end === rev.end) {
+      const months = Math.round((Date.parse(ni.end) - Date.parse(ni.start)) / (30.44 * 86_400_000));
+      const year = ni.end.slice(0, 4);
+      co.now.profits.last = Math.round(ni.val / 1e8) / 10;
+      co.now.profits.revenue = Math.round(rev.val / 1e8) / 10;
+      co.now.profitsPeriod = months === 6 ? `in the first half of ${year}` : months === 3 ? `in the first quarter of ${year}` : `in the first ${months} months of ${year}`;
+    }
+  } else delete co.now.profitsPeriod;
   // a company whose filings gave no recent profit keeps its figures and their source
   if (now.eps !== null) co.src = { ...co.src, pe: 'sec-eod', y: 'sec-eod', last: 'sec-eod', ...(fc ? { forecast: 'alphavantage' } : {}) };
 
@@ -108,8 +129,14 @@ for (const s of SOURCES) {
       const usd = (v: number) => (s.fx?.startsWith('USD') ? v / rate : v * rate);
       const b = b0 ? { ...b0, cash: usd(b0.cash), debt: usd(b0.debt) } : null;
       // a year's profit: the company's value over its years of profit, else its reported profit (share classes)
-      const profit = now.value !== null && now.pe !== null && now.pe > 0 ? now.value / now.pe : now.netIncome !== null && now.netIncome > 0 ? now.netIncome : null;
-      return b ? { cash: Math.round(b.cash / 1e8) / 10, debt: Math.round(b.debt / 1e8) / 10, end: b.end, ...(profit !== null ? { profit: Math.round(profit * 10) / 10 } : {}) } : undefined;
+      // a year's profit: profit per share times the shares, the profit the years of profit count in
+      // (else the company's value over its years of profit, else its reported profit, where share counts aren't filed in a form we read)
+      const profit = now.profit !== null && now.profit > 0 ? now.profit
+        : now.value !== null && now.pe !== null && now.pe > 0 ? (now.value * (1 - now.stakesShare)) / now.pe
+        : now.netIncome !== null && now.netIncome > 0 ? now.netIncome : null;
+      // stakes in other companies, listed when they're worth half a year of profit or more and 1% of the price
+      const stakes = profit !== null && now.stakes >= profit / 2 && now.stakesShare >= 0.01 ? Math.round(now.stakes * 10) / 10 : undefined;
+      return b ? { cash: Math.round(b.cash / 1e8) / 10, debt: Math.round(b.debt / 1e8) / 10, end: b.end, ...(profit !== null ? { profit: Math.round(profit * 10) / 10 } : {}), ...(stakes ? { stakes } : {}) } : undefined;
     })(),
     // how fast the share count changed per year: buybacks (negative) or new shares
     shares: (() => { const c = shareChange(f, s.eod, today); return c ? { rate: r4(c.rate)!, years: c.years } : undefined; })(),
@@ -140,6 +167,9 @@ for (const s of SOURCES) {
     if (then.dividendYield !== null) p.y = r3(then.dividendYield)!;
     p.profit = then.eps !== null && then.eps > 0 && now.eps !== null && now.eps > 0 ? r3(Math.pow(now.eps / then.eps, 1 / n) - 1)! : undefined;
     p.stock = r3(Math.pow(after.adjusted_close / before.adjusted_close, 1 / n) - 1)!;
+    // ten years ago: the same three-year averages as today's last decade, so the two cards quote one record
+    // (TSMC's filings start too late for the averages; today's card shows no decade, so its single years stand)
+    if (era === 'y10' && dec) p.profit = r3(dec.g)!;
     if (p.profit === undefined) delete p.profit;
     const before1 = computeOn(f, yearsBefore(d, 1), today);
     const rg = then.revenue && before1?.revenue ? r4(then.revenue / before1.revenue - 1) : undefined;
@@ -202,7 +232,8 @@ for (const [era, n] of ERAS) {
     const E = F.eras[era].spx;
     E.pe = Math.round(level(d) / k.E!);
     E.y = r3(kd.D! / level(d))!;
-    E.profit = r3(Math.pow(known.E! / k.E!, 1 / n) - 1)!;
+    // ten years ago: the last decade's growth, from three-year averages like today's card
+    E.profit = era === 'y10' && spx.last !== undefined ? spx.last : r3(Math.pow(known.E! / k.E!, 1 / n) - 1)!;
     const tr = shillerTotalReturn(d.slice(0, 7), lastTR);
     if (tr !== null) {
       const yrs = (Date.parse(lastTR + '-15') - Date.parse(d)) / (365.25 * 86_400_000);
@@ -211,6 +242,12 @@ for (const [era, n] of ERAS) {
   }
 }
 F.sources['shiller'] = { name: 'Robert Shiller’s S&P 500 data (profit, dividends and total return per index share)', url: 'https://shillerdata.com/', date: shillerKnown(today)!.month } as never;
+
+// cards that compare a profit with Apple's quote Apple's own, from its filings (profit per share × shares)
+{
+  const apple = F.companies.find((c) => c.id === 'AAPL')?.now.balance?.profit;
+  for (const c of F.companies) if (c.now.profits?.apple !== undefined && apple) c.now.profits.apple = Math.round(apple);
+}
 
 F.asOf = month(today);
 F.sources['sec-eod'] = {

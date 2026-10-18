@@ -61,13 +61,16 @@ interface TileParts {
 
 /** The Finances bubble, opened from its link at the foot of the card: cash or debt, dividends and the share count,
  * each under its own small heading, each left off when its figure isn't in the data. */
-function financesBubble(co: Company, section: Section, shared: CopyEntry | null | undefined, tk: Tokens, id: string): { link: string; html: string } | undefined {
+function financesBubble(co: Company, section: Section, shared: CopyEntry | null | undefined, tk: Tokens, id: string, entry?: CopyEntry): { link: string; html: string } | undefined {
   if (!shared) return undefined;
   const labels = (shared.labels ?? {}) as Record<string, string>;
   const rows: [string, string][] = [];
   // Cash, Debt, or Cash & debt when they're close
   const b = balanceRow(co, section, shared)[0];
   if (b?.[1]) rows.push([labels[b[2]] ?? '', b[1]]);
+  // the biggest stakes are named on the card's own entry (`stakesNames`), from the company's filings
+  const names = entry?.stakesNames as string | undefined;
+  if (co.now.balance?.stakes && section !== 'loss') rows.push([labels.stakes, names ? (shared.stakesNamed as string).replace('{stakesNames}', names) : (shared.stakes as string)]);
   rows.push([labels.dividends, (co.now.y > 0 ? shared.dividends : shared.noDividend) as string]);
   const sh = co.now.shares;
   if (sh) rows.push([labels.shares, (Math.abs(sh.rate) < 0.005 ? shared.sharesSteady : sh.rate < 0 ? shared.sharesDown : shared.sharesUp) as string]);
@@ -164,6 +167,9 @@ export interface Rendered {
   errors: string[];
 }
 
+/** Years of profit rounded as a card shows them (as figures.ts writes them): whole years from 10 up, else one decimal. */
+const shownYears = (pe: number) => (pe >= 10 ? Math.round(pe) : Math.round(pe * 10) / 10);
+
 export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
   const copy = new Copy(C);
   const errors: string[] = [];
@@ -183,8 +189,10 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     if (s.basis !== 't' || now === null || !co.now.then || section === 'loss') return undefined;
     const badges = COMPARES.flatMap((c) => {
       const then = co.now.then?.[c];
-      if (!then) return [];
-      const was = requiredGrowth(then.y, then.pe);
+      // a date needs its bond too, or its version of the card can't be built
+      if (!then || F.eras.now.bondThen?.[c] === undefined) return [];
+      // from the years of profit as that date's card shows them, so the badge and the card agree
+      const was = requiredGrowth(then.y, shownYears(then.pe));
       const kind = pct(was) === pct(now) ? 'same' : was > now ? 'better' : 'worse';
       const detail = fill(copy.label('compare', kind === 'same' ? 'detailSame' : 'detail'), { then: () => pct(was), now: () => pct(now) }, `${co.id} deal`);
       return [{ c, html: `<div class="deal ${kind}" data-w="${c}">${esc(copy.label('compare', kind))} · ${detail}</div>` }];
@@ -248,7 +256,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     const name = (now?.name as string) ?? 'S&P 500';
     if (s.era === 'now') {
       const tk = spxNowTokens(F, s.basis, e);
-      const m = nowModel({ now: { pe: E.spx.pe, pef: E.spx.pef ?? null, y: E.spx.y } }, F);
+      const m = nowModel({ now: { pe: E.spx.pe, pef: E.spx.pef ?? null, y: E.spx.y } }, F, s.basis);
       const shown = m.shown(s.basis)!;
       return tile({
         id: spxId, badge: 'SPX', ...BASE.spx, name, href: yahoo('^GSPC'), base: true,
@@ -289,20 +297,21 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
   if (s.era === 'now') {
     for (const co of F.companies.filter(inCategory)) {
       const id = `${co.id}:now`;
-      const m = nowModel(co, F);
+      const m = nowModel(co, F, s.basis);
       const html = safe(id, () => {
         const e = copy.get(id);
         if (!e) return null;
         const shared = copy.get('company-lines');
         // the years figure and the three sections for the company as it stands in `c`, with the bond in `FF`
         const card = (c: Company, FF: Figures, basis: Basis) => {
-          const mm = nowModel(c, FF);
+          const mm = nowModel(c, FF, basis);
           const tk = companyNowTokens(c, basis, FF, e);
           const shown = mm.shown(basis);
           const unit = (e.unit as string) ?? '';
-          const price = c.now.yearsOfRevenue !== undefined
-            ? { pre: L('pricedAt'), n: `${parseFig(c.now.yearsOfRevenue).text} ${L('years')}`, unit }
-            : { pre: L('pricedAt'), n: `${shown!.years.text} ${L('years')}`, unit: yearsUnit(shown!.basis) };
+          // Not profitable: no number in the corner, since there's no profit to count years in (the bet is that it
+          // becomes profitable, which the card's dollar lines spell out). Years of revenue aren't shown: the board is about profit
+          const price = mm.section === 'loss' || !shown ? undefined
+            : { pre: L('pricedAt'), n: `${shown.years.text} ${L('years')}`, unit: yearsUnit(shown.basis) };
           // every company card: what the price needs, what the business earns against the bond,
           // what analysts expect next year, and what happens if growth falls short
           const earnsNow = mm.section !== 'loss' && mm.shown(basis) !== null;
@@ -323,12 +332,12 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
           const bondThen = F.eras.now.bondThen?.[w];
           if (!t || bondThen === undefined) return [];
           // years of profit rounded like today's: whole years from 10 up
-          const was: Company = { ...co, now: { ...co.now, pe: t.pe >= 10 ? Math.round(t.pe) : t.pe, pef: null, y: t.y, forecast: null } };
+          const was: Company = { ...co, now: { ...co.now, pe: shownYears(t.pe), pef: null, y: t.y, forecast: null } };
           const FF: Figures = { ...F, eras: { ...F.eras, now: { ...F.eras.now, bond: bondThen } } };
           const v = card(was, FF, 't');
           return [{ w, price: v.price, facts: v.facts }];
         }) : undefined;
-        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, href: yahoo(co.id), about: aboutOf(copy, co.id), price: today.price, lines: [], facts: today.facts, at, extra: financesBubble(co, m.section, shared, today.tk, id), compare, why: { heading: heading(m.section), bullets: bulletsOf(e, today.tk) } }, copy);
+        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, href: yahoo(co.id), about: aboutOf(copy, co.id), price: today.price, lines: [], facts: today.facts, at, extra: financesBubble(co, m.section, shared, today.tk, id, e), compare, why: { heading: heading(m.section), bullets: bulletsOf(e, today.tk) } }, copy);
       });
       // not profitable: the most years of profit first, and an outright loss (no years to count) ahead of those
       if (html) buckets[m.section].push({ sort: m.section === 'loss' ? m.pe.v ?? Infinity : m.sectionReq ?? -Infinity, html });
@@ -348,8 +357,9 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         // the past in the same shape as today: Priced for, as a headline; a loss year says so instead
         return tile({
           id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, href: yahoo(co.id), about: aboutOf(copy, co.id),
-          price: { pre: L('pricedAt'), n: `${m.pe.text} ${L('years')}`, unit: L('unitPast') },
-          lines: m.req === null ? [{ cls: 'makes', html: fill(frame.noProfit as string, tk, id) }] : [],
+          // a loss year has no years of profit to show; its line says so
+          price: m.pe.loss ? undefined : { pre: L('pricedAt'), n: `${m.pe.text} ${L('years')}`, unit: L('unitPast') },
+          lines: m.req === null ? [{ cls: 'makes', html: fill((m.barely ? frame.barelyProfit : frame.noProfit) as string, tk, id) }] : [],
           facts: m.req === null ? undefined : facts(id, tk, [['assumes', frame.assumes as string]]),
           why: { story: [[copy.label('past-frame', 'storyHeading'), fill(e.story as string, tk, id)], [copy.label('past-frame', 'sinceHeading'), fill(e.happened as string, tk, id)]] },
         }, copy);

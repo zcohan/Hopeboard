@@ -15,8 +15,14 @@ export interface Source {
   supplement?: { concept: string; as: string; member?: string }[];
   /** Profit per share leaves out investment gains after their tax (Berkshire's operating profit). */
   operating?: boolean;
+  /** Where its gains on investments are filed, when not under the standard labels (compute.ts GAINS). */
+  gains?: string[];
+  /** Banks: buying and selling investments is part of the business, so the gains stay in profit. */
+  keepGains?: true;
   /** Cash and debt the standard labels miss, from supplements (`as` names), added to what they find. */
   balance?: { cash?: string[]; debt?: string[] };
+  /** Stakes in other companies held among its marketable securities (supplement `as` names): counted as stakes, not cash. */
+  stakesInCash?: string[];
   /** Checked against the latest filed report: it has no borrowing, so no debt label is no debt. */
   debtFree?: true;
 }
@@ -37,10 +43,18 @@ export const SOURCES: Source[] = [
     { concept: 'ifrs-full:ProfitLossAttributableToOwnersOfParent', as: 'ProfitLossAttributableToOwnersOfParent' },
     { concept: 'ifrs-full:CashAndCashEquivalents', as: 'CashAndCashEquivalents' }, { concept: 'ifrs-full:NoncurrentPortionOfNoncurrentBondsIssued', as: 'BondsNoncurrent' }, { concept: 'ifrs-full:LongtermBorrowings', as: 'BorrowingsNoncurrent' }, { concept: 'ifrs-full:CurrentPortionOfLongtermBorrowings', as: 'DebtCurrentPortion' }],
     balance: { debt: ['BondsNoncurrent', 'BorrowingsNoncurrent', 'DebtCurrentPortion'] } },
-  us('AMZN', 1018724),
+  // its gains on its stakes (Anthropic, Rivian) are filed only inside other income
+  { ...us('AMZN', 1018724), gains: ['OtherNonoperatingIncomeExpense'] },
   us('ORCL', 1341439),
   // Google re-registered as Alphabet in 2015; its early profit per share is filed per share class
-  { ...us('GOOGL', 1288776, 1652044), supplement: [{ concept: 'us-gaap:EarningsPerShareDiluted', as: 'EarningsPerShareDiluted', member: 'ClassA' }] },
+  // its SpaceX shares (listed in June 2026) sit among its marketable securities: a stake, not cash
+  {
+    ...us('GOOGL', 1288776, 1652044), stakesInCash: ['MarketableStakes'],
+    supplement: [
+      { concept: 'us-gaap:EarningsPerShareDiluted', as: 'EarningsPerShareDiluted', member: 'ClassA' },
+      { concept: 'us-gaap:EquitySecuritiesFvNi', as: 'MarketableStakes', member: '^us-gaap:FairValueMeasurementsRecurringMember$' },
+    ],
+  },
   us('XOM', 34088, 2115436),
   us('AVGO', 1730168),
   us('AMD', 2488),
@@ -57,7 +71,8 @@ export const SOURCES: Source[] = [
   us('CSCO', 858877),
   us('DELL', 1571996),
   // listed in June 2026: the 2025 full year is in its listing document, read from the filing
-  { ...us('SPCX', 1181412), supplement: [{ concept: 'us-gaap:EarningsPerShareDiluted', as: 'EarningsPerShareDiluted' }, { concept: 'us-gaap:NetIncomeLoss', as: 'NetIncomeLoss' }, { concept: 'us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax', as: 'RevenueFromContractWithCustomerExcludingAssessedTax' }] },
+  // listed in June 2026: its share count is on its reports' cover page, by share class
+  { ...us('SPCX', 1181412), supplement: [{ concept: 'us-gaap:EarningsPerShareDiluted', as: 'EarningsPerShareDiluted' }, { concept: 'us-gaap:NetIncomeLoss', as: 'NetIncomeLoss' }, { concept: 'us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax', as: 'RevenueFromContractWithCustomerExcludingAssessedTax' }, { concept: 'dei:EntityCommonStockSharesOutstanding', as: 'EntityCommonStockSharesOutstanding', member: 'CommonClass' }] },
   // Berkshire reports profit per class A share; one class B share is 1/1500 of one
   // Its official profit swings with the paper gains on its stock holdings, so the board uses
   // operating profit: profit less investment gains, less the tax on them, all as filed.
@@ -75,16 +90,16 @@ export const SOURCES: Source[] = [
       { concept: 'brka:GainLossOnInvestmentsAndGainLossOnDerivativeInstrumentsTax', as: 'InvestmentGainsTax', member: 'MaterialReconcilingItems' },
     ],
   },
-  us('JPM', 19617),
-  us('BAC', 70858),
+  { ...us('JPM', 19617), keepGains: true },
+  { ...us('BAC', 70858), keepGains: true },
   // profit per share is filed per share class; the board's shares are class A
   { ...us('V', 1403161), supplement: [{ concept: 'us-gaap:EarningsPerShareDiluted', as: 'EarningsPerShareDiluted', member: 'ClassA' }] },
   us('MA', 1141391),
-  us('WFC', 72971),
+  { ...us('WFC', 72971), keepGains: true },
   // the SEC summary lags Citigroup's recent quarters
-  { ...us('C', 831001), supplement: [{ concept: 'us-gaap:EarningsPerShareDiluted', as: 'EarningsPerShareDiluted' }] },
-  us('GS', 886982),
-  us('MS', 895421),
+  { ...us('C', 831001), keepGains: true, supplement: [{ concept: 'us-gaap:EarningsPerShareDiluted', as: 'EarningsPerShareDiluted' }] },
+  { ...us('GS', 886982), keepGains: true },
+  { ...us('MS', 895421), keepGains: true },
   us('VZ', 732712),
   us('T', 732717),
   // T-Mobile files its total debt under a breakdown (third-party debt), which the summary data leaves out
@@ -111,7 +126,11 @@ export const SOURCES: Source[] = [
   us('RTX', 101829),
   us('TMO', 97745),
   us('TXN', 97476),
-  us('GEV', 1996810),
+  // the gain on remeasuring its Prolec GE stake when it bought the rest ($4bn, early 2026), from its filed reports
+  {
+    ...us('GEV', 1996810), gains: ['StakeRemeasurementGain'],
+    supplement: [{ concept: 'us-gaap:BusinessCombinationStepAcquisitionEquityInterestInAcquireeRemeasurementGain', as: 'StakeRemeasurementGain', member: 'ProlecGE' }],
+  },
   us('AMGN', 318154),
   us('CRWD', 1535527),
   us('LIN', 1707925),
