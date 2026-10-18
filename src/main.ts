@@ -62,7 +62,7 @@ function whenButton(copy: Copy): string {
     `<button type="button" role="menuitemradio" aria-checked="${on}" class="${on ? 'on' : ''}" data-${attr}="${value}">${esc(label)}</button>`;
   // a dot on the clock says the board isn't showing today's prices against last year's profit
   const changed = state.era !== 'now' || state.basis !== 't';
-  return `<div class="when"><button type="button" class="theme whenbtn${changed ? ' changed' : ''}" aria-haspopup="menu" aria-expanded="${whenOpen}" aria-label="${esc(L('whenButton'))}" title="${esc(L('whenButton'))}">` +
+  return `<div class="when"><button type="button" class="whenbtn${changed ? ' changed' : ''}" aria-haspopup="menu" aria-expanded="${whenOpen}" aria-label="${esc(L('whenButton'))}" title="${esc(L('whenButton'))}">` +
     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>` +
     `<div class="whenmenu" role="menu"${whenOpen ? '' : ' hidden'}><p class="mh">${esc(L('whenHeading'))}</p>${eras.map(([e, f]) => item('era', e, L(f), state.era === e)).join('')}` +
     (state.era === 'now' ? `<hr><p class="mh">${esc(L('basisHeading'))}</p>${item('basis', 't', L('basisT'), state.basis === 't')}${item('basis', 'f', L('basisF'), state.basis === 'f')}` : '') +
