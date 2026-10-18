@@ -43,6 +43,19 @@ export type OutcomeRef = 'bond' | 'index' | 'its';
  * gap to the safe US bond (or the index), with "still" only when it beats it.
  * withReturn adds the return itself: "you'd still make ~8%/year, ~3%/year more than…".
  */
+/** The outcome as a card headline: "Liable to lose 81% of your investment", "3.5%/year more than the safe US bond". */
+export function outcomeHead(rs: number[], bond: number, ref: OutcomeRef): string {
+  const changes = rs.map(decadeChange);
+  if (changes.every((c) => c < 0)) return `Liable to lose <b class="loss">${range(changes.map((c) => -c), pct)}</b> of your investment`;
+  const base = ref === 'bond' ? bond : INDEX_RETURN;
+  const what = ref === 'bond' ? 'the safe US bond' : ref === 'index' ? 'the index’s 10% average' : 'its 10% average';
+  const gaps = rs.map((r) => r - base);
+  const mean = gaps.reduce((a, b) => a + b, 0) / gaps.length;
+  if (halfPct(Math.abs(mean)) === '0%') return `<b>The same</b> as ${what}`;
+  const gap = range(gaps.map(Math.abs), halfPct);
+  return `<b>${gap}/year ${mean > 0 ? 'more' : 'less'}</b> than ${what}`;
+}
+
 export function outcome(rs: number[], bond: number, ref: OutcomeRef, withReturn: boolean): string {
   const changes = rs.map(decadeChange);
   if (changes.every((c) => c < 0))
