@@ -25,7 +25,7 @@ main{max-width:1360px; margin:0 auto; padding:40px 20px 80px}
 h1{font-weight:600; font-size:26px; line-height:1.15; margin:0; letter-spacing:-0.025em}
 h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 #board h2:first-child{margin-top:8px}
-.sub{color:var(--ink); margin:3px 0 0; font-size:15px; max-width:60ch}
+.sub{color:var(--ink); margin:3px 0 0; font-size:15px}
 .grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px}
 @media (max-width:1020px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:680px){.grid{grid-template-columns:minmax(0,1fr); gap:14px}}
@@ -131,9 +131,9 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .masthead{display:flex; align-items:center; justify-content:space-between; gap:16px;
   padding:0 0 22px; margin:0 0 24px; border-bottom:1px solid var(--rule)}
 .brand{display:flex; align-items:center; gap:14px; min-width:0}
-.mark{flex:none; width:48px; height:48px; border-radius:13px; display:grid; place-items:center;
-  background:linear-gradient(140deg,#FFB547 0%,#FF7A59 55%,#E8508A 100%); box-shadow:0 4px 14px rgba(255,122,89,.28)}
-.mark svg{width:30px; height:30px}
+.mark{flex:none; width:56px; height:56px; color:var(--ink)}
+.mark svg{width:100%; height:100%; display:block}
+@media (max-width:640px){.mark{width:46px; height:46px}}
 .theme,.whenbtn{flex:none; width:36px; height:36px; border-radius:999px; border:1px solid var(--edge); background:var(--tile);
   color:var(--ink); display:grid; place-items:center; cursor:pointer; padding:0}
 .theme svg,.whenbtn svg{width:18px; height:18px}
