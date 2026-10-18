@@ -49,7 +49,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 - **Bargain:** under 10%.
 - **Losing money:** lost money last year, so there is no profit to price.
 
-**Views.** Buttons switch between Now, 1 year ago, 5 years ago and 10 years ago. Past views show the price then, what it needed, the story at the time and what happened since. For Now, a second toggle switches between last year's profit and next year's forecast.
+**Views.** A clock button in the header opens a menu: prices from Today, 1 year ago, 5 years ago or 10 years ago, and (for Today) whether to count last year's profit or next year's forecast. The button shows a dot when the view isn't today against last year's profit. Past views show the price then, what it needed, the story at the time and what happened since, under a bar saying which date is shown, with a way back to today.
 
 **Card anatomy (company cards)**
 

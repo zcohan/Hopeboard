@@ -53,12 +53,28 @@ function route(): Route {
 }
 const href = (r: Route) => (r === 'board' ? BASE : `${BASE}${r}`);
 
+// The time and profit menu: a clock button in the header, open until a choice is made.
+let whenOpen = false;
+function whenButton(copy: Copy): string {
+  const L = (f: string) => copy.label('page', f);
+  const eras: [Era, string][] = [['now', 'eraNow'], ['y1', 'eraY1'], ['y5', 'eraY5'], ['y10', 'eraY10']];
+  const item = (attr: string, value: string, label: string, on: boolean) =>
+    `<button type="button" role="menuitemradio" aria-checked="${on}" class="${on ? 'on' : ''}" data-${attr}="${value}">${esc(label)}</button>`;
+  // a dot on the clock says the board isn't showing today's prices against last year's profit
+  const changed = state.era !== 'now' || state.basis !== 't';
+  return `<div class="when"><button type="button" class="theme whenbtn${changed ? ' changed' : ''}" aria-haspopup="menu" aria-expanded="${whenOpen}" aria-label="${esc(L('whenButton'))}" title="${esc(L('whenButton'))}">` +
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>` +
+    `<div class="whenmenu" role="menu"${whenOpen ? '' : ' hidden'}><p class="mh">${esc(L('whenHeading'))}</p>${eras.map(([e, f]) => item('era', e, L(f), state.era === e)).join('')}` +
+    (state.era === 'now' ? `<hr><p class="mh">${esc(L('basisHeading'))}</p>${item('basis', 't', L('basisT'), state.basis === 't')}${item('basis', 'f', L('basisF'), state.basis === 'f')}` : '') +
+    `</div></div>`;
+}
+
 function header(copy: Copy, current: Route): string {
   const L = (f: string) => copy.label('page', f);
   const N = (f: string) => copy.label('nav', f);
   const link = (r: Route) => `<a href="${href(r)}" data-route="${r}"${r === current ? ' aria-current="page"' : ''}>${esc(N(r))}</a>`;
   return `<header class="masthead"><a class="brand" href="${href('board')}" data-route="board">${MARK}<div><h1>${esc(L('title'))}</h1><p class="sub">${esc(L('subtitle'))}</p></div></a>` +
-    `<nav class="nav">${link('philosophy')}${link('methodology')}${themeButton()}</nav></header>`;
+    `<nav class="nav">${link('philosophy')}${link('methodology')}${current === 'board' ? whenButton(copy) : ''}${themeButton()}</nav></header>`;
 }
 
 function footer(copy: Copy): string {
@@ -98,17 +114,12 @@ function render() {
   }
   const { baselines, companies, errors } = out;
   for (const e of errors) console.error(e);
-  const eras: [Era, string][] = [['now', 'eraNow'], ['y1', 'eraY1'], ['y5', 'eraY5'], ['y10', 'eraY10']];
   const pills = copy.get('pills');
   app.innerHTML =
     devBar(errors) +
     header(copy, 'board') +
-    `<div class="toggles">` +
-    `<div class="toggle" role="group" aria-label="When">${eras.map(([e, f]) => pill('era', e, L(f), state.era === e)).join('')}</div>` +
-    (state.era === 'now'
-      ? `<div class="toggle basis" role="group" aria-label="Which profit to count">${pill('basis', 't', L('basisT'), state.basis === 't')}${pill('basis', 'f', L('basisF'), state.basis === 'f')}</div>`
-      : '') +
-    `</div>` +
+    // looking back: say so, with the way back to today
+    (state.era !== 'now' ? `<div class="pastbar"><span>${esc(L('pastBanner'))} <b>${esc(F.eras[state.era].label)}</b>${esc(L('pastBannerTail'))}</span><button type="button" data-era="now">${esc(L('backToday'))}</button></div>` : '') +
     `<div id="board">${baselines}` +
     (pills
       ? `<div class="toggle pills" role="group" aria-label="Industry">${pill('cat', 'mag7', pills.mag7 as string, state.category === 'mag7')}${pill('cat', 'all', pills.all as string, state.category === 'all')}${CATEGORIES.map((c) => pill('cat', c, pills[c] as string, state.category === c)).join('')}</div>`
@@ -116,8 +127,13 @@ function render() {
 
     `${companies}</div>` + footer(copy);
 
-  app.querySelectorAll<HTMLButtonElement>('button[data-era]').forEach((b) => b.addEventListener('click', () => { state.era = b.dataset.era as Era; render(); }));
-  app.querySelectorAll<HTMLButtonElement>('button[data-basis]').forEach((b) => b.addEventListener('click', () => { state.basis = b.dataset.basis as Basis; render(); }));
+  app.querySelectorAll<HTMLButtonElement>('button[data-era]').forEach((b) => b.addEventListener('click', () => { state.era = b.dataset.era as Era; whenOpen = false; render(); }));
+  app.querySelectorAll<HTMLButtonElement>('button[data-basis]').forEach((b) => b.addEventListener('click', () => { state.basis = b.dataset.basis as Basis; whenOpen = false; render(); }));
+  app.querySelector<HTMLButtonElement>('.whenbtn')?.addEventListener('click', () => {
+    whenOpen = !whenOpen;
+    render();
+    if (whenOpen) app.querySelector<HTMLButtonElement>('.whenmenu button.on')?.focus();
+  });
   placeLogos();
   applyCompare();
   wireCommon();
@@ -137,6 +153,10 @@ function wireCommon() {
   }));
 }
 window.addEventListener('popstate', () => render());
+document.addEventListener('click', (ev) => { if (whenOpen && !(ev.target as HTMLElement).closest('.when')) { whenOpen = false; render(); } });
+document.addEventListener('keydown', (ev) => {
+  if (ev.key === 'Escape' && whenOpen) { whenOpen = false; render(); app.querySelector<HTMLButtonElement>('.whenbtn')?.focus(); }
+});
 
 /** The app's mark: a sun rising over the horizon. */
 const MARK = `<div class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M9 21a7 7 0 0 1 14 0"/><path d="M5 25h22"/><path d="M16 8v3M8.2 11.2l2.1 2.1M23.8 11.2l-2.1 2.1"/></svg></div>`;

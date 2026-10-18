@@ -223,7 +223,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         : { story: [[copy.label('past-frame', 'storyHeading'), fill(e.story as string, et, goldId)], [copy.label('past-frame', 'sinceHeading'), fill(e.happened as string, et, goldId)]] },
     }, copy);
   }));
-  const baselines = section(copy.label('sections', 'baselines') + (s.era === 'now' ? '' : ` — ${E.label}`), base.filter(Boolean));
+  const baselines = section(copy.label('sections', 'baselines'), base.filter(Boolean));
   let board = '';
 
   const buckets: Record<Section, { sort: number; html: string }[]> = { pricey: [], normal: [], bargain: [], loss: [] };
