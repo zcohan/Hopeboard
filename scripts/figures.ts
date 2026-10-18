@@ -185,11 +185,15 @@ for (const [era, n] of ERAS) {
   const level = (d: string) => barOn('GSPC.INDX', d)!.close;
   const known = shillerKnown(today)!;
   const withD = shiller().filter((r) => r.D !== null && r.month <= known.month).at(-1)!;
-  const decadeAgo = shiller().find((r) => r.month === `${+known.month.slice(0, 4) - 10}${known.month.slice(4)}`);
+  // profit over the last decade: the average of the three years to each end, so one unusual year can't decide the rate
+  const months = shiller();
+  const at = months.findIndex((r) => r.month === known.month);
+  const avg3 = (i: number) => { const e = [0, 12, 24].map((k) => months[i - k]?.E); return e.every((x) => x) ? (e as number[]).reduce((a, b) => a + b, 0) / 3 : null; };
+  const nowE = avg3(at), thenE = avg3(at - 120);
   const spx = F.eras.now.spx;
   spx.pe = Math.round(level(today) / known.E!);
   spx.y = r3(withD.D! / level(today))!;
-  spx.last = decadeAgo?.E ? r3(Math.pow(known.E! / decadeAgo.E, 1 / 10) - 1)! : spx.last;
+  spx.last = nowE && thenE ? r3(Math.pow(nowE / thenE, 1 / 10) - 1)! : spx.last;
   const lastTR = shiller().filter((r) => r.realTR !== null).at(-1)!.month;
   for (const [era, n] of ERAS) {
     const d = yearsBefore(today, n);

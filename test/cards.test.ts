@@ -31,6 +31,15 @@ describe('wording stays true to the numbers', () => {
     for (const t of all) expect(t).not.toMatch(/still make [^.]*less than/);
   });
 
+  it('no decade record that rounds to nothing', () => {
+    for (const t of all) expect(t).not.toMatch(/last decade it (shrank|grew) 0%\/year|the 0%\/year of the last decade/);
+  });
+
+  it('“barely changed” only where the last decade rounds to 0%', () => {
+    for (const e of C.entries.filter((e) => /barely changed/.test(String(e.assumes ?? ''))))
+      expect(Math.abs(F.companies.find((c) => `${c.id}:now` === e.id)!.now.last ?? 1)).toBeLessThan(0.005);
+  });
+
 });
 
 describe('hand-written lines', () => {

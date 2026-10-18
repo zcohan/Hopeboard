@@ -37,6 +37,7 @@ g* = 1.10 / ((1 + y) * (18 / PE)^(1/10)) - 1
 - Loss or gain over the decade is `(1 + r)^10 - 1`. That is where "you may lose 30% of your investment" comes from.
 - Toggling to next year's forecast grows last year's profit at the analysts' forecast rate and recomputes `g*`.
 - The "if" lines on each card use the same formula with an anchored scenario growth rate.
+- Last-decade growth (the company's, and the S&P 500's for the average big US company) compares profit per share at the two ends of the decade, each end the average of three years, so one unusual year can't decide the rate.
 
 The test tables in `test/formula.test.ts` are the design-stage figures; the app must reproduce each required-growth figure within one point.
 
@@ -126,6 +127,7 @@ The design is a plain card grid that a first-time reader can scan, with nothing 
 | Baselines at the top: US Bond, Gold, S&P 500 | These are the places people actually park money, and every other card is measured against them. |
 | Sort by required growth, not years of profit | Dividends change what a given number of years needs. |
 | Past-view buttons (1, 5, 10 years ago) | Seeing what was assumed then and what happened builds the intuition. |
+| Last decade from three-year averages at each end (October 2026) | A single starting year in a slump flattered the record: the S&P 500's 13%/year started from the 2016 profit dip (9.6% averaged), Chevron's and Merck's from bad years. |
 | Toggle between last year's profit and next year's forecast | "Cheap at 20" quotes use the forecast, so both views should be one tap apart. |
 | The company's own forecast, not an industry average | Industry averages were plain averages over hundreds of companies and rarely fit the one on the card. |
 | Dividends only as cash returned | Buybacks already show up in profit-per-share growth. |

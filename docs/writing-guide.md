@@ -278,9 +278,9 @@ The profit growth a year the price needs, as a headline, then notes:
 - `{vsLastNote}` writes "More than the 15%/year of the last decade", "Less than…" or "The same rate as over the last decade".
 - The analysts' forecast note is added by the app when there is a forecast. One year, and it says so; don't compare it with the ten-year figure in words.
 - The notes under Priced for are sentences, end with a full stop, and run on as one short paragraph rather than a line each (owner, October 2026).
-- A short qualifier after the record is allowed when it changes how to read it: "Less than the 68%/year of the last decade, ending on a boom year" (Nvidia), "…from almost nothing" (Amazon), "…from a bad year for oil" (Exxon).
+- A short qualifier after the record is allowed when it changes how to read it: "Less than the 68%/year of the last decade, ending on a boom year" (Nvidia), "…from almost nothing" (Amazon). The three-year averages already smooth over a single bad year, so don't add a qualifier for one.
 - No decade of profit: the headline alone (`**{reqSigned}** growth/year`). The fact goes in the bubble: "Profitable only since 2023, so there's little record to go on".
-- Profit allowed to shrink: the record in plain words, "Over the last decade it shrank 1%/year" (Verizon).
+- Profit allowed to shrink: the record in plain words, "Over the last decade it shrank 1%/year". When the record rounds to 0%, "Over the last decade its profit barely changed" (Verizon); a test checks it still rounds to 0%.
 
 **Cards in dollars.** A company that lost money, or earns under 0.2% of its price (more than 500 years of profit), sits in Not profitable and is priced in dollars, with two anchors the reader knows:
 

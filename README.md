@@ -47,4 +47,4 @@ Sources: company filings from SEC EDGAR (profit per share, share classes, Berksh
 
 `{opening}` ("Only if" or "If", set by section), `{req}`, `{vsLast}` (up from / down from the last decade, or "the same rate"), `{last}`, `{g}` (scenario growth), `{outcome}` (lose X% in red, or X%/year more or less than the safe US bond; `:index`, `:its` variants), `{earns}`, `{earnsVsBond}`, `{pays}`, `{fcastValue}`, `{vsBond}`, `{pe}`, `{pef}`, `{peNow}`, `{reqProfit}`, `{p:key}`, `{bond}`, `{highSince}`, `{goldReturn}`, `{index}`, `{normalYears}`, `{profit}`, `{stock}`, `{era}`. Arguments: `:bare` drops the `≈`, `:abs` drops the sign.
 
-Scenario anchors (`scenario` on a card entry): `none`, `last`, `average` (the S&P 500's last-decade profit growth), plus `endsAt` and `profit` for cards that need a dollar or level test.
+Scenario anchors (`scenario` on a card entry): `none`, `last`, `average` (the S&P 500’s last-decade profit growth, from three-year averages at each end), plus `endsAt` and `profit` for cards that need a dollar or level test.

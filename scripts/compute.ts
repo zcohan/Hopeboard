@@ -416,11 +416,15 @@ export function lastDecade(f: Filings, today: string): { g: number; from: string
   const adj = (x: Fact) => (toUsd(x.val) * (s.perShare ?? 1)) / splitFactor(s.eod, x.filed, today);
   const latest = f.latestAnnualEnd(f.eps, today);
   if (!latest) return null;
-  const now = f.annualNear(f.eps, latest, today, adj);
-  const then = f.annualNear(f.eps, yearsBefore(latest, 10), today, adj);
+  // each end of the decade is the average of three years, so one unusual year can't decide the rate
+  const avg3 = (end: string) => {
+    const v = [0, 1, 2].map((n) => f.annualNear(f.eps, yearsBefore(end, n), today, adj));
+    return v.every((x) => x !== null) ? (v as number[]).reduce((a, b) => a + b, 0) / 3 : null;
+  };
+  const now = avg3(latest);
+  const then = avg3(yearsBefore(latest, 10));
   if (now === null || then === null || now <= 0 || then <= 0) return null;
-  return { g: Math.pow(now / then, 1 / 10) - 1, from: yearsBefore(latest, 10), to: latest };
-  return null;
+  return { g: Math.pow(now / then, 1 / 10) - 1, from: yearsBefore(latest, 12), to: latest };
 }
 
 // ---------- analysts' forecasts ----------

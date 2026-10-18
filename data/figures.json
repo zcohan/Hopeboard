@@ -91,7 +91,7 @@
         "pe": 26,
         "y": 0.011,
         "pef": "≈23",
-        "last": 0.13
+        "last": 0.096
       },
       "bondHighSince": "It reached 5.3% in October, the highest since 2002",
       "oil": 127,
@@ -305,7 +305,7 @@
         "pe": 48,
         "pef": "≈47",
         "y": 0.006,
-        "last": 0.146,
+        "last": 0.137,
         "ytd": 0.1521,
         "fromHigh": {
           "below": 0.0947,
@@ -385,7 +385,7 @@
         "pe": 39,
         "pef": "≈35",
         "y": 0.003,
-        "last": 0.125,
+        "last": 0.139,
         "ytd": 0.2668,
         "fromHigh": {
           "below": 0,
@@ -464,7 +464,7 @@
         "pe": 27,
         "pef": 16,
         "y": 0.002,
-        "last": 0.682,
+        "last": 0.618,
         "forecast": 0.709,
         "ytd": 0.1508,
         "fromHigh": {
@@ -546,7 +546,7 @@
         "pe": 29,
         "pef": 25,
         "y": 0.007,
-        "last": 0.215,
+        "last": 0.206,
         "forecast": 0.198,
         "ytd": 0.1009,
         "fromHigh": {
@@ -628,7 +628,7 @@
         "pe": 27,
         "pef": 24,
         "y": 0.003,
-        "last": 0.337,
+        "last": 0.355,
         "forecast": 0.105,
         "ytd": 0.0774,
         "fromHigh": {
@@ -710,7 +710,7 @@
         "pe": 40,
         "pef": 31,
         "y": 0.008,
-        "last": 0.188,
+        "last": null,
         "forecast": 0.295,
         "ytd": 0.367,
         "fromHigh": {
@@ -786,7 +786,7 @@
         "pe": 20,
         "pef": 25,
         "y": 0,
-        "last": 0.607,
+        "last": 0.727,
         "forecast": -0.183,
         "ytd": 0.0831,
         "fromHigh": {
@@ -867,7 +867,7 @@
         "pe": 20,
         "pef": 15,
         "y": 0.016,
-        "last": 0.109,
+        "last": 0.076,
         "forecast": 0.351,
         "ytd": -0.3333,
         "fromHigh": {
@@ -949,7 +949,7 @@
         "pe": 17,
         "pef": 23,
         "y": 0.003,
-        "last": 0.252,
+        "last": 0.23,
         "forecast": -0.269,
         "ytd": 0.0903,
         "fromHigh": {
@@ -1027,7 +1027,7 @@
         "pe": 23,
         "pef": 25,
         "y": 0.023,
-        "last": 0.057,
+        "last": 0.022,
         "forecast": -0.082,
         "ytd": 0.5171,
         "fromHigh": {
@@ -1261,7 +1261,7 @@
         "pe": 59,
         "pef": 44,
         "y": 0.006,
-        "last": 0.226,
+        "last": 0.227,
         "forecast": 0.361,
         "ytd": 0.5417,
         "fromHigh": {
@@ -1318,7 +1318,7 @@
         "pe": 12,
         "pef": 10,
         "y": 0.001,
-        "last": null,
+        "last": 0.331,
         "forecast": 0.162,
         "ytd": 2.0815,
         "fromHigh": {
@@ -1432,7 +1432,7 @@
         "pe": 14,
         "pef": 12,
         "y": 0,
-        "last": 0.297,
+        "last": 0.332,
         "forecast": 0.13,
         "ytd": -0.2994,
         "fromHigh": {
@@ -1603,7 +1603,7 @@
         "pe": 22,
         "pef": 21,
         "y": 0,
-        "last": 0.569,
+        "last": 0.476,
         "forecast": 0.063,
         "ytd": -0.2478,
         "fromHigh": {
@@ -1767,7 +1767,7 @@
         "pe": 32,
         "pef": 30,
         "y": 0.016,
-        "last": 0.047,
+        "last": 0.046,
         "forecast": 0.092,
         "ytd": 0.4199,
         "fromHigh": {
@@ -1918,7 +1918,7 @@
         "pe": 26,
         "pef": null,
         "y": 0,
-        "last": 0.085,
+        "last": 0.1,
         "ytd": 0.0584,
         "fromHigh": {
           "below": 0,
@@ -1993,7 +1993,7 @@
         "pe": 15,
         "pef": null,
         "y": 0.018,
-        "last": 0.128,
+        "last": 0.136,
         "ytd": 0.0746,
         "fromHigh": {
           "below": 0.0651,
@@ -2065,7 +2065,7 @@
         "pe": 12,
         "pef": null,
         "y": 0.023,
-        "last": 0.113,
+        "last": 0.147,
         "ytd": -0.0536,
         "fromHigh": {
           "below": 0.2055,
@@ -2137,7 +2137,7 @@
         "pe": 12,
         "pef": null,
         "y": 0.022,
-        "last": 0.043,
+        "last": 0.031,
         "ytd": -0.0853,
         "fromHigh": {
           "below": 0.1156,
@@ -2207,7 +2207,7 @@
         "pe": 13,
         "pef": null,
         "y": 0.02,
-        "last": 0.026,
+        "last": 0.036,
         "ytd": 0.081,
         "fromHigh": {
           "below": 0.1426,
@@ -2280,7 +2280,7 @@
         "pe": 14,
         "pef": null,
         "y": 0.02,
-        "last": 0.155,
+        "last": 0.099,
         "ytd": 0.0172,
         "fromHigh": {
           "below": 0.2313,
@@ -2349,7 +2349,7 @@
         "pe": 15,
         "pef": null,
         "y": 0.023,
-        "last": 0.134,
+        "last": 0.148,
         "ytd": 0.0339,
         "fromHigh": {
           "below": 0.2056,
@@ -2418,7 +2418,7 @@
         "pe": 34,
         "pef": null,
         "y": 0.007,
-        "last": 0.147,
+        "last": 0.156,
         "ytd": 0.1549,
         "fromHigh": {
           "below": 0,
@@ -2493,7 +2493,7 @@
         "pe": 34,
         "pef": null,
         "y": 0.006,
-        "last": 0.173,
+        "last": 0.167,
         "ytd": 0.0885,
         "fromHigh": {
           "below": 0,
@@ -2572,7 +2572,7 @@
         "pe": 12,
         "pef": null,
         "y": 0.063,
-        "last": -0.007,
+        "last": 0.001,
         "ytd": 0.1729,
         "fromHigh": {
           "below": 0.1159,
@@ -2650,7 +2650,7 @@
         "pe": 7.8,
         "pef": null,
         "y": 0.047,
-        "last": 0.054,
+        "last": 0.02,
         "ytd": -0.0113,
         "fromHigh": {
           "below": 0.1658,
@@ -2728,7 +2728,7 @@
         "pe": 17,
         "pef": null,
         "y": 0.026,
-        "last": 0.281,
+        "last": 0.365,
         "ytd": -0.2038,
         "fromHigh": {
           "below": 0.2939,
@@ -2807,7 +2807,7 @@
         "pe": 42,
         "pef": null,
         "y": 0.005,
-        "last": 0.261,
+        "last": 0.165,
         "ytd": 0.1753,
         "fromHigh": {
           "below": 0.0182,
@@ -2885,7 +2885,7 @@
         "pe": 43,
         "pef": null,
         "y": 0.008,
-        "last": 0.06,
+        "last": 0.038,
         "ytd": 0.0732,
         "fromHigh": {
           "below": 0.1126,
@@ -2964,7 +2964,7 @@
         "pe": 30,
         "pef": null,
         "y": 0.021,
-        "last": 0.072,
+        "last": 0.067,
         "ytd": 0.2548,
         "fromHigh": {
           "below": 0.0821,
@@ -3042,7 +3042,7 @@
         "pe": 81,
         "pef": null,
         "y": 0.024,
-        "last": -0.028,
+        "last": 0.01,
         "ytd": 0.2865,
         "fromHigh": {
           "below": 0,
@@ -3120,7 +3120,7 @@
         "pe": 22,
         "pef": null,
         "y": 0.031,
-        "last": 0.105,
+        "last": 0.016,
         "ytd": 0.5174,
         "fromHigh": {
           "below": 0,
@@ -3198,7 +3198,7 @@
         "pe": 30,
         "pef": null,
         "y": 0.022,
-        "last": 0.062,
+        "last": 0.044,
         "ytd": 0.3692,
         "fromHigh": {
           "below": 0,
@@ -3276,7 +3276,7 @@
         "pe": 24,
         "pef": null,
         "y": 0.027,
-        "last": 0.06,
+        "last": 0.066,
         "ytd": 0.1367,
         "fromHigh": {
           "below": 0.0326,
@@ -3355,7 +3355,7 @@
         "pe": 27,
         "pef": null,
         "y": 0.02,
-        "last": 0.06,
+        "last": 0.074,
         "ytd": 0.0772,
         "fromHigh": {
           "below": 0.036,
@@ -3433,7 +3433,7 @@
         "pe": 26,
         "pef": null,
         "y": 0.023,
-        "last": 0.082,
+        "last": 0.118,
         "ytd": 0.2401,
         "fromHigh": {
           "below": 0.0744,
@@ -3512,7 +3512,7 @@
         "pe": 117,
         "pef": null,
         "y": 0.023,
-        "last": 0.172,
+        "last": 0.077,
         "ytd": 0.4152,
         "fromHigh": {
           "below": 0.0616,
@@ -3591,7 +3591,7 @@
         "pe": 31,
         "pef": null,
         "y": 0.008,
-        "last": 0.162,
+        "last": 0.13,
         "ytd": 0.2834,
         "fromHigh": {
           "below": 0.3125,
@@ -3670,7 +3670,7 @@
         "pe": 46,
         "pef": null,
         "y": 0.004,
-        "last": 0.271,
+        "last": 0.262,
         "ytd": 0.5465,
         "fromHigh": {
           "below": 0.3903,
@@ -3749,7 +3749,7 @@
         "pe": 37,
         "pef": null,
         "y": 0.006,
-        "last": null,
+        "last": 0.081,
         "ytd": 0.0231,
         "fromHigh": {
           "below": 0.1755,
@@ -3827,7 +3827,7 @@
         "pe": 35,
         "pef": null,
         "y": 0.005,
-        "last": 0.227,
+        "last": 0.277,
         "ytd": 0.5983,
         "fromHigh": {
           "below": 0.4333,
@@ -3905,7 +3905,7 @@
         "pe": 30,
         "pef": null,
         "y": 0.029,
-        "last": 0.051,
+        "last": 0.015,
         "ytd": 0.3126,
         "fromHigh": {
           "below": 0.0018,
@@ -3983,7 +3983,7 @@
         "pe": 22,
         "pef": null,
         "y": 0.03,
-        "last": 0.101,
+        "last": 0.123,
         "ytd": -0.0806,
         "fromHigh": {
           "below": 0.191,
@@ -4145,7 +4145,7 @@
         "pe": 34,
         "pef": null,
         "y": 0.015,
-        "last": -0.009,
+        "last": -0.024,
         "ytd": 0.0688,
         "fromHigh": {
           "below": 0.14,
@@ -4224,7 +4224,7 @@
         "pe": 37,
         "pef": null,
         "y": 0.003,
-        "last": 0.137,
+        "last": 0.143,
         "ytd": 0.1941,
         "fromHigh": {
           "below": 0.0093,
@@ -4303,7 +4303,7 @@
         "pe": 42,
         "pef": null,
         "y": 0.021,
-        "last": 0.068,
+        "last": 0.093,
         "ytd": 0.6204,
         "fromHigh": {
           "below": 0.1637,
@@ -4440,7 +4440,7 @@
         "pe": 27,
         "pef": null,
         "y": 0.023,
-        "last": 0.046,
+        "last": 0.043,
         "ytd": 0.3484,
         "fromHigh": {
           "below": 0.0262,

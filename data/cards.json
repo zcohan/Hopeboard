@@ -149,7 +149,7 @@
         {
           "h": "Last decade",
           "p": [
-            "Last-decade growth compares the latest fiscal year’s profit per share with the one ten years before, adjusted for stock splits."
+            "Last-decade growth compares profit per share at the two ends of the decade, adjusted for stock splits. Each end is the average of three fiscal years, the latest three and the three ten years before them, so one unusual year can’t decide the rate. The S&P 500’s is worked out the same way."
           ]
         },
         {
@@ -607,7 +607,7 @@
     {
       "id": "TSM:now",
       "about": "Makes Apple’s & Nvidia’s chips",
-      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
+      "assumes": "**{reqSigned}** growth/year",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -722,7 +722,7 @@
     {
       "id": "XOM:now",
       "about": "Oil & gas",
-      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}, from a bad year for oil.",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1268,7 +1268,7 @@
     {
       "id": "VZ:now",
       "about": "Mobile phone & home internet",
-      "assumes": "**{reqSigned}** growth/year\nOver the last decade it shrank {last:abs}/year.",
+      "assumes": "**{reqSigned}** growth/year\nOver the last decade its profit barely changed.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
