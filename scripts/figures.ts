@@ -73,7 +73,7 @@ for (const s of SOURCES) {
   if (now.eps !== null) co.src = { ...co.src, pe: 'sec-eod', y: 'sec-eod', last: 'sec-eod', ...(fc ? { forecast: 'alphavantage' } : {}) };
 
   // barely profitable (earning under 0.5% of its price): shown like a loss-maker, in dollars
-  if (!dollar && now.eps !== null && now.eps > 0 && now.pe !== null && now.pe > 200 && now.netIncome) {
+  if (!dollar && now.eps !== null && now.eps > 0 && now.pe !== null && now.pe > 500 && now.netIncome) {
     const b2 = (x: number) => (Math.abs(x) < 1 ? Math.round(x * 100) / 100 : Math.round(x * 10) / 10);
     const ttmBn = (names: string[]) => { const t = f.ttm(names, today); return t ? b2(Math.abs(t.val) / 1e9) : undefined; };
     co.now.value = Math.round(now.price * (now.netIncome / now.eps));

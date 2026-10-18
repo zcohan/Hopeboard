@@ -72,8 +72,8 @@ export function nowModel(co: { now: NowFigures; industry?: string }, F: Figures)
   };
   const dollar = isDollarCard(n);
   // lost money last year: the section is set by last year's profit, so a forecast profit doesn't move it
-  // lost money, or barely profitable (earning under 0.5% of its price: more than 200 years of profit)
-  const lostMoney = pe.loss || (n.profits?.last ?? 0) < 0 || (pe.v !== null && pe.v > 200);
+  // lost money, or barely profitable (earning under 0.2% of its price: more than 500 years of profit)
+  const lostMoney = pe.loss || (n.profits?.last ?? 0) < 0 || (pe.v !== null && pe.v > 500);
   const sectionReq = dollar && pe.v === null && pef.v === null ? null : req('t');
   const industry = co.industry ? F.industries[co.industry]?.growth ?? null : null;
   const last = n.last ?? null;
