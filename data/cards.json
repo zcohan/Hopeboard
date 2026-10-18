@@ -285,8 +285,8 @@
       "name": "Gold",
       "badge": "GOLD",
       "unit": "an ounce, no profit",
-      "assumes": "Earns nothing: no interest, no profit. You only make money if someone pays more for it later. It has returned **{goldReturn}/year** since 1971, unevenly.",
-      "consequence": "It can fall for decades: from 1980 to 2000 gold lost half its value after inflation.",
+      "assumes": "Has returned **{goldReturn}/year** since 1971, unevenly.",
+      "consequence": "Can fall for decades: from 1980 to 2000 gold lost half its value after inflation.",
       "heading": "Why people buy it",
       "bullets": [
         "Nobody can default on it or print more of it",
