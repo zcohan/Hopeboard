@@ -16,7 +16,7 @@ const state: BoardState = {
   era: 'now',
   basis: 't',
   category: 'mag7',
-  section: 'pricey',
+  section: 'every',
 };
 
 const app = document.getElementById('app')!;
@@ -92,7 +92,7 @@ function render() {
   const L = (f: string) => copy.label('page', f);
   let out = renderBoard(F, C, state);
   // a filter or era with nothing in the chosen tab moves to the first tab that has cards
-  if (state.section !== 'all' && !out.counts[state.section]) {
+  if (state.section !== 'all' && state.section !== 'every' && !out.counts[state.section]) {
     const first = SECTIONS.find((sec) => out.counts[sec]);
     if (first) { state.section = first; out = renderBoard(F, C, state); }
   }
@@ -121,7 +121,7 @@ function render() {
   placeLogos();
   applyCompare();
   wireCommon();
-  app.querySelectorAll<HTMLButtonElement>('button[data-sec]').forEach((b) => b.addEventListener('click', () => { state.section = b.dataset.sec as Section; render(); }));
+  app.querySelectorAll<HTMLButtonElement>('button[data-sec]').forEach((b) => b.addEventListener('click', () => { state.section = b.dataset.sec as BoardState['section']; render(); }));
   app.querySelectorAll<HTMLButtonElement>('button[data-cat]').forEach((b) => b.addEventListener('click', () => { state.category = b.dataset.cat as BoardState['category']; render(); }));
 }
 

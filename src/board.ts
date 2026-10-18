@@ -11,8 +11,9 @@ export interface BoardState {
   era: Era;
   basis: Basis;
   category: Category | 'all' | 'mag7';
-  /** The section tab shown; 'all' renders every section under its heading (tests). */
-  section: Section | 'all';
+  /** The section tab shown; 'every' is the All tab (one grid, most required growth first);
+   * 'all' renders every section under its heading (tests). */
+  section: Section | 'all' | 'every';
 }
 
 export class Copy {
@@ -284,9 +285,12 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
   const label = (sec: Section) => copy.label('sections', s.era === 'now' ? sec : `${sec}Then`);
   if (s.section === 'all') for (const sec of SECTIONS) board += section(label(sec), sorted(sec));
   else {
-    board += `<div class="tabs" role="tablist">` + SECTIONS.map((sec) =>
-      `<button type="button" role="tab" data-sec="${sec}" aria-selected="${sec === s.section}"${counts[sec] ? '' : ' disabled'}>${esc(label(sec))}<span class="count">${counts[sec]}</span></button>`).join('') + `</div>`;
-    const tiles = sorted(s.section);
+    const total = SECTIONS.reduce((n, sec) => n + counts[sec], 0);
+    const tab = (sec: string, name: string, n: number) =>
+      `<button type="button" role="tab" data-sec="${sec}" aria-selected="${sec === s.section}"${n ? '' : ' disabled'}>${esc(name)}<span class="count">${n}</span></button>`;
+    board += `<div class="tabs" role="tablist">` + tab('every', copy.label('sections', 'every'), total) + SECTIONS.map((sec) => tab(sec, label(sec), counts[sec])).join('') + `</div>`;
+    // All: the sections in order, so cards run from the most required growth down, then the not profitable
+    const tiles = s.section === 'every' ? SECTIONS.flatMap(sorted) : sorted(s.section);
     board += tiles.length ? `<div class="grid">${tiles.join('')}</div>` : '';
   }
 

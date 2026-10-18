@@ -162,6 +162,7 @@
     {
       "id": "sections",
       "baselines": "Baselines",
+      "every": "All",
       "pricey": "Pricey",
       "normal": "Normal",
       "bargain": "Bargain",
