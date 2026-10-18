@@ -131,10 +131,11 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .masthead{display:flex; align-items:center; justify-content:space-between; gap:16px;
   padding:0 0 22px; margin:0 0 24px; border-bottom:1px solid var(--rule)}
 .brand{display:flex; align-items:flex-start; gap:14px; min-width:0}
-/* the mark's top lines up with the top of the title's letters */
-.mark{flex:none; width:48px; height:30px; margin-top:6px; color:var(--ink)}
+/* the mark runs from the top of the title's letters to the foot of the subtitle */
+/* height: the title line (26px × 1.15) + 3px + the subtitle line (15px × 1.45), less the space above the
+   title's capitals and below the subtitle's letters */
+.mark{flex:none; height:calc(26px * 1.15 + 3px + 15px * 1.45 - 10px); aspect-ratio:46/29; margin-top:6px; color:var(--ink)}
 .mark svg{width:100%; height:100%; display:block}
-@media (max-width:640px){.mark{width:40px; height:25px}}
 .theme,.whenbtn{flex:none; width:36px; height:36px; border-radius:999px; border:1px solid var(--edge); background:var(--tile);
   color:var(--ink); display:grid; place-items:center; cursor:pointer; padding:0}
 .theme svg,.whenbtn svg{width:18px; height:18px}
