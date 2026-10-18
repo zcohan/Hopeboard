@@ -40,6 +40,8 @@ interface TileParts {
   icon?: string; // inline SVG glyph for a baseline
   color: string;
   name: string;
+  /** where the name links: the company's page on Yahoo Finance */
+  href?: string;
   about?: string; // one line on what the business does
   /** The years figure, top right; gold has none (no profit or interest to count years of). */
   price?: { pre?: string; n: string; unit: string };
@@ -51,6 +53,9 @@ interface TileParts {
   why?: { heading: string; bullets: string[] } | { story: [string, string][] };
   base?: boolean;
 }
+
+/** A quote page on Yahoo Finance; Yahoo writes share classes with a dash (BRK-B). */
+const yahoo = (symbol: string) => `https://finance.yahoo.com/quote/${encodeURIComponent(symbol.replace('.', '-'))}/`;
 
 function tile(t: TileParts, copy: Copy): string {
   const price = t.price
@@ -72,7 +77,7 @@ function tile(t: TileParts, copy: Copy): string {
     `<div class="tile${t.base ? ' base' : ''}" data-copy="${esc(t.id)}">` +
     `<div class="top"><div class="head">` +
     (t.icon ? `<div class="logo" style="background:${t.color}" aria-hidden="true">${t.icon}</div>` : t.logo ? `<div class="logo img" data-logo="${esc(t.logo)}"></div>` : `<div class="logo" style="background:${t.color}">${esc(t.badge)}</div>`) +
-    `<div class="name">${esc(t.name)}${t.about ? `<small>${esc(t.about)}</small>` : ''}</div>${price}</div>` +
+    `<div class="name">${t.href ? `<a class="namelink" href="${esc(t.href)}" target="_blank" rel="noopener">${esc(t.name)}</a>` : esc(t.name)}${t.about ? `<small>${esc(t.about)}</small>` : ''}</div>${price}</div>` +
     t.lines.map((l) => `<p class="${l.cls}">${l.html}</p>`).join('') +
     (t.facts?.length ? `<dl class="facts">${t.facts.map((x) => `<div class="${x.cls ?? ''}"><dt>${esc(x.label)}</dt><dd>${x.html}</dd></div>`).join('')}</dl>` : '') +
     (link || t.compare
@@ -159,10 +164,13 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     return tpl.filter(([, t]) => typeof t === 'string')
       .map(([f, t]) => {
         const html = fill(t!, tk, `${id} ${f}`);
-        // the risk row is good news only when you'd beat the safe US bond: no loss, not less, not just level with it
-        const good = f === 'consequence' && !html.includes('class="loss"') && !html.includes(' less</b>') && !/<b>the same<\/b> as the safe US bond/i.test(html);
+        // the risk row is good news when you'd do at least as well as the safe US bond: no loss, and not less
+        const good = f === 'consequence' && !html.includes('class="loss"') && !html.includes(' less</b>');
         // Earns and Priced for read as a headline figure with notes under it
-        const shaped = f === 'farm' || f === 'assumes' ? html.split('\n').map((l, i) => `<span class="${i ? 'note' : 'headline'}">${l}</span>`).join('') : html;
+        const lines = html.split('\n');
+        // Priced for's notes run on as one short paragraph; Earns keeps one note per line
+        const notes = f === 'assumes' ? [lines.slice(1).join(' ')].filter(Boolean) : lines.slice(1);
+        const shaped = f === 'farm' || f === 'assumes' ? [`<span class="headline">${lines[0]}</span>`, ...notes.map((l) => `<span class="note">${l}</span>`)].join('') : html;
         return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html: shaped, cls: f };
       });
   };
@@ -175,7 +183,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     if (!e) return null;
     const now = copy.get('bond:now');
     return tile({
-      id: bondId, badge: 'US10Y', ...BASE.bond, name: (now?.name as string) ?? 'US Bond', base: true,
+      id: bondId, badge: 'US10Y', ...BASE.bond, name: (now?.name as string) ?? 'US Bond', href: yahoo('^TNX'), base: true,
       // the bond in the board's own unit: years of its yearly interest, like years of profit for a stock
       price: { pre: L('pricedAt'), n: `${Math.round(1 / E.bond)} ${L('years')}`, unit: (now?.unit as string) ?? '' },
       lines: [
@@ -196,7 +204,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
       const m = nowModel({ now: { pe: E.spx.pe, pef: E.spx.pef ?? null, y: E.spx.y } }, F);
       const shown = m.shown(s.basis)!;
       return tile({
-        id: spxId, badge: 'SPX', ...BASE.spx, name, base: true,
+        id: spxId, badge: 'SPX', ...BASE.spx, name, href: yahoo('^GSPC'), base: true,
         price: { pre: L('pricedAt'), n: `${shown.years.text} ${L('years')}`, unit: yearsUnit(shown.basis) },
         lines: [], facts: facts(spxId, tk, [['farm', (e.farm ?? copy.get('company-lines')?.farm) as string], ['assumes', e.assumes as string], ['consequence', e.consequence as string]]),
         why: { heading: heading(m.section === 'loss' ? 'pricey' : m.section), bullets: bulletsOf(e, tk) },
@@ -204,7 +212,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     }
     const frame = copy.get('past-frame');
     return tile({
-      id: spxId, badge: 'SPX', ...BASE.spx, name, base: true,
+      id: spxId, badge: 'SPX', ...BASE.spx, name, href: yahoo('^GSPC'), base: true,
       price: { pre: L('pricedAt'), n: `${parseFig(E.spx.pe).text} ${L('years')}`, unit: L('unitPast') },
       lines: [], facts: frame ? facts(spxId, et, [['assumes', frame.assumes as string]]) : [],
       why: { story: [[copy.label('past-frame', 'storyHeading'), fill(e.story as string, et, spxId)], [copy.label('past-frame', 'sinceHeading'), fill(e.happened as string, et, spxId)]] },
@@ -217,7 +225,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     if (!e) return null;
     const now = copy.get('gold:now');
     return tile({
-      id: goldId, badge: 'GOLD', ...BASE.gold, name: (now?.name as string) ?? 'Gold', base: true,
+      id: goldId, badge: 'GOLD', ...BASE.gold, name: (now?.name as string) ?? 'Gold', href: yahoo('GC=F'), base: true,
       lines: [
         { cls: 'makes', html: fill(e.assumes as string, et, goldId) },
         ...(e.consequence ? [{ cls: 'miss' as const, html: fill(e.consequence as string, et, goldId) }] : []),
@@ -256,7 +264,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
 
           ['consequence', e.consequence as string | undefined],
         ];
-        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts: facts(id, tk, tpl), compare: comparePanel(co, m.req('t'), m.section), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
+        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, href: yahoo(co.id), about: aboutOf(copy, co.id), price, lines: [], facts: facts(id, tk, tpl), compare: comparePanel(co, m.req('t'), m.section), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
       });
       // not profitable: the most years of profit first, and an outright loss (no years to count) ahead of those
       if (html) buckets[m.section].push({ sort: m.section === 'loss' ? m.pe.v ?? Infinity : m.sectionReq ?? -Infinity, html });
@@ -275,7 +283,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         const tk = companyPastTokens(co, era, F);
         // the past in the same shape as today: Priced for, as a headline; a loss year says so instead
         return tile({
-          id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id),
+          id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, href: yahoo(co.id), about: aboutOf(copy, co.id),
           price: { pre: L('pricedAt'), n: `${m.pe.text} ${L('years')}`, unit: L('unitPast') },
           lines: m.req === null ? [{ cls: 'makes', html: fill(frame.noProfit as string, tk, id) }] : [],
           facts: m.req === null ? undefined : facts(id, tk, [['assumes', frame.assumes as string]]),

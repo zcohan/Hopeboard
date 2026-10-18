@@ -146,8 +146,8 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .aside{color:var(--ink-2)} .aside b{font-weight:500; color:var(--ink)}
 
 /* Company cards: labelled rows */
-.facts{margin:0; display:flex; flex-direction:column; gap:18px}
-.facts dt{font-size:13px; font-weight:500; color:var(--ink-3); margin:0 0 2px; text-transform:uppercase; letter-spacing:0.06em}
+.facts{margin:8px 0 0; display:flex; flex-direction:column; gap:18px}
+.facts dt{font-size:13px; font-weight:500; color:var(--ink-3); margin:0 0 2px; line-height:1.33; text-transform:uppercase; letter-spacing:0.06em}
 .facts dd{margin:0; font-size:15px; color:var(--ink); line-height:1.45}
 .facts dd b{font-weight:600}
 .facts b.loss{color:var(--loss); font-weight:500}
@@ -204,7 +204,7 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .head .name:not(:has(small)){align-self:flex-start; min-height:44px; display:flex; align-items:center}
 /* EARNS: the headline figure, with the bond comparison and dividends as small notes under it */
 .facts :is(.farm, .assumes) dd{white-space:normal}
-.facts :is(.farm, .assumes) .headline{display:block; font-size:16px}
+.facts :is(.farm, .assumes) .headline{display:block; font-size:16px; line-height:1.35}
 .facts .farm .headline b{font-size:22px; font-weight:600; letter-spacing:-0.02em; margin-right:2px}
 .facts .assumes .headline b{font-weight:600}
 .facts :is(.farm, .assumes) .note{display:block; font-size:13px; color:var(--ink-3); line-height:1.4; margin-top:1px}
@@ -226,3 +226,6 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .pastbar{display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; background:var(--tile); border:1px solid var(--edge); border-radius:10px; padding:10px 14px; margin:0 0 24px; font-size:15px}
 .pastbar b{font-weight:600}
 .pastbar button{margin-left:auto; font:inherit; font-size:14px; font-weight:500; background:none; border:0; padding:2px 0; color:var(--ink); cursor:pointer; text-decoration:underline; text-decoration-color:var(--ink-3); text-underline-offset:3px}
+.namelink{color:inherit; text-decoration:none}
+.namelink:hover{text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--ink-3)}
+.namelink:focus-visible{outline:2px solid var(--ink); outline-offset:2px; border-radius:3px}
