@@ -285,8 +285,8 @@
       "name": "Gold",
       "badge": "GOLD",
       "unit": "an ounce, no profit",
-      "assumes": "Pays nothing and produces nothing, so there is no profit to grow. This price is reasonable only if someone pays more for it later. Has returned **{goldReturn}/year** since 1971, with twenty-year stretches of nothing.",
-      "consequence": "If the fear fades, there is no profit underneath to catch it: from 1980 to 2000 gold lost half its value after inflation.",
+      "assumes": "Earns nothing: no interest, no profit. You only make money if someone pays more for it later. It has returned **{goldReturn}/year** since 1971, unevenly.",
+      "consequence": "It can fall for decades: from 1980 to 2000 gold lost half its value after inflation.",
       "heading": "Why people buy it",
       "bullets": [
         "Nobody can default on it or print more of it",
