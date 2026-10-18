@@ -284,7 +284,6 @@
       "id": "gold:now",
       "name": "Gold",
       "badge": "GOLD",
-      "unit": "an ounce, no profit",
       "assumes": "Has returned **{goldReturn}/year** since 1971, unevenly.",
       "consequence": "Can fall for decades: from 1980 to 2000 gold lost half its value after inflation.",
       "heading": "Why people buy it",
@@ -323,7 +322,6 @@
     },
     {
       "id": "gold:y1",
-      "unit": "an ounce then, no profit",
       "assumes": "No profit to price. Reasonable only if someone paid more later.",
       "story": "A new record almost every week; central banks and retail buying together.",
       "happened": "Up {goldReturn}.",
@@ -348,7 +346,6 @@
     },
     {
       "id": "gold:y5",
-      "unit": "an ounce then, no profit",
       "assumes": "No profit to price. Reasonable only if someone paid more later.",
       "story": "Inflation arriving and gold oddly flat; bitcoin called the new gold.",
       "happened": "Up {goldReturn}/year, most of it since 2024.",
@@ -373,7 +370,6 @@
     },
     {
       "id": "gold:y10",
-      "unit": "an ounce then, no profit",
       "assumes": "No profit to price. Reasonable only if someone paid more later.",
       "story": "Out of fashion; five years below its 2011 high; “a pet rock.”",
       "happened": "Up {goldReturn}/year.",

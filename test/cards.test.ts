@@ -66,7 +66,7 @@ describe('writing guide', () => {
   const SHARE_PRICE = /\$\d[\d,.]*(?:–\d+)?(?![\d,.–]|\s*(bn|billion|trillion)|s\b)/;
   const cards = ERAS.flatMap((era) => {
     const { board } = renderBoard(F, C, { era, basis: 't', category: 'all', section: 'all' });
-    // Card wording only: drop the top-right figure (the gold price lives there) and split on block ends.
+    // Card wording only: drop the top-right years figure and split on block ends.
     return board.split('<div class="tile').slice(1).map((t) => ({
       id: /data-copy="([^"]+)"/.exec(t)![1],
       text: text(t.replace(/<div class="price">.*?<\/div>/, '').replace(/<\/(p|li|h4|button)>/g, '\n')),

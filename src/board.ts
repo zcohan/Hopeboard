@@ -3,7 +3,7 @@ import logos from '../public/logos/sources.json';
 import { fill, type Tokens } from './copy';
 import { nowModel, parseFig, pastModel, type Section } from './engine';
 import { requiredGrowth } from './formula';
-import { decPctFixed, pct, usd } from './format';
+import { decPctFixed, pct } from './format';
 import { companyNowTokens, companyPastTokens, eraTokens, spxNowTokens } from './tokens';
 import { COMPARES, MAG7, type Basis, type CardsFile, type Category, type Company, type CopyEntry, type Era, type Figures, type PastEra } from './types';
 
@@ -41,7 +41,8 @@ interface TileParts {
   color: string;
   name: string;
   about?: string; // one line on what the business does
-  price: { pre?: string; n: string; unit: string };
+  /** The years figure, top right; gold has none (no profit or interest to count years of). */
+  price?: { pre?: string; n: string; unit: string };
   lines: { cls: 'makes' | 'miss'; html: string }[];
   /** The card's compare panel (time buttons and one badge per time scale), opened from a link at the foot. */
   compare?: { link: string; panel: string };
@@ -52,9 +53,10 @@ interface TileParts {
 }
 
 function tile(t: TileParts, copy: Copy): string {
-  const price =
-    `<div class="price">${t.price.pre ? `<span class="u">${t.price.pre}</span>` : ''}` +
-    `<span class="n">${t.price.n}</span><span class="u">${t.price.unit}</span></div>`;
+  const price = t.price
+    ? `<div class="price">${t.price.pre ? `<span class="u">${t.price.pre}</span>` : ''}` +
+      `<span class="n">${t.price.n}</span><span class="u">${t.price.unit}</span></div>`
+    : '';
   // The comment bubble opens on demand from a link under the card (a popover).
   // The link carries the bubble's heading; for past views, the first story heading.
   let link = '', why = '';
@@ -213,7 +215,6 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     const now = copy.get('gold:now');
     return tile({
       id: goldId, badge: 'GOLD', ...BASE.gold, name: (now?.name as string) ?? 'Gold', base: true,
-      price: { n: '≈' + usd(parseFig(E.gold).v ?? 0), unit: e.unit as string },
       lines: [
         { cls: 'makes', html: fill(e.assumes as string, et, goldId) },
         ...(e.consequence ? [{ cls: 'miss' as const, html: fill(e.consequence as string, et, goldId) }] : []),
