@@ -16,6 +16,8 @@ export type Compare = 'w1' | 'm1' | 'm3' | 'm12';
 export const COMPARES: Compare[] = ['w1', 'm1', 'm3', 'm12'];
 
 export type Category = 'Chips' | 'Software' | 'Internet' | 'Hardware' | 'Health' | 'Consumer' | 'Financials' | 'Industry' | 'Telecoms' | 'Other';
+/** The "Magnificent 7": the seven giant US tech companies, a filter of its own on top of the industries. */
+export const MAG7 = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'NVDA', 'META', 'TSLA'];
 export const CATEGORIES: Category[] = ['Chips', 'Software', 'Internet', 'Hardware', 'Health', 'Consumer', 'Financials', 'Industry', 'Telecoms', 'Other'];
 
 export interface Source {

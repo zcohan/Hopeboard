@@ -5,12 +5,12 @@ import { nowModel, parseFig, pastModel, type Section } from './engine';
 import { requiredGrowth } from './formula';
 import { decPctFixed, pct, usd } from './format';
 import { companyNowTokens, companyPastTokens, eraTokens, spxNowTokens } from './tokens';
-import { COMPARES, type Basis, type CardsFile, type Category, type Company, type CopyEntry, type Era, type Figures, type PastEra } from './types';
+import { COMPARES, MAG7, type Basis, type CardsFile, type Category, type Company, type CopyEntry, type Era, type Figures, type PastEra } from './types';
 
 export interface BoardState {
   era: Era;
   basis: Basis;
-  category: Category | 'all';
+  category: Category | 'all' | 'mag7';
   /** The section tab shown; 'all' renders every section under its heading (tests). */
   section: Section | 'all';
 }
@@ -147,7 +147,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
   const bulletsOf = (e: CopyEntry, tk: Tokens) => ((e.bullets as string[]) ?? []).map((b, i) => fill(b, tk, `${e.id} bullet ${i + 1}`));
   const section = (title: string, tiles: string[]) =>
     tiles.length ? `<h2>${esc(title)}</h2><div class="grid">${tiles.join('')}</div>` : '';
-  const inCategory = (co: Company) => s.category === 'all' || co.category === s.category;
+  const inCategory = (co: Company) => s.category === 'all' || (s.category === 'mag7' ? MAG7.includes(co.id) : co.category === s.category);
   const E = F.eras[s.era];
   const et = eraTokens(F, E);
 

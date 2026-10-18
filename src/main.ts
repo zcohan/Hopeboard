@@ -15,7 +15,7 @@ const DEV = import.meta.env.DEV;
 const state: BoardState = {
   era: 'now',
   basis: 't',
-  category: 'all',
+  category: 'mag7',
   section: 'pricey',
 };
 
@@ -111,7 +111,7 @@ function render() {
     `</div>` +
     `<div id="board">${baselines}` +
     (pills
-      ? `<div class="toggle pills" role="group" aria-label="Industry">${pill('cat', 'all', pills.all as string, state.category === 'all')}${CATEGORIES.map((c) => pill('cat', c, pills[c] as string, state.category === c)).join('')}</div>`
+      ? `<div class="toggle pills" role="group" aria-label="Industry">${pill('cat', 'mag7', pills.mag7 as string, state.category === 'mag7')}${pill('cat', 'all', pills.all as string, state.category === 'all')}${CATEGORIES.map((c) => pill('cat', c, pills[c] as string, state.category === c)).join('')}</div>`
       : '') +
 
     `${companies}</div>` + footer(copy);
