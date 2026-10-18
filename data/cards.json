@@ -269,7 +269,7 @@
       "name": "US Bond",
       "badge": "US10Y",
       "unit": "of its yearly interest",
-      "assumes": "Returns **{bond}/year** for ten years, guaranteed. {highSince}. Every stock below has to promise more than this, or it isn’t worth the risk.",
+      "assumes": "Guaranteed to return **{bond}/year** for ten years. Every stock below has to promise more than this, or it isn’t worth the risk.",
       "heading": "Why it matters",
       "bullets": [
         "The floor every other return is measured against",
