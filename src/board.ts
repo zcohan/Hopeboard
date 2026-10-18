@@ -150,6 +150,19 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
   const inCategory = (co: Company) => s.category === 'all' || (s.category === 'mag7' ? MAG7.includes(co.id) : co.category === s.category);
   const E = F.eras[s.era];
   const et = eraTokens(F, E);
+  // the labelled sections of a card: Earns, Priced for, Risk (or Cushion)
+  const facts = (id: string, tk: Tokens, tpl: [string, string | undefined][]) => {
+    const labels = (copy.get('company-lines')?.labels ?? {}) as Record<string, string>;
+    return tpl.filter(([, t]) => typeof t === 'string')
+      .map(([f, t]) => {
+        const html = fill(t!, tk, `${id} ${f}`);
+        // the risk row is good news on cheap cards: no loss, and no "less than"
+        const good = f === 'consequence' && !html.includes('class="loss"') && !html.includes('/year less</b>');
+        // Earns and Priced for read as a headline figure with notes under it
+        const shaped = f === 'farm' || f === 'assumes' ? html.split('\n').map((l, i) => `<span class="${i ? 'note' : 'headline'}">${l}</span>`).join('') : html;
+        return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html: shaped, cls: f };
+      });
+  };
 
   // Baselines
   const base: string[] = [];
@@ -179,7 +192,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
       return tile({
         id: spxId, badge: 'SPX', ...BASE.spx, name, base: true,
         price: { pre: L('pricedAt'), n: `${shown.years.text} ${L('years')}`, unit: yearsUnit(shown.basis) },
-        lines: [{ cls: 'makes', html: fill(e.assumes as string, tk, spxId) }, { cls: 'miss', html: fill(e.consequence as string, tk, spxId) }],
+        lines: [], facts: facts(spxId, tk, [['farm', copy.get('company-lines')?.farm as string], ['assumes', e.assumes as string], ['consequence', e.consequence as string]]),
         why: { heading: heading(m.section === 'loss' ? 'pricey' : m.section), bullets: bulletsOf(e, tk) },
       }, copy);
     }
@@ -238,17 +251,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
 
           ['consequence', e.consequence as string | undefined],
         ];
-        const labels = (shared?.labels ?? {}) as Record<string, string>;
-        const facts = tpl.filter(([, t]) => typeof t === 'string')
-          .map(([f, t]) => {
-            const html = fill(t!, tk, `${id} ${f}`);
-            // the risk row is good news on cheap cards: no loss, and no "less than"
-            const good = f === 'consequence' && !html.includes('class="loss"') && !html.includes('/year less</b>');
-            // EARNS and REASONABLY PRICED IF read as a headline figure with notes under it
-            const shaped = f === 'farm' || f === 'assumes' ? html.split('\n').map((l, i) => `<span class="${i ? 'note' : 'headline'}">${l}</span>`).join('') : html;
-            return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html: shaped, cls: f };
-          });
-        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts, compare: comparePanel(co, m.req('t'), m.section), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
+        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts: facts(id, tk, tpl), compare: comparePanel(co, m.req('t'), m.section), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
       });
       if (html) buckets[m.section].push({ sort: m.sectionReq ?? -Infinity, html });
     }

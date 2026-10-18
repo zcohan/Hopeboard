@@ -76,18 +76,24 @@ function vsBondPhrase(x: number, bond: number): string {
   return gap === '0%' ? 'The same as' : `${gap} ${x > bond ? 'more' : 'less'} than`;
 }
 
-export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: CopyEntry): Tokens {
-  const m = nowModel(co, F);
-  // what the business earns each year as a share of its price: Buffett's farm, in percent
+/** What the business earns each year as a share of its price (Buffett's farm, in percent), against the bond, and the dividend share. */
+function farmTokens(m: ReturnType<typeof nowModel>, basis: Basis, F: Figures, y: number): Tokens {
   const earns = () => {
     const shown = need(m.shown(basis), 'years of profit');
     return 1 / need(shown.years.v, 'years of profit');
   };
   return {
-    ...nowTokens(m, basis, F, entry.scenario as Scenario | undefined),
     earns: () => (earns() < 0.001 ? 'Under 0.1%' : decPct(earns())),
     earnsVsBond: () => vsBondPhrase(earns(), F.eras.now.bond),
-    pays: () => (co.now.y >= 0.01 ? `\n${decPct(co.now.y)} of it paid to you as dividends` : ''),
+    pays: () => (y >= 0.01 ? `\n${decPct(y)} of it paid to you as dividends` : ''),
+  };
+}
+
+export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: CopyEntry): Tokens {
+  const m = nowModel(co, F);
+  return {
+    ...nowTokens(m, basis, F, entry.scenario as Scenario | undefined),
+    ...farmTokens(m, basis, F, co.now.y),
     fcast: () => {
       const g = need(co.now.forecast, 'forecast');
       const p = pct(Math.abs(g));
@@ -121,7 +127,7 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
 export function spxNowTokens(F: Figures, basis: Basis, entry: CopyEntry): Tokens {
   const s = F.eras.now.spx;
   const m = nowModel({ now: { pe: s.pe, pef: s.pef ?? null, y: s.y, last: s.last } }, F);
-  return nowTokens(m, basis, F, entry.scenario as Scenario | undefined);
+  return { ...nowTokens(m, basis, F, entry.scenario as Scenario | undefined), ...farmTokens(m, basis, F, s.y) };
 }
 
 export function eraTokens(F: Figures, E: EraFigures): Tokens {

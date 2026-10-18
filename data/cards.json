@@ -270,7 +270,7 @@
         "Since 1928 stocks have returned {premium}/year more than this, for taking the risk"
       ],
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
@@ -287,14 +287,14 @@
         "It’s what you hold when you don’t trust the other cards"
       ],
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
       "id": "spx:now",
       "name": "S&P 500",
       "badge": "SPX",
-      "assumes": "Has returned **{index}/year** on average since 1928, dividends included. Today’s price is reasonable assuming profit grows at **{req}/year** {vsLast}. People normally pay {normalYears} years of profit; today it’s {pe:bare}.",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.\nHas returned {index}/year since 1928, dividends included",
       "consequence": "If profit grows at {g}/year like the last decade, {outcome:its}.",
       "scenario": {
         "anchor": "last"
@@ -305,14 +305,14 @@
         "The average now carries Tesla, Palantir and a boom-year Nvidia"
       ],
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
       "id": "bond:y1",
       "assumes": "Returned **{bond}/year** for ten years, guaranteed. What a bondholder got, guaranteed. Over the year since, the stocks below did what they did.",
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
@@ -322,7 +322,7 @@
       "story": "A new record almost every week; central banks and retail buying together.",
       "happened": "Up {goldReturn}.",
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
@@ -330,14 +330,14 @@
       "story": "The AI boom in full swing; the index at {pe} years of profit.",
       "happened": "Profit {profitMove}. The index returned {stock}.",
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
       "id": "bond:y5",
       "assumes": "Returned **{bond}/year** for ten years, guaranteed. Near zero. With the safe US bond paying almost nothing, almost any stock price looked reasonable by comparison — which is how 2021 happened.",
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
@@ -347,7 +347,7 @@
       "story": "Inflation arriving and gold oddly flat; bitcoin called the new gold.",
       "happened": "Up {goldReturn}/year, most of it since 2024.",
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
@@ -355,14 +355,14 @@
       "story": "Zero interest rates, pandemic stimulus, everything expensive at once; the index at {pe} years of profit.",
       "happened": "Profit {profitMove}. The index returned {stock}/year.",
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
       "id": "bond:y10",
       "assumes": "Returned **{bond}/year** for ten years, guaranteed. Low for a decade. The safe US bond was the thing nobody wanted; stocks priced accordingly.",
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
@@ -372,7 +372,7 @@
       "story": "Out of fashion; five years below its 2011 high; “a pet rock.”",
       "happened": "Up {goldReturn}/year.",
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
@@ -380,7 +380,7 @@
       "story": "Post-Brexit, pre-election, slow growth; “bond-proxy” stocks in fashion, tech cheap by today’s standards.",
       "happened": "Profit {profitMove}. The index returned {stock}/year.",
       "notes": [
-        "Open item: bring the US Bond, Gold, S&P 500 and History cards into the same wording as the company cards."
+        "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against."
       ]
     },
     {
