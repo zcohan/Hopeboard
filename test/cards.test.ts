@@ -60,7 +60,7 @@ describe('writing guide', () => {
     /\bP\/E\b/, /\bmultiples?\b/i, /\bEPS\b/, /\bthe ask\b/i, /\bpts\b/i, /\bpoints\b/i, /\bpercentage points\b/i,
     /\babout\b(?! to\b)/i, /\bthe bond\b/i, /margin of safety/i, /room for error/i, /\bmood\b/i, /\bsentiment\b/i, /Mr Market/i,
     /\bmoat\b/i, /headwind|tailwind/i, /\bcatalyst\b/i, /\bupside\b|\bdownside\b/i, /\bbullish\b|\bbearish\b/i,
-    /\bearnings\b/i, /\btrailing\b/i, /\bmight\b|\barguably\b/i, /\bgrows (?!at |to )[~\d]/, /\b(margins?|backlog|capex|hyperscalers?|guidance|valuation|priced in|tailwinds?|headwinds?|secular)\b/i,
+    /\bearnings\b/i, /\btrailing\b/i, /\b(up|down) from\b/i, /\bmight\b|\barguably\b/i, /\bgrows (?!at |to )[~\d]/, /\b(margins?|backlog|capex|hyperscalers?|guidance|valuation|priced in|tailwinds?|headwinds?|secular)\b/i,
   ];
   // A dollar figure that isn't a company-wide amount (bn, billion, trillion) or an oil price is a share price.
   const SHARE_PRICE = /\$\d[\d,.]*(?:–\d+)?(?![\d,.–]|\s*(bn|billion|trillion)|s\b)/;

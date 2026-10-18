@@ -100,7 +100,7 @@
         {
           "h": "Earns",
           "p": [
-            "What the business earns each year as a share of its price: one over the years of profit. A company priced at 25 years of profit earns 4% of its price a year. Dividends are those paid over the last twelve months. Buybacks aren’t counted as cash returned: they already raise profit per share."
+            "What the business earns each year as a share of its price: one over the years of profit. A company priced at 25 years of profit earns 4% of its price a year. Dividends are those paid over the last twelve months. A card spells out the dividend only when it is 3% of the price or more, where it explains why the price needs little growth; smaller dividends are still counted in “Priced for”. Buybacks aren’t counted as cash returned: they already raise profit per share."
           ]
         },
         {
@@ -189,7 +189,7 @@
     {
       "id": "company-lines",
       "farm": "**{earns}** of its stock price a year\n{earnsVsBond} the safe US bond{pays}",
-      "forecast": "Analysts expect {fcastValue} next year",
+      "forecast": "Analysts expect {fcastValue} next year.",
       "notes": [
         "Shared by every company card. farm: what the business earns each year as a share of its price (one over years of profit), against the safe US bond: Buffett's farm in percent. Left off when the company lost money.",
         "forecast: analysts' average forecast for the next fiscal year against this one (Alpha Vantage). Replaced the industry line in October 2026.",
@@ -294,8 +294,8 @@
       "name": "S&P 500",
       "badge": "SPX",
       "farm": "**{earns}** of an index fund’s price a year\n{earnsVsBond} the safe US bond{pays}",
-      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.\nHas returned {index}/year since 1928, dividends included",
-      "consequence": "If profit grows at {g}/year like the last decade, {outcome:its}.",
+      "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.\nHas returned {index}/year since 1928, dividends included.",
+      "consequence": "If profit grows at {g}/year like the last decade, {outcome}.",
       "scenario": {
         "anchor": "last"
       },

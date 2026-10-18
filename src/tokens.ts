@@ -15,10 +15,10 @@ const move = (x: number) => `${x >= 0 ? 'up' : 'down'} ${pct(Math.abs(x))}`;
 
 const years = (p: Parsed, args: string[]) => (args.includes('bare') ? p.text.replace(/^[≈~]/, '') : p.text.replace(/^~/, ''));
 
-/** "up from", "down from" or "the same as", comparing the figures as shown. */
+/** "more than", "less than" or "the same as", comparing the figures as shown. */
 export function compare(req: number, last: number): string {
   const a = Math.round(req * 100), b = Math.round(last * 100);
-  return a > b ? 'up from' : a < b ? 'down from' : 'the same as';
+  return a > b ? 'more than' : a < b ? 'less than' : 'the same as';
 }
 
 /** "+47%" or "−1%": a required growth with its sign, as a headline */
@@ -45,12 +45,12 @@ function nowTokens(m: NowModel, basis: Basis, F: Figures, scenario: Scenario | u
     /** "+47%" or "−1%": the required growth with its sign, as a headline */
     reqSigned: () => signed(req()),
     cmp: () => compare(req(), need(m.last, 'last-decade growth')),
-    /** "Up from the 15%/year of the last decade", or "The same rate as over the last decade": a note under the requirement */
+    /** "More than the 15%/year of the last decade", or "The same rate as over the last decade": a note under the requirement */
     vsLastNote: () => {
       const c = compare(req(), need(m.last, 'last-decade growth'));
       return c === 'the same as' ? 'The same rate as over the last decade' : `${c[0].toUpperCase()}${c.slice(1)} the ${approx(m.last!, [])}/year of the last decade`;
     },
-    /** "— up from the ~15%/year of the last decade", or "— the same rate as over the last decade" (no repeated figure). */
+    /** "— more than the 15%/year of the last decade", or "— the same rate as over the last decade" (no repeated figure). */
     vsLast: () => {
       const c = compare(req(), need(m.last, 'last-decade growth'));
       return c === 'the same as' ? '— the same rate as over the last decade' : `— ${c} the ${approx(m.last!, [])}/year of the last decade`;
@@ -90,7 +90,8 @@ function farmTokens(m: ReturnType<typeof nowModel>, basis: Basis, F: Figures, y:
   return {
     earns: () => (earns() < 0.001 ? 'Under 0.1%' : decPct(earns())),
     earnsVsBond: () => vsBondPhrase(earns(), F.eras.now.bond),
-    pays: () => (y >= 0.01 ? `\n${decPct(y)} of it paid to you as dividends` : ''),
+    // shown only when it changes the story (3% or more); smaller dividends still count in Priced for
+    pays: () => (y >= 0.03 ? `\n${decPct(y)} of it paid to you as dividends` : ''),
   };
 }
 
