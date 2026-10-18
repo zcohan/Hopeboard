@@ -110,7 +110,7 @@ A daily job (`npm run refresh`) downloads new data, recomputes the figures and k
 The design is a plain card grid that a first-time reader can scan, with nothing on the page that does not teach.
 
 - Three columns on desktop, two on tablets, one on phones. Cards are white on a near-white page.
-- A header with the mark, the title and one subtitle: "Laying out the assumptions built into the current market price of popular investments." No explanatory paragraph.
+- A header with the mark, the title and one subtitle: "Drawing out the growth assumptions in the current market price of popular US investments." No explanatory paragraph.
 - No share price anywhere. The number top right is always years of profit.
 - Geist for everything.
 - Red is used only for a loss.
