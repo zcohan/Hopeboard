@@ -1,5 +1,5 @@
 // The placeholder values each kind of card offers its wording.
-import { approx, outcome, outcomeHead, type OutcomeRef, type Tokens } from './copy';
+import { approx, outcome, type OutcomeRef, type Tokens } from './copy';
 import { nowModel, parseFig, type NowModel, type Parsed } from './engine';
 import { INDEX_RETURN, NORMAL_YEARS, requiredGrowth } from './formula';
 import { billions, decPct, halfPct, pct, range } from './format';
@@ -59,11 +59,6 @@ function nowTokens(m: NowModel, basis: Basis, F: Figures, scenario: Scenario | u
     outcome: (a) => {
       const ref: OutcomeRef = a[0] === 'index' || a[0] === 'its' ? a[0] : 'bond';
       return outcome(m.r(scn()), F.eras.now.bond, ref, a[0] === 'r');
-    },
-    /** the outcome as the Risk/Cushion headline; the "if" goes in the note under it */
-    outcomeHead: (a) => {
-      const ref: OutcomeRef = a[0] === 'index' || a[0] === 'its' ? a[0] : 'bond';
-      return outcomeHead(m.r(scn()), F.eras.now.bond, ref);
     },
     r: () => `${range(m.r(scn()), halfPct)}`,
     vsBond: () => {

@@ -62,9 +62,8 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 
 **Scenario anchors.** The "if" line tests the thing that card's price depends on, using a growth rate a reader can check: the company's own last decade, no growth, or the average big US company (the S&P 500's last-decade profit growth, computed). Never a round number with no anchor.
 
-- The Risk section leads with the outcome and puts the scenario in a note under it.
-- Losses read "Liable to lose X% of your investment", with the percentage in red (over the full decade).
-- Gains and shortfalls read "X%/year more/less than the safe US bond".
+- Losses read "you're liable to lose X% of your investment", with the percentage in red (over the full decade).
+- Gains and shortfalls read "you'd (still) make X%/year more/less than the safe US bond".
 
 ## Voice and wording
 

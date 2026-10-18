@@ -275,7 +275,7 @@ Company cards show three labelled sections (labels in `company-lines.labels`), e
 | --- | --- | --- |
 | EARNS | **0.7%** of its stock price a year | 4.5% less than the safe US bond; dividends, when 1% or more |
 | PRICED FOR | **+35%** growth/year | Up from the 15%/year of the last decade; Analysts expect 107% profit growth next year |
-| RISK, or CUSHION when you'd make more than the safe US bond | Liable to lose **55%** of your investment | If profit only grows at 13%/year (the average big US company) |
+| RISK, or CUSHION when you'd make more than the safe US bond | If profit only grows at 13%/year (the average big US company), you're liable to lose 55% of your investment. | |
 
 `assumes` holds the headline, a newline, then its note: `**{reqSigned}** growth/year\n{vsLastNote}.` The forecast note is added by the app.
 
@@ -299,16 +299,9 @@ Each row holds one number. Background (when it became profitable, what fell sinc
 
 ### 8.4 The consequence line (`consequence`)
 
-On company cards and the S&P 500 it is a headline and a note, like the other sections: `{outcomeHead}\nIf profit only grows at {g}/year (the average big US company)`. The outcome leads; the scenario is the note (owner, October 2026).
+One if-then sentence: the scenario, then `{outcome}` (the owner tried the outcome as a headline in October 2026 and preferred the sentence).
 
-Forms the app writes for `{outcomeHead}`:
-
-- Loss over the decade: "Liable to lose **34%** of your investment" (the percentage in red).
-- Better than the bond: "**2%/year more** than the safe US bond".
-- Worse than the bond: "**1.5%/year less** than the safe US bond".
-- Level with it: "**The same** as the safe US bond".
-
-The sentence form, `{outcome}`, is still used on the baseline cards' past views and wherever a whole sentence reads better:
+Forms the app writes for `{outcome}`:
 
 - Loss over the decade: "you're liable to lose **34% of your investment**" (red).
 - Better than the bond: "you'd still make **~2%/year more** than the safe US bond".

@@ -160,9 +160,9 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
       .map(([f, t]) => {
         const html = fill(t!, tk, `${id} ${f}`);
         // the risk row is good news only when you'd beat the safe US bond: no loss, not less, not just level with it
-        const good = f === 'consequence' && !html.includes('class="loss"') && !html.includes(' less</b>') && !html.includes('<b>The same</b> as the safe US bond');
-        // each section reads as a headline with notes under it
-        const shaped = f === 'farm' || f === 'assumes' || f === 'consequence' ? html.split('\n').map((l, i) => `<span class="${i ? 'note' : 'headline'}">${l}</span>`).join('') : html;
+        const good = f === 'consequence' && !html.includes('class="loss"') && !html.includes(' less</b>') && !/<b>the same<\/b> as the safe US bond/i.test(html);
+        // Earns and Priced for read as a headline figure with notes under it
+        const shaped = f === 'farm' || f === 'assumes' ? html.split('\n').map((l, i) => `<span class="${i ? 'note' : 'headline'}">${l}</span>`).join('') : html;
         return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html: shaped, cls: f };
       });
   };
