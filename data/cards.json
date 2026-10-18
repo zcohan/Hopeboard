@@ -269,7 +269,8 @@
       "name": "US Bond",
       "badge": "US10Y",
       "unit": "of its yearly interest",
-      "assumes": "Guaranteed to return **{bond}/year** for ten years. Stock prices generally promise a higher return than this, or it isn’t worth the uncertainty.",
+      "assumes": "Guaranteed to return **{bond}/year** for ten years.",
+      "consequence": "Stock prices generally promise a higher return than this, or it isn’t worth the uncertainty.",
       "heading": "Why it matters",
       "bullets": [
         "The floor every other return is measured against",

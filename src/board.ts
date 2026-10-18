@@ -178,7 +178,10 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
       id: bondId, badge: 'US10Y', ...BASE.bond, name: (now?.name as string) ?? 'US Bond', base: true,
       // the bond in the board's own unit: years of its yearly interest, like years of profit for a stock
       price: { pre: L('pricedAt'), n: `${Math.round(1 / E.bond)} ${L('years')}`, unit: (now?.unit as string) ?? '' },
-      lines: [{ cls: 'makes', html: fill(e.assumes as string, et, bondId) }],
+      lines: [
+        { cls: 'makes', html: fill(e.assumes as string, et, bondId) },
+        ...(e.consequence ? [{ cls: 'miss' as const, html: fill(e.consequence as string, et, bondId) }] : []),
+      ],
       why: s.era === 'now' ? { heading: e.heading as string, bullets: bulletsOf(e, et) } : undefined,
     }, copy);
   }));
