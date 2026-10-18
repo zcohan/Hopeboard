@@ -34,7 +34,7 @@ g* = 1.10 / ((1 + y) * (18 / PE)^(1/10)) - 1
 - `g` is profit-per-share growth per year. `g*` is the required growth: the g that makes r equal the S&P 500's 10%.
 - `y` is dividends paid to holders each year, as a share of the price. Buybacks are not added: they raise profit per share, which `g` already measures, so adding them would count them twice.
 - `PE` is today's years of profit. `18` is the ordinary number of years people pay, assumed for 2036 (the long-run average).
-- Loss or gain over the decade is `(1 + r)^10 - 1`. That is where "you're liable to lose 30% of your investment" comes from.
+- Loss or gain over the decade is `(1 + r)^10 - 1`. That is where "you may lose 30% of your investment" comes from.
 - Toggling to next year's forecast grows last year's profit at the analysts' forecast rate and recomputes `g*`.
 - The "if" lines on each card use the same formula with an anchored scenario growth rate.
 
@@ -62,7 +62,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 
 **Scenario anchors.** The "if" line tests the thing that card's price depends on, using a growth rate a reader can check: the company's own last decade, no growth, or the average big US company (the S&P 500's last-decade profit growth, computed). Never a round number with no anchor.
 
-- Losses read "you're liable to lose X% of your investment", with the percentage in red (over the full decade).
+- Losses read "you may lose X% of your investment", with the percentage in red (over the full decade).
 - Gains and shortfalls read "you'd (still) make X%/year more/less than the safe US bond".
 
 ## Voice and wording

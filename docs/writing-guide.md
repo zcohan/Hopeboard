@@ -121,7 +121,7 @@ The cards read like a sharp analyst writing for a friend who doesn't work in fin
 
 - **State facts.** "Palantir has been profitable since 2023." Not "Palantir has only recently become profitable, which is worth bearing in mind."
 - **Statements, not questions.** The only questions on the board are the bubble links.
-- **No hedging on the card.** No "may", "might", "could potentially", "it's possible that", "arguably". The numbers are already scenarios; the footer says so. Uncertainty about a figure goes in a flag (section 14), not in hedged prose.
+- **No hedging on the card.** No "might", "could potentially", "it's possible that", "arguably". The numbers are already scenarios; the footer says so. Uncertainty about a figure goes in a flag (section 14), not in hedged prose.
 - **No disclaimers on the card.** The not-advice line lives in the footer, once.
 - **Precise.** "Data-centre sales were up 57% last quarter" beats "data-centre sales are booming".
 - **Short.** One idea per sentence. Most sentences under 20 words. Bullets under 12.
@@ -196,7 +196,7 @@ Facts that are inputs, not results, may be typed in bullets and stories when the
 ### 7.3 Units
 
 - Growth and returns per year: "~15%/year". Write "/year" every time, so the reader never has to guess whether a figure is yearly or total.
-- Losses over the whole decade: "you're liable to lose 34% of your investment". This is the one total figure.
+- Losses over the whole decade: "you may lose 34% of your investment". This is the one total figure.
 - One-year past views: "Profit grew ~30%. The stock returned ~39%." (no "/year", because it is one year).
 - Years of profit: "35 years", never "35x".
 - Dollars: "$175bn" in bullets, "~$21 billion" in sentences. Never a share price.
@@ -275,7 +275,7 @@ Company cards show three labelled sections (labels in `company-lines.labels`), e
 | --- | --- | --- |
 | EARNS | **0.7%** of its stock price a year | 4.5% less than the safe US bond; dividends, when 1% or more |
 | PRICED FOR | **+35%** growth/year | Up from the 15%/year of the last decade; Analysts expect 107% profit growth next year |
-| RISK, or CUSHION when you'd make more than the safe US bond | If profit only grows at 13%/year (the average big US company), you're liable to lose 55% of your investment. | |
+| RISK, or CUSHION when you'd make more than the safe US bond | If profit only grows at 13%/year (the average big US company), you may lose 55% of your investment. | |
 
 `assumes` holds the headline, a newline, then its note: `**{reqSigned}** growth/year\n{vsLastNote}.` The forecast note is added by the app.
 
@@ -299,11 +299,11 @@ Each row holds one number. Background (when it became profitable, what fell sinc
 
 ### 8.4 The consequence line (`consequence`)
 
-One if-then sentence: the scenario, then `{outcome}` (the owner tried the outcome as a headline in October 2026 and preferred the sentence).
+One if-then sentence: the scenario, then `{outcome}` (the owner tried the outcome as a headline in October 2026 and preferred the sentence). Put `{corrects}` straight after the scenario: on Pricey cards it adds " & the stock corrects", because buyers going back to an ordinary 18 years of profit is most of the loss there. Losses read "you may lose" (owner, October 2026: more concise than "liable to lose", and less certain).
 
 Forms the app writes for `{outcome}`:
 
-- Loss over the decade: "you're liable to lose **34% of your investment**" (red).
+- Loss over the decade: "you may lose **34% of your investment**" (red).
 - Better than the bond: "you'd still make **~2%/year more** than the safe US bond".
 - Worse than the bond: "you'd make **~1.5%/year less** than the safe US bond".
 - Give only the gap to the yardstick: "you'd make **~2.5%/year less** than the safe US bond". Don't add the return itself (`{outcome:r}`); the owner found "you'd make ~2.5%/year, ~2.5%/year less…" harder to read.
@@ -456,10 +456,10 @@ The footer defines terms once. The cards never do.
 ### 11.4 Also banned
 
 - Rhetorical questions in body text ("Can it last?").
-- Hedges: may, might, could, arguably, potentially, somewhat, fairly.
+- Hedges: might, could, arguably, potentially, somewhat, fairly.
 - Intensifiers: very, extremely, incredibly, massive, huge (use the number instead).
 - Filler: "It's worth noting", "Importantly", "In other words", "Simply put", "At the end of the day".
-- Second person outside the consequence line. "You" appears in the consequence ("you'd make", "you're liable to lose") and nowhere else.
+- Second person outside the consequence line. "You" appears in the consequence ("you'd make", "you may lose") and nowhere else.
 - Advice: buy, sell, avoid, opportunity, worth a look, steer clear.
 
 ## 12. Worked examples
@@ -488,7 +488,7 @@ Why: the hinge is that Costco's price needs more than its own best decade. So th
 
 > Reasonably priced only if you assume profit grows at **~15%/year** — down from the ~70%/year of the last decade, ending on a boom year.
 > Analysts expect chip companies to grow profit ~23%/year.
-> If profit doesn't grow from this year's level, you're liable to lose **34% of your investment**.
+> If profit doesn't grow from this year's level, you may lose **34% of your investment**.
 
 Why: ~15%/year looks easy next to ~70%. But the ~70% ends on a boom year, so the question is whether this year's profit is the new floor. "Doesn't grow from this year's level" tests exactly that. Testing at the industry's 23% would make the card look safe, and that reading would be wrong.
 
@@ -504,7 +504,7 @@ Why: the requirement is low because ~5% a year comes back as cash. The consequen
 
 > Reasonably priced only if you assume profit grows at **~37%/year**. Palantir has been profitable since 2023.
 > Analysts expect software companies to grow profit ~23%/year.
-> If profit only grows at 23%/year (the average for software), you're liable to lose **11% of your investment**.
+> If profit only grows at 23%/year (the average for software), you may lose **11% of your investment**.
 
 Why: there is no record to compare with, so state the fact and stop. The industry is the test, and growing as fast as the average software company still loses money.
 
@@ -526,7 +526,7 @@ Why: beating the bond is trivial at this price, so the test is the index. The bu
 ### 12.6 Intel: no profit to price
 
 > Reasonably priced only if you assume Intel earns **~$70–95 billion** a year by 2036. Intel lost ~$11 billion last year. Its best years were ~$21 billion.
-> If profit reaches Intel's best year (~$21 billion), you're liable to lose **20–42% of your investment**.
+> If profit reaches Intel's best year (~$21 billion), you may lose **20–42% of your investment**.
 
 Why: with no profit there's no growth rate to quote, so the card works in dollars, with two anchors the reader can hold: last year's loss and the best year ever. The range comes from two sources that disagree on Intel's value, and `notes` says so.
 
@@ -568,7 +568,7 @@ Lines the owner rejected or that break this guide, with what replaced them or wo
 The owner holds a high standard for accuracy and wants soft claims flagged where the reader can see them. Three places:
 
 1. **On the card**, when the reader needs it to read the line correctly: "(rough figure)", "≈", a range with both ends.
-2. **In the footer**, for assumptions that apply to every card: the 18 years in 2036, analyst forecasts running optimistic, "liable to lose" being a scenario, not advice.
+2. **In the footer**, for assumptions that apply to every card: the 18 years in 2036, analyst forecasts running optimistic, "may lose" being a scenario, not advice.
 3. **In `notes`**, for whoever writes next: open questions, disagreeing sources, judgement calls on industry buckets, figures from memory. Notes never reach the board.
 
 Flag when:

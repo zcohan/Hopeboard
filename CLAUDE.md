@@ -53,7 +53,7 @@ Cards read as if a real analyst wrote them, in mainstream words. Use one term fo
 - No taglines, no aphorisms, no "X, not Y" turns, no lines that explain the concept. Every word must help the reader decide.
 - Never show the dollar share price.
 - Scenario growth rates must be anchored: the company's own last decade, no growth, or the average big US company (the S&P 500's last-decade profit growth, computed).
-- Loss lines read "you're liable to lose X% of your investment", with the percentage in red.
+- Loss lines read "you may lose X% of your investment", with the percentage in red.
 
 ## Data
 

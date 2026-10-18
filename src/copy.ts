@@ -39,14 +39,14 @@ export type OutcomeRef = 'bond' | 'index' | 'its';
 
 /**
  * The consequence: what you'd make or lose at the scenario's return.
- * Losses read "you're liable to lose X% of your investment" (red). Otherwise the
+ * Losses read "you may lose X% of your investment" (red). Otherwise the
  * gap to the safe US bond (or the index), with "still" only when it beats it.
  * withReturn adds the return itself: "you'd still make ~8%/year, ~3%/year more than…".
  */
 export function outcome(rs: number[], bond: number, ref: OutcomeRef, withReturn: boolean): string {
   const changes = rs.map(decadeChange);
   if (changes.every((c) => c < 0))
-    return `you’re liable to lose <b class="loss">${range(changes.map((c) => -c), pct)} of your investment</b>`;
+    return `you may lose <b class="loss">${range(changes.map((c) => -c), pct)} of your investment</b>`;
   const base = ref === 'bond' ? bond : INDEX_RETURN;
   const what = ref === 'bond' ? 'the safe US bond' : ref === 'index' ? 'the index’s 10% average' : 'its 10% average';
   const gaps = rs.map((r) => r - base);

@@ -39,6 +39,8 @@ function nowTokens(m: NowModel, basis: Basis, F: Figures, scenario: Scenario | u
   return {
     ...common(F),
     opening: () => (m.section === 'pricey' || m.section === 'loss' ? 'Only if' : 'If'),
+    /** " & the stock corrects" on Pricey cards, where buyers going back to ordinary years of profit drives the loss */
+    corrects: () => (m.section === 'pricey' ? ' & the stock corrects' : ''),
     req: (a) => approx(req(), a),
     /** "+47%" or "−1%": the required growth with its sign, as a headline */
     reqSigned: () => signed(req()),
