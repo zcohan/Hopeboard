@@ -114,9 +114,14 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .logo.img img{max-width:38px; max-height:30px; display:block}
 
 /* Section tabs: Pricey / Normal / Bargain */
-.tabs{display:flex; gap:4px; margin:40px 0 16px; border-bottom:1px solid var(--rule); overflow-x:auto}
+/* The rule under the tabs is painted as a background, so the selected tab's underline can sit on it without
+   spilling out of the box (which gave the row its own vertical scroll). On a phone the row still scrolls sideways,
+   without a scrollbar. */
+.tabs{display:flex; gap:4px; margin:40px 0 16px; overflow-x:auto; overflow-y:hidden; scrollbar-width:none;
+  background:linear-gradient(var(--rule), var(--rule)) bottom / 100% 1px no-repeat}
+.tabs::-webkit-scrollbar{display:none}
 .tabs button{font-family:inherit; font-weight:600; font-size:20px; letter-spacing:-0.02em;
-  color:var(--ink-3); background:none; border:0; border-bottom:2px solid transparent; margin-bottom:-1px;
+  color:var(--ink-3); background:none; border:0; border-bottom:2px solid transparent;
   padding:6px 14px 10px; cursor:pointer; white-space:nowrap; display:flex; align-items:baseline; gap:8px}
 .tabs button:first-child{padding-left:0}
 .tabs button[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--ink)}
@@ -203,11 +208,11 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 /* a name with no description sits level with the middle of the logo */
 .head .name:not(:has(small)){align-self:flex-start; min-height:44px; display:flex; align-items:center}
 /* EARNS: the headline figure, with the bond comparison and dividends as small notes under it */
-.facts :is(.farm, .assumes) dd{white-space:normal}
-.facts :is(.farm, .assumes) .headline{display:block; font-size:16px; line-height:1.35}
+.facts :is(.farm, .assumes, .balance) dd{white-space:normal}
+.facts :is(.farm, .assumes, .balance) .headline{display:block; font-size:16px; line-height:1.35}
 .facts .farm .headline b{font-size:22px; font-weight:600; letter-spacing:-0.02em; margin-right:2px}
-.facts .assumes .headline b{font-weight:600}
-.facts :is(.farm, .assumes) .note{display:block; font-size:13px; color:var(--ink-3); line-height:1.4; margin-top:1px}
+.facts :is(.assumes, .balance) .headline b{font-weight:600}
+.facts :is(.farm, .assumes, .balance) .note{display:block; font-size:13px; color:var(--ink-3); line-height:1.4; margin-top:1px}
 
 /* The time and profit menu, opened from the clock button in the header */
 .when{position:relative; flex:none}
@@ -229,3 +234,5 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .namelink{color:inherit; text-decoration:none}
 .namelink:hover{text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--ink-3)}
 .namelink:focus-visible{outline:2px solid var(--ink); outline-offset:2px; border-radius:3px}
+.why p.note{margin:4px 0 0; font-size:13px; color:var(--ink-3)}
+.why > :last-child{margin-bottom:0}
