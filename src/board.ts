@@ -289,7 +289,9 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     const total = SECTIONS.reduce((n, sec) => n + counts[sec], 0);
     const tab = (sec: string, name: string, n: number) =>
       `<button type="button" role="tab" data-sec="${sec}" aria-selected="${sec === s.section}"${n ? '' : ' disabled'}>${esc(name)}<span class="count">${n}</span></button>`;
-    board += `<div class="tabs" role="tablist">` + tab('every', copy.label('sections', 'every'), total) + SECTIONS.map((sec) => tab(sec, label(sec), counts[sec])).join('') + `</div>`;
+    board += `<div class="tabs" role="tablist">` + tab('every', copy.label('sections', 'every'), total) + SECTIONS
+      // Not profitable is left off when nothing in view lost money
+      .filter((sec) => sec !== 'loss' || counts.loss).map((sec) => tab(sec, label(sec), counts[sec])).join('') + `</div>`;
     // All: the not profitable first (their price needs more growth than any percentage), then the most required growth down
     const tiles = s.section === 'every' ? (['loss', 'pricey', 'normal', 'bargain'] as Section[]).flatMap(sorted) : sorted(s.section);
     board += tiles.length ? `<div class="grid">${tiles.join('')}</div>` : '';
