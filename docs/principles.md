@@ -42,7 +42,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 
 ## The board and the cards
 
-**Sections.** Baselines (US Bond, Gold, S&P 500) sit on top. Company cards sit under category pills and four tabs, sorted by required growth:
+**Sections.** Baselines (US Bond, S&P 500, Gold) sit on top; the S&P 500 card uses the company layout. Company cards sit under category pills (Mag 7 by default, then All industries and each industry) and tabs sorted by required growth. The All tab (the default) shows every card in one grid, most required growth first; the others split them:
 
 - **Pricey:** required growth of 14% or more.
 - **Normal:** 10% to 14%.
