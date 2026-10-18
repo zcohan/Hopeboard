@@ -290,6 +290,16 @@ The profit growth a year the price needs, as a headline, then notes:
 > **$290 billion** profit/year by 2036
 > SpaceX lost $9 billion on $23 billion of revenue last year. Apple earns $130 billion.
 
+### 8.3a Cash & debt (shared, `company-lines.balance*`)
+
+A link at the foot of the card opens a bubble. The link says which is bigger: "Cash", "Debt", or "Cash & debt" when they are close. It stays out of the three sections, which are the card's core (owner, October 2026). Written once for every card; the app picks the wording from the latest balance sheet:
+
+> Holds **8 years** of profit in cash, beyond its debt
+> It would take **10 years** of profit to pay off its debt, after using its cash
+> Cash and debt close to even (within a quarter of a year of profit)
+
+Relative only: no dollar amounts (owner, October 2026). Not profitable cards have no profit to measure against, so they say only which is bigger: "Holds more in cash than it owes". Banks get no row: their debts are mostly deposits. A company whose debt isn't found in the data gets no row either, so a missing figure never reads as "no debt".
+
 ### 8.4 Risk or Cushion (`consequence`)
 
 One if-then sentence: the scenario, then `{outcome}`. The owner tried the result as a headline with the scenario as a note (October 2026) and preferred the sentence.

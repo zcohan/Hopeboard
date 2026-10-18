@@ -51,7 +51,34 @@ interface TileParts {
   /** Labelled rows (company cards): Earns, Reasonably priced, Expected next year, Risk. */
   facts?: { label: string; html: string; cls?: string }[];
   why?: { heading: string; bullets: string[] } | { story: [string, string][] };
+  /** A second bubble from its own link at the foot: cash and debt */
+  extra?: { link: string; html: string };
   base?: boolean;
+}
+
+/** The Cash & debt bubble, opened from its link at the foot of the card: a headline in years of profit (dollars on
+ * cards that are Not profitable), the dollar amounts under it. Nothing when cash and debt aren't both in the data. */
+function balanceBubble(co: Company, section: Section, shared: CopyEntry | null | undefined, tk: Tokens, id: string, copy: Copy): { link: string; html: string } | undefined {
+  const t = balanceRow(co, section, shared)[0];
+  if (!t?.[1]) return undefined;
+  const [head, ...notes] = fill(t[1], tk, `${id} balance`).split('\n');
+  // the link says which is bigger: Cash, Debt, or Cash & debt when they're close
+  const labels = (shared?.labels ?? {}) as Record<string, string>;
+  return { link: labels[t[2]] ?? '', html: `<p class="story">${head}</p>${notes.map((n) => `<p class="note">${n}</p>`).join('')}` };
+}
+
+/** Which Cash / Debt wording, and its label. Years of profit where there is a profit to count in;
+ * dollars on cards that are Not profitable. */
+function balanceRow(co: Company, section: Section, shared: CopyEntry | null | undefined): [string, string | undefined, string][] {
+  const b = co.now.balance;
+  if (!b || !shared) return [];
+  const net = b.cash - b.debt;
+  const inYears = section !== 'loss' && b.profit !== undefined && b.profit > 0;
+  const key = inYears
+    ? Math.abs(net) / b.profit! < 0.25 ? 'balanceEven' : net > 0 ? 'balanceCash' : 'balanceDebt'
+    : net >= 0 ? 'balanceCashDollars' : 'balanceDebtDollars';
+  const label = key.startsWith('balanceEven') ? 'balanceEven' : key.startsWith('balanceCash') ? 'balanceCash' : 'balanceDebt';
+  return [['balance', shared[key] as string | undefined, label]];
 }
 
 /** A quote page on Yahoo Finance; Yahoo writes share classes with a dash (BRK-B). */
@@ -81,10 +108,12 @@ function tile(t: TileParts, copy: Copy): string {
     t.lines.map((l) => `<p class="${l.cls}">${l.html}</p>`).join('') +
     (t.facts?.length ? `<dl class="facts">${t.facts.map((x) => `<div class="${x.cls ?? ''}"><dt>${esc(x.label)}</dt><dd>${x.html}</dd></div>`).join('')}</dl>` : '') +
     (link || t.compare
-      ? `<div class="foot-links">${t.compare?.panel ?? ''}<div class="links">${link ? `<button type="button" class="whylink" popovertarget="${pop}">${link}</button>` : ''}${t.compare?.link ?? ''}</div></div>`
+      ? `<div class="foot-links">${t.compare?.panel ?? ''}<div class="links">${link ? `<button type="button" class="whylink" popovertarget="${pop}">${link}</button>` : ''}` +
+        `${t.extra ? `<button type="button" class="whylink" popovertarget="${pop}-x">${esc(t.extra.link)}</button>` : ''}${t.compare?.link ?? ''}</div></div>`
       : '') +
     `</div>` +
     (link ? `<div class="why" popover id="${pop}">${why}</div>` : '') +
+    (t.extra ? `<div class="why" popover id="${pop}-x">${t.extra.html}</div>` : '') +
     `</div>`
   );
 }
@@ -158,11 +187,12 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
   const inCategory = (co: Company) => s.category === 'all' || (s.category === 'mag7' ? MAG7.includes(co.id) : co.category === s.category);
   const E = F.eras[s.era];
   const et = eraTokens(F, E);
-  // the labelled sections of a card: Earns, Priced for, Risk (or Cushion)
-  const facts = (id: string, tk: Tokens, tpl: [string, string | undefined][]) => {
+  // the labelled sections of a card: Earns, Priced for, Cash or Debt, Risk (or Cushion). An entry may name its
+  // label (Cash, Debt or Cash & debt) in place of the section's own.
+  const facts = (id: string, tk: Tokens, tpl: ([string, string | undefined] | [string, string | undefined, string])[]) => {
     const labels = (copy.get('company-lines')?.labels ?? {}) as Record<string, string>;
     return tpl.filter(([, t]) => typeof t === 'string')
-      .map(([f, t]) => {
+      .map(([f, t, labelKey]) => {
         const html = fill(t!, tk, `${id} ${f}`);
         // the risk row is good news when you'd do at least as well as the safe US bond: no loss, and not less
         const good = f === 'consequence' && !html.includes('class="loss"') && !html.includes(' less</b>');
@@ -170,8 +200,8 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         const lines = html.split('\n');
         // Priced for's notes run on as one short paragraph; Earns keeps one note per line
         const notes = f === 'assumes' ? [lines.slice(1).join(' ')].filter(Boolean) : lines.slice(1);
-        const shaped = f === 'farm' || f === 'assumes' ? [`<span class="headline">${lines[0]}</span>`, ...notes.map((l) => `<span class="note">${l}</span>`)].join('') : html;
-        return { label: (good ? labels.consequenceGood : labels[f]) ?? '', html: shaped, cls: f };
+        const shaped = f === 'farm' || f === 'assumes' || f === 'balance' ? [`<span class="headline">${lines[0]}</span>`, ...notes.map((l) => `<span class="note">${l}</span>`)].join('') : html;
+        return { label: (labelKey ? labels[labelKey] : good ? labels.consequenceGood : labels[f]) ?? '', html: shaped, cls: f };
       });
   };
 
@@ -257,14 +287,13 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         const shared = copy.get('company-lines');
         const earnsNow = m.section !== 'loss' && m.shown(s.basis) !== null;
         // the farm line leads; the rest reads as commentary under it
-        const tpl: [string, string | undefined][] = [
+        const tpl: ([string, string | undefined] | [string, string | undefined, string])[] = [
           ['farm', earnsNow ? (shared?.farm as string | undefined) : undefined],
           // the analysts' forecast sits under the requirement as a note, so the two growth figures read together
           ['assumes', e.assumes === undefined ? undefined : (e.assumes as string) + (co.now.forecast !== undefined && co.now.forecast !== null && shared?.forecast ? `\n${shared.forecast as string}` : '')],
-
           ['consequence', e.consequence as string | undefined],
         ];
-        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, href: yahoo(co.id), about: aboutOf(copy, co.id), price, lines: [], facts: facts(id, tk, tpl), compare: comparePanel(co, m.req('t'), m.section), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
+        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, href: yahoo(co.id), about: aboutOf(copy, co.id), price, lines: [], facts: facts(id, tk, tpl), extra: balanceBubble(co, m.section, shared, tk, id, copy), compare: comparePanel(co, m.req('t'), m.section), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
       });
       // not profitable: the most years of profit first, and an outright loss (no years to count) ahead of those
       if (html) buckets[m.section].push({ sort: m.section === 'loss' ? m.pe.v ?? Infinity : m.sectionReq ?? -Infinity, html });

@@ -44,6 +44,12 @@
           ]
         },
         {
+          "h": "Charts are made for traders",
+          "p": [
+            "Stock apps lead with the share price and a chart because they are built for people who buy and sell within days or weeks. For someone leaving money for ten years, the day’s move tells you almost nothing. What matters is what you pay for the profit, and how much that profit has to grow."
+          ]
+        },
+        {
           "h": "Count the years of profit you’re paying for",
           "p": [
             "Warren Buffett explained it with a farm. If a farm costs $1,000 and earns $70 a year, you are paying 14 years of its profit. Put the other way round, it earns 7% of its price a year.",
@@ -68,6 +74,14 @@
           "h": "Parking money for a decade",
           "p": [
             "Hopeboard is for people deciding where to put savings for ten years. It doesn’t follow the daily price. The deal does change every day, though: when the price falls or the profit grows, the same company becomes a better deal. “Compare over time” on each card shows whether the deal is better or worse than a week, a month, three months or a year ago."
+          ]
+        },
+        {
+          "h": "What the board leaves to you",
+          "p": [
+            "In 2016 Warren Buffett asked for a big US company priced at no more than 15 years of next year’s profit, that his managers were 90% sure would earn more in five years, and at least 50% sure would grow profit 7% a year. The search found Apple, as The Wall Street Journal later reported.",
+            "Hopeboard does the first part for every company: the years of profit, and the growth the price needs. The second part is judgement: how sure you can be that the profit grows. Buffett got there by understanding the business. He learned, for example, that about 95% of iPhone owners buy another iPhone. The board can’t do that part for you.",
+            "Buffett also buys rarely, and only when a price needs little. On most days, most prices on this board need a lot."
           ]
         },
         {
@@ -109,6 +123,12 @@
             "“Priced for” is the profit growth a year the stock needs to return what the S&P 500 has averaged since 1928, {index} a year, with dividends. The return over ten years comes from three things: profit growth, the dividends paid along the way, and the change in how many years of profit people pay. Hopeboard assumes that in ten years people pay an ordinary {normalYears} years of profit, the long-run average, and works backwards to the growth each price needs."
           ],
           "formula": "return per year = (1 + growth) × (1 + dividends) × (18 ÷ years of profit today)^(1/10) − 1"
+        },
+        {
+          "h": "Cash and debt",
+          "p": [
+            "From the company’s latest balance sheet in its SEC filings. Cash counts cash, short-term investments and marketable securities; debt counts borrowing, without leases. The “Cash” or “Debt” link on each card shows whichever is bigger, in years of last year’s profit. Cards that are Not profitable have no profit to measure against, so they say only which is bigger. Banks are left out, because most of what a bank owes is its customers’ deposits."
+          ]
         },
         {
           "h": "The sections",
@@ -195,14 +215,23 @@
         "forecast: analysts' average forecast for the next fiscal year against this one (Alpha Vantage). Replaced the industry line in October 2026.",
         "Company cards show labelled rows (owner’s layout, October 2026): Earns, Reasonably priced, Expected next year, Risk.",
         "The Risk row is labelled Cushion when its outcome is good news (no loss, and at least as much as the yardstick).",
-        "The forecast is a note under the requirement (owner, October 2026), no longer its own row."
+        "The forecast is a note under the requirement (owner, October 2026), no longer its own row.",
+        "Cash and debt (owner, October 2026): a third link at the foot of the card, named for whichever is bigger (Cash, Debt, or Cash & debt when close), opening a bubble. Relative only, in years of profit, no dollar amounts (the owner: “it’s all relative”). Cards that are Not profitable have no profit to measure against, so they say only which is bigger. Left off banks and wherever the debt isn't in the data."
       ],
       "labels": {
         "farm": "Earns",
         "assumes": "Priced for",
         "consequence": "Risk",
-        "consequenceGood": "Cushion"
-      }
+        "consequenceGood": "Cushion",
+        "balanceCash": "Cash",
+        "balanceDebt": "Debt",
+        "balanceEven": "Cash & debt"
+      },
+      "balanceCash": "Holds **{netYears}** of profit in cash, beyond its debt",
+      "balanceDebt": "It would take **{netYears}** of profit to pay off its debt, after using its cash",
+      "balanceEven": "Cash and debt close to even",
+      "balanceCashDollars": "Holds more in cash than it owes",
+      "balanceDebtDollars": "Owes more than it holds in cash"
     },
     {
       "id": "compare",

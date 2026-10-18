@@ -47,6 +47,8 @@ export interface NowFigures {
   fromHigh?: { below: number; month: string }; // below the year's highest close
   revenueGrowth?: number; // revenue, last twelve months against the twelve before
   capex?: number; // $ billions spent on buildings and equipment, last twelve months
+  /** Cash and debt on the latest balance sheet ($ billions), and a year's profit (value ÷ years of profit) to count them in */
+  balance?: { cash: number; debt: number; end: string; profit?: number };
   listing?: { low: number; high: number; month: string }; // a new listing's range against its first close
   /** Years of profit and dividends a week, a month, a quarter and a year ago, with the filings known then. */
   then?: Partial<Record<Compare, { pe: number; y: number }>>;

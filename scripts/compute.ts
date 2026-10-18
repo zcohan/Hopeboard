@@ -142,6 +142,16 @@ const NET_INCOME = ['NetIncomeLoss', 'ProfitLossAttributableToOwnersOfParent'];
 const CAPEX = ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsToAcquireProductiveAssets'];
 const SHARE_PAY = ['ShareBasedCompensation', 'AllocatedShareBasedCompensationExpense'];
 const OPERATING_CASH = ['NetCashProvidedByUsedInOperatingActivities'];
+// cash and debt on the balance sheet. Cash counts what could be spent soon: cash, short-term investments and
+// long-term marketable securities (Apple keeps most of its pile there). Debt is borrowing, without leases.
+const CASH = ['CashAndCashEquivalentsAtCarryingValue', 'CashAndCashEquivalents', 'CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents', 'Cash'];
+const SHORT_INVESTMENTS = ['ShortTermInvestments', 'MarketableSecuritiesCurrent', 'AvailableForSaleSecuritiesDebtSecuritiesCurrent', 'CurrentInvestments'];
+const LONG_SECURITIES = ['MarketableSecuritiesNoncurrent', 'AvailableForSaleSecuritiesDebtSecuritiesNoncurrent'];
+const DEBT_ALL = ['DebtLongtermAndShorttermCombinedAmount'];
+const DEBT_LONG_ALL = ['LongTermDebt', 'LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities'];
+const DEBT_LONG = ['LongTermDebtNoncurrent', 'LongTermDebtAndCapitalLeaseObligations', 'LongTermNotesAndLoans', 'ConvertibleDebtNoncurrent'];
+const DEBT_LONG_CURRENT = ['LongTermDebtCurrent', 'DebtCurrent', 'NotesPayableCurrent', 'ConvertibleNotesPayableCurrent'];
+const DEBT_SHORT = ['CommercialPaper', 'ShortTermBorrowings'];
 
 export class Filings {
   private facts: Record<string, Record<string, Record<string, Fact[]>>> = {};
@@ -260,6 +270,37 @@ export class Filings {
   latestAnnualEnd(names: string[], asOf: string): string | null {
     const per = [...this.periods(this.pick(names, asOf)).values()].filter((x) => { const d = (ms(x.end) - ms(x.start!)) / DAY; return d > 350 && d < 380; });
     return per.length ? per.reduce((m, x) => (x.end > m ? x.end : m), '') : null;
+  }
+
+  /** A balance-sheet figure (a value on a date, like cash held): the latest reported by `asOf`, from the first of
+   * `names` that has one. Null if the latest is more than 200 days old. */
+  instant(names: string[], asOf: string): { val: number; end: string; name: string } | null {
+    let best: { val: number; end: string; name: string; filed: string } | null = null;
+    for (const n of names) {
+      const f = this.pick([n], asOf).filter((x) => !x.start && x.filed <= asOf);
+      for (const x of f) if (!best || x.end > best.end || (x.end === best.end && n === best.name && x.filed > best.filed)) best = { val: x.val, end: x.end, name: n, filed: x.filed };
+    }
+    return best && ms(asOf) - ms(best.end) <= (this.src.fx ? 400 : 200) * DAY ? { val: best.val, end: best.end, name: best.name } : null;
+  }
+
+  /** Cash and debt on the latest balance sheet by `asOf`, in the reporting currency. Null unless both are found:
+   * a company whose debt isn't in the data must not read as having none. */
+  balance(asOf: string): { cash: number; debt: number; end: string } | null {
+    const g = (n: string[]) => this.instant(n, asOf);
+    const cash = g(CASH);
+    if (!cash) return null;
+    const same = <T extends { end: string }>(x: T | null) => (x && x.end === cash.end ? x : null);
+    const spend = cash.val + (same(g(SHORT_INVESTMENTS))?.val ?? 0) + (same(g(LONG_SECURITIES))?.val ?? 0);
+    const all = same(g(DEBT_ALL));
+    const longAll = same(g(DEBT_LONG_ALL));
+    const long = same(g(DEBT_LONG)), current = same(g(DEBT_LONG_CURRENT));
+    const short = same(g(DEBT_SHORT))?.val ?? 0;
+    const found = all ? all.val : longAll ? longAll.val + short : long ? long.val + (current?.val ?? 0) + short : null;
+    // what the standard labels miss, from the company's filed reports (sources.ts `balance`)
+    const extra = (names: string[] = []) => names.reduce((t, n) => t + (same(g([n]))?.val ?? 0), 0);
+    const extraDebt = this.src.balance?.debt;
+    const debt = found !== null ? found + extra(extraDebt) : extraDebt?.length || this.src.debtFree ? extra(extraDebt) : null;
+    return debt === null ? null : { cash: spend + extra(this.src.balance?.cash), debt, end: cash.end };
   }
 
   /** Shares outstanding from the cover page closest to `d` (all share classes added). */

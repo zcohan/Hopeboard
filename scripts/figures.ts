@@ -9,7 +9,7 @@ import { parseFig, sectionOf } from '../src/engine';
 import type { Company, Figures, PastEra } from '../src/types';
 import { SOURCES } from './sources';
 import { loadSupplements } from './xbrl';
-import { oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
+import { fxOn, oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
 
 const WRITE = process.argv.includes('--write');
 await loadSupplements(SOURCES);
@@ -26,6 +26,9 @@ const show = (v: unknown) => (v === null || v === undefined ? '—' : typeof v =
 
 const notes: string[] = [];
 const rows: string[][] = [];
+
+/** Banks: their debts are mostly customers' deposits, so cash and debt don't read the same way. */
+const BANKS = new Set(['JPM', 'BAC', 'WFC', 'C', 'GS', 'MS']);
 
 for (const s of SOURCES) {
   const co = F.companies.find((c) => c.id === s.id) as Company | undefined;
@@ -94,10 +97,24 @@ for (const s of SOURCES) {
       const a = f.ttm(f.revenue, today), b = f.ttm(f.revenue, yearsBefore(today, 1));
       return a && b && a.end !== b.end && b.val ? r4(a.val / b.val - 1) : undefined; // in the reporting currency
     })(),
+    // cash and debt, $ billions, with a year's profit to count them in. Not for banks, whose debts are mostly
+    // customers' deposits, and only for companies reporting in dollars for now
+    balance: (() => {
+      if (BANKS.has(s.id)) return undefined;
+      const b0 = f.balance(today);
+      // companies reporting in another currency: in dollars at today's rate
+      const rate = s.fx ? fxOn(s.fx, today) : 1;
+      if (rate === null) return undefined;
+      const usd = (v: number) => (s.fx?.startsWith('USD') ? v / rate : v * rate);
+      const b = b0 ? { ...b0, cash: usd(b0.cash), debt: usd(b0.debt) } : null;
+      // a year's profit: the company's value over its years of profit, else its reported profit (share classes)
+      const profit = now.value !== null && now.pe !== null && now.pe > 0 ? now.value / now.pe : now.netIncome !== null && now.netIncome > 0 ? now.netIncome : null;
+      return b ? { cash: Math.round(b.cash / 1e8) / 10, debt: Math.round(b.debt / 1e8) / 10, end: b.end, ...(profit !== null ? { profit: Math.round(profit * 10) / 10 } : {}) } : undefined;
+    })(),
     capex: (() => { const c = f.ttm(f.capex, today); return c && c.end > yearsBefore(today, 1) ? Math.round(Math.abs(c.val) / 1e9) : undefined; })(),
     listing: listedRecently ? (() => { const l = sinceListing(s.eod); return { low: r4(l.low)!, high: r4(l.high)!, month: l.month }; })() : undefined,
   });
-  for (const k of ['ytd', 'revenueGrowth', 'capex', 'listing'] as const) if (co.now[k] === undefined) delete co.now[k];
+  for (const k of ['ytd', 'revenueGrowth', 'balance', 'capex', 'listing'] as const) if (co.now[k] === undefined) delete co.now[k];
 
   // how the deal has moved: years of profit and dividends a week, a month, a quarter and a year ago, as known then
   const daysBefore = (n: number) => new Date(Date.parse(today) - n * 86_400_000).toISOString().slice(0, 10);

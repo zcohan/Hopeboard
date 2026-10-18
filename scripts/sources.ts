@@ -15,20 +15,28 @@ export interface Source {
   supplement?: { concept: string; as: string; member?: string }[];
   /** Profit per share leaves out investment gains after their tax (Berkshire's operating profit). */
   operating?: boolean;
+  /** Cash and debt the standard labels miss, from supplements (`as` names), added to what they find. */
+  balance?: { cash?: string[]; debt?: string[] };
+  /** Checked against the latest filed report: it has no borrowing, so no debt label is no debt. */
+  debtFree?: true;
 }
 
 const us = (id: string, ...cik: number[]): Source => ({ id, cik, eod: `${id}.US` });
 
 export const SOURCES: Source[] = [
   us('TSLA', 1318605),
-  us('PLTR', 1321655),
+  { ...us('PLTR', 1321655), debtFree: true },
   us('COST', 909832),
   us('AAPL', 320193),
   us('NVDA', 1045810),
   us('MSFT', 789019),
   us('META', 1326801),
   // its latest annual report is missing from the SEC summary; read it from the filing
-  { ...us('TSM', 1046179), fx: 'USDTWD.FOREX', perShare: 5, supplement: [{ concept: 'ifrs-full:DilutedEarningsLossPerShare', as: 'DilutedEarningsLossPerShare' }, { concept: 'ifrs-full:Revenue', as: 'Revenue' }, { concept: 'ifrs-full:RevenueFromContractsWithCustomers', as: 'Revenue' }] },
+  { ...us('TSM', 1046179), fx: 'USDTWD.FOREX', perShare: 5, supplement: [{ concept: 'ifrs-full:DilutedEarningsLossPerShare', as: 'DilutedEarningsLossPerShare' }, { concept: 'ifrs-full:Revenue', as: 'Revenue' }, { concept: 'ifrs-full:RevenueFromContractsWithCustomers', as: 'Revenue' },
+    // cash, and debt as bonds and bank loans (the current portion covers both)
+    { concept: 'ifrs-full:ProfitLossAttributableToOwnersOfParent', as: 'ProfitLossAttributableToOwnersOfParent' },
+    { concept: 'ifrs-full:CashAndCashEquivalents', as: 'CashAndCashEquivalents' }, { concept: 'ifrs-full:NoncurrentPortionOfNoncurrentBondsIssued', as: 'BondsNoncurrent' }, { concept: 'ifrs-full:LongtermBorrowings', as: 'BorrowingsNoncurrent' }, { concept: 'ifrs-full:CurrentPortionOfLongtermBorrowings', as: 'DebtCurrentPortion' }],
+    balance: { debt: ['BondsNoncurrent', 'BorrowingsNoncurrent', 'DebtCurrentPortion'] } },
   us('AMZN', 1018724),
   us('ORCL', 1341439),
   // Google re-registered as Alphabet in 2015; its early profit per share is filed per share class
@@ -42,7 +50,7 @@ export const SOURCES: Source[] = [
   us('CRM', 1108524),
   us('ADBE', 796343),
   us('NOW', 1373715),
-  us('SHOP', 1594805),
+  { ...us('SHOP', 1594805), debtFree: true },
   us('NFLX', 1065280),
   us('UBER', 1543151),
   us('ABNB', 1559720),
@@ -55,8 +63,13 @@ export const SOURCES: Source[] = [
   // operating profit: profit less investment gains, less the tax on them, all as filed.
   {
     id: 'BRK.B', cik: [1067983], eod: 'BRK-B.US', av: 'BRK-B', perShare: 1 / 1500, operating: true,
+    balance: { cash: ['TreasuryBillsHeld'], debt: ['DebtInsuranceAndOther', 'DebtRailroadUtilities'] },
     supplement: [
       { concept: 'us-gaap:EarningsPerShareBasic', as: 'EarningsPerShareDiluted', member: 'ClassA' },
+      // its cash pile is mostly US Treasury bills, and its debt is split between insurance and the railroad and utilities
+      { concept: 'brka:USTreasuryBills', as: 'TreasuryBillsHeld', member: 'InsuranceAndOtherMember' },
+      { concept: 'us-gaap:DebtAndCapitalLeaseObligations', as: 'DebtInsuranceAndOther', member: 'InsuranceAndOtherMember' },
+      { concept: 'us-gaap:DebtAndCapitalLeaseObligations', as: 'DebtRailroadUtilities', member: 'RailroadUtilitiesAndEnergyMember' },
       { concept: 'us-gaap:NetIncomeLoss', as: 'NetIncomeLoss' },
       { concept: 'us-gaap:GainLossOnInvestments', as: 'InvestmentGains' },
       { concept: 'brka:GainLossOnInvestmentsAndGainLossOnDerivativeInstrumentsTax', as: 'InvestmentGainsTax', member: 'MaterialReconcilingItems' },
@@ -74,7 +87,8 @@ export const SOURCES: Source[] = [
   us('MS', 895421),
   us('VZ', 732712),
   us('T', 732717),
-  us('TMUS', 1283699),
+  // T-Mobile files its total debt under a breakdown (third-party debt), which the summary data leaves out
+  { ...us('TMUS', 1283699), supplement: [{ concept: 'us-gaap:LongTermDebt', as: 'TotalDebt', member: '^tmus:TotalDebtMember$' }], balance: { debt: ['TotalDebt'] } },
   // the 50 largest S&P 500 companies by market value (October 2026), added to the earlier cards
   us('LLY', 59478),
   us('WMT', 104169),
@@ -86,7 +100,8 @@ export const SOURCES: Source[] = [
   us('BLK', 1364742, 2012383), // BlackRock re-registered in 2024
   us('UNH', 731766),
   us('MRK', 310158),
-  us('CAT', 18230),
+  // Caterpillar: the machinery business's debt only. Its finance arm borrows to lend to customers, like a bank
+  { ...us('CAT', 18230), supplement: [{ concept: 'us-gaap:LongTermDebtAndCapitalLeaseObligations', as: 'DebtMachinery', member: 'MachineryPowerEnergyMember' }, { concept: 'us-gaap:LongTermDebtAndCapitalLeaseObligationsCurrent', as: 'DebtMachineryCurrent', member: 'MachineryPowerEnergyMember' }, { concept: 'us-gaap:ShortTermBorrowings', as: 'BorrowingMachinery', member: 'MachineryPowerEnergyMember' }], balance: { debt: ['DebtMachinery', 'DebtMachineryCurrent', 'BorrowingMachinery'] } },
   us('LRCX', 707549),
   us('GE', 40545),
   us('AMAT', 6951),

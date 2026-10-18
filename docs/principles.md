@@ -56,7 +56,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 1. Logo, name, a one-line description of the business, and a right-aligned stack: "priced at", the number of years, "of last year's profit".
 
 2. Three labelled sections, each a headline figure with small notes: EARNS (what the business earns as a share of its price; notes: against the safe US bond, and dividends where they are 3% or more), PRICED FOR ("+35% growth/year": the profit growth a year the price needs; notes: the last decade, and the analysts' forecast for next year), RISK (what happens if growth falls short; CUSHION when that is good news).
-3. Links at the foot: "Why so pricey?" (or "What the price assumes", "Why so cheap?") opens two or three points on why the price is what it is; "Compare over time" opens time buttons (1 week, 1 month, 3 months, 1 year) and a badge saying whether the deal is better, worse or the same, with what the price needed then and needs now.
+3. Links at the foot: "Why so pricey?" (or "What the price assumes", "Why so cheap?") opens two or three points on why the price is what it is; "Cash" or "Debt" (whichever is bigger; "Cash & debt" when close) opens how much cash the company holds against what it owes, in years of profit (on Not profitable cards, only which is bigger; left off banks and wherever the debt isn't in the data); "Compare over time" opens time buttons (1 week, 1 month, 3 months, 1 year) and a badge saying whether the deal is better, worse or the same, with what the price needed then and needs now.
 
 `docs/writing-guide.md` has the wording rules for every part.
 
@@ -142,6 +142,8 @@ The design is a plain card grid that a first-time reader can scan, with nothing 
 - A History section: the time buttons already show the past.
 
 ## Open items
+
+- [ ] **What the business earns on the money it keeps (for later).** Two businesses priced for the same growth aren't equally likely to get there: one that needs $1,000 of new kit for each extra $100 of profit has to plough back most of what it earns, while one that needs $200 can grow and still pay you. Buffett looks hard at this. It can be computed from the filings (profit against the money tied up in the business), but the owner found it too complicated to explain for now (October 2026).
 
 - [ ] **Cheap stocks get a flattering assumption.** The board assumes people pay 18 years of profit in 2036. For a stock priced below 18 (Verizon at 12, AT&T at 8) that assumes it becomes more popular, which adds several points a year to its "if" line. (A line saying so on those cards was tried and removed: it confused more than it helped.) Capping the 2036 figure at today's isn't clearly better: every stock below 18 would then need about 10% minus its dividend, so Micron at 12 and Alphabet at 17 would look the same. The owner's call.
 - [ ] **The S&P 500's next-year forecast** is still a quoted figure (≈); its other figures come from Shiller's data.

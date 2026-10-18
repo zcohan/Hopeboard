@@ -39,7 +39,7 @@ export async function filings(cik: number, from: string, forms = /^(10-K|10-Q|20
   return out.sort((a, b) => a.filed.localeCompare(b.filed));
 }
 
-async function instance(cik: number, f: Filing): Promise<string | null> {
+export async function instance(cik: number, f: Filing): Promise<string | null> {
   const id = String(cik).padStart(10, '0');
   const dir = f.accession.replace(/-/g, '');
   const path = `.cache/xbrl/${id}/${dir}.xml`;
@@ -53,7 +53,7 @@ async function instance(cik: number, f: Filing): Promise<string | null> {
 
 interface Context { start?: string; end: string; members: string[] }
 
-function contexts(xml: string): Map<string, Context> {
+export function contexts(xml: string): Map<string, Context> {
   const out = new Map<string, Context>();
   for (const m of xml.matchAll(/<(?:xbrli:)?context\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/(?:xbrli:)?context>/g)) {
     const body = m[2];

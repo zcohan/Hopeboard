@@ -122,6 +122,12 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
       const p = pct(Math.abs(g));
       return p === '0%' ? 'Profit flat' : g > 0 ? `${p} profit growth` : `${p} fall in profit`;
     },
+    /** cash beyond debt (or debt beyond cash) in years of the card's own profit: "8 years", "1 year", "half a year" */
+    netYears: () => {
+      const b = need(co.now.balance, 'cash and debt');
+      const v = Math.abs(b.cash - b.debt) / need(b.profit, 'a year of profit');
+      return v >= 1.5 ? `${Math.round(v)} years` : v >= 0.75 ? '1 year' : 'half a year';
+    },
     p: ([key, ...a]) => {
       const v = need(co.now.profits?.[key], `profit figure ${key}`);
       const n = a.includes('abs') ? Math.abs(v) : v;
