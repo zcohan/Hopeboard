@@ -178,12 +178,6 @@
             "pe": 255.2,
             "y": 0
           }
-        },
-        "value": 1249,
-        "profits": {
-          "last": 3.8,
-          "sharePay": 3.8,
-          "cash": 18.7
         }
       },
       "past": {
@@ -651,7 +645,7 @@
           "below": 0.1507,
           "month": "October"
         },
-        "revenueGrowth": -0.041,
+        "revenueGrowth": 0.3161,
         "then": {
           "w1": {
             "pe": 44.2,
@@ -1135,7 +1129,7 @@
           "below": 0.1738,
           "month": "June"
         },
-        "revenueGrowth": 0.1091,
+        "revenueGrowth": 0.1558,
         "capex": 2,
         "then": {
           "w1": {
@@ -1885,7 +1879,6 @@
           "below": 0.1156,
           "month": "January"
         },
-        "revenueGrowth": 0,
         "then": {
           "w1": {
             "pe": 12.1,
@@ -3609,7 +3602,7 @@
             "y": 0
           }
         },
-        "value": 262,
+        "value": 280,
         "profits": {
           "last": 0.31,
           "sharePay": 1.8,
@@ -4001,7 +3994,7 @@
             "y": 0
           }
         },
-        "value": 281,
+        "value": 233,
         "profits": {
           "last": 0.05,
           "sharePay": 1.2,

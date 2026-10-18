@@ -65,7 +65,8 @@ for (const s of SOURCES) {
   co.now.last = dec ? r3(dec.g) : null;
   if (dollar && now.value !== null) co.now.value = Math.round(now.value);
   if (dollar && co.now.profits) {
-    if (now.netIncome !== null) co.now.profits.last = Math.round(now.netIncome);
+    // small profits keep two decimals, so $0.05 billion doesn't read as $0
+    if (now.netIncome !== null) co.now.profits.last = Math.abs(now.netIncome) < 1 ? Math.round(now.netIncome * 100) / 100 : Math.abs(now.netIncome) < 10 ? Math.round(now.netIncome * 10) / 10 : Math.round(now.netIncome);
     if (now.revenue !== null && co.now.profits.revenue !== undefined) co.now.profits.revenue = Math.round(now.revenue);
   }
   if (co.now.yearsOfRevenue !== undefined && now.value !== null && now.revenue) co.now.yearsOfRevenue = Math.round(now.value / now.revenue);
@@ -88,7 +89,11 @@ for (const s of SOURCES) {
   Object.assign(co.now, {
     ytd: r4(yearToDate(s.eod, today)),
     fromHigh: (() => { const h = fromHigh(s.eod, today); const m = month(h.date); return { below: r4(h.below)!, month: h.date.slice(0, 4) === today.slice(0, 4) ? m.split(' ')[0] : m }; })(),
-    revenueGrowth: now.revenue && yearAgo?.revenue ? r4(now.revenue / yearAgo.revenue - 1) : undefined,
+    // only across two different years: a company that files once a year can show the same year twice
+    revenueGrowth: (() => {
+      const a = f.ttm(f.revenue, today), b = f.ttm(f.revenue, yearsBefore(today, 1));
+      return a && b && a.end !== b.end && b.val ? r4(a.val / b.val - 1) : undefined; // in the reporting currency
+    })(),
     capex: (() => { const c = f.ttm(f.capex, today); return c && c.end > yearsBefore(today, 1) ? Math.round(Math.abs(c.val) / 1e9) : undefined; })(),
     listing: listedRecently ? (() => { const l = sinceListing(s.eod); return { low: r4(l.low)!, high: r4(l.high)!, month: l.month }; })() : undefined,
   });

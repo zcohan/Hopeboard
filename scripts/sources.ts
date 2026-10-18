@@ -28,7 +28,7 @@ export const SOURCES: Source[] = [
   us('MSFT', 789019),
   us('META', 1326801),
   // its latest annual report is missing from the SEC summary; read it from the filing
-  { ...us('TSM', 1046179), fx: 'USDTWD.FOREX', perShare: 5, supplement: [{ concept: 'ifrs-full:DilutedEarningsLossPerShare', as: 'DilutedEarningsLossPerShare' }] },
+  { ...us('TSM', 1046179), fx: 'USDTWD.FOREX', perShare: 5, supplement: [{ concept: 'ifrs-full:DilutedEarningsLossPerShare', as: 'DilutedEarningsLossPerShare' }, { concept: 'ifrs-full:Revenue', as: 'Revenue' }, { concept: 'ifrs-full:RevenueFromContractsWithCustomers', as: 'Revenue' }] },
   us('AMZN', 1018724),
   us('ORCL', 1341439),
   // Google re-registered as Alphabet in 2015; its early profit per share is filed per share class
