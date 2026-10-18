@@ -47,7 +47,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 - **Pricey:** required growth of 14% or more.
 - **Normal:** 10% to 14%.
 - **Bargain:** under 10%.
-- **Losing money:** lost money last year, so there is no profit to price.
+- **Not profitable:** lost money last year, or earns under 0.2% of its price (more than 500 years of profit), so it is priced in dollars. The tab is hidden when it has no cards.
 
 **Views.** A clock button in the header opens a menu: prices from Today, 1 year ago, 5 years ago or 10 years ago, and (for Today) whether to count last year's profit or next year's forecast. The button shows a dot when the view isn't today against last year's profit. Past views show the price then, what it needed, the story at the time and what happened since, under a bar saying which date is shown, with a way back to today.
 
@@ -55,7 +55,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 
 1. Logo, name, a one-line description of the business, and a right-aligned stack: "priced at", the number of years, "of last year's profit".
 
-2. Three labelled sections, each a headline figure with small notes: EARNS (what the business earns as a share of its price; notes: against the safe US bond, and dividends where they are 1% or more), PRICED FOR ("+35% growth/year": the profit growth a year the price needs; notes: the last decade, and the analysts' forecast for next year), RISK (what happens if growth falls short; CUSHION when that is good news).
+2. Three labelled sections, each a headline figure with small notes: EARNS (what the business earns as a share of its price; notes: against the safe US bond, and dividends where they are 3% or more), PRICED FOR ("+35% growth/year": the profit growth a year the price needs; notes: the last decade, and the analysts' forecast for next year), RISK (what happens if growth falls short; CUSHION when that is good news).
 3. Links at the foot: "Why so pricey?" (or "What the price assumes", "Why so cheap?") opens two or three points on why the price is what it is; "Compare over time" opens time buttons (1 week, 1 month, 3 months, 1 year) and a badge saying whether the deal is better, worse or the same, with what the price needed then and needs now.
 
 `docs/writing-guide.md` has the wording rules for every part.
@@ -76,8 +76,8 @@ The cards read as if a real analyst wrote them, in words an ordinary reader alre
 | the price needs profit to grow at X%/year | the ask, asks, implied growth |
 | returns, make, lose | pays, yields (for the bond: "Returns 5.1%/year") |
 | the safe US bond (US Bond as a card name) | the bond, risk-free rate |
-| up from, down from, the same as | pts, percentage points |
-| Pricey, Normal, Bargain, Losing money | Expensive, Cheap as section names |
+| more than, less than, the same as | up from, down from, pts, percentage points |
+| Pricey, Normal, Bargain, Not profitable | Expensive, Cheap as section names |
 
 - State the fact directly. Every word must do a job.
 - No aphorisms, no "X, not Y" turns, no taglines, no lines that explain the concept.
