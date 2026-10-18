@@ -300,6 +300,7 @@
       "id": "spx:now",
       "name": "S&P 500",
       "badge": "SPX",
+      "farm": "**{earns}** of its index price a year\n{earnsVsBond} the safe US bond{pays}",
       "assumes": "**{reqSigned}** growth/year\n{vsLastNote}.\nHas returned {index}/year since 1928, dividends included",
       "consequence": "If profit grows at {g}/year like the last decade, {outcome:its}.",
       "scenario": {

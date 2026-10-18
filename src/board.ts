@@ -198,7 +198,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
       return tile({
         id: spxId, badge: 'SPX', ...BASE.spx, name, base: true,
         price: { pre: L('pricedAt'), n: `${shown.years.text} ${L('years')}`, unit: yearsUnit(shown.basis) },
-        lines: [], facts: facts(spxId, tk, [['farm', copy.get('company-lines')?.farm as string], ['assumes', e.assumes as string], ['consequence', e.consequence as string]]),
+        lines: [], facts: facts(spxId, tk, [['farm', (e.farm ?? copy.get('company-lines')?.farm) as string], ['assumes', e.assumes as string], ['consequence', e.consequence as string]]),
         why: { heading: heading(m.section === 'loss' ? 'pricey' : m.section), bullets: bulletsOf(e, tk) },
       }, copy);
     }
