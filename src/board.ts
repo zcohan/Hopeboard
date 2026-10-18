@@ -254,7 +254,8 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         ];
         return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, about: aboutOf(copy, co.id), price, lines: [], facts: facts(id, tk, tpl), compare: comparePanel(co, m.req('t'), m.section), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
       });
-      if (html) buckets[m.section].push({ sort: m.sectionReq ?? -Infinity, html });
+      // not profitable: the most years of profit first, and an outright loss (no years to count) ahead of those
+      if (html) buckets[m.section].push({ sort: m.section === 'loss' ? m.pe.v ?? Infinity : m.sectionReq ?? -Infinity, html });
     }
 
   } else {
@@ -289,8 +290,8 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     const tab = (sec: string, name: string, n: number) =>
       `<button type="button" role="tab" data-sec="${sec}" aria-selected="${sec === s.section}"${n ? '' : ' disabled'}>${esc(name)}<span class="count">${n}</span></button>`;
     board += `<div class="tabs" role="tablist">` + tab('every', copy.label('sections', 'every'), total) + SECTIONS.map((sec) => tab(sec, label(sec), counts[sec])).join('') + `</div>`;
-    // All: the sections in order, so cards run from the most required growth down, then the not profitable
-    const tiles = s.section === 'every' ? SECTIONS.flatMap(sorted) : sorted(s.section);
+    // All: the not profitable first (their price needs more growth than any percentage), then the most required growth down
+    const tiles = s.section === 'every' ? (['loss', 'pricey', 'normal', 'bargain'] as Section[]).flatMap(sorted) : sorted(s.section);
     board += tiles.length ? `<div class="grid">${tiles.join('')}</div>` : '';
   }
 
