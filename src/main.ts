@@ -159,7 +159,7 @@ document.addEventListener('keydown', (ev) => {
 });
 
 /** The app's mark: the sun half risen over the horizon, drawn straight onto the page. */
-const MARK = `<div class="mark" aria-hidden="true"><svg viewBox="0 0 52 52"><defs><linearGradient id="markSun" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF7A59"/><stop offset="1" stop-color="#FFB547"/></linearGradient></defs><path d="M10 38a16 16 0 0 1 32 0z" fill="url(#markSun)"/><rect x="4" y="41" width="44" height="3" rx="1.5" fill="currentColor"/><rect x="10" y="47" width="32" height="3" rx="1.5" fill="currentColor" opacity=".35"/></svg></div>`;
+const MARK = `<div class="mark" aria-hidden="true"><svg viewBox="3 21.5 46 29"><defs><linearGradient id="markSun" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF7A59"/><stop offset="1" stop-color="#FFB547"/></linearGradient></defs><path d="M10 38a16 16 0 0 1 32 0z" fill="url(#markSun)"/><rect x="4" y="41" width="44" height="3" rx="1.5" fill="currentColor"/><rect x="10" y="47" width="32" height="3" rx="1.5" fill="currentColor" opacity=".35"/></svg></div>`;
 
 // Light or dark: the system's choice until the reader picks one, which is remembered on this device.
 type Theme = 'light' | 'dark';
