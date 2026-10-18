@@ -9,7 +9,7 @@ import { parseFig, sectionOf } from '../src/engine';
 import type { Company, Figures, PastEra } from '../src/types';
 import { SOURCES } from './sources';
 import { loadSupplements } from './xbrl';
-import { fxOn, oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
+import { shareChange, fxOn, oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
 
 const WRITE = process.argv.includes('--write');
 await loadSupplements(SOURCES);
@@ -111,10 +111,12 @@ for (const s of SOURCES) {
       const profit = now.value !== null && now.pe !== null && now.pe > 0 ? now.value / now.pe : now.netIncome !== null && now.netIncome > 0 ? now.netIncome : null;
       return b ? { cash: Math.round(b.cash / 1e8) / 10, debt: Math.round(b.debt / 1e8) / 10, end: b.end, ...(profit !== null ? { profit: Math.round(profit * 10) / 10 } : {}) } : undefined;
     })(),
+    // how fast the share count changed per year: buybacks (negative) or new shares
+    shares: (() => { const c = shareChange(f, s.eod, today); return c ? { rate: r4(c.rate)!, years: c.years } : undefined; })(),
     capex: (() => { const c = f.ttm(f.capex, today); return c && c.end > yearsBefore(today, 1) ? Math.round(Math.abs(c.val) / 1e9) : undefined; })(),
     listing: listedRecently ? (() => { const l = sinceListing(s.eod); return { low: r4(l.low)!, high: r4(l.high)!, month: l.month }; })() : undefined,
   });
-  for (const k of ['ytd', 'revenueGrowth', 'balance', 'capex', 'listing'] as const) if (co.now[k] === undefined) delete co.now[k];
+  for (const k of ['ytd', 'revenueGrowth', 'balance', 'shares', 'capex', 'listing'] as const) if (co.now[k] === undefined) delete co.now[k];
 
   // how the deal has moved: years of profit and dividends a week, a month, a quarter and a year ago, as known then
   const daysBefore = (n: number) => new Date(Date.parse(today) - n * 86_400_000).toISOString().slice(0, 10);
@@ -155,6 +157,12 @@ for (const s of SOURCES) {
 // eras: the bond, gold
 const goldNow = barOn('XAUUSD.FOREX', today)!.close;
 F.eras.now.bond = r3(bond(today))!;
+// the bond on each "Compare over time" date, so a card shown as it was then measures against that day's bond
+{
+  const day = (n: number) => new Date(Date.parse(today) - n * 86_400_000).toISOString().slice(0, 10);
+  const dates = { w1: day(7), m1: monthsBefore(today, 1), m3: monthsBefore(today, 3), m12: monthsBefore(today, 12) };
+  (F.eras.now as { bondThen?: Record<string, number> }).bondThen = Object.fromEntries(Object.entries(dates).map(([k, d]) => [k, r3(bond(d))!]));
+}
 (F.eras.now as { bondHighSince?: string | null }).bondHighSince = bondHighSince(today);
 F.eras.now.gold = Math.round(goldNow);
 F.eras.now.oil = Math.round(oilOn(today)!);

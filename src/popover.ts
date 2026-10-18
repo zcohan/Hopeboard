@@ -7,7 +7,8 @@ function place(pop: HTMLElement) {
   const link = document.querySelector<HTMLElement>(`[popovertarget="${CSS.escape(pop.id)}"]`);
   if (!link) return;
   const r = link.getBoundingClientRect();
-  const width = Math.min(320, window.innerWidth - 2 * GUTTER);
+  // the compare popover holds a row of five time buttons, so it's wider
+  const width = Math.min(pop.classList.contains('cmp') ? 500 : 320, window.innerWidth - 2 * GUTTER);
   const left = Math.max(GUTTER, Math.min(r.left - 18, window.innerWidth - GUTTER - width));
   pop.style.left = `${left + window.scrollX}px`;
   pop.style.top = `${r.bottom + window.scrollY + 12}px`;

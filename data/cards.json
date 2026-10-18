@@ -60,7 +60,8 @@
           "h": "What the price needs",
           "p": [
             "Most companies grow, so most are priced above what a farm would fetch. Paying 35 years of profit only works out if the profit grows a lot.",
-            "For every card, Hopeboard works out how fast profit has to grow each year for the next ten years for the stock to do as well as the S&P 500 has done since 1928, {index} a year. Then it sets that against what the business has actually done, and against what analysts expect next year."
+            "For every card, Hopeboard works out how fast profit has to grow each year for the next ten years for the stock to do as well as the S&P 500 has done since 1928, {index} a year. Then it sets that against what the business has actually done, and against what analysts expect next year.",
+            "Michael Mauboussin and Alfred Rappaport set out the full version of this idea in Expectations Investing (2001, revised 2021), working from the cash a business generates over many years. Hopeboard’s version is simpler: profit per share, over ten years."
           ]
         },
         {
@@ -125,9 +126,12 @@
           "formula": "return per year = (1 + growth) × (1 + dividends) × (18 ÷ years of profit today)^(1/10) − 1"
         },
         {
-          "h": "Cash and debt",
+          "h": "Finances",
           "p": [
-            "From the company’s latest balance sheet in its SEC filings. Cash counts cash, short-term investments and marketable securities; debt counts borrowing, without leases. The “Cash” or “Debt” link on each card shows whichever is bigger, in years of last year’s profit. Cards that are Not profitable have no profit to measure against, so they say only which is bigger. Banks are left out, because most of what a bank owes is its customers’ deposits."
+            "The “Finances” link on each card shows three things about the company’s health, each left off when its figure isn’t in the data.",
+            "Cash or debt: from the latest balance sheet in its SEC filings. Cash counts cash, short-term investments and marketable securities; debt counts borrowing, without leases. Whichever is bigger is shown in years of last year’s profit. Cards that are Not profitable have no profit to measure against, so they say only which is bigger. Banks are left out, because most of what a bank owes is its customers’ deposits.",
+            "Dividends: those paid over the last twelve months, as a share of today’s price.",
+            "Shares: how fast the number of shares changed each year, from the average count in the latest annual report and the one ten years before (as few as five, for companies listed more recently). Fewer shares means the company bought some back, so each share owns a bigger slice of the profit; more means it issued new ones, often as pay for staff or to buy another company."
           ]
         },
         {
@@ -216,7 +220,7 @@
         "Company cards show labelled rows (owner’s layout, October 2026): Earns, Reasonably priced, Expected next year, Risk.",
         "The Risk row is labelled Cushion when its outcome is good news (no loss, and at least as much as the yardstick).",
         "The forecast is a note under the requirement (owner, October 2026), no longer its own row.",
-        "Cash and debt (owner, October 2026): a third link at the foot of the card, named for whichever is bigger (Cash, Debt, or Cash & debt when close), opening a bubble. Relative only, in years of profit, no dollar amounts (the owner: “it’s all relative”). Cards that are Not profitable have no profit to measure against, so they say only which is bigger. Left off banks and wherever the debt isn't in the data."
+        "Finances (owner, October 2026): a third link at the foot of the card opening one bubble with Cash or Debt, Dividends and Shares, the company's health behind the three sections. Relative only: years of profit and percentages, no dollar amounts. Not Profitable cards say only whether cash or debt is bigger. Each line is left off when its figure isn't in the data (banks get no cash or debt line)."
       ],
       "labels": {
         "farm": "Earns",
@@ -225,31 +229,41 @@
         "consequenceGood": "Cushion",
         "balanceCash": "Cash",
         "balanceDebt": "Debt",
-        "balanceEven": "Cash & debt"
+        "balanceEven": "Cash & debt",
+        "dividends": "Dividends",
+        "shares": "Shares"
       },
       "balanceCash": "Holds **{netYears}** of profit in cash, beyond its debt",
       "balanceDebt": "It would take **{netYears}** of profit to pay off its debt, after using its cash",
       "balanceEven": "Cash and debt close to even",
       "balanceCashDollars": "Holds more in cash than it owes",
-      "balanceDebtDollars": "Owes more than it holds in cash"
+      "balanceDebtDollars": "Owes more than it holds in cash",
+      "financesLink": "Finances",
+      "dividends": "Pays **{divYield}** of its stock price a year as dividends",
+      "noDividend": "Pays no dividend",
+      "sharesDown": "Bought back **{shareRate}** of its shares a year over the last {shareYears} years, so each share owns a bigger slice",
+      "sharesUp": "Issued **{shareRate}** more shares a year over the last {shareYears} years, so each share owns a smaller slice",
+      "sharesSteady": "Kept the same number of shares over the last {shareYears} years"
     },
     {
       "id": "compare",
       "label": "Compare over time",
-      "w1": "1 week",
-      "m1": "1 month",
-      "m3": "3 months",
-      "m12": "1 year",
+      "w1": "1 week ago",
+      "m1": "1 month ago",
+      "m3": "3 months ago",
+      "m12": "1 year ago",
       "better": "Better deal",
       "worse": "Worse deal",
       "same": "Same deal",
-      "detail": "needed {then}, now {now}",
+      "detail": "needed {then}/year, now {now}/year",
       "notes": [
         "The badge on each company card (owner chose option A, October 2026): the growth the price needed at the chosen time, with the filings known then, against today. Lower is a better deal. Shown on the Now view with last year’s profit.",
-        "Per card (owner, October 2026): a “Compare over time” link at the foot opens the time buttons for that card; it starts on 1 year."
+        "Per card (owner, October 2026): a “Compare over time” link at the foot opens the time buttons for that card; it starts on 1 year.",
+        "Picking a date shows the whole card as it was then: years of profit, Earns, Priced for and Risk, from that day's price, dividend and bond. “Today” comes first and is where it starts (owner, October 2026)."
       ],
-      "detailSame": "needs {now}",
-      "link": "Compare over time"
+      "detailSame": "needs {now}/year",
+      "link": "Compare over time",
+      "now": "Today"
     },
     {
       "id": "pills",

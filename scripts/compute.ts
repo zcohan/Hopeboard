@@ -47,6 +47,36 @@ export function splitFactor(sym: string, d: string, today: string): number {
   return splits(sym).filter((s) => s.date > d && s.date <= today).reduce((f, s) => f * s.ratio, 1);
 }
 
+/** Like splitFactor, but true splits only (3-for-1, 1-for-8): EOD also records spin-offs as small "splits"
+ * (GE's 1.253 for GE Vernova) to adjust old prices, and those didn't change the number of shares. */
+export function shareSplitFactor(sym: string, d: string, today: string): number {
+  const whole = (r: number) => Math.abs(r - Math.round(r)) < 0.01 && Math.round(r) >= 2;
+  return splits(sym).filter((s) => s.date > d && s.date <= today && (whole(s.ratio) || whole(1 / s.ratio))).reduce((f, s) => f * s.ratio, 1);
+}
+
+const WEIGHTED_SHARES = ['WeightedAverageNumberOfDilutedSharesOutstanding', 'WeightedAverageNumberOfShareOutstandingBasicAndDiluted', 'AdjustedWeightedAverageNumberOfSharesOutstanding'];
+
+/** How fast the number of shares changed per year (negative: bought back), from the average shares in the
+ * latest annual report and the one ten years before, or the earliest from five years back. Only years from a year
+ * after listing count: before it, share counts leave out the investors' shares that convert at listing. */
+export function shareChange(f: Filings, sym: string, today: string): { rate: number; years: number } | null {
+  const end = f.latestAnnualEnd(WEIGHTED_SHARES, today);
+  if (!end) return null;
+  const at = (e: string) => f.annualNear(WEIGHTED_SHARES, e, today, (x) => x.val * shareSplitFactor(sym, x.filed, today));
+  const now = at(end);
+  if (!now) return null;
+  // the downloaded prices start in January 2015; a first price later than that is a listing
+  const first = series(sym)[0].date;
+  const listed = first > '2015-02-01' ? yearsBefore(first, -1) : '';
+  for (let n = 10; n >= 5; n--) {
+    const e = `${+end.slice(0, 4) - n}${end.slice(4)}`;
+    if (e < listed) continue;
+    const then = at(e);
+    if (then) return { rate: Math.pow(now / then, 1 / n) - 1, years: n };
+  }
+  return null;
+}
+
 /** Dividends paid per share in the twelve months to `d` (by ex-dividend date), in shares as they were at `d`. */
 export function dividendsTtm(sym: string, d: string): number {
   const p = `.cache/div/${sym}.json`;

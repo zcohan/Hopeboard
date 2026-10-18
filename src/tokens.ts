@@ -128,6 +128,10 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
       const v = Math.abs(b.cash - b.debt) / need(b.profit, 'a year of profit');
       return v >= 1.5 ? `${Math.round(v)} years` : v >= 0.75 ? '1 year' : 'half a year';
     },
+    divYield: () => decPct(co.now.y),
+    /** the yearly change in the share count, without its sign: "4%", "0.7%" */
+    shareRate: () => decPct(Math.abs(need(co.now.shares, 'share count change').rate)),
+    shareYears: () => String(need(co.now.shares, 'share count change').years),
     p: ([key, ...a]) => {
       const v = need(co.now.profits?.[key], `profit figure ${key}`);
       const n = a.includes('abs') ? Math.abs(v) : v;
@@ -183,7 +187,7 @@ export function companyPastTokens(co: Company, era: PastEra, F: Figures): Tokens
     vsReq: () => {
       if (pe.v === null) return '';
       const rq = requiredGrowth(p.y ?? co.now.y, pe.v), g = need(p.profit, `${co.id} ${era} profit growth`);
-      return pct(g) === pct(rq) ? '— what was required' : `— ${g > rq ? 'more than' : 'short of'} the ${pct(rq)} required`;
+      return pct(g) === pct(rq) ? '— what was required' : `— ${g > rq ? 'more than' : 'short of'} the ${pct(rq)}/year required`;
     },
     /** "rose from 28 to 38" or "fell from 52 to 27": the years of profit people paid, then and now */
     peMove: () => {

@@ -47,24 +47,34 @@ interface TileParts {
   price?: { pre?: string; n: string; unit: string };
   lines: { cls: 'makes' | 'miss'; html: string }[];
   /** The card's compare panel (time buttons and one badge per time scale), opened from a link at the foot. */
-  compare?: { link: string; panel: string };
+  compare?: { link: string; panel: string };  // link text, and the popover's contents
   /** Labelled rows (company cards): Earns, Reasonably priced, Expected next year, Risk. */
   facts?: { label: string; html: string; cls?: string }[];
   why?: { heading: string; bullets: string[] } | { story: [string, string][] };
-  /** A second bubble from its own link at the foot: cash and debt */
+  /** The card as it was on each Compare over time date: its own years figure and sections, shown in place of
+   * today's when that date is picked. */
+  at?: { w: string; price: TileParts['price']; facts: NonNullable<TileParts['facts']> }[];
+  /** A second bubble from its own link at the foot: the company's finances */
   extra?: { link: string; html: string };
   base?: boolean;
 }
 
-/** The Cash & debt bubble, opened from its link at the foot of the card: a headline in years of profit (dollars on
- * cards that are Not profitable), the dollar amounts under it. Nothing when cash and debt aren't both in the data. */
-function balanceBubble(co: Company, section: Section, shared: CopyEntry | null | undefined, tk: Tokens, id: string, copy: Copy): { link: string; html: string } | undefined {
-  const t = balanceRow(co, section, shared)[0];
-  if (!t?.[1]) return undefined;
-  const [head, ...notes] = fill(t[1], tk, `${id} balance`).split('\n');
-  // the link says which is bigger: Cash, Debt, or Cash & debt when they're close
-  const labels = (shared?.labels ?? {}) as Record<string, string>;
-  return { link: labels[t[2]] ?? '', html: `<p class="story">${head}</p>${notes.map((n) => `<p class="note">${n}</p>`).join('')}` };
+/** The Finances bubble, opened from its link at the foot of the card: cash or debt, dividends and the share count,
+ * each under its own small heading, each left off when its figure isn't in the data. */
+function financesBubble(co: Company, section: Section, shared: CopyEntry | null | undefined, tk: Tokens, id: string): { link: string; html: string } | undefined {
+  if (!shared) return undefined;
+  const labels = (shared.labels ?? {}) as Record<string, string>;
+  const rows: [string, string][] = [];
+  // Cash, Debt, or Cash & debt when they're close
+  const b = balanceRow(co, section, shared)[0];
+  if (b?.[1]) rows.push([labels[b[2]] ?? '', b[1]]);
+  rows.push([labels.dividends, (co.now.y > 0 ? shared.dividends : shared.noDividend) as string]);
+  const sh = co.now.shares;
+  if (sh) rows.push([labels.shares, (Math.abs(sh.rate) < 0.005 ? shared.sharesSteady : sh.rate < 0 ? shared.sharesDown : shared.sharesUp) as string]);
+  return {
+    link: shared.financesLink as string,
+    html: rows.map(([h, t]) => `<h4>${esc(h)}</h4><p class="story">${fill(t, tk, `${id} finances`)}</p>`).join(''),
+  };
 }
 
 /** Which Cash / Debt wording, and its label. Years of profit where there is a profit to count in;
@@ -85,10 +95,16 @@ function balanceRow(co: Company, section: Section, shared: CopyEntry | null | un
 const yahoo = (symbol: string) => `https://finance.yahoo.com/quote/${encodeURIComponent(symbol.replace('.', '-'))}/`;
 
 function tile(t: TileParts, copy: Copy): string {
-  const price = t.price
-    ? `<div class="price">${t.price.pre ? `<span class="u">${t.price.pre}</span>` : ''}` +
-      `<span class="n">${t.price.n}</span><span class="u">${t.price.unit}</span></div>`
+  const priceOf = (p: TileParts['price'], w?: string) => p
+    ? `<div class="price"${w ? ` data-at="${w}"${w === 'now' ? '' : ' hidden'}` : ''}>${p.pre ? `<span class="u">${p.pre}</span>` : ''}` +
+      `<span class="n">${p.n}</span><span class="u">${p.unit}</span></div>`
     : '';
+  const factsOf = (f: TileParts['facts'], w?: string) => f?.length
+    ? `<dl class="facts"${w ? ` data-at="${w}"${w === 'now' ? '' : ' hidden'}` : ''}>${f.map((x) => `<div class="${x.cls ?? ''}"><dt>${esc(x.label)}</dt><dd>${x.html}</dd></div>`).join('')}</dl>`
+    : '';
+  // a card with dates to compare carries each date's version, today's showing
+  const price = t.at ? priceOf(t.price, 'now') + t.at.map((a) => priceOf(a.price, a.w)).join('') : priceOf(t.price);
+  const factsHtml = t.at ? factsOf(t.facts, 'now') + t.at.map((a) => factsOf(a.facts, a.w)).join('') : factsOf(t.facts);
   // The comment bubble opens on demand from a link under the card (a popover).
   // The link carries the bubble's heading; for past views, the first story heading.
   let link = '', why = '';
@@ -106,14 +122,16 @@ function tile(t: TileParts, copy: Copy): string {
     (t.icon ? `<div class="logo" style="background:${t.color}" aria-hidden="true">${t.icon}</div>` : t.logo ? `<div class="logo img" data-logo="${esc(t.logo)}"></div>` : `<div class="logo" style="background:${t.color}">${esc(t.badge)}</div>`) +
     `<div class="name">${t.href ? `<a class="namelink" href="${esc(t.href)}" target="_blank" rel="noopener">${esc(t.name)}</a>` : esc(t.name)}${t.about ? `<small>${esc(t.about)}</small>` : ''}</div>${price}</div>` +
     t.lines.map((l) => `<p class="${l.cls}">${l.html}</p>`).join('') +
-    (t.facts?.length ? `<dl class="facts">${t.facts.map((x) => `<div class="${x.cls ?? ''}"><dt>${esc(x.label)}</dt><dd>${x.html}</dd></div>`).join('')}</dl>` : '') +
+    factsHtml +
     (link || t.compare
-      ? `<div class="foot-links">${t.compare?.panel ?? ''}<div class="links">${link ? `<button type="button" class="whylink" popovertarget="${pop}">${link}</button>` : ''}` +
-        `${t.extra ? `<button type="button" class="whylink" popovertarget="${pop}-x">${esc(t.extra.link)}</button>` : ''}${t.compare?.link ?? ''}</div></div>`
+      ? `<div class="foot-links"><div class="links">${link ? `<button type="button" class="whylink" popovertarget="${pop}">${link}</button>` : ''}` +
+        `${t.extra ? `<button type="button" class="whylink" popovertarget="${pop}-x">${esc(t.extra.link)}</button>` : ''}` +
+        `${t.compare ? `<button type="button" class="whylink" popovertarget="${pop}-c">${esc(t.compare.link)}</button>` : ''}</div></div>`
       : '') +
     `</div>` +
     (link ? `<div class="why" popover id="${pop}">${why}</div>` : '') +
     (t.extra ? `<div class="why" popover id="${pop}-x">${t.extra.html}</div>` : '') +
+    (t.compare ? `<div class="why cmp" popover id="${pop}-c">${t.compare.panel}</div>` : '') +
     `</div>`
   );
 }
@@ -168,15 +186,14 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
       if (!then) return [];
       const was = requiredGrowth(then.y, then.pe);
       const kind = pct(was) === pct(now) ? 'same' : was > now ? 'better' : 'worse';
-      const arrow = { better: '↓', worse: '↑', same: '=' }[kind];
       const detail = fill(copy.label('compare', kind === 'same' ? 'detailSame' : 'detail'), { then: () => pct(was), now: () => pct(now) }, `${co.id} deal`);
-      return [{ c, html: `<div class="deal ${kind}" data-w="${c}">${arrow} ${esc(copy.label('compare', kind))} · ${detail}</div>` }];
+      return [{ c, html: `<div class="deal ${kind}" data-w="${c}">${esc(copy.label('compare', kind))} · ${detail}</div>` }];
     });
     if (!badges.length) return undefined;
-    const buttons = badges.map(({ c }) => `<button type="button" data-w="${c}">${esc(copy.label('compare', c))}</button>`).join('');
+    const buttons = `<button type="button" data-w="now">${esc(copy.label('compare', 'now'))}</button>` + badges.map(({ c }) => `<button type="button" data-w="${c}">${esc(copy.label('compare', c))}</button>`).join('');
     return {
-      link: `<button type="button" class="cmplink" aria-expanded="false">${esc(copy.label('compare', 'link'))}</button>`,
-      panel: `<div class="cmp" hidden><div class="seg" role="group" aria-label="${esc(copy.label('compare', 'label'))}">${buttons}</div>${badges.map((b) => b.html).join('')}</div>`,
+      link: copy.label('compare', 'link'),
+      panel: `<div class="seg" role="group" aria-label="${esc(copy.label('compare', 'label'))}">${buttons}</div>${badges.map((b) => b.html).join('')}`,
     };
   };
   const yearsUnit = (b: Basis) => L(b === 't' ? 'unitT' : 'unitF');
@@ -276,24 +293,42 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
       const html = safe(id, () => {
         const e = copy.get(id);
         if (!e) return null;
-        const tk = companyNowTokens(co, s.basis, F, e);
-        const shown = m.shown(s.basis);
-        const unit = (e.unit as string) ?? '';
-        const price = co.now.yearsOfRevenue !== undefined
-          ? { pre: L('pricedAt'), n: `${parseFig(co.now.yearsOfRevenue).text} ${L('years')}`, unit }
-          : { pre: L('pricedAt'), n: `${shown!.years.text} ${L('years')}`, unit: yearsUnit(shown!.basis) };
-        // every company card: what the price needs, what the business earns against the bond,
-        // what analysts expect next year, and what happens if growth falls short
         const shared = copy.get('company-lines');
-        const earnsNow = m.section !== 'loss' && m.shown(s.basis) !== null;
-        // the farm line leads; the rest reads as commentary under it
-        const tpl: ([string, string | undefined] | [string, string | undefined, string])[] = [
-          ['farm', earnsNow ? (shared?.farm as string | undefined) : undefined],
-          // the analysts' forecast sits under the requirement as a note, so the two growth figures read together
-          ['assumes', e.assumes === undefined ? undefined : (e.assumes as string) + (co.now.forecast !== undefined && co.now.forecast !== null && shared?.forecast ? `\n${shared.forecast as string}` : '')],
-          ['consequence', e.consequence as string | undefined],
-        ];
-        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, href: yahoo(co.id), about: aboutOf(copy, co.id), price, lines: [], facts: facts(id, tk, tpl), extra: balanceBubble(co, m.section, shared, tk, id, copy), compare: comparePanel(co, m.req('t'), m.section), why: { heading: heading(m.section), bullets: bulletsOf(e, tk) } }, copy);
+        // the years figure and the three sections for the company as it stands in `c`, with the bond in `FF`
+        const card = (c: Company, FF: Figures, basis: Basis) => {
+          const mm = nowModel(c, FF);
+          const tk = companyNowTokens(c, basis, FF, e);
+          const shown = mm.shown(basis);
+          const unit = (e.unit as string) ?? '';
+          const price = c.now.yearsOfRevenue !== undefined
+            ? { pre: L('pricedAt'), n: `${parseFig(c.now.yearsOfRevenue).text} ${L('years')}`, unit }
+            : { pre: L('pricedAt'), n: `${shown!.years.text} ${L('years')}`, unit: yearsUnit(shown!.basis) };
+          // every company card: what the price needs, what the business earns against the bond,
+          // what analysts expect next year, and what happens if growth falls short
+          const earnsNow = mm.section !== 'loss' && mm.shown(basis) !== null;
+          const tpl: ([string, string | undefined] | [string, string | undefined, string])[] = [
+            ['farm', earnsNow ? (shared?.farm as string | undefined) : undefined],
+            // the analysts' forecast sits under the requirement as a note, so the two growth figures read together
+            ['assumes', e.assumes === undefined ? undefined : (e.assumes as string) + (c.now.forecast !== undefined && c.now.forecast !== null && shared?.forecast ? `\n${shared.forecast as string}` : '')],
+            ['consequence', e.consequence as string | undefined],
+          ];
+          return { tk, price, facts: facts(id, tk, tpl) };
+        };
+        const today = card(co, F, s.basis);
+        const compare = comparePanel(co, m.req('t'), m.section);
+        // the card as it was on each Compare over time date: that day's years of profit, dividend and bond;
+        // no forecast (the board keeps only today's)
+        const at = compare ? COMPARES.flatMap((w) => {
+          const t = co.now.then?.[w];
+          const bondThen = F.eras.now.bondThen?.[w];
+          if (!t || bondThen === undefined) return [];
+          // years of profit rounded like today's: whole years from 10 up
+          const was: Company = { ...co, now: { ...co.now, pe: t.pe >= 10 ? Math.round(t.pe) : t.pe, pef: null, y: t.y, forecast: null } };
+          const FF: Figures = { ...F, eras: { ...F.eras, now: { ...F.eras.now, bond: bondThen } } };
+          const v = card(was, FF, 't');
+          return [{ w, price: v.price, facts: v.facts }];
+        }) : undefined;
+        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, href: yahoo(co.id), about: aboutOf(copy, co.id), price: today.price, lines: [], facts: today.facts, at, extra: financesBubble(co, m.section, shared, today.tk, id), compare, why: { heading: heading(m.section), bullets: bulletsOf(e, today.tk) } }, copy);
       });
       // not profitable: the most years of profit first, and an outright loss (no years to count) ahead of those
       if (html) buckets[m.section].push({ sort: m.section === 'loss' ? m.pe.v ?? Infinity : m.sectionReq ?? -Infinity, html });

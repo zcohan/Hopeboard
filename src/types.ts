@@ -49,6 +49,8 @@ export interface NowFigures {
   capex?: number; // $ billions spent on buildings and equipment, last twelve months
   /** Cash and debt on the latest balance sheet ($ billions), and a year's profit (value ÷ years of profit) to count them in */
   balance?: { cash: number; debt: number; end: string; profit?: number };
+  /** Change in the number of shares per year (negative: bought back), over `years` (10, or as few as 5) */
+  shares?: { rate: number; years: number };
   listing?: { low: number; high: number; month: string }; // a new listing's range against its first close
   /** Years of profit and dividends a week, a month, a quarter and a year ago, with the filings known then. */
   then?: Partial<Record<Compare, { pe: number; y: number }>>;
@@ -85,6 +87,8 @@ export interface EraFigures {
   longRun?: { stocks: number; bonds: number; from: number; to: number };
   /** The year the bond was last this high, when it's the highest of the past year. */
   bondHighSince?: string | null;
+  /** The bond on each Compare over time date (now only). */
+  bondThen?: Partial<Record<Compare, number>>;
   spx: { pe: Fig; pef?: Fig; y: number; last?: number; profit?: number; stock?: number };
 }
 

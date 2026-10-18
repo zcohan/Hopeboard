@@ -44,7 +44,7 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .why[popover]{position:absolute; inset:auto; margin:0; width:min(320px, calc(100vw - 32px)); overflow:visible;
   box-shadow:0 8px 28px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08)}
 .why::before{content:""; position:absolute; top:-7px; left:var(--arrow,28px); width:12px; height:12px; background:inherit;
-  border-left:1px solid var(--rule); border-top:1px solid var(--rule); transform:rotate(45deg)}
+  border-left:1px solid var(--edge); border-top:1px solid var(--edge); transform:rotate(45deg)}
 .price{flex:none; margin-left:auto; text-align:right; line-height:1.1; font-variant-numeric:tabular-nums}
 .price .n{display:block; font-size:17px; color:var(--ink); white-space:nowrap; margin:2px 0}
 .price .u{display:block; font-size:11px; color:var(--ink-3)}
@@ -164,6 +164,8 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .seg button{font:inherit; font-size:13px; border:0; background:none; padding:5px 12px; border-radius:999px; color:var(--ink-2); cursor:pointer; white-space:nowrap}
 .seg button.on{background:var(--ink); color:var(--paper)}
 .seg button:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+/* on a phone the four time buttons don't fit on one row: two by two */
+@media (max-width:560px){.seg{display:grid; grid-template-columns:1fr 1fr; border-radius:18px} .seg button{text-align:center}}
 .deal{align-self:flex-start; font-size:13px; font-weight:500; padding:4px 10px; border-radius:999px; margin:-2px 0 2px}
 .deal.better{background:#E6F4EC; color:#1D6B43}
 .deal.worse{background:#FBF0DD; color:#8A5A12}
@@ -176,10 +178,9 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .foot-links{margin-top:auto; display:flex; flex-direction:column; gap:12px}
 .links{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center}
 .links .whylink{margin-top:0}
-.cmplink{font:inherit; font-size:14px; font-weight:500; color:var(--ink); background:none; border:0; padding:2px 0; cursor:pointer;
-  text-decoration:underline; text-decoration-color:var(--ink-3); text-underline-offset:3px}
-.cmplink:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
-.cmp{display:flex; flex-direction:column; gap:10px; align-items:flex-start; padding-top:4px}
+.why.cmp{gap:10px; align-items:flex-start; width:min(500px, calc(100vw - 32px))}
+.why.cmp .seg{flex-wrap:wrap}
+.why.cmp:popover-open{display:flex; flex-direction:column}
 .cmp[hidden], .cmp .deal[hidden]{display:none}
 .cmp .deal{margin:0}
 
@@ -236,3 +237,4 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .namelink:focus-visible{outline:2px solid var(--ink); outline-offset:2px; border-radius:3px}
 .why p.note{margin:4px 0 0; font-size:13px; color:var(--ink-3)}
 .why > :last-child{margin-bottom:0}
+[data-at][hidden]{display:none !important}

@@ -202,7 +202,7 @@ Facts that are inputs, not results, may be typed in bullets and stories when the
 
 ### 7.3 Units
 
-- Growth and returns per year: "15%/year". Write "/year" every time, so the reader never has to guess whether a figure is yearly or total.
+- Growth and returns per year: "15%/year". Write "/year" every time, so the reader never has to guess whether a figure is yearly or total. That includes short labels: the compare badge reads "Better deal · needed 48%/year, now 47%/year", never "needed 48%, now 47%".
 - Losses over the whole decade: "you may lose 34% of your investment". This is the one total figure.
 - One-year past views: "Profit grew 30%. The stock returned 39%." (no "/year", because it is one year).
 - Years of profit: "35 years", never "35x". The US Bond is in the same unit: "20 years of its yearly interest".
@@ -290,15 +290,17 @@ The profit growth a year the price needs, as a headline, then notes:
 > **$290 billion** profit/year by 2036
 > SpaceX lost $9 billion on $23 billion of revenue last year. Apple earns $130 billion.
 
-### 8.3a Cash & debt (shared, `company-lines.balance*`)
+### 8.3a Finances (shared, `company-lines`)
 
-A link at the foot of the card opens a bubble. The link says which is bigger: "Cash", "Debt", or "Cash & debt" when they are close. It stays out of the three sections, which are the card's core (owner, October 2026). Written once for every card; the app picks the wording from the latest balance sheet:
+A link at the foot of the card, "Finances", opens one bubble on the company's health. It stays out of the three sections, which are the card's core (owner, October 2026). Written once for every card; the app picks the wording from the data. Three small headings, each left off when its figure isn't in the data:
 
-> Holds **8 years** of profit in cash, beyond its debt
-> It would take **10 years** of profit to pay off its debt, after using its cash
-> Cash and debt close to even (within a quarter of a year of profit)
+> **Cash**: Holds **8 years** of profit in cash, beyond its debt
+> **Debt**: It would take **10 years** of profit to pay off its debt, after using its cash
+> **Cash & debt**: Cash and debt close to even (within a quarter of a year of profit)
+> **Dividends**: Pays **2.4%** of its stock price a year as dividends / Pays no dividend
+> **Shares**: Bought back **4.3%** of its shares a year over the last 10 years, so each share owns a bigger slice / Issued **6.3%** more shares a year…, so each share owns a smaller slice
 
-Relative only: no dollar amounts (owner, October 2026). Not profitable cards have no profit to measure against, so they say only which is bigger: "Holds more in cash than it owes". Banks get no row: their debts are mostly deposits. A company whose debt isn't found in the data gets no row either, so a missing figure never reads as "no debt".
+Relative only: years of profit and percentages, no dollar amounts (owner, October 2026). Not profitable cards have no profit to measure against, so the cash line says only which is bigger: "Holds more in cash than it owes". Banks get no cash or debt line: their debts are mostly deposits. A missing figure never reads as zero.
 
 ### 8.4 Risk or Cushion (`consequence`)
 

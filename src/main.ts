@@ -195,16 +195,16 @@ function placeLogos() {
   });
 }
 
-// Each card's "Compare over time" panel. Its state lives here, by card, so a re-render keeps it.
-const compareOpen = new Map<string, Compare>();
+// Each card's "Compare over time" popover: the date picked lives here, by card, so a re-render keeps it.
+// Picking a date shows the card as it was then; Today, where it starts, shows it as it is.
+const compareOpen = new Map<string, Compare | 'now'>();
 function applyCompare() {
   app.querySelectorAll<HTMLElement>('.tile[data-copy]').forEach((tile) => {
     const panel = tile.querySelector<HTMLElement>('.cmp');
-    const link = tile.querySelector<HTMLButtonElement>('.cmplink');
-    if (!panel || !link) return;
-    const w = compareOpen.get(tile.dataset.copy!);
-    panel.hidden = !w;
-    link.setAttribute('aria-expanded', String(!!w));
+    if (!panel) return;
+    const w = compareOpen.get(tile.dataset.copy!) ?? 'now';
+    tile.querySelectorAll<HTMLElement>('[data-at]').forEach((el) => { el.hidden = el.dataset.at !== w; });
+    tile.classList.toggle('then', w !== 'now');
     panel.querySelectorAll<HTMLElement>('[data-w]').forEach((el) => {
       if (el.tagName === 'BUTTON') { el.classList.toggle('on', el.dataset.w === w); el.setAttribute('aria-pressed', String(el.dataset.w === w)); }
       else el.hidden = el.dataset.w !== w;
@@ -215,15 +215,8 @@ app.addEventListener('click', (ev) => {
   const t = ev.target as HTMLElement;
   const tile = t.closest<HTMLElement>('.tile[data-copy]');
   if (!tile) return;
-  const id = tile.dataset.copy!;
-  if (t.closest('.cmplink')) {
-    // opening starts on a year, the longest view; clicking the link again closes it
-    if (compareOpen.has(id)) compareOpen.delete(id); else compareOpen.set(id, 'm12');
-    applyCompare();
-  } else {
-    const b = t.closest<HTMLButtonElement>('.cmp button[data-w]');
-    if (b) { compareOpen.set(id, b.dataset.w as Compare); applyCompare(); }
-  }
+  const b = t.closest<HTMLButtonElement>('.cmp button[data-w]');
+  if (b) { compareOpen.set(tile.dataset.copy!, b.dataset.w as Compare | 'now'); applyCompare(); }
 });
 
 installPopovers();
