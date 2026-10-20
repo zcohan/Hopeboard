@@ -38,7 +38,7 @@
       "note": "SpaceX: its listing document has no machine-readable figures; replaced at its first annual report."
     },
     "shiller": {
-      "name": "Robert Shiller’s S&P 500 data (profit, dividends and total return per index share)",
+      "name": "Robert Shiller’s S&P 500 data (profit, dividends and total return per index share, and US consumer prices)",
       "url": "https://shillerdata.com/",
       "date": "2026-06"
     }
@@ -106,6 +106,13 @@
         "m1": 0.05,
         "m3": 0.046,
         "m12": 0.04
+      },
+      "inflation": {
+        "decade": 0.034,
+        "year": 0.034,
+        "lost": 0.281,
+        "since": "2016",
+        "month": "2026-08"
       }
     },
     "y1": {
@@ -199,7 +206,8 @@
         "cheapest": {
           "month": "2024-04",
           "req": 0.182
-        }
+        },
+        "prevYear": 1.889
       },
       "past": {
         "y1": {
@@ -280,7 +288,8 @@
           "month": "2026-06",
           "req": 0.36,
           "since": "2020"
-        }
+        },
+        "prevYear": 0.166
       },
       "past": {
         "y1": {
@@ -356,7 +365,8 @@
         "cheapest": {
           "month": "2017-07",
           "req": 0.083
-        }
+        },
+        "prevYear": 0.877
       },
       "past": {
         "y1": {
@@ -442,7 +452,8 @@
         "cheapest": {
           "month": "2016-11",
           "req": 0.044
-        }
+        },
+        "prevYear": 0.697
       },
       "past": {
         "y1": {
@@ -529,7 +540,8 @@
         "cheapest": {
           "month": "2018-12",
           "req": 0.107
-        }
+        },
+        "prevYear": 0.423
       },
       "past": {
         "y1": {
@@ -615,7 +627,8 @@
         "cheapest": {
           "month": "2020-03",
           "req": 0.116
-        }
+        },
+        "prevYear": 0.783
       },
       "past": {
         "y1": {
@@ -701,7 +714,8 @@
         "cheapest": {
           "month": "2022-10",
           "req": 0.037
-        }
+        },
+        "prevYear": 0.883
       },
       "past": {
         "y1": {
@@ -782,7 +796,8 @@
         "cheapest": {
           "month": "2023-05",
           "req": 0.051
-        }
+        },
+        "prevYear": 0.682
       },
       "past": {
         "y1": {
@@ -868,7 +883,8 @@
         "cheapest": {
           "month": "2025-04",
           "req": 0.161
-        }
+        },
+        "prevYear": 0.85
       },
       "past": {
         "y1": {
@@ -954,7 +970,8 @@
         "cheapest": {
           "month": "2020-03",
           "req": 0.049
-        }
+        },
+        "prevYear": 0.79
       },
       "past": {
         "y1": {
@@ -1037,7 +1054,8 @@
         "cheapest": {
           "month": "2023-01",
           "req": 0.1
-        }
+        },
+        "prevYear": 0.781
       },
       "past": {
         "y1": {
@@ -1116,7 +1134,8 @@
           "end": "2026-06-30",
           "profit": 32.4
         },
-        "margin": 0.096
+        "margin": 0.096,
+        "prevYear": 1.009
       },
       "past": {
         "y1": {
@@ -1202,7 +1221,8 @@
         "cheapest": {
           "month": "2018-07",
           "req": -0.016
-        }
+        },
+        "prevYear": 0.157
       },
       "past": {},
       "src": {
@@ -1264,7 +1284,8 @@
         "cheapest": {
           "month": "2022-10",
           "req": 0.137
-        }
+        },
+        "prevYear": 0.256
       },
       "past": {},
       "src": {
@@ -1373,7 +1394,8 @@
         "cheapest": {
           "month": "2022-10",
           "req": 0.124
-        }
+        },
+        "prevYear": 0.779
       },
       "past": {},
       "src": {
@@ -1430,7 +1452,8 @@
           "rate": 0.0099,
           "years": 10
         },
-        "margin": 0.482
+        "margin": 0.482,
+        "prevYear": 0.102
       },
       "past": {},
       "src": {
@@ -1491,7 +1514,8 @@
         "cheapest": {
           "month": "2026-06",
           "req": 0.108
-        }
+        },
+        "prevYear": 0.906
       },
       "past": {},
       "src": {
@@ -1553,7 +1577,8 @@
         "cheapest": {
           "month": "2026-06",
           "req": 0.056
-        }
+        },
+        "prevYear": 0.689
       },
       "past": {},
       "src": {
@@ -1615,7 +1640,8 @@
         "cheapest": {
           "month": "2026-05",
           "req": 0.234
-        }
+        },
+        "prevYear": 1.004
       },
       "past": {},
       "src": {
@@ -1677,7 +1703,8 @@
         "cheapest": {
           "month": "2022-10",
           "req": 0.047
-        }
+        },
+        "prevYear": 1.047
       },
       "past": {},
       "src": {
@@ -1739,7 +1766,8 @@
         "cheapest": {
           "month": "2022-06",
           "req": 0.087
-        }
+        },
+        "prevYear": 0.623
       },
       "past": {},
       "src": {
@@ -1802,7 +1830,8 @@
           "month": "2025-12",
           "req": 0.037,
           "since": "2019"
-        }
+        },
+        "prevYear": 0.859
       },
       "past": {},
       "src": {
@@ -1854,7 +1883,8 @@
           "end": "2026-06-30",
           "profit": 2.6
         },
-        "margin": 0.299
+        "margin": 0.299,
+        "prevYear": 0.938
       },
       "past": {},
       "src": {
@@ -1914,7 +1944,8 @@
         "cheapest": {
           "month": "2020-03",
           "req": 0.022
-        }
+        },
+        "prevYear": 0.834
       },
       "past": {},
       "src": {
@@ -1976,7 +2007,8 @@
         "cheapest": {
           "month": "2022-10",
           "req": -0.047
-        }
+        },
+        "prevYear": 0.385
       },
       "past": {},
       "src": {
@@ -2071,7 +2103,8 @@
         "cheapest": {
           "month": "2019-01",
           "req": 0.031
-        }
+        },
+        "prevYear": 1.089
       },
       "past": {
         "y1": {
@@ -2147,7 +2180,8 @@
         "cheapest": {
           "month": "2020-04",
           "req": -0.024
-        }
+        },
+        "prevYear": 0.846
       },
       "past": {
         "y1": {
@@ -2223,7 +2257,8 @@
         "cheapest": {
           "month": "2020-03",
           "req": -0.026
-        }
+        },
+        "prevYear": 0.737
       },
       "past": {
         "y1": {
@@ -2298,7 +2333,8 @@
         "cheapest": {
           "month": "2020-03",
           "req": -0.076
-        }
+        },
+        "prevYear": 0.781
       },
       "past": {
         "y1": {
@@ -2373,7 +2409,8 @@
         "cheapest": {
           "month": "2020-04",
           "req": -0.077
-        }
+        },
+        "prevYear": 0.64
       },
       "past": {
         "y1": {
@@ -2445,7 +2482,8 @@
         "shares": {
           "rate": -0.0361,
           "years": 10
-        }
+        },
+        "prevYear": 0.626
       },
       "past": {
         "y1": {
@@ -2513,7 +2551,8 @@
         "shares": {
           "rate": -0.0202,
           "years": 10
-        }
+        },
+        "prevYear": 0.642
       },
       "past": {
         "y1": {
@@ -2590,7 +2629,8 @@
         "cheapest": {
           "month": "2022-10",
           "req": 0.136
-        }
+        },
+        "prevYear": 0.828
       },
       "past": {
         "y1": {
@@ -2674,7 +2714,8 @@
         "cheapest": {
           "month": "2026-05",
           "req": 0.142
-        }
+        },
+        "prevYear": 0.761
       },
       "past": {
         "y1": {
@@ -2757,7 +2798,8 @@
         "cheapest": {
           "month": "2023-10",
           "req": -0.088
-        }
+        },
+        "prevYear": 1.078
       },
       "past": {
         "y1": {
@@ -2841,7 +2883,8 @@
         "cheapest": {
           "month": "2018-12",
           "req": -0.098
-        }
+        },
+        "prevYear": 0.64
       },
       "past": {
         "y1": {
@@ -2924,7 +2967,8 @@
         "cheapest": {
           "month": "2018-12",
           "req": 0.047
-        }
+        },
+        "prevYear": 1.01
       },
       "past": {
         "y1": {
@@ -3007,7 +3051,8 @@
         "cheapest": {
           "month": "2019-10",
           "req": 0.048
-        }
+        },
+        "prevYear": 0.395
       },
       "past": {
         "y1": {
@@ -3091,7 +3136,8 @@
         "cheapest": {
           "month": "2017-01",
           "req": 0.049
-        }
+        },
+        "prevYear": 0.871
       },
       "past": {
         "y1": {
@@ -3175,7 +3221,8 @@
         "cheapest": {
           "month": "2024-06",
           "req": -0.002
-        }
+        },
+        "prevYear": 0.688
       },
       "past": {
         "y1": {
@@ -3258,7 +3305,8 @@
         "cheapest": {
           "month": "2020-03",
           "req": 0.013
-        }
+        },
+        "prevYear": 0.675
       },
       "past": {
         "y1": {
@@ -3337,7 +3385,8 @@
           "rate": -0.001,
           "years": 10
         },
-        "margin": 0.087
+        "margin": 0.087,
+        "prevYear": 0.933
       },
       "past": {
         "y1": {
@@ -3421,7 +3470,8 @@
         "cheapest": {
           "month": "2020-05",
           "req": 0.061
-        }
+        },
+        "prevYear": 0.775
       },
       "past": {
         "y1": {
@@ -3504,7 +3554,8 @@
         "cheapest": {
           "month": "2017-05",
           "req": 0.054
-        }
+        },
+        "prevYear": 0.983
       },
       "past": {
         "y1": {
@@ -3587,7 +3638,8 @@
         "cheapest": {
           "month": "2018-12",
           "req": 0.015
-        }
+        },
+        "prevYear": 0.982
       },
       "past": {
         "y1": {
@@ -3670,7 +3722,8 @@
         "cheapest": {
           "month": "2025-07",
           "req": 0.026
-        }
+        },
+        "prevYear": 0.997
       },
       "past": {
         "y1": {
@@ -3754,7 +3807,8 @@
         "cheapest": {
           "month": "2025-05",
           "req": 0.005
-        }
+        },
+        "prevYear": 6.374
       },
       "past": {
         "y1": {
@@ -3837,7 +3891,8 @@
         "cheapest": {
           "month": "2020-03",
           "req": -0.019
-        }
+        },
+        "prevYear": 0.949
       },
       "past": {
         "y1": {
@@ -3921,7 +3976,8 @@
         "cheapest": {
           "month": "2018-12",
           "req": 0.009
-        }
+        },
+        "prevYear": 0.72
       },
       "past": {
         "y1": {
@@ -4000,7 +4056,8 @@
           "rate": -0.0158,
           "years": 10
         },
-        "margin": 0.152
+        "margin": 0.152,
+        "prevYear": 0.654
       },
       "past": {
         "y1": {
@@ -4083,7 +4140,8 @@
         "cheapest": {
           "month": "2018-12",
           "req": 0.015
-        }
+        },
+        "prevYear": 0.851
       },
       "past": {
         "y1": {
@@ -4166,7 +4224,8 @@
         "cheapest": {
           "month": "2020-05",
           "req": 0.004
-        }
+        },
+        "prevYear": 0.591
       },
       "past": {
         "y1": {
@@ -4249,7 +4308,8 @@
         "cheapest": {
           "month": "2020-03",
           "req": 0.052
-        }
+        },
+        "prevYear": 1.043
       },
       "past": {
         "y1": {
@@ -4338,7 +4398,8 @@
         "cheapest": {
           "month": "2024-04",
           "req": 0.2
-        }
+        },
+        "prevYear": 4
       },
       "past": {
         "y1": {
@@ -4420,7 +4481,8 @@
         "cheapest": {
           "month": "2020-03",
           "req": 0.029
-        }
+        },
+        "prevYear": 0.625
       },
       "past": {
         "y1": {
@@ -4503,7 +4565,8 @@
         "cheapest": {
           "month": "2021-05",
           "req": 0.125
-        }
+        },
+        "prevYear": 0.892
       },
       "past": {
         "y1": {
@@ -4587,7 +4650,8 @@
         "cheapest": {
           "month": "2022-10",
           "req": 0.054
-        }
+        },
+        "prevYear": 0.79
       },
       "past": {
         "y1": {
@@ -4667,7 +4731,8 @@
           "month": "2026-09",
           "req": 0.198,
           "since": "2024"
-        }
+        },
+        "prevYear": 0.258
       },
       "past": {
         "y1": {
@@ -4735,7 +4800,8 @@
         "cheapest": {
           "month": "2019-05",
           "req": 0.031
-        }
+        },
+        "prevYear": 0.494
       },
       "past": {
         "y1": {
@@ -4883,7 +4949,8 @@
         "cheapest": {
           "month": "2019-04",
           "req": 0.053
-        }
+        },
+        "prevYear": 0.879
       },
       "past": {
         "y1": {

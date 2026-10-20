@@ -27,14 +27,22 @@ export function compare(req: number, last: number): string {
   return a > b ? 'more than' : a < b ? 'less than' : 'the same as';
 }
 
-/** "+47%" or "−1%": a required growth with its sign, as a headline */
-const signed = (g: number) => { const p = pct(g); return p.startsWith('−') || p === '0%' ? p : `+${p}`; };
+/** "47%" or "−1%": a required growth as a headline, with a sign only when it's negative (never "−0%") */
+const signed = (g: number) => { const p = pct(g); return p === '−0%' ? '0%' : p; };
 
 function common(F: Figures): Tokens {
   return {
     index: (a) => approx(INDEX_RETURN, a),
     normalYears: () => String(NORMAL_YEARS),
     bond: (a) => approx(F.eras.now.bond, a, decPct),
+    /** inflation: the decade's yearly rise, what cash lost since then, and the bond against the last year's rise */
+    inflDecade: () => decPct(need(F.eras.now.inflation, 'inflation').decade),
+    inflSince: () => need(F.eras.now.inflation, 'inflation').since,
+    inflLost: () => pct(need(F.eras.now.inflation, 'inflation').lost),
+    bondVsInflation: () => {
+      const gap = F.eras.now.bond - need(F.eras.now.inflation, 'inflation').year, g = halfPct(Math.abs(gap));
+      return g === '0%' ? 'so it currently just keeps up with inflation' : gap > 0 ? `so it currently beats inflation by **${g}/year**` : `so it currently pays **${g}/year** less than inflation`;
+    },
   };
 }
 
@@ -45,9 +53,8 @@ function nowTokens(m: NowModel, basis: Basis, F: Figures, scenario: Scenario | u
   return {
     ...common(F),
     opening: () => (m.section === 'pricey' || m.section === 'loss' ? 'Only if' : 'If'),
-    /** " & the stock corrects" on Pricey cards, where buyers going back to ordinary years of profit drives the loss */
-    /** " & the stock corrects" on Pricey cards, where buyers going back to ordinary years of profit drives the loss */
-    corrects: () => (m.section === 'pricey' ? ' & the stock corrects' : ''),
+    /** " & the story fades" on Pricey cards: buyers going back to an ordinary 18 years of profit, which drives the loss there */
+    corrects: () => (m.section === 'pricey' ? ' & the story fades' : ''),
     /** " (5.5x today’s profit by 2036)": the requirement as the profit it adds up to, from 4%/year */
     reqTimes: () => {
       // on the forecast view the growth starts from next year's profit, so "times today's" wouldn't hold
@@ -77,8 +84,10 @@ function nowTokens(m: NowModel, basis: Basis, F: Figures, scenario: Scenario | u
     industry: (a) => approx(need(m.industry, 'industry growth'), a),
     g: (a) => approx(m.g(scn()), ['bare', ...a]),
     outcome: (a) => {
-      const ref: OutcomeRef = a[0] === 'index' || a[0] === 'its' ? a[0] : 'bond';
-      return outcome(m.r(scn()), F.eras.now.bond, ref, a[0] === 'r');
+      const ref: OutcomeRef = a.includes('index') ? 'index' : a.includes('its') ? 'its' : 'bond';
+      // `:still` reads "you may still lose", for a scenario that sounds like good news (Intel back at its best year)
+      const out = outcome(m.r(scn()), F.eras.now.bond, ref, a.includes('r'));
+      return a.includes('still') ? out.replace(/^you may lose/, 'you may still lose') : out;
     },
     r: () => `${range(m.r(scn()), halfPct)}`,
     vsBond: () => {
@@ -164,25 +173,23 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
       const lastShown = last < 1 ? Math.round(last * 100) / 100 : last;
       const x = shown(need2036.reduce((a, b) => a + b, 0) / need2036.length) / lastShown;
       const two = (v: number) => { const p = Math.pow(10, Math.floor(Math.log10(v)) - 1); return Math.round(v / p) * p; };
-      return x < 1.5 ? '' : ` (${x >= 10 ? two(x).toLocaleString('en-US') : Math.round(x * 2) / 2}x last year’s)`;
+      return x < 1.5 ? '' : ` (${x >= 10 ? two(x).toLocaleString('en-US') : Math.round(x * 2) / 2}x last year’s profit)`;
     },
     /** when the dollar figures are from: "last year", or "in the first half of 2026" for a new listing */
     profitsPeriod: () => co.now.profitsPeriod ?? 'last year',
     /** "26 cents" of every $1 of sales kept as profit, over the last three years */
     marginCents: () => { const c = Math.round(Math.abs(need(co.now.margin, 'margin')) * 100); return c === 1 ? '1 cent' : `${c} cents`; },
-    /** the track record: the year ten years ago, the growth its price assumed then, what profit did, and what today's assumes */
+    /** the note under Priced for: the year ten years ago and the growth its price assumed then */
     trackYear: () => need(F.eras.y10.label.match(/\d{4}/)?.[0], 'ten-years-ago year'),
     trackThen: () => pct(need(pastModel(co, 'y10')?.req, 'growth assumed ten years ago')),
-    /** "It grew faster, at **14%/year**", "It grew slower, at…", "It grew at that rate, …", compared as printed */
+    /** "but it actually grew 14%/year", "and it grew 14%/year" when the two print the same, "but profit actually fell 2%/year" */
     trackGot: () => {
       const got = need(co.now.last, 'last-decade growth'), then = need(pastModel(co, 'y10')?.req, 'growth assumed ten years ago');
       const g = pct(got);
-      if (g === '0%') return 'Its profit stayed roughly the same';
-      if (got < 0) return `Its profit fell instead, by **${pct(-got)}/year**`;
-      const a = Math.round(got * 100), b = Math.round(then * 100);
-      return a > b ? `It grew faster, at **${g}/year**` : a < b ? `It grew slower, at **${g}/year**` : `It grew at that rate, **${g}/year**`;
+      if (g === '0%') return 'but profit actually stayed roughly the same';
+      if (got < 0) return `but profit actually fell ${pct(-got)}/year`;
+      return Math.round(got * 100) === Math.round(then * 100) ? `and it grew ${g}/year` : `but it actually grew ${g}/year`;
     },
-    trackNow: () => pct(need(nowModel(co, F, 't').req('t'), 'growth assumed today')),
     divYield: () => decPct(co.now.y),
     /** the yearly change in the share count, without its sign: "4%", "0.7%" */
     shareRate: () => decPct(Math.abs(need(co.now.shares, 'share count change').rate)),
@@ -264,5 +271,36 @@ export function companyPastTokens(co: Company, era: PastEra, F: Figures): Tokens
     maxFall: () => pct(need(p.maxFall, `${co.id} ${era} biggest fall`)),
     rev: () => pct(need(p.revenueGrowth, `${co.id} ${era} revenue growth`)),
     oil: () => `$${need(F.eras[era].oil, 'oil price')}`,
+  };
+}
+
+/** The Philosophy and Methodology pages: board-wide figures, and real companies' figures for the worked examples
+ * ({c:WMT:grew}), so the pages never quote a typed number. */
+export function pageTokens(F: Figures): Tokens {
+  const co = (id: string) => need(F.companies.find((c) => c.id === id), `company ${id}`);
+  // the made-up example: 40 years of profit, 1% in dividends
+  const exReq = requiredGrowth(0.01, 40);
+  return {
+    index: () => '10%',
+    normalYears: () => String(NORMAL_YEARS),
+    avg: () => `${Math.round(need(F.eras.now.spx.last, 'S&P last-decade growth') * 100)}%`,
+    y10year: () => need(F.eras.y10.label.match(/\d{4}/)?.[0], 'ten-years-ago year'),
+    inflDecade: () => decPct(need(F.eras.now.inflation, 'inflation').decade),
+    endYear: () => String(+(F.asOf.match(/\d{4}/)?.[0] ?? NaN) + 10),
+    exReq: () => pct(exReq),
+    exTimes: () => String(Math.round(Math.pow(1 + exReq, 10))),
+    /** {c:WMT:grew} profit growth over the last decade; returned, the stock's return a year since ten years ago;
+     * yearsThen / yearsNow, years of profit then and today; assumedThen, the growth its price assumed then */
+    c: ([id, what]) => {
+      const c = co(id);
+      switch (what) {
+        case 'grew': return pct(need(c.now.last, `${id} last decade`));
+        case 'returned': return pct(need(c.past.y10?.stock, `${id} stock return`));
+        case 'yearsThen': return parseFig(need(c.past.y10?.pe, `${id} years then`)).text;
+        case 'yearsNow': return parseFig(c.now.pe).text;
+        case 'assumedThen': return pct(need(pastModel(c, 'y10')?.req, `${id} growth assumed then`));
+        default: throw new Error(`Unknown company figure ${what}`);
+      }
+    },
   };
 }

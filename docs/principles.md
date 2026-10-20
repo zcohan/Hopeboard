@@ -4,7 +4,7 @@
 
 The Hopeboard teaches one thing: a stock price is a bet on the next ten years, and the way to judge it is the profit growth the price assumes, not the chart.
 
-It is a grid of cards for ordinary people deciding where to park money for a decade. The cards cover big companies, plus three baselines: the safe US bond, gold and the S&P 500. Each card says what the business earns against the bond, what its price assumes to be true, what analysts expect next year, and what you would make or lose if the price is wrong.
+It is a grid of cards for ordinary people deciding where to park money for a decade. The cards cover big companies, plus three baselines: inflation, the safe US bond and the S&P 500. Each card says what the business earns against the bond, what its price assumes to be true, what analysts expect next year, and what you would make or lose if the price is wrong.
 
 The reader has no finance training and reads a rising chart as "this stock is doing well". The app replaces that habit with a better one. The original mockup is `mockup/hopeboard.html`.
 
@@ -43,7 +43,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 
 ## The board and the cards
 
-**Sections.** Baselines (US Bond, S&P 500, Gold) sit on top; the S&P 500 card uses the company layout. Company cards sit under category pills (Mag 7 by default, then All industries and each industry) and tabs sorted by required growth. The All tab (the default) shows every card in one grid: the not profitable first (their price assumes more growth than any percentage), then most required growth first; the others split them:
+**Sections.** Baselines (Inflation, US Bond, S&P 500) sit on top; the S&P 500 card uses the company layout. Company cards sit under category pills (Mag 7 by default, then All industries and each industry) and tabs sorted by required growth. The All tab (the default) shows every card in one grid: the not profitable first (their price assumes more growth than any percentage), then most required growth first; the others split them:
 
 - **Pricey:** required growth of 14% or more.
 - **Normal:** 10% to 14%.
@@ -56,7 +56,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 
 1. Logo, name, a one-line description of the business, and a right-aligned stack: "priced at", the number of years, "of last year's profit".
 
-2. Three labelled sections, each a headline figure with small notes: EARNS (what the business earns as a share of its price; notes: against the safe US bond, and dividends where they are 3% or more), PRICED FOR ("+35% growth/year": the profit growth a year the price assumes; notes: the last decade, and the analysts' forecast for next year), RISK (what happens if growth falls short; CUSHION when that is good news).
+2. Three labelled sections, each a headline figure with small notes: EARNS (what the business earns as a share of its price; notes: against the safe US bond, and dividends where they are 3% or more), PRICED FOR ("+35%/year growth": the profit growth a year the price assumes; notes: the last decade, and the analysts' forecast for next year), RISK (what happens if growth falls short; CUSHION when that is good news).
 3. Links at the foot: "Why so pricey?" (or "What the price assumes", "Why so cheap?") opens two or three points on why the price is what it is; "Finances" opens the company's health: cash or debt in years of profit (on Little or no profit cards, only which is bigger; no line for banks), dividends, and how fast the share count changed over the last decade; "Compare over time" opens time buttons (1 week, 1 month, 3 months, 1 year) and a badge saying whether today's price is cheaper, pricier or no different, with what the price assumed then and assumes now.
 
 `docs/writing-guide.md` has the wording rules for every part.
@@ -124,7 +124,7 @@ The design is a plain card grid that a first-time reader can scan, with nothing 
 | --- | --- |
 | Name it Hopeboard | The price carries hope about the next decade, and the board shows how much. |
 | Show years of profit, never the share price | The dollar price is a meaningless number on its own. |
-| Baselines at the top: US Bond, Gold, S&P 500 | These are the places people actually park money, and every other card is measured against them. |
+| Baselines at the top: Inflation, US Bond, S&P 500 (Gold dropped for now, October 2026: no profit or interest to measure, not part of the story) | These are the places people actually park money, and every other card is measured against them. |
 | Sort by required growth, not years of profit | Dividends change what a given number of years assumes. |
 | Past-view buttons (1, 5, 10 years ago) | Seeing what was assumed then and what happened builds the intuition. |
 | Last decade from three-year averages at each end (October 2026) | A single starting year in a slump flattered the record: the S&P 500's 13%/year started from the 2016 profit dip (9.6% averaged), Chevron's and Merck's from bad years. |
@@ -133,6 +133,7 @@ The design is a plain card grid that a first-time reader can scan, with nothing 
 | On the forecast view the whole card follows next year's profit, section included (October 2026) | Half-following it contradicted itself: Nvidia showed +10% under "Why so pricey?". A company moving section shows how much its price leans on the analysts. Little-or-no-profit cards stay put; they're written in dollars. |
 | Finances adds profit on sales (three-year average) and a ten-year track record (October 2026) | How much of each sale a business keeps says a lot about it; three years together give the general picture without a range to read. The track record shows whether the market under- or overestimated it: what the price assumed in 2016 against what profit did. Profit per employee and analyst "beats" were left out: the first mostly measures how a company is set up (outsourcing, retail staff), the second is steered by companies guiding analysts low. |
 | Compare over time shows the cheapest month in the last decade (October 2026) | Gives today's price some history in the board's terms. Worded as a fact, not "the best time to buy": the cheapest price isn't always the best buy, and the board doesn't advise. Same profit as every Priced for (last twelve months), so it agrees with the past views; left off for boom-and-bust businesses (sales fell a quarter in a year) and months under 5 years of profit. |
+| An Inflation card leads the baselines; the Philosophy page opens with where Hopeboard fits (October 2026) | Inflation is why money can't sit as cash, and the yardstick the bond and index have to beat. The page then says what the long-run record shows (most people do better with an index fund, as Buffett and Housel say) and that Hopeboard is for those who buy individual companies the value-investing way. |
 | Past views keep figures for periods that ended 120 days before (October 2026) | 120 days is the longest filing deadline, so they were public then; requiring the exact filing loses figures the SEC summary data misses. |
 | Toggle between last year's profit and next year's forecast | "Cheap at 20" quotes use the forecast, so both views should be one tap apart. |
 | The company's own forecast, not an industry average | Industry averages were plain averages over hundreds of companies and rarely fit the one on the card. |

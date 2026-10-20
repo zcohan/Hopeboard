@@ -76,10 +76,11 @@ function financesBubble(co: Company, section: Section, shared: CopyEntry | null 
   if (mg !== undefined && section !== 'loss') rows.push([labels.margin, (mg < 0 ? shared.marginLoses : shared.marginKeeps) as string]);
   rows.push([labels.dividends, (co.now.y > 0 ? shared.dividends : shared.noDividend) as string]);
   const sh = co.now.shares;
-  if (sh) rows.push([labels.shares, (Math.abs(sh.rate) < 0.005 ? shared.sharesSteady : sh.rate < 0 ? shared.sharesDown : shared.sharesUp) as string]);
-  // what its price assumed ten years ago against what the business then did
-  const was = pastModel(co, 'y10');
-  if (was?.req !== null && was?.req !== undefined && co.now.last !== null && co.now.last !== undefined) rows.push([labels.track, shared.track as string]);
+  // headed by what happened: Share buybacks, New shares, or Shares when the count held
+  if (sh) {
+    const dir = Math.abs(sh.rate) < 0.005 ? 'Steady' : sh.rate < 0 ? 'Down' : 'Up';
+    rows.push([labels[`shares${dir}`] ?? labels.shares, shared[`shares${dir}`] as string]);
+  }
   return {
     link: shared.financesLink as string,
     html: rows.map(([h, t]) => `<h4>${esc(h)}</h4><p class="story">${fill(t, tk, `${id} finances`)}</p>`).join(''),
@@ -155,10 +156,13 @@ const aboutOf = (copy: Copy, id: string) => copy.label(`${id}:now`, 'about') || 
 
 const glyph = (d: string) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
 /** Baseline badges: a government building for the bond, stacked bars for gold, a rising line for the index. */
+const SHOW_GOLD = false;
+
 const BASE = {
   bond: { color: 'linear-gradient(140deg,#5B9BFF,#2F63E0)', icon: glyph('<path d="M3 9.5 12 4l9 5.5z"/><path d="M5.5 12v6M10 12v6M14 12v6M18.5 12v6"/><path d="M3 20.5h18"/>') },
   gold: { color: 'linear-gradient(140deg,#FFD15C,#F2A20C)', icon: glyph('<path d="M8 4.5h8l2 5H6z"/><path d="M3 19.5l2-5h6l2 5zM11 19.5l2-5h6l2 5z"/>') },
   spx: { color: 'linear-gradient(140deg,#3EDB9F,#10A36F)', icon: glyph('<path d="M3 17l5-5 4 3 8-8"/><path d="M15 7h5v5"/>') },
+  inflation: { color: 'linear-gradient(140deg,#FFD15C,#F2A20C)', icon: glyph('<path d="M4 7h16v10H4z"/><circle cx="12" cy="12" r="2.5"/><path d="M16 4l4 3M8 20l-4-3"/>') },
 };
 
 export interface Rendered {
@@ -173,8 +177,19 @@ export interface Rendered {
   errors: string[];
 }
 
-/** "+5%", "−2%" or "0%": a growth rate as a headline shows it (never "−0%") */
-const signedPct = (g: number) => { const p = pct(g); return p === '−0%' || p === '0%' ? '0%' : p.startsWith('−') ? p : `+${p}`; };
+/** Priced for's template with the ten-years-ago note in place of the last-decade note, keeping that note's qualifier. */
+function priced(assumes: string, track: string | undefined): string {
+  if (!track) return assumes;
+  const lines = assumes.split('\n');
+  const i = lines.findIndex((l) => l.includes('{vsLastNote}') || l.startsWith('Over the last decade'));
+  if (i < 0) return `${assumes}\n${track}`;
+  const qualifier = /^\{vsLastNote\}(, [^.]+)\.$/.exec(lines[i])?.[1] ?? '';
+  lines[i] = track.replace(/\.$/, `${qualifier}.`);
+  return lines.join('\n');
+}
+
+/** "5%", "−2%" or "0%": a growth rate as a headline shows it (never "−0%") */
+const signedPct = (g: number) => { const p = pct(g); return p === '−0%' ? '0%' : p; };
 
 /** Years of profit rounded as a card shows them (as figures.ts writes them): whole years from 10 up, else one decimal. */
 const shownYears = (pe: number) => (pe >= 10 ? Math.round(pe) : Math.round(pe * 10) / 10);
@@ -239,15 +254,28 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         const good = f === 'consequence' && !html.includes('class="loss"') && !html.includes(' less</b>');
         // Earns and Priced for read as a headline figure with notes under it
         const lines = html.split('\n');
-        // Priced for's notes run on as one short paragraph; Earns keeps one note per line
-        const notes = f === 'assumes' ? [lines.slice(1).join(' ')].filter(Boolean) : lines.slice(1);
+        // Priced for's notes run on as one short paragraph, broken where the template leaves a blank line (the
+        // analysts' forecast always starts its own line); Earns keeps one note per line
+        const notes = f === 'assumes' ? lines.slice(1).join('\n').split('\n\n').map((g) => g.split('\n').join(' ')).filter(Boolean) : lines.slice(1);
         const shaped = f === 'farm' || f === 'assumes' || f === 'balance' ? [`<span class="headline">${lines[0]}</span>`, ...notes.map((l) => `<span class="note">${l}</span>`)].join('') : html;
         return { label: (labelKey ? labels[labelKey] : good ? labels.consequenceGood : labels[f]) ?? '', html: shaped, cls: f };
       });
   };
 
-  // Baselines
+  // Baselines: inflation first (today only), the yardstick the others have to beat
   const base: string[] = [];
+  if (s.era === 'now') base.push(safe('inflation:now', () => {
+    const e = copy.get('inflation:now');
+    if (!e) return null;
+    const tk = et;
+    return tile({
+      id: 'inflation:now', badge: 'CPI', ...BASE.inflation, name: (e.name as string) ?? 'Inflation', href: 'https://fred.stlouisfed.org/series/CPIAUCSL', base: true,
+      lines: [
+        { cls: 'makes', html: fill(e.assumes as string, tk, 'inflation:now') },
+        ...(e.consequence ? [{ cls: 'miss' as const, html: fill(e.consequence as string, tk, 'inflation:now') }] : []),
+      ],
+    }, copy);
+  }));
   const bondId = `bond:${s.era}`;
   base.push(safe(bondId, () => {
     const e = copy.get(bondId);
@@ -290,8 +318,9 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     }, copy);
   }));
   // today's prices are live, so only a past view names its date
+  // gold is off the board for now (owner, October 2026: not part of the story); its figures and wording are kept
   const goldId = `gold:${s.era}`;
-  base.push(safe(goldId, () => {
+  if (SHOW_GOLD) base.push(safe(goldId, () => {
     const e = copy.get(goldId);
     if (!e) return null;
     const now = copy.get('gold:now');
@@ -335,7 +364,11 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
             // little or no profit: the card's own line on what it made (or lost), in dollars
             ['farm', earnsNow ? (shared?.farm as string | undefined) : (e.earns as string | undefined)],
             // the analysts' forecast sits under the requirement as a note, so the two growth figures read together
-            ['assumes', e.assumes === undefined ? undefined : (e.assumes as string) + (c.now.forecast !== undefined && c.now.forecast !== null && shared?.forecast ? `\n${shared.forecast as string}` : '')],
+            // notes under Priced for: what its price assumed ten years ago against what profit did (replacing the
+            // last-decade note, which would say the same growth twice; its qualifier, like "ending on a boom year",
+            // moves onto the new sentence), then the analysts' forecast
+            ['assumes', e.assumes === undefined ? undefined : priced(e.assumes as string, mm.section !== 'loss' && pastModel(c, 'y10')?.req != null && c.now.last != null ? shared?.trackNote as string | undefined : undefined)
+              + (c.now.forecast !== undefined && c.now.forecast !== null && shared?.forecast ? `\n\n${shared.forecast as string}` : '')],
             ['consequence', e.consequence as string | undefined],
           ];
           return { tk, price, facts: facts(id, tk, tpl) };

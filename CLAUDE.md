@@ -49,7 +49,7 @@ The design-stage tables in `test/formula.test.ts` are test cases. The app should
 Cards read as if a real analyst wrote them, in mainstream words. Use one term for one thing. The full lists are in the writing guide.
 
 - Use: "priced at 35 years of last year's profit", "profit" (per share), "the price assumes profit grows X%/year", "returns", "make", "lose", "the safe US bond", "more than / less than / the same as" (owner prefers these to up from / down from), Pricey / Normal / Bargain / Little or no profit.
-- Avoid: P/E, multiple, EPS, "the ask", "pts" or "percentage points", "about", "the bond", margin of safety, room for error, mood, sentiment, Mr Market.
+- Avoid: P/E, multiple, EPS, "the ask", "pts" or "percentage points", "the bond", margin of safety, room for error, mood, sentiment, Mr Market. The word "about" is fine where it reads naturally; the rule is no "~" sign on figures.
 - No taglines, no aphorisms, no "X, not Y" turns, no lines that explain the concept. Every word must help the reader decide.
 - Never show the dollar share price.
 - Scenario growth rates must be anchored: the company's own last decade, no growth, or the average big US company (the S&P 500's last-decade profit growth, computed).

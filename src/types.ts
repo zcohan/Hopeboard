@@ -42,6 +42,8 @@ export interface NowFigures {
   profitsPeriod?: string;
   /** Dollar cards priced on revenue (SpaceX). */
   yearsOfRevenue?: Fig;
+  /** Last fiscal year's profit per share as a share of the latest twelve months' (Micron: a tenth) */
+  prevYear?: number;
   /** Analysts' expected profit growth next year (their fiscal year after this one). */
   forecast?: number | null;
   /** The stock's path and the business's size, for hand-written lines that quote them. */
@@ -94,6 +96,9 @@ export interface EraFigures {
   longRun?: { stocks: number; bonds: number; from: number; to: number };
   /** The year the bond was last this high, when it's the highest of the past year. */
   bondHighSince?: string | null;
+  /** US consumer prices (now only): yearly rise over the last decade and the last year, the spending power cash lost
+   * since `since`, and the latest month in the data */
+  inflation?: { decade: number; year: number; lost: number; since: string; month: string };
   /** The bond on each Compare over time date (now only). */
   bondThen?: Partial<Record<Compare, number>>;
   spx: { pe: Fig; pef?: Fig; y: number; last?: number; profit?: number; stock?: number };
@@ -114,6 +119,7 @@ export type Scenario =
   | { anchor: 'last' } // the company's own last decade
   | { anchor: 'average' } // the average big US company: the S&P 500's last-decade profit growth
   | { anchor: 'endsAt'; factor: number } // profit ends the decade at factor × today's
+  | { anchor: 'lastYear' } // profit falls back to last fiscal year's level, from the filings
   | { anchor: 'profit'; key: string } // dollar cards: profit reaches a named level
   | { anchor: 'unanchored'; g: number }; // flagged: needs the owner's call
 

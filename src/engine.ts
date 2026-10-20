@@ -92,6 +92,9 @@ export function nowModel(co: { now: NowFigures; industry?: string }, F: Figures,
       // the average big US company: the S&P 500's profit growth over the last decade, computed from data
       case 'average': return F.eras.now.spx.last ?? (() => { throw new Error('S&P last-decade growth missing'); })();
       case 'endsAt': return Math.pow(s.factor, 1 / 10) - 1;
+      case 'lastYear':
+        if (n.prevYear === undefined) throw new Error('Last-year scenario on a card with no last year of profit');
+        return Math.pow(n.prevYear, 1 / 10) - 1;
       case 'unanchored': return s.g;
       case 'profit': return NaN; // dollar scenario, see r()
     }

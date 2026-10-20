@@ -9,7 +9,7 @@ import { parseFig, sectionOf } from '../src/engine';
 import type { Company, Figures, PastEra } from '../src/types';
 import { SOURCES } from './sources';
 import { loadSupplements } from './xbrl';
-import { gainsShare, margin, shareChange, fxOn, oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
+import { gainsShare, margin, shareChange, splitFactor, fxOn, oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
 
 const WRITE = process.argv.includes('--write');
 await loadSupplements(SOURCES);
@@ -75,6 +75,16 @@ for (const s of SOURCES) {
   co.now.pef = pef;
   if (now.dividendYield !== null) co.now.y = r3(now.dividendYield)!;
   co.now.last = dec ? r3(dec.g) : null;
+  // last fiscal year's profit per share against the latest twelve months, for "if profit falls back to last year's level"
+  co.now.prevYear = (() => {
+    const latest = f.latestAnnualEnd(f.eps, today);
+    if (!latest || !now.eps || now.eps <= 0) return undefined;
+    const before = f.annualNear(f.eps, yearsBefore(latest, 1), today, (x) => x.val / splitFactor(s.eod, x.filed, today));
+    const fx = s.fx ? fxOn(s.fx, today) ?? 1 : 1;
+    const toUsd = (v: number) => (s.fx?.startsWith('USD') ? v / fx : v * fx);
+    return before !== null && before > 0 ? r3((toUsd(before) * (s.perShare ?? 1)) / now.eps) ?? undefined : undefined;
+  })();
+  if (co.now.prevYear === undefined) delete co.now.prevYear;
   if (dollar && now.value !== null) co.now.value = Math.round(now.value);
   if (dollar && co.now.profits) {
     // small profits keep two decimals, so $0.05 billion doesn't read as $0
@@ -265,7 +275,20 @@ for (const [era, n] of ERAS) {
     }
   }
 }
-F.sources['shiller'] = { name: 'Robert Shiller’s S&P 500 data (profit, dividends and total return per index share)', url: 'https://shillerdata.com/', date: shillerKnown(today)!.month } as never;
+// inflation: US consumer prices from the same Shiller sheet, over the last decade and the last year
+{
+  // only published months: a month's prices come out in the middle of the next, so the newest rows are estimates
+  const rows = shiller().filter((r) => r.CPI > 0 && r.month <= monthsBefore(today, 2).slice(0, 7));
+  const last = rows.at(-1)!, i = rows.length - 1;
+  const decadeAgo = rows[i - 120], yearAgo = rows[i - 12];
+  if (decadeAgo && yearAgo) F.eras.now.inflation = {
+    decade: r3(Math.pow(last.CPI / decadeAgo.CPI, 1 / 10) - 1)!,
+    year: r3(last.CPI / yearAgo.CPI - 1)!,
+    lost: r3(1 - decadeAgo.CPI / last.CPI)!,
+    since: decadeAgo.month.slice(0, 4), month: last.month,
+  };
+}
+F.sources['shiller'] = { name: 'Robert Shiller’s S&P 500 data (profit, dividends and total return per index share, and US consumer prices)', url: 'https://shillerdata.com/', date: shillerKnown(today)!.month } as never;
 
 // cards that compare a profit with Apple's quote Apple's own, from its filings (profit per share × shares)
 {

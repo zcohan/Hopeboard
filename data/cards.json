@@ -3,7 +3,7 @@
     {
       "id": "page",
       "title": "Hopeboard",
-      "subtitle": "Drawing out the growth assumptions in the current market price of popular US investments.",
+      "subtitle": "Drawing out the assumptions of future growth implicit in today’s stock prices.",
       "whenButton": "Time and profit",
       "whenHeading": "Prices from",
       "basisHeading": "Count",
@@ -24,86 +24,22 @@
     },
     {
       "id": "nav",
-      "board": "Board",
+      "board": "Hopeboard",
       "philosophy": "Philosophy",
       "methodology": "Methodology",
-      "foot": "Figures are rounded and update every day. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything.",
+      "foot": "Figures are rounded and update every day. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling individual stocks.",
       "repo": "Source on GitHub",
       "repoUrl": "https://github.com/zcohan/Hopeboard"
     },
     {
-      "id": "page:philosophy",
-      "title": "Philosophy",
-      "lead": "What a price is asking you to believe, and how to read it in plain numbers.",
-      "sections": [
-        {
-          "h": "A share price says nothing on its own",
-          "p": [
-            "A share price tells you nothing on its own, until you know how much profit stands behind each share. A $10 share can be expensive and a $1,000 share cheap.",
-            "So Hopeboard never shows the share price. It shows what you are paying for: the business’s profit."
-          ]
-        },
-        {
-          "h": "Charts are made for traders",
-          "p": [
-            "Stock apps lead with the share price and a chart because they are built for people who buy and sell within days or weeks. For someone leaving money for ten years, the day’s move tells you almost nothing. What matters is what you pay for the profit, and how much that profit has to grow."
-          ]
-        },
-        {
-          "h": "Count the years of profit you’re paying for",
-          "p": [
-            "Warren Buffett explained it with a farm. If a farm costs $1,000 and earns $70 a year, you are paying 14 years of its profit. Put the other way round, it earns 7% of its price a year.",
-            "Every card starts there: what the business earns each year as a share of its price, next to what the safe US bond pays with no risk at all."
-          ]
-        },
-        {
-          "h": "What the price assumes",
-          "p": [
-            "Most companies grow, so most are priced above what a farm would fetch. Paying 35 years of profit only works out if the profit grows a lot.",
-            "For every card, Hopeboard works out how fast profit has to grow each year for the next ten years for the stock to do as well as the S&P 500 has done since 1928, {index} a year. Then it sets that against what the business has actually done, and against what analysts expect next year.",
-            "Michael Mauboussin and Alfred Rappaport set out the full version of this idea in Expectations Investing (2001, revised 2021), working from the cash a business generates over many years. Hopeboard’s version is simpler: profit per share, over ten years."
-          ]
-        },
-        {
-          "h": "Measured against the safe choices",
-          "p": [
-            "The safe US bond pays a guaranteed return. The S&P 500 is the average of every big company’s story, at the average return. Anything else has to promise more than these to be worth the extra risk.",
-            "A famous company at a high price can promise less than the bond."
-          ]
-        },
-        {
-          "h": "Parking money for a decade",
-          "p": [
-            "Hopeboard is for people deciding where to put savings for ten years. It doesn’t follow the daily price. The price does change every day, though: when it falls or profit grows, the same company becomes cheaper. “Compare over time” on each card shows whether it’s cheaper or pricier than a week, a month, three months or a year ago."
-          ]
-        },
-        {
-          "h": "What the board leaves to you",
-          "p": [
-            "In 2016 Warren Buffett asked for a big US company priced at no more than 15 years of next year’s profit, that his managers were 90% sure would earn more in five years, and at least 50% sure would grow profit 7% a year. The search found Apple, as The Wall Street Journal later reported.",
-            "Hopeboard does the first part for every company: the years of profit, and the growth the price assumes. The second part is judgement: how sure you can be that the profit grows. Buffett got there by understanding the business. He learned, for example, that about 95% of iPhone owners buy another iPhone. The board can’t do that part for you.",
-            "Buffett also buys rarely, and only when a price assumes little. On most days, most prices on this board assume a lot."
-          ]
-        },
-        {
-          "h": "What it doesn’t do",
-          "p": [
-            "It makes no predictions and picks no winners. It shows what has to be true for each price to work out, and leaves the judgement to you. Some prices assume a story the business has never shown; some assume very little.",
-            "Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything."
-          ]
-        }
-      ]
-    },
-    {
       "id": "page:methodology",
       "title": "Methodology",
-      "lead": "How every figure on the board is worked out, and where it comes from.",
       "sections": [
         {
           "h": "Years of profit",
           "p": [
             "The number in each card’s corner is the price divided by the last twelve months of profit per share, after dilution: what investors call the P/E. Profit comes from the company’s own filings with the SEC, and the price is the latest close.",
-            "Profit leaves out gains and losses on investments: the company’s stakes in other companies going up or down in value. They don’t come from running the business and rarely repeat, so they’re taken out at the company’s own tax rate, from the figures it files. The stakes themselves are still yours, so their value on the latest balance sheet comes off the price before counting years of profit: the years are what you pay for the business, for each dollar it earns (for Amazon and GE Vernova, the gains are filed inside “other income”, so that is what’s taken out). Banks keep them, because buying and selling investments is part of a bank’s business. Berkshire Hathaway’s profit leaves out the paper gains and losses on its stock holdings, after the tax on them, the way Berkshire reports it itself. TSMC and ASML file full years only in a form we can read, so for them last year’s profit is the last calendar year."
+            "Profit leaves out gains and losses on investments: the company’s stakes in other companies going up or down in value. They don’t come from running the business and rarely repeat, so they’re taken out after tax, from the figures the company files. The stakes themselves are still yours. So their value on the latest balance sheet comes off the price before counting years of profit, and the years are what you pay for the business itself. Counting investments at today’s value this way follows Michael Mauboussin and Alfred Rappaport’s Expectations Investing (2001, revised 2021). Banks keep their gains, because buying and selling investments is part of a bank’s business. Berkshire Hathaway’s profit leaves out the paper gains and losses on its stock holdings, after the tax on them, the way Berkshire reports it itself. TSMC and ASML file full years only in a form we can read, so for them last year’s profit is the last calendar year."
           ]
         },
         {
@@ -111,6 +47,12 @@
           "p": [
             "The forecast view grows last year’s official profit at the analysts’ average forecast growth for their next fiscal year, the one ending six to eighteen months from now. That keeps both years counted the same way: analysts’ own figures usually leave out costs such as pay in shares, so they can’t be compared with official profit directly. Where gains on investments were more than a fifth of last year’s profit, the analysts’ figures for this year include them, so those cards show no forecast.",
             "On the forecast view the whole card follows next year’s profit: the growth its price assumes, the “if” line and its section. So a company can move section, which shows how much the price leans on the analysts being right. Cards with little or no profit stay where they are."
+          ]
+        },
+        {
+          "h": "Inflation",
+          "p": [
+            "How fast US consumer prices rose, from the official consumer price index as published in Robert Shiller’s data: a year on average over the last decade, and what money kept as cash since then can buy today. The bond is set against the last twelve months’ rise, so the card says “currently”: in some years, such as 2021–22, prices rose faster than the bond paid. Only months already published are used."
           ]
         },
         {
@@ -122,20 +64,20 @@
         {
           "h": "What “Priced for” means",
           "p": [
-            "“Priced for” is the profit growth a year the price assumes, for the stock to return what the S&P 500 has averaged since 1928, {index} a year, with dividends. The return over ten years comes from three things: profit growth, the dividends paid along the way, and the change in how many years of profit people pay. Hopeboard assumes that in ten years people pay an ordinary {normalYears} years of profit, the long-run average, and works backwards to the growth each price assumes."
+            "“Priced for” is the profit growth a year the price assumes, for the stock to return what the S&P 500 has averaged since 1928, {index} a year, with dividends. The return over ten years comes from three things: profit growth, the dividends paid along the way, and the change in how many years of profit people pay. Hopeboard assumes that in ten years people pay an ordinary {normalYears} years of profit, the long-run average, and works backwards to the growth each price assumes.",
+            "Under it, what the company’s price assumed ten years ago, worked out the same way with the filings known then, next to how fast profit actually grew over the decade."
           ],
           "formula": "return per year = (1 + growth) × (1 + dividends) × (18 ÷ years of profit today)^(1/10) − 1"
         },
         {
           "h": "Finances",
           "p": [
-            "The “Finances” link on each card shows up to six things about the company’s health, each left off when its figure isn’t in the data.",
+            "The “Finances” link on each card shows up to five things about the company’s health, each left off when its figure isn’t in the data.",
             "Cash or debt: from the latest balance sheet in its SEC filings. Cash counts cash, short-term investments and marketable securities; debt counts borrowing, without leases. The difference between them is shown in years of last year’s profit, or as close to even when it’s under a quarter of a year. Cards with little or no profit have none to measure against, so they say only which is bigger. Banks are left out, because most of what a bank owes is its customers’ deposits.",
             "Investments: stakes in other companies, at their value on the latest balance sheet, in years of last year’s profit. Shown when they’re worth half a year of profit or more.",
             "Profit on sales: how much of each dollar of sales it kept as profit, over its latest three fiscal years added together, leaving out gains on investments. Not shown for banks, whose sales are mostly interest, or for cards with little or no profit.",
             "Dividends: those paid over the last twelve months, as a share of today’s price.",
-            "Shares: how fast the number of shares changed each year, from the average count in the latest annual report and the one ten years before (as few as five, for companies listed more recently). Fewer shares means the company bought some back of the profit; more means it issued new ones, often as pay for staff or to buy another company.",
-            "Track record: the profit growth a year its price assumed ten years ago, against how fast profit actually grew since, measured as on today’s card (three-year averages at each end)."
+            "Shares: how fast the number of shares changed each year, from the average count in the latest annual report and the one ten years before (as few as five, for companies listed more recently). Fewer shares means the company bought some back of the profit; more means it issued new ones, often as pay for staff or to buy another company."
           ]
         },
         {
@@ -147,7 +89,8 @@
         {
           "h": "The “if” lines",
           "p": [
-            "Each card tests what happens if growth falls short, using a growth rate you can check: the company’s own last decade, no growth at all, or the average big US company: the S&P 500’s profit growth over the last decade, {avg} a year. Losses are over the full ten years."
+            "Each card tests what happens if growth falls short, using a growth rate you can check: the company’s own last decade, no growth at all, or the average big US company: the S&P 500’s profit growth over the last decade, {avg} a year. Losses are over the full ten years.",
+            "On Pricey cards the line adds “& the story fades”: by 2036 buyers go back to paying an ordinary {normalYears} years of profit, instead of the extra they pay today for the company’s story. That’s most of the loss on those cards."
           ]
         },
         {
@@ -189,7 +132,7 @@
         {
           "h": "Not advice",
           "p": [
-            "Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything. Figures can be out of date or wrong."
+            "Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling individual stocks. Figures can be out of date or wrong."
           ]
         }
       ]
@@ -239,7 +182,9 @@
         "shares": "Shares",
         "stakes": "Investments",
         "margin": "Profit on sales",
-        "track": "Track record"
+        "sharesDown": "Share buybacks",
+        "sharesUp": "New shares",
+        "sharesSteady": "Shares"
       },
       "balanceCash": "Holds **{netYears}** of profit in cash, beyond its debt",
       "balanceDebt": "It would take **{netYears}** of profit to pay off its debt, after using its cash",
@@ -248,15 +193,15 @@
       "balanceDebtDollars": "Owes more than it holds in cash",
       "stakes": "Owns stakes in other companies worth **{stakeYears}** of profit",
       "stakesNamed": "Owns stakes in other companies, including {stakesNames}, worth **{stakeYears}** of profit",
-      "marginKeeps": "Keeps **{marginCents}** of every dollar of sales as profit, over the last three years",
-      "marginLoses": "Lost **{marginCents}** on every dollar of sales, over the last three years",
+      "marginKeeps": "Keeps **{marginCents}** of every dollar of sales as profit",
+      "marginLoses": "Lost **{marginCents}** on every dollar of sales",
       "financesLink": "Finances",
-      "dividends": "Pays **{divYield}** of its stock price a year as dividends",
+      "dividends": "Pays out **{divYield}** of its stock price a year as dividends",
       "noDividend": "Pays no dividend",
       "sharesDown": "Bought back **{shareRate}** of its shares a year over the last {shareYears} years",
       "sharesUp": "Issued **{shareRate}** more shares a year over the last {shareYears} years",
       "sharesSteady": "Kept the same number of shares over the last {shareYears} years",
-      "track": "In {trackYear} its price assumed **{trackThen}/year** profit growth. {trackGot}. Today’s price assumes **{trackNow}/year** for the next decade"
+      "trackNote": "10 years ago the price assumed {trackThen}/year, {trackGot}."
     },
     {
       "id": "compare",
@@ -269,8 +214,8 @@
       "worse": "Pricier now",
       "same": "No change",
       "detail": "assumed {then}/year then, {now}/year now",
-      "cheapest": "Cheapest in the last decade: **{month}**, priced for **{req}** growth/year",
-      "cheapestSince": "Cheapest since listing in {since}: **{month}**, priced for **{req}** growth/year",
+      "cheapest": "Cheapest in the last decade: **{month}**, priced for **{req}**/year growth",
+      "cheapestSince": "Cheapest since listing in {since}: **{month}**, priced for **{req}**/year growth",
       "notes": [
         "The badge on each company card (owner chose option A, October 2026): the growth the price assumed at the chosen time, with the filings known then, against today. Lower is cheaper. Shown on the Now view with last year’s profit.",
         "Per card (owner, October 2026): a “Compare over time” link at the foot opens the time buttons for that card; it starts on 1 year.",
@@ -288,7 +233,7 @@
       "Software": "Software",
       "Internet": "Internet",
       "Hardware": "Hardware",
-      "Other": "Other",
+      "Other": "Elon",
       "notes": [
         "New: category filter pills (build step 7). “All” is a new label.",
         "Category of each company comes from docs/new-cards.md."
@@ -301,7 +246,7 @@
     },
     {
       "id": "past-frame",
-      "assumes": "**{reqSigned}** growth/year",
+      "assumes": "**{reqSigned}**/year growth",
       "noProfit": "No profit to price: it was losing money.",
       "barelyProfit": "Too little profit to price: it made almost none.",
       "storyHeading": "The story then",
@@ -309,7 +254,7 @@
     },
     {
       "id": "foot:now",
-      "text": "“Years of last year’s profit” is the P/E: the share price, less the part that buys the company’s stakes in other companies, divided by the last twelve months of reported profit per share after dilution, without gains on investments, from the companies’ own filings (SEC EDGAR) and the latest closing price (EOD). “Next year’s forecast” grows that profit at the analysts’ average forecast growth for their next fiscal year (Alpha Vantage). “Earns” is one over the years of profit. Dividends are those paid over the last twelve months; buybacks count through profit per share. “Priced for” is the growth that would match the S&P 500’s 10%/year since 1928, assuming people pay an ordinary 18 years of profit ten years out. The “if” lines use the same assumptions. Last-decade growth compares profit per share averaged over the latest three fiscal years with the three ten years before. All figures are rounded and approximate; ≈ marks rough estimates. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything."
+      "text": "“Years of last year’s profit” is the P/E: the share price, less the part that buys the company’s stakes in other companies, divided by the last twelve months of reported profit per share after dilution, without gains on investments, from the companies’ own filings (SEC EDGAR) and the latest closing price (EOD). “Next year’s forecast” grows that profit at the analysts’ average forecast growth for their next fiscal year (Alpha Vantage). “Earns” is one over the years of profit. Dividends are those paid over the last twelve months; buybacks count through profit per share. “Priced for” is the growth that would match the S&P 500’s 10%/year since 1928, assuming people pay an ordinary 18 years of profit ten years out. The “if” lines use the same assumptions. Last-decade growth compares profit per share averaged over the latest three fiscal years with the three ten years before. All figures are rounded and approximate; ≈ marks rough estimates. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling individual stocks."
     },
     {
       "id": "sources",
@@ -321,15 +266,24 @@
     },
     {
       "id": "foot:past",
-      "text": "Figures for {era} use only the company filings published by then and that day’s prices; stock returns include dividends. “Priced for” uses the same rule as today’s board. Stories are one-line summaries of what the market was saying at the time. All figures are rounded and approximate. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling anything."
+      "text": "Figures for {era} use only the company filings published by then and that day’s prices; stock returns include dividends. “Priced for” uses the same rule as today’s board. Stories are one-line summaries of what the market was saying at the time. All figures are rounded and approximate. Hopeboard is an educational tool. It isn’t investment advice and doesn’t recommend buying or selling individual stocks."
+    },
+    {
+      "id": "inflation:now",
+      "name": "Inflation",
+      "badge": "CPI",
+      "assumes": "Prices rose **{inflDecade}/year** over the last decade. Money kept as cash since {inflSince} buys {inflLost} less today.",
+      "notes": [
+        "US consumer prices from Robert Shiller’s sheet (the official consumer price index). The bond is set against the last twelve months’ rise, so “currently”; over 2021–22 prices rose faster than the bond paid."
+      ]
     },
     {
       "id": "bond:now",
       "name": "US Bond",
       "badge": "US10Y",
       "unit": "of its yearly interest",
-      "assumes": "Guaranteed to return **{bond}/year** if held for ten years.",
-      "consequence": "Stock prices generally promise a higher return than this, or they aren’t worth the uncertainty.",
+      "assumes": "Guaranteed to return **{bond}/year** if held for ten years, {bondVsInflation}.",
+      "consequence": "Stock prices generally promise a higher return than this, or they aren’t worth the uncertain return on investment.",
       "heading": "Why it matters",
       "bullets": [
         "When its return rises, stock prices have to promise more too",
@@ -353,7 +307,7 @@
       "name": "S&P 500",
       "badge": "SPX",
       "farm": "**{earns}** of an index fund’s price a year\n{earnsVsBond} the safe US bond{pays}",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.\nHas returned {index}/year since 1928, dividends included.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.\nHas returned {index}/year since 1928, dividends included.",
       "consequence": "If profit only grows at {g}/year like the last decade, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -418,8 +372,8 @@
     {
       "id": "TSLA:now",
       "about": "Electric cars & batteries",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
-      "consequence": "If profit only grows at {g}/year (the average big US company) and buyers stop paying extra for the story, {outcome}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
+      "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
       },
@@ -427,9 +381,6 @@
         "The price assumes Elon Musk keeps building big new businesses",
         "It assumes robots and robotaxis are in wide use within ten years",
         "Profit per share has fallen since 2022, so the price rests on the new businesses"
-      ],
-      "notes": [
-        "The consequence names the story because the loss comes mostly from buyers paying an ordinary 18 years of profit in 2036 instead of today’s hundreds (owner’s suggestion, October 2026)."
       ]
     },
     {
@@ -450,7 +401,7 @@
     {
       "id": "PLTR:now",
       "about": "AI software for governments & companies",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -473,7 +424,7 @@
     {
       "id": "COST:now",
       "about": "Members-only warehouse stores",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -501,7 +452,7 @@
     {
       "id": "AAPL:now",
       "about": "iPhone, Mac & services",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -533,7 +484,7 @@
       "id": "NVDA:now",
       "about": "Chips that power AI",
       "stakesNames": "Intel and SpaceX",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}, ending on a boom year.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}, ending on a boom year.",
       "consequence": "If profit doesn’t grow from this year’s level{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -564,7 +515,7 @@
     {
       "id": "MSFT:now",
       "about": "Windows, Office & Azure servers",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -593,7 +544,7 @@
     {
       "id": "META:now",
       "about": "Facebook & Instagram",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -625,7 +576,7 @@
     {
       "id": "TSM:now",
       "about": "Makes Apple’s & Nvidia’s chips",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -633,7 +584,7 @@
       "bullets": [
         "Makes almost all of the most advanced AI chips",
         "The price assumes it keeps that lead",
-        "Part of the price reflects the risk of conflict over Taiwan"
+        "It assumes conflict over Taiwan doesn’t disrupt it"
       ]
     },
     {
@@ -655,7 +606,7 @@
       "id": "AMZN:now",
       "about": "Online shopping & cloud computing",
       "stakesNames": "Anthropic",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}, from almost nothing.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}, from almost nothing.",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -687,7 +638,7 @@
     {
       "id": "ORCL:now",
       "about": "Business software & cloud servers",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -717,7 +668,7 @@
       "id": "GOOGL:now",
       "about": "Google search & YouTube",
       "stakesNames": "SpaceX and Anthropic",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -749,7 +700,7 @@
     {
       "id": "XOM:now",
       "about": "Oil & gas",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -781,7 +732,7 @@
     {
       "id": "AVGO:now",
       "about": "Chips for phones, networks & AI",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -795,7 +746,7 @@
     {
       "id": "AMD:now",
       "about": "Computer & AI chips",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -810,7 +761,7 @@
       "about": "Chips for PCs & chip factories",
       "earns": "Lost **{p:last:abs}** last year",
       "assumes": "**{reqProfit}** profit/year by 2036\nIts best years were {p:best}.",
-      "consequence": "If profit reaches Intel’s best year ({p:best}){corrects}, {outcome}.",
+      "consequence": "If profit only reaches Intel’s best year ({p:best}){corrects}, {outcome:still}.",
       "scenario": {
         "anchor": "profit",
         "key": "best"
@@ -823,7 +774,7 @@
     {
       "id": "ASML:now",
       "about": "Machines that make chips",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -836,11 +787,10 @@
     {
       "id": "MU:now",
       "about": "Memory chips for computers & phones",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
-      "consequence": "If profit falls back to half this year’s level{corrects}, {outcome}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
+      "consequence": "If profit falls back to last year’s level{corrects}, {outcome}.",
       "scenario": {
-        "anchor": "endsAt",
-        "factor": 0.5
+        "anchor": "lastYear"
       },
       "bullets": [
         "This year’s profit is a memory-chip boom profit",
@@ -849,13 +799,14 @@
       "notes": [
         "Sources disagree on next year’s forecast: 5 to 15 years.",
         "The “half this year’s level” scenario is not one of the four allowed anchors.",
-        "Open question: at ≈12.5 years, assuming people pay 18 by 2036 means they pay more than today. Assuming no more than today, required growth is ~9%."
+        "Open question: at ≈12.5 years, assuming people pay 18 by 2036 means they pay more than today. Assuming no more than today, required growth is ~9%.",
+        "October 2026: the test moved from half this year’s profit (a made-up figure) to last year’s, from the filings (owner)."
       ]
     },
     {
       "id": "NOW:now",
       "about": "Office software for big companies",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -868,7 +819,7 @@
     {
       "id": "SHOP:now",
       "about": "Software for running an online shop",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -884,14 +835,14 @@
     {
       "id": "CRM:now",
       "about": "Software for sales teams",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
       },
       "bullets": [
         "The price assumes AI doesn’t let customers build their own software instead",
-        "The stock is {ytd} this year"
+        "Last year’s official profit included gains on its investments, which the board leaves out"
       ],
       "notes": [
         "October 2026: Pricey once gains on its investments left its profit; the test moved from no growth to the average big US company, as the guide asks for a Pricey card with no decade record."
@@ -900,7 +851,7 @@
     {
       "id": "ADBE:now",
       "about": "Photoshop & PDF software",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -916,7 +867,7 @@
     {
       "id": "ABNB:now",
       "about": "Holiday home rentals",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -929,7 +880,7 @@
     {
       "id": "NFLX:now",
       "about": "Streaming TV & films",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -943,14 +894,14 @@
     {
       "id": "UBER:now",
       "about": "Rides & food delivery",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
       },
       "bullets": [
-        "The price assumes riders and drivers keep coming to Uber first",
-        "Investors fear robotaxis will cut out the drivers it connects riders to"
+        "Investors fear robotaxis will cut out the drivers it connects riders to",
+        "Its profit has only recently turned steady"
       ],
       "notes": [
         "Sources disagree on next year’s forecast: 15 to 23 years.",
@@ -960,20 +911,20 @@
     {
       "id": "CSCO:now",
       "about": "Routers & internet infrastructure",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
       },
       "bullets": [
-        "AI networking demand keeps lifting sales",
+        "The price assumes AI networking keeps its sales growing",
         "The 2000 boom priced it so high that the stock went nowhere for well over a decade"
       ]
     },
     {
       "id": "DELL:now",
       "about": "Computers & AI servers",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -1009,7 +960,7 @@
     {
       "id": "BRK.B:now",
       "about": "Buffett’s company: buys & holds whole businesses and stocks",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -1041,14 +992,13 @@
     {
       "id": "JPM:now",
       "about": "America’s biggest bank",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
       },
       "bullets": [
-        "The price assumes few of its loans go bad",
-        "Profit this high depends on interest rates staying up",
+        "Investors expect profit to fall when interest rates come down",
         "The biggest US bank, and the one that came through 2008 in the best shape"
       ]
     },
@@ -1070,13 +1020,13 @@
     {
       "id": "BAC:now",
       "about": "Banking for US households",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
       },
       "bullets": [
-        "The price assumes few of its loans go bad",
+        "Investors worry some of its loans go bad",
         "It still holds bonds bought when rates were low, which pay little"
       ]
     },
@@ -1098,7 +1048,7 @@
     {
       "id": "WFC:now",
       "about": "Everyday banking & home loans",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1126,7 +1076,7 @@
     {
       "id": "C:now",
       "about": "Bank for big companies worldwide",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1154,14 +1104,14 @@
     {
       "id": "GS:now",
       "about": "Advises on big deals & trades shares",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
       },
       "bullets": [
         "Profit rises and falls with deal-making and trading",
-        "The price assumes markets stay busy"
+        "Its profit falls when markets go quiet"
       ]
     },
     {
@@ -1182,14 +1132,14 @@
     {
       "id": "MS:now",
       "about": "Looks after wealthy people’s money",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
       },
       "bullets": [
         "Most of its profit now comes from managing people’s money, which is steadier than trading",
-        "The price assumes markets stay busy"
+        "Its profit falls when markets go quiet"
       ]
     },
     {
@@ -1210,7 +1160,7 @@
     {
       "id": "V:now",
       "about": "Credit cards",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -1239,15 +1189,14 @@
     {
       "id": "MA:now",
       "about": "Credit cards",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
       },
       "bullets": [
-        "The other half of the card-network pair with Visa",
         "Spending abroad, where its fees are highest, keeps rising",
-        "Governments pushing their own payment systems are the threat"
+        "The price assumes governments’ own payment systems don’t cut into its fees"
       ]
     },
     {
@@ -1268,15 +1217,15 @@
     {
       "id": "VZ:now",
       "about": "Mobile phone & home internet",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\nOver the last decade its profit barely changed.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\nOver the last decade its profit barely changed.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
       },
       "bullets": [
-        "Most of what you get is the dividend",
-        "Phone customers don’t leave for cheaper rivals or cable companies",
-        "Its large debt has to keep being paid"
+        "Its profit has barely changed in ten years, so buyers pay little for growth",
+        "Investors worry that cable companies and T-Mobile will keep taking its phone customers",
+        "It carries a large debt, which has to keep being paid before anything else"
       ]
     },
     {
@@ -1297,7 +1246,7 @@
     {
       "id": "T:now",
       "about": "Phone plans & fibre internet",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\nOver the last decade it grew {last}/year.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\nOver the last decade it grew {last}/year.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1329,13 +1278,13 @@
     {
       "id": "TMUS:now",
       "about": "Mobile phone plans",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
       },
       "bullets": [
-        "Profit grew fast after it bought Sprint in 2020",
+        "Its fast growth came from buying Sprint in 2020, which won’t repeat",
         "The price assumes it keeps winning customers from Verizon and AT&T"
       ]
     },
@@ -1357,7 +1306,7 @@
     {
       "id": "LLY:now",
       "about": "Weight-loss and diabetes drugs",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -1385,7 +1334,7 @@
     {
       "id": "WMT:now",
       "about": "The biggest US shop, in stores and online",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -1413,13 +1362,13 @@
     {
       "id": "JNJ:now",
       "about": "Medicines and medical devices",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
       },
       "bullets": [
-        "Medicines and devices only, since it split off its consumer brands in 2023",
+        "The price assumes its medicines and devices keep growing, now it has split off its consumer brands",
         "Lawsuits over talc have been a cost for years"
       ]
     },
@@ -1441,14 +1390,14 @@
     {
       "id": "ABBV:now",
       "about": "Medicines, including Botox",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
       },
       "bullets": [
         "Official profit is held down by charges for buying other drug makers’ research",
-        "Its newer drugs Skyrizi and Rinvoq have to keep replacing Humira, which lost its US patent in 2023"
+        "The price assumes its newer drugs Skyrizi and Rinvoq keep replacing Humira, which lost its US patent in 2023"
       ]
     },
     {
@@ -1469,14 +1418,14 @@
     {
       "id": "CVX:now",
       "about": "Oil & gas",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
       },
       "bullets": [
-        "Its profit rises and falls with the oil price, now {oil} a barrel",
-        "Bought Hess in 2025 for its share of the oil found off Guyana"
+        "Its profit rises and falls with the oil price, which is high today",
+        "Investors expect profit to fall when oil does"
       ]
     },
     {
@@ -1497,13 +1446,13 @@
     {
       "id": "KO:now",
       "about": "Soft drinks",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
       },
       "bullets": [
-        "Sells drinks in almost every country, growing slowly and steadily",
+        "The price assumes slow, steady growth from selling drinks in almost every country",
         "Berkshire Hathaway has been its biggest holder since 1988"
       ]
     },
@@ -1525,7 +1474,7 @@
     {
       "id": "PG:now",
       "about": "Tide, Pampers & Gillette",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -1553,7 +1502,7 @@
     {
       "id": "BLK:now",
       "about": "The biggest money manager",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -1581,14 +1530,14 @@
     {
       "id": "UNH:now",
       "about": "The biggest US health insurer",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
       },
       "bullets": [
-        "America’s biggest health insurer, and a large health-services business",
-        "Profit per share {profit1y} over the last year as medical costs ran ahead of what it charged"
+        "The price assumes it can raise what it charges faster than medical costs rise",
+        "America’s biggest health insurer, and a large health-services business"
       ]
     },
     {
@@ -1609,14 +1558,14 @@
     {
       "id": "MRK:now",
       "about": "Medicines and vaccines, including Keytruda",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
       },
       "bullets": [
         "Charges for buying other companies’ drug research this year cut its official profit, so its years of profit overstate how pricey it is",
-        "Keytruda, its biggest cancer drug, starts losing its main patent protection in 2028"
+        "The price assumes new drugs replace Keytruda, its biggest cancer drug, which starts losing its main patent protection in 2028"
       ],
       "notes": [
         "Merck’s 2026 10-Qs: $9.0 billion acquired-research charge for Cidara (Q1), $5.7 billion (Q2)."
@@ -1640,7 +1589,7 @@
     {
       "id": "CAT:now",
       "about": "Diggers, mining trucks & engines",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
@@ -1668,14 +1617,14 @@
     {
       "id": "LRCX:now",
       "about": "Machines that make chips",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
       },
       "bullets": [
-        "Makes the machines that etch and lay down the layers of a chip",
-        "Its sales follow chip makers’ spending, which rises and falls every few years"
+        "The price assumes chip makers keep spending heavily on new factories",
+        "Its sales follow that spending, which rises and falls every few years"
       ]
     },
     {
@@ -1696,14 +1645,14 @@
     {
       "id": "GE:now",
       "about": "Jet engines",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
       },
       "bullets": [
-        "Jet engines only, after the old GE split into three companies",
-        "Most of its profit comes from servicing engines already flying"
+        "Most of its profit comes from servicing engines already flying",
+        "The price assumes airlines keep flying more, so that servicing keeps growing"
       ]
     },
     {
@@ -1724,13 +1673,13 @@
     {
       "id": "AMAT:now",
       "about": "Machines that make chips",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
       },
       "bullets": [
-        "The biggest maker of chip-making machines",
+        "The price assumes chip makers keep building new factories at today’s pace",
         "Sales to China are a large part of its business, and US export rules limit them"
       ]
     },
@@ -1752,7 +1701,7 @@
     {
       "id": "PM:now",
       "about": "Marlboro & nicotine pouches outside the US",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -1780,7 +1729,7 @@
     {
       "id": "HD:now",
       "about": "DIY & building supplies",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
       "scenario": {
         "anchor": "none"
@@ -1838,14 +1787,14 @@
     {
       "id": "RTX:now",
       "about": "Jet engines & missiles",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
       },
       "bullets": [
-        "Pratt & Whitney jet engines and Raytheon missiles",
-        "A defect in some of its engines has cost it billions in inspections and repairs"
+        "A defect in some of its engines has cost it billions in inspections and repairs",
+        "The price assumes those costs end and defence spending stays high"
       ]
     },
     {
@@ -1866,14 +1815,14 @@
     {
       "id": "TMO:now",
       "about": "Lab equipment & supplies",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
       },
       "bullets": [
         "Sells the tools and supplies that drug makers and labs use",
-        "Profit has grown slowly since the pandemic testing boom ended"
+        "The price assumes growth picks up again, now the pandemic testing boom is over"
       ]
     },
     {
@@ -1894,14 +1843,14 @@
     {
       "id": "TXN:now",
       "about": "Basic chips for cars & factories",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
       },
       "bullets": [
         "Makes basic chips that go into cars, factories and appliances",
-        "Spending heavily on new chip factories in Texas and Utah"
+        "The price assumes its new chip factories in Texas and Utah pay off"
       ]
     },
     {
@@ -1922,14 +1871,14 @@
     {
       "id": "GEV:now",
       "about": "Gas turbines, wind turbines & power grids",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
       },
       "bullets": [
-        "Gas turbines, wind turbines and grid equipment, split off from GE in 2024",
-        "Demand for power from data centres has filled its order book"
+        "Demand for power from data centres has filled its order book",
+        "The price assumes that demand lasts for years"
       ]
     },
     {
@@ -1940,7 +1889,7 @@
     {
       "id": "AMGN:now",
       "about": "Biotech medicines",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}\n{vsLastNote}.",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
       "consequence": "If the last decade’s {g}/year growth repeats{corrects}, {outcome}.",
       "scenario": {
         "anchor": "last"
@@ -1993,14 +1942,14 @@
     {
       "id": "LIN:now",
       "about": "Industrial gases",
-      "assumes": "**{reqSigned}** growth/year{reqTimes}",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
       "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
       "scenario": {
         "anchor": "average"
       },
       "bullets": [
-        "The biggest maker of industrial gases, mostly sold on long contracts",
-        "Formed in 2018 when Linde and Praxair merged"
+        "The biggest maker of industrial gases, mostly sold on long contracts that keep its profit steady",
+        "The price assumes that steadiness keeps growing"
       ]
     },
     {

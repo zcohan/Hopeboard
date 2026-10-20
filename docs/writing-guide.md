@@ -45,8 +45,8 @@ Every company card connects three numbers, each in its own labelled section:
 | Section | What it says | Example (Costco) |
 | --- | --- | --- |
 | EARNS | What the business earns each year as a share of its price, against the safe US bond | **2.1%** of its stock price a year / 3% less than the safe US bond |
-| PRICED FOR | The profit growth a year the price assumes, against what the business has done | **+21%** growth/year / More than the 15%/year of the last decade |
-| RISK or CUSHION | What you'd make or lose if growth comes in at an anchored rate | If the last decade's 15%/year growth repeats & the stock corrects, you'd make **0.5%/year less** than the safe US bond. |
+| PRICED FOR | The profit growth a year the price assumes, against what the business has done | **21%**/year growth / More than the 15%/year of the last decade |
+| RISK or CUSHION | What you'd make or lose if growth comes in at an anchored rate | If the last decade's 15%/year growth repeats & the story fades, you'd make **0.5%/year less** than the safe US bond. |
 
 The bubble behind the link ("Why so pricey?") says why people pay what they pay: the beliefs the price rests on.
 
@@ -149,12 +149,12 @@ Use one word for one thing, everywhere. If the reader learns a word on one card,
 | orders it hasn't delivered yet | backlog |
 | spending on buildings and equipment, data centres | capex |
 | big cloud companies | hyperscalers |
-| Priced for +21% growth/year; the price assumes profit grows 21%/year | the ask, asks, implied growth, priced in, baked in |
+| Priced for 21%/year growth; the price assumes profit grows 21%/year | the ask, asks, implied growth, priced in, baked in |
 | profit grows at 21%/year | profit grows 21%/year (drops the "at") |
 | returns, make, lose | pays, yields, total shareholder return |
 | the safe US bond (US Bond as the card name) | the bond, Treasuries, risk-free rate |
 | more than, less than, the same as | up from, down from, pts, points, percentage points, bps |
-| the stock corrects | (the owner's word for buyers going back to ordinary years of profit) |
+| the story fades | (the owner's words for buyers going back to an ordinary 18 years of profit; it replaced "the stock corrects", October 2026) |
 | dividends | capital return, shareholder yield, payout |
 | Pricey, Normal, Bargain, Little or no profit | Expensive, Cheap, Overvalued, Undervalued (as labels) |
 | the average big US company | the market average, the median company |
@@ -186,7 +186,7 @@ Sources use jargon. Translate before it reaches a card.
 
 Required growth, returns, gains, losses and gaps to the bond are computed by the app. In `data/cards.json`, write a placeholder:
 
-- Write `**{reqSigned}** growth/year`, never `+21% growth/year`.
+- Write `**{reqSigned}**/year growth`: "21%/year growth", with a sign only when negative ("−1%/year growth"). Owner, October 2026: no "+", and "/year" as everywhere else; this reverses the earlier "+21% growth/year".
 - Write `{outcome}`, never `you'd make 0.5%/year less than the safe US bond`.
 
 Placeholders are listed in `README.md`. If you need a number that has no placeholder, add the figure to `data/figures.json` with a source and add a placeholder. Don't type it.
@@ -195,7 +195,7 @@ Facts that are inputs, not results, may be typed in bullets and stories when the
 
 ### 7.2 Marks
 
-- No `~` on figures (the owner found it visually dirty, October 2026). Every figure is rounded, and the footer says so once.
+- No `~` on figures (the owner found it visually dirty, October 2026). Every figure is rounded, and the footer says so once. The word "about" is fine where it reads naturally ("about 95% of iPhone owners"): the rule is the sign, not the idea (owner, October 2026).
 - `≈` before an estimated figure (set in `figures.json`, shown by the app), such as SpaceX's years of revenue.
 - No mark on a scenario growth rate that is an anchor. "If profit only grows at 13%/year (the average big US company)": the anchor is a definition, not an estimate.
 - A range where sources disagree: "$70–95 billion", "20–42% of your investment". Say why in `notes`.
@@ -269,23 +269,24 @@ What the business earns each year as a share of its price, against the safe US b
 The profit growth a year the price assumes, as a headline, then notes:
 
 ```
-"assumes": "**{reqSigned}** growth/year\n{vsLastNote}."
+"assumes": "**{reqSigned}**/year growth\n{vsLastNote}."
 ```
 
-> **+21%** growth/year
+> **21%**/year growth
 > More than the 15%/year of the last decade. Analysts expect 10% profit growth next year.
 
 - `{vsLastNote}` writes "More than the 15%/year of the last decade", "Less than…" or "The same rate as over the last decade".
 - The analysts' forecast note is added by the app when there is a forecast. One year, and it says so; don't compare it with the ten-year figure in words.
-- The notes under Priced for are sentences, end with a full stop, and run on as one short paragraph rather than a line each (owner, October 2026).
+- When the company has a ten-years-ago price and a decade of profit, that note replaces the last-decade note, which would repeat the same growth: "10 years ago the price assumed 5%/year, but it actually grew 14%/year." (owner's wording, October 2026). A qualifier on the last-decade note moves onto it: "…but it actually grew 61%/year, ending on a boom year." The headline right above gives today's figure, so then, delivered and now read together.
+- The notes under Priced for are sentences, end with a full stop, and run on as one short paragraph rather than a line each (owner, October 2026). The analysts' forecast always starts its own line (owner, October 2026).
 - A short qualifier after the record is allowed when it changes how to read it: "Less than the 68%/year of the last decade, ending on a boom year" (Nvidia), "…from almost nothing" (Amazon). The three-year averages already smooth over a single bad year, so don't add a qualifier for one.
-- No decade of profit: the headline alone (`**{reqSigned}** growth/year`). The fact goes in the bubble: "Profitable only since 2023, so there's little record to go on".
+- No decade of profit: the headline alone (`**{reqSigned}**/year growth`). The fact goes in the bubble: "Profitable only since 2023, so there's little record to go on".
 - Profit allowed to shrink: the record in plain words, "Over the last decade it shrank 1%/year". When the record rounds to 0%, "Over the last decade its profit barely changed" (Verizon); a test checks it still rounds to 0%.
 
-**Cards in dollars.** A company that lost money, or earns under 0.2% of its price (more than 500 years of profit), sits in Little or no profit and is priced in dollars. It keeps the three sections, and the corner shows no years figure. Earns comes from the card's own `earns` line: what it made or lost, in dollars. Priced for is the profit the price assumes by 2036, with `{reqProfitTimes}` (" (700x last year's)", from the two figures as printed) when there was a profit. Then one anchor the reader knows:
+**Cards in dollars.** A company that lost money, or earns under 0.2% of its price (more than 500 years of profit), sits in Little or no profit and is priced in dollars. It keeps the three sections, and the corner shows no years figure. Earns comes from the card's own `earns` line: what it made or lost, in dollars. Priced for is the profit the price assumes by 2036, with `{reqProfitTimes}` (" (700x last year's profit)", from the two figures as printed) when there was a profit. Then one anchor the reader knows:
 
 > **EARNS** Almost nothing: **$50 million** last year, after paying staff $1.2 billion in shares
-> **PRICED FOR** **$35 billion** profit/year by 2036 (700x last year's)
+> **PRICED FOR** **$35 billion** profit/year by 2036 (700x last year's profit)
 > **RISK** If profit only reaches the $2 billion a year it makes before paying staff in shares, you may lose **85% of your investment**.
 
 > **EARNS** Lost **$11 billion** last year
@@ -293,21 +294,21 @@ The profit growth a year the price assumes, as a headline, then notes:
 
 ### 8.3a Finances (shared, `company-lines`)
 
-A link at the foot of the card, "Finances", opens one bubble on the company's health. It stays out of the three sections, which are the card's core (owner, October 2026). Written once for every card; the app picks the wording from the data. Up to six small headings, each left off when its figure isn't in the data:
+A link at the foot of the card, "Finances", opens one bubble on the company's health. It stays out of the three sections, which are the card's core (owner, October 2026). Written once for every card; the app picks the wording from the data. Up to five small headings, each left off when its figure isn't in the data:
 
 > **Cash**: Holds **8 years** of profit in cash, beyond its debt
 > **Debt**: It would take **10 years** of profit to pay off its debt, after using its cash
 > **Cash & debt**: Cash and debt close to even (within a quarter of a year of profit)
 > **Investments**: Owns stakes in other companies worth **2 years** of profit (when worth half a year of profit and 1% of the price; not on cards with little or no profit)
-> **Profit on sales**: Keeps **25 cents** of every dollar of sales as profit, over the last three years (not for banks or cards with little or no profit; "margin" stays banned, so the label says what it is)
-> **Dividends**: Pays **2.4%** of its stock price a year as dividends / Pays no dividend
+> **Profit on sales**: Keeps **25 cents** of every dollar of sales as profit (three years together, said on the Methodology page; not for banks or cards with little or no profit; "margin" stays banned, so the label says what it is)
+> **Dividends**: Pays out **2.4%** of its stock price a year as dividends / Pays no dividend
 > **Shares**: Bought back **4.3%** of its shares a year over the last 10 years / Issued **6.3%** more shares a year…
 
-> **Track record**: In 2016 its price assumed **5%/year** profit growth. It grew faster, at **14%/year**. Today's price assumes **18%/year** for the next decade (owner, October 2026: "assumed" throughout, never "needed" or "expected"; "grew slower" / "grew at that rate" from the printed figures)
+Finances lines stay a quick summary: how a figure is measured (which years, averages) goes on the Methodology page, not on the card (owner, October 2026).
 
 Relative only: years of profit and percentages, no dollar amounts (owner, October 2026). Cards with little or no profit have none to measure against, so the cash line says only which is bigger: "Holds more in cash than it owes". Banks get no cash or debt line: their debts are mostly deposits. A missing figure never reads as zero.
 
-In the Compare over time popover, under the dates: "Cheapest in the last decade: **November 2016**, priced for **+4%** growth/year" ("Cheapest since listing in 2020" for later listings). Never "best time to buy": it's a fact about the price, not advice.
+In the Compare over time popover, under the dates: "Cheapest in the last decade: **November 2016**, priced for **4%**/year growth" ("Cheapest since listing in 2020" for later listings). Never "best time to buy": it's a fact about the price, not advice.
 
 ### 8.4 Risk or Cushion (`consequence`)
 
@@ -317,7 +318,7 @@ One if-then sentence: the scenario, then `{outcome}`. The owner tried the result
 "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}."
 ```
 
-- `{corrects}` goes straight after the scenario. On Pricey cards it writes " & the stock corrects", because buyers going back to an ordinary 18 years of profit is most of the loss there. Elsewhere it writes nothing. (Tesla keeps its own clause, "and buyers stop paying extra for the story", which the owner likes.)
+- `{corrects}` goes straight after the scenario. On Pricey cards it writes " & the story fades", because buyers going back to an ordinary 18 years of profit is most of the loss there; the Methodology page says so once. Elsewhere it writes nothing. Every card uses it, Tesla included (owner, October 2026).
 - `{reqTimes}` follows the Priced for headline on today's cards: " (5.5x today's profit by 2036)", what the growth adds up to over ten years (the owner prefers "x" to "times"). Left off under 4%/year. Halves under 10x, whole numbers above.
 - The label is RISK when you'd make less than the safe US bond (a loss counts as less), and CUSHION when you'd make at least as much. The app sets it.
 
@@ -429,7 +430,7 @@ Say which part was the business and which was people paying more or less. That i
 
 The baselines are where people already park money: US Bond, S&P 500, Gold, in that order.
 
-- **US Bond.** Priced at "20 years of its yearly interest", the same unit as the stocks. Two lines: "Guaranteed to return **{bond}/year** for ten years." and "Stock prices generally promise a higher return than this, or they aren't worth the uncertainty." Its past views say only what it was guaranteed to return then, plus a line where the rate itself was the story (2021's near-zero).
+- **US Bond.** Priced at "20 years of its yearly interest", the same unit as the stocks. Two lines: "Guaranteed to return **{bond}/year** for ten years." and "Stock prices generally promise a higher return than this, or they aren't worth the uncertain return on investment." Its past views say only what it was guaranteed to return then, plus a line where the rate itself was the story (2021's near-zero).
 - **S&P 500.** The company layout: Earns ("of an index fund's price a year"), Priced for, Risk or Cushion against the safe US bond. The note "Has returned {index}/year since 1928, dividends included" stays, because that 10% is what every card's growth figure is measured against.
 - **Gold.** No profit and no price. "Has returned **{goldReturn}/year** since 1971, unevenly." and "Can fall for decades: from 1980 to 2000 gold lost half its value after inflation." (the owner's wording).
 
@@ -486,37 +487,37 @@ Each example shows how the card reads today, then why it was written that way.
 ### 12.1 Costco: assumes more than it has ever done
 
 > EARNS **2.1%** of its stock price a year / 3% less than the safe US bond
-> PRICED FOR **+21%** growth/year / More than the 15%/year of the last decade
-> RISK If the last decade's 15%/year growth repeats & the stock corrects, you'd make **0.5%/year less** than the safe US bond.
+> PRICED FOR **21%**/year growth / More than the 15%/year of the last decade
+> RISK If the last decade's 15%/year growth repeats & the story fades, you'd make **0.5%/year less** than the safe US bond.
 
 Why: the hinge is that Costco's price assumes more than its own best decade. So the test is its own record, and the result is worse than the bond. The reader sees that a famous, steady company can be a poor place to park money at this price.
 
 ### 12.2 Nvidia: the record ends on a boom
 
-> PRICED FOR **+14%** growth/year / Less than the 68%/year of the last decade, ending on a boom year / Analysts expect 71% profit growth next year
-> RISK If profit doesn't grow from this year's level & the stock corrects, you may lose **32% of your investment**.
+> PRICED FOR **14%**/year growth / Less than the 68%/year of the last decade, ending on a boom year / Analysts expect 71% profit growth next year
+> RISK If profit doesn't grow from this year's level & the story fades, you may lose **32% of your investment**.
 
 Why: 14%/year looks easy next to 68%. But the 68% ends on a boom year, so the question is whether this year's profit is the new floor. "Doesn't grow from this year's level" tests exactly that.
 
 ### 12.3 Verizon: the dividend carries it
 
 > EARNS **8.3%** of its stock price a year / 3% more than the safe US bond / 6.3% of it paid to you as dividends
-> PRICED FOR **−1%** growth/year / Over the last decade it shrank 1%/year
+> PRICED FOR **−1%**/year growth / Over the last decade it shrank 1%/year
 > CUSHION If profit doesn't grow, you'd still make **5.5%/year more** than the safe US bond.
 
 Why: the requirement is below zero because most of the profit comes back as cash. The dividend note is there because it explains the −1%.
 
 ### 12.4 Palantir: no decade of profit
 
-> PRICED FOR **+37%** growth/year
-> RISK If profit only grows at 13%/year (the average big US company) & the stock corrects, you may lose **62% of your investment**.
+> PRICED FOR **37%**/year growth
+> RISK If profit only grows at 13%/year (the average big US company) & the story fades, you may lose **62% of your investment**.
 > Bubble: Profitable only since 2023, so there's little record to go on
 
 Why: there is no record to compare with, so Priced for stands alone and the fact goes in the bubble. Growing as fast as the average big US company still loses most of the money.
 
 ### 12.5 Adobe: priced for doubt
 
-> PRICED FOR **+7%** growth/year (2x today's profit by 2036) / Less than the 33%/year of the last decade. Analysts expect 13% profit growth next year.
+> PRICED FOR **7%**/year growth (2x today's profit by 2036) / Less than the 33%/year of the last decade. Analysts expect 13% profit growth next year.
 > RISK If profit doesn't grow, you'd make **2.5%/year less** than the safe US bond.
 > Bubble ("Why so cheap?"): The stock is down this year on fears that AI makes creative tools cheap / The price assumes AI tools don't take its customers
 
@@ -532,7 +533,7 @@ Why: with no profit there's no growth rate to quote, so the card works in dollar
 ### 12.7 A past view: Apple, October 2016
 
 > priced at 14 years of that year's profit
-> PRICED FOR **+5%** growth/year
+> PRICED FOR **5%**/year growth
 > The story then: iPhone sales falling for the first time in years; Carl Icahn had sold, and Warren Buffett had started buying.
 > What happened since: Profit grew 15%/year — more than the 5% required. The stock returned 29%/year, and the years of profit people paid rose from 14 to 39.
 
@@ -544,11 +545,11 @@ Lines the owner rejected or changed, with what replaced them.
 
 | Before | After | Rule |
 | --- | --- | --- |
-| Reasonably priced if you assume profit grows at 21%/year | PRICED FOR **+21%** growth/year | Three sections |
+| Reasonably priced if you assume profit grows at 21%/year | PRICED FOR **21%**/year growth | Three sections |
 | Up from the 13%/year of the last decade | More than the 13%/year of the last decade | more/less, not up/down |
 | 5%/year more than over the last decade | More than the 13%/year of the last decade | Show the record, not the gap (the owner found the gap less clear) |
 | you're liable to lose 32% | you may lose 32% | Owner's choice |
-| If profit doesn't grow from this year's level, you may lose… | If profit doesn't grow from this year's level & the stock corrects, you may lose… | Name the correction on Pricey cards |
+| If profit doesn't grow from this year's level, you may lose… | If profit doesn't grow from this year's level & the story fades, you may lose… | Name the fading story on Pricey cards |
 | of its price a year | of its stock price a year / of an index fund's price a year | Exact about what's measured |
 | Returns 5.1%/year for ten years, guaranteed. It reached 5.3% in October, the highest since 2002. Every stock below has to promise more than this, or it isn't worth the risk. | Guaranteed to return 5.1%/year for ten years. / Stock prices generally promise a higher return than this, or they aren't worth the uncertainty. | Fewer words, neutral, one thought per line |
 | Pays nothing and produces nothing, so there is no profit to grow… with twenty-year stretches of nothing. | Has returned 8%/year since 1971, unevenly. | Neutral, no flourish |

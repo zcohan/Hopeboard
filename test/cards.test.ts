@@ -2,7 +2,9 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { renderBoard } from '../src/board';
 import { nowModel } from '../src/engine';
-import { compare } from '../src/tokens';
+import { compare, pageTokens } from '../src/tokens';
+import { fill } from '../src/copy';
+import { parsePage } from '../src/pages';
 import { requiredGrowth } from '../src/formula';
 import { CATEGORIES, ERAS, type CardsFile, type Figures } from '../src/types';
 
@@ -39,7 +41,7 @@ describe('wording stays true to the numbers', () => {
       const id = /data-copy="([^"]+)"/.exec(t)![1];
       for (const m of t.matchAll(/<div class="deal \w+" data-w="(\w+)">[^<]*?(?:assumed|assumes) ([−\d]+%)/g)) {
         const card = new RegExp(`<dl class="facts" data-at="${m[1]}"[\\s\\S]*?</dl>`).exec(t)?.[0] ?? '';
-        const shown = /([+−]?\d+%)<\/b> growth\/year/.exec(card)?.[1]?.replace('+', '');
+        const shown = /([+−]?\d+%)<\/b>\/year growth/.exec(card)?.[1]?.replace('+', '');
         if (shown !== m[2]) bad.push(`${id} ${m[1]}: badge ${m[2]}, card ${shown}`);
       }
     }
@@ -77,6 +79,20 @@ describe('hand-written lines', () => {
   });
 });
 
+describe('pages', () => {
+  it('the Philosophy and Methodology pages fill every figure from the data', () => {
+    const tk = pageTokens(F);
+    const bad: string[] = [];
+    const pages = { 'page:philosophy': parsePage(readFileSync('data/pages/philosophy.md', 'utf8')), 'page:methodology': C.entries.find((x) => x.id === 'page:methodology')! };
+    for (const [id, e] of Object.entries(pages)) {
+      for (const sec of e.sections as { p: string[] }[]) for (const p of sec.p) {
+        try { if (/NaN|undefined|\{/.test(fill(p, tk, id))) bad.push(`${id}: ${p.slice(0, 60)}`); } catch (err) { bad.push(`${id}: ${(err as Error).message}`); }
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+});
+
 describe('cards file', () => {
   it('ids are unique', () => {
     const ids = C.entries.map((e) => e.id);
@@ -88,7 +104,7 @@ describe('cards file', () => {
 describe('writing guide', () => {
   const NEVER = [
     /\bP\/E\b/, /\bmultiples?\b/i, /\bEPS\b/, /\bthe ask\b/i, /\bpts\b/i, /\bpoints\b/i, /\bpercentage points\b/i,
-    /\babout\b(?! to\b)/i, /\bthe bond\b/i, /margin of safety/i, /room for error/i, /\bmood\b/i, /\bsentiment\b/i, /Mr Market/i,
+    /\bthe bond\b/i, /margin of safety/i, /room for error/i, /\bmood\b/i, /\bsentiment\b/i, /Mr Market/i,
     /\bmoat\b/i, /headwind|tailwind/i, /\bcatalyst\b/i, /\bupside\b|\bdownside\b/i, /\bbullish\b|\bbearish\b/i,
     /\bearnings\b/i, /\btrailing\b/i, /\b(up|down) from\b/i, /\bmight\b|\barguably\b/i, /\bgrows (?!at |to )[~\d]/, /\b(margins?|backlog|capex|hyperscalers?|guidance|valuation|priced in|tailwinds?|headwinds?|secular)\b/i,
   ];
@@ -102,6 +118,10 @@ describe('writing guide', () => {
       text: text(t.replace(/<div class="price">.*?<\/div>/, '').replace(/<\/(p|li|h4|button)>/g, '\n')),
     }));
   }));
+
+  it('no ~ sign on any figure (≈ marks rough estimates)', () => {
+    expect(cards.filter((c) => /~/.test(c.text)).map((c) => c.id)).toEqual([]);
+  });
 
   it('prints no broken figures', () => {
     const hits = cards.filter((c) => /NaN|undefined|Infinity|\{[a-zA-Z:]+\}/.test(c.text)).map((c) => c.id);

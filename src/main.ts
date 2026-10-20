@@ -6,16 +6,28 @@ import { Copy, renderBoard, SECTIONS, type BoardState } from './board';
 import { fill } from './copy';
 import type { Section } from './engine';
 import { installPopovers } from './popover';
+import { pageTokens } from './tokens';
+import { parsePage } from './pages';
+import philosophyMd from '../data/pages/philosophy.md?raw';
 import { CATEGORIES, type Basis, type CardsFile, type Compare, type Era, type Figures } from './types';
 
 const F = figuresJson as unknown as Figures;
 let C = cardsJson as unknown as CardsFile;
 const DEV = import.meta.env.DEV;
 
+/** The industry pill last picked, remembered in this browser (Mag 7 when there's none, or storage is blocked). */
+function savedCategory(): BoardState['category'] {
+  try {
+    const c = localStorage.getItem('category');
+    if (c === 'mag7' || c === 'all' || (CATEGORIES as string[]).includes(c ?? '')) return c as BoardState['category'];
+  } catch { /* no storage */ }
+  return 'mag7';
+}
+
 const state: BoardState = {
   era: 'now',
   basis: 't',
-  category: 'mag7',
+  category: savedCategory(),
   section: 'every',
 };
 
@@ -73,7 +85,7 @@ function header(copy: Copy, current: Route): string {
   const L = (f: string) => copy.label('page', f);
   const N = (f: string) => copy.label('nav', f);
   const link = (r: Route) => `<a href="${href(r)}" data-route="${r}"${r === current ? ' aria-current="page"' : ''}>${esc(N(r))}</a>`;
-  return `<header class="masthead"><a class="brand" href="${href('board')}" data-route="board">${MARK}<div><h1>${esc(L('title'))}</h1><p class="sub">${esc(L('subtitle'))}</p></div></a>` +
+  return `<header class="masthead"><div class="brand">${MARK.replace('<div class="mark" aria-hidden="true">', `<a class="mark brand-link" href="${href('board')}" data-route="board" tabindex="-1" aria-hidden="true">`).replace(/<\/div>$/, '</a>')}<div><h1><a class="brand-link" href="${href('board')}" data-route="board">${esc(L('title'))}</a></h1><p class="sub">${esc(L('subtitle'))}</p></div></div>` +
     `<nav class="nav">${link('philosophy')}${link('methodology')}${current === 'board' ? whenButton(copy) : ''}${themeButton()}</nav></header>`;
 }
 
@@ -84,16 +96,19 @@ function footer(copy: Copy): string {
     `<a href="${esc(N('repoUrl'))}" rel="noopener">${esc(N('repo'))}</a></nav><p>${esc(N('foot'))}</p></footer>`;
 }
 
-/** A text page from cards.json: a title, a lead line and sections of paragraphs. */
+/** A text page: Philosophy from its markdown file (data/pages), Methodology from cards.json. A title, an optional lead
+ * line and sections of paragraphs. */
 function page(copy: Copy, id: 'philosophy' | 'methodology'): string {
-  const e = copy.get(`page:${id}`);
+  const e = id === 'philosophy' ? (parsePage(philosophyMd) as unknown as Record<string, unknown>) : copy.get(`page:${id}`);
   if (!e) return '';
-  const tk = { index: () => '10%', normalYears: () => '18', avg: () => `${Math.round((F.eras.now.spx.last ?? 0) * 100)}%` };
+  const tk = pageTokens(F);
   const sections = (e.sections as { h: string; p: string[]; formula?: string; sources?: boolean }[]).map((sec) =>
-    `<section><h2>${esc(sec.h)}</h2>${sec.p.map((x) => `<p>${fill(x, tk, `page:${id}`)}</p>`).join('')}` +
+    `<section>${sec.h ? `<h2>${esc(sec.h)}</h2>` : ''}${sec.p.map((x) => x.startsWith('- ')
+      ? `<ul>${x.split('\n').map((l) => `<li>${fill(l.replace(/^- /, ''), tk, `page:${id}`)}</li>`).join('')}</ul>`
+      : `<p>${fill(x, tk, `page:${id}`)}</p>`).join('')}` +
     (sec.formula ? `<pre class="formula">${esc(sec.formula)}</pre>` : '') +
     (sec.sources ? sourcesHtml(copy) : '') + `</section>`).join('');
-  return `<article class="doc"><h1 class="doc-title">${esc(e.title as string)}</h1><p class="lead">${esc(e.lead as string)}</p>${sections}</article>`;
+  return `<article class="doc"><h1 class="doc-title">${esc(e.title as string)}</h1>${e.lead ? `<p class="lead">${esc(e.lead as string)}</p>` : ''}${sections}</article>`;
 }
 
 function render() {
@@ -138,7 +153,11 @@ function render() {
   applyCompare();
   wireCommon();
   app.querySelectorAll<HTMLButtonElement>('button[data-sec]').forEach((b) => b.addEventListener('click', () => { state.section = b.dataset.sec as BoardState['section']; render(); }));
-  app.querySelectorAll<HTMLButtonElement>('button[data-cat]').forEach((b) => b.addEventListener('click', () => { state.category = b.dataset.cat as BoardState['category']; render(); }));
+  app.querySelectorAll<HTMLButtonElement>('button[data-cat]').forEach((b) => b.addEventListener('click', () => {
+    state.category = b.dataset.cat as BoardState['category'];
+    try { localStorage.setItem('category', state.category); } catch { /* storage blocked: the choice lasts this visit */ }
+    render();
+  }));
 }
 
 /** The theme button and in-page links, on every page. */
