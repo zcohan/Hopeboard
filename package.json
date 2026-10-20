@@ -4,7 +4,7 @@
   "description": "Teaches ordinary people how to read a stock price.",
   "scripts": {
     "dev": "vite",
-    "build": "npm test && vite build",
+    "build": "npm test && vite build && tsx scripts/prerender.ts",
     "preview": "vite preview",
     "test": "tsc && vitest run",
     "fetch": "tsx scripts/fetch.ts",

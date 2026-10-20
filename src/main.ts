@@ -2,12 +2,9 @@ import './style.css';
 import figuresJson from '../data/figures.json';
 import cardsJson from '../data/cards.json';
 import logoSources from '../public/logos/sources.json';
-import { Copy, renderBoard, SECTIONS, type BoardState } from './board';
-import { fill } from './copy';
-import type { Section } from './engine';
+import { Copy, type BoardState } from './board';
 import { installPopovers } from './popover';
-import { pageTokens } from './tokens';
-import { parsePage } from './pages';
+import { boardBody, footer, header, page, pageTitle, type Route } from './render';
 import philosophyMd from '../data/pages/philosophy.md?raw';
 import { CATEGORIES, type Basis, type CardsFile, type Compare, type Era, type Figures } from './types';
 
@@ -34,113 +31,36 @@ const state: BoardState = {
 const app = document.getElementById('app')!;
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-function pill(attr: string, value: string, label: string, on: boolean) {
-  return label ? `<button type="button" class="${on ? 'on' : ''}" data-${attr}="${value}">${esc(label)}</button>` : '';
-}
-
-function sourcesHtml(copy: Copy): string {
-  const e = copy.get('sources');
-  if (!e) return '';
-  const items = Object.values(F.sources).map((s) => {
-    const name = s.url ? `<a href="${s.url}">${esc(s.name)}</a>` : esc(s.name);
-    return `<li>${name}${s.date ? `, ${esc(s.date)}` : ''}${s.rough ? ` (${esc(e.rough as string)})` : ''}${s.note ? `. ${esc(s.note)}` : ''}</li>`;
-  });
-  items.push(`<li>Company logos: <a href="https://commons.wikimedia.org/">Wikimedia Commons</a> (public domain; the brands belong to their owners)</li>`);
-  return `<div class="sources"><ul>${items.join('')}</ul></div>`;
-}
-
 /** Development only: cards whose wording failed to fill (a missing figure or an unknown placeholder). */
 function devBar(errors: string[]): string {
   if (!DEV || !errors.length) return '';
   return `<div class="devbar"><span class="errs">${errors.length} card errors</span><span>${esc(errors.join(' · '))}</span></div>`;
 }
 
-// Three pages: the board, the philosophy and the methodology. Paths are served by
-// public/_redirects on Cloudflare and by Vite's fallback in development.
-type Route = 'board' | 'philosophy' | 'methodology';
+// Three pages: the board, the philosophy and the methodology. The build writes each one out as a finished page
+// (scripts/prerender.ts); here the app draws them, and moves between them without reloading.
 const BASE = import.meta.env.BASE_URL;
 function route(): Route {
   const p = location.pathname.slice(BASE.length - 1).replace(/\/+$/, '');
   return p === '/philosophy' ? 'philosophy' : p === '/methodology' ? 'methodology' : 'board';
 }
-const href = (r: Route) => (r === 'board' ? BASE : `${BASE}${r}`);
 
-// The time and profit menu: a clock button in the header, open until a choice is made.
+// The time and profit menu: open until a choice is made.
 let whenOpen = false;
-function whenButton(copy: Copy): string {
-  const L = (f: string) => copy.label('page', f);
-  const eras: [Era, string][] = [['now', 'eraNow'], ['y1', 'eraY1'], ['y5', 'eraY5'], ['y10', 'eraY10']];
-  const item = (attr: string, value: string, label: string, on: boolean) =>
-    `<button type="button" role="menuitemradio" aria-checked="${on}" class="${on ? 'on' : ''}" data-${attr}="${value}">${esc(label)}</button>`;
-  // a dot on the clock says the board isn't showing today's prices against last year's profit
-  const changed = state.era !== 'now' || state.basis !== 't';
-  return `<div class="when"><button type="button" class="whenbtn${changed ? ' changed' : ''}" aria-haspopup="menu" aria-expanded="${whenOpen}" aria-label="${esc(L('whenButton'))}" title="${esc(L('whenButton'))}">` +
-    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>` +
-    `<div class="whenmenu" role="menu"${whenOpen ? '' : ' hidden'}><p class="mh">${esc(L('whenHeading'))}</p>${eras.map(([e, f]) => item('era', e, L(f), state.era === e)).join('')}` +
-    (state.era === 'now' ? `<hr><p class="mh">${esc(L('basisHeading'))}</p>${item('basis', 't', L('basisT'), state.basis === 't')}${item('basis', 'f', L('basisF'), state.basis === 'f')}` : '') +
-    `</div></div>`;
-}
-
-function header(copy: Copy, current: Route): string {
-  const L = (f: string) => copy.label('page', f);
-  const N = (f: string) => copy.label('nav', f);
-  const link = (r: Route) => `<a href="${href(r)}" data-route="${r}"${r === current ? ' aria-current="page"' : ''}>${esc(N(r))}</a>`;
-  return `<header class="masthead"><div class="brand">${MARK.replace('<div class="mark" aria-hidden="true">', `<a class="mark brand-link" href="${href('board')}" data-route="board" tabindex="-1" aria-hidden="true">`).replace(/<\/div>$/, '</a>')}<div><h1><a class="brand-link" href="${href('board')}" data-route="board">${esc(L('title'))}</a></h1><p class="sub">${esc(L('subtitle'))}</p></div></div>` +
-    `<nav class="nav">${link('philosophy')}${link('methodology')}${current === 'board' ? whenButton(copy) : ''}${themeButton()}</nav></header>`;
-}
-
-function footer(copy: Copy): string {
-  const N = (f: string) => copy.label('nav', f);
-  const link = (r: Route) => `<a href="${href(r)}" data-route="${r}">${esc(N(r))}</a>`;
-  return `<footer class="foot"><nav class="foot-nav">${link('board')}${link('philosophy')}${link('methodology')}` +
-    `<a href="${esc(N('repoUrl'))}" rel="noopener">${esc(N('repo'))}</a></nav><p>${esc(N('foot'))}</p></footer>`;
-}
-
-/** A text page: Philosophy from its markdown file (data/pages), Methodology from cards.json. A title, an optional lead
- * line and sections of paragraphs. */
-function page(copy: Copy, id: 'philosophy' | 'methodology'): string {
-  const e = id === 'philosophy' ? (parsePage(philosophyMd) as unknown as Record<string, unknown>) : copy.get(`page:${id}`);
-  if (!e) return '';
-  const tk = pageTokens(F);
-  const sections = (e.sections as { h: string; p: string[]; formula?: string; sources?: boolean }[]).map((sec) =>
-    `<section>${sec.h ? `<h2>${esc(sec.h)}</h2>` : ''}${sec.p.map((x) => x.startsWith('- ')
-      ? `<ul>${x.split('\n').map((l) => `<li>${fill(l.replace(/^- /, ''), tk, `page:${id}`)}</li>`).join('')}</ul>`
-      : `<p>${fill(x, tk, `page:${id}`)}</p>`).join('')}` +
-    (sec.formula ? `<pre class="formula">${esc(sec.formula)}</pre>` : '') +
-    (sec.sources ? sourcesHtml(copy) : '') + `</section>`).join('');
-  return `<article class="doc"><h1 class="doc-title">${esc(e.title as string)}</h1>${e.lead ? `<p class="lead">${esc(e.lead as string)}</p>` : ''}${sections}</article>`;
-}
+const headerOf = (copy: Copy, r: Route) => header(copy, r, { base: BASE, state, whenOpen, dark: theme() === 'dark' });
 
 function render() {
   const copy = new Copy(C);
   const r = route();
-  document.title = r === 'board' ? copy.label('page', 'title') : `${copy.label('nav', r)} · ${copy.label('page', 'title')}`;
+  document.title = pageTitle(copy, r);
   if (r !== 'board') {
-    app.innerHTML = header(copy, r) + page(copy, r) + footer(copy);
+    app.innerHTML = headerOf(copy, r) + page(copy, F, r, philosophyMd) + footer(copy, BASE);
     wireCommon();
     return;
   }
-  const L = (f: string) => copy.label('page', f);
-  let out = renderBoard(F, C, state);
-  // a filter or era with nothing in the chosen tab moves to the first tab that has cards
-  if (state.section !== 'all' && state.section !== 'every' && !out.counts[state.section]) {
-    const first = SECTIONS.find((sec) => out.counts[sec]);
-    if (first) { state.section = first; out = renderBoard(F, C, state); }
-  }
-  const { baselines, companies, errors } = out;
+  const { html, errors } = boardBody(F, C, copy, state);
   for (const e of errors) console.error(e);
-  const pills = copy.get('pills');
-  app.innerHTML =
-    devBar(errors) +
-    header(copy, 'board') +
-    // looking back: say so, with the way back to today
-    (state.era !== 'now' ? `<div class="pastbar"><span>${esc(L('pastBanner'))} <b>${esc(F.eras[state.era].label)}</b>${esc(L('pastBannerTail'))}</span><button type="button" data-era="now">${esc(L('backToday'))}</button></div>` : '') +
-    `<div id="board">${baselines}` +
-    (pills
-      ? `<div class="toggle pills" role="group" aria-label="Industry">${pill('cat', 'mag7', pills.mag7 as string, state.category === 'mag7')}${pill('cat', 'all', pills.all as string, state.category === 'all')}${CATEGORIES.map((c) => pill('cat', c, pills[c] as string, state.category === c)).join('')}</div>`
-      : '') +
-
-    `${companies}</div>` + footer(copy);
+  app.innerHTML = devBar(errors) + headerOf(copy, 'board') + html + footer(copy, BASE);
 
   app.querySelectorAll<HTMLButtonElement>('button[data-era]').forEach((b) => b.addEventListener('click', () => { state.era = b.dataset.era as Era; whenOpen = false; render(); }));
   app.querySelectorAll<HTMLButtonElement>('button[data-basis]').forEach((b) => b.addEventListener('click', () => { state.basis = b.dataset.basis as Basis; whenOpen = false; render(); }));
@@ -197,8 +117,6 @@ document.addEventListener('keydown', (ev) => {
   if (t.closest('.whenmenu') && (ev.key === 'ArrowUp' || ev.key === 'ArrowDown')) step([...app.querySelectorAll<HTMLButtonElement>('.whenmenu button')], ev.key === 'ArrowUp')?.focus();
 });
 
-/** The app's mark: the sun half risen over the horizon, drawn straight onto the page. */
-const MARK = `<div class="mark" aria-hidden="true"><svg viewBox="3 21.5 46 29"><defs><linearGradient id="markSun" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF7A59"/><stop offset="1" stop-color="#FFB547"/></linearGradient></defs><path d="M10 38a16 16 0 0 1 32 0z" fill="url(#markSun)"/><rect x="4" y="41" width="44" height="3" rx="1.5" fill="currentColor"/><rect x="10" y="47" width="32" height="3" rx="1.5" fill="currentColor" opacity=".35"/></svg></div>`;
 
 // Light or dark: the system's choice until the reader picks one, which is remembered on this device.
 type Theme = 'light' | 'dark';
@@ -209,13 +127,6 @@ function theme(): Theme {
 function setTheme(t: Theme, remember: boolean) {
   document.documentElement.dataset.theme = t;
   if (remember) try { localStorage.setItem('theme', t); } catch { /* storage blocked: the choice lasts this visit */ }
-}
-function themeButton(): string {
-  const dark = theme() === 'dark';
-  const icon = dark
-    ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'
-    : '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>';
-  return `<button type="button" class="theme" aria-label="${dark ? 'Light mode' : 'Dark mode'}" title="${dark ? 'Light mode' : 'Dark mode'}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${icon}</svg></button>`;
 }
 try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') setTheme(t, false); } catch { /* no storage */ }
 

@@ -1,0 +1,13 @@
+<!-- The link-preview image: rsvg-convert -w 1200 -h 630 scripts/og.svg -o public/og.png -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><linearGradient id="sun" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF7A59"/><stop offset="1" stop-color="#FFB547"/></linearGradient></defs>
+  <rect width="1200" height="630" fill="#F7F8F6"/>
+  <g transform="translate(96 118) scale(5.2)">
+    <path d="M10 38a16 16 0 0 1 32 0z" transform="translate(-3 -21.5)" fill="url(#sun)"/>
+    <rect x="1" y="19.5" width="44" height="3" rx="1.5" fill="#1C2622"/>
+    <rect x="7" y="25.5" width="32" height="3" rx="1.5" fill="#1C2622" opacity=".35"/>
+  </g>
+  <text x="96" y="400" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="96" font-weight="700" fill="#1C2622" letter-spacing="-2">Hopeboard</text>
+  <text x="96" y="470" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="38" fill="#4F5B55">Drawing out the assumptions of future growth</text>
+  <text x="96" y="520" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="38" fill="#4F5B55">implicit in today’s stock prices.</text>
+</svg>
