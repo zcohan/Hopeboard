@@ -171,6 +171,8 @@ app.addEventListener('click', (ev) => {
 
 installPopovers();
 render();
+// the page stays hidden (index.html) until this first drawing has its styles and font, then shows at once
+Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 500))]).then(() => document.documentElement.classList.remove('drawing'));
 
 if (import.meta.hot) {
   import.meta.hot.accept(['../data/cards.json', '../data/figures.json'], ([cards, figures]) => {

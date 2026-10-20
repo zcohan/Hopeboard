@@ -9,6 +9,11 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap">
+<!-- Before anything is drawn: the reader's saved light or dark mode, and the page kept hidden until the app has drawn
+     it with its styles and font (src/main.ts), so nothing flashes or jumps. Shown anyway after a moment if the app
+     doesn't load. Readers that don't run scripts, like search engines and AI tools, get the finished page as written. -->
+<script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}document.documentElement.classList.add('drawing');setTimeout(function(){document.documentElement.classList.remove('drawing')},2500)</script>
+<style>.drawing body{visibility:hidden} html{background:#F7F8F6} @media (prefers-color-scheme:dark){html:not([data-theme="light"]){background:#171B18}} html[data-theme="dark"]{background:#171B18}</style>
 </head>
 <body>
 <main id="app"></main>
