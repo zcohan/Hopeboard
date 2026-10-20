@@ -52,6 +52,10 @@ export interface NowFigures {
   /** Cash and debt on the latest balance sheet ($ billions), a year's profit to count them in, and stakes in other
    * companies when they're worth half a year of profit or more */
   balance?: { cash: number; debt: number; end: string; profit?: number; stakes?: number };
+  /** The month in the last decade when its price needed the least growth, and how much (`since`: listed later, that year) */
+  cheapest?: { month: string; req: number; since?: string };
+  /** Profit as a share of sales over its last three fiscal years together (not for banks) */
+  margin?: number;
   /** Change in the number of shares per year (negative: bought back), over `years` (10, or as few as 5) */
   shares?: { rate: number; years: number };
   listing?: { low: number; high: number; month: string }; // a new listing's range against its first close

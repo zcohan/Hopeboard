@@ -48,7 +48,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 - **Pricey:** required growth of 14% or more.
 - **Normal:** 10% to 14%.
 - **Bargain:** under 10%.
-- **Not profitable:** lost money last year, or earns under 0.2% of its price (more than 500 years of profit), so it is priced in dollars. The tab is hidden when it has no cards.
+- **Little or no profit** (renamed from Not profitable, October 2026: a company earning a little still counts): lost money last year, or earns under 0.2% of its price (more than 500 years of profit), so it is priced in dollars, with no years figure in the corner and its Earns line in dollars. The tab is hidden when it has no cards.
 
 **Views.** A clock button in the header opens a menu: prices from Today, 1 year ago, 5 years ago or 10 years ago, and (for Today) whether to count last year's profit or next year's forecast. The button shows a dot when the view isn't today against last year's profit. Past views show the price then, what it needed, the story at the time and what happened since, under a bar saying which date is shown, with a way back to today.
 
@@ -57,7 +57,7 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 1. Logo, name, a one-line description of the business, and a right-aligned stack: "priced at", the number of years, "of last year's profit".
 
 2. Three labelled sections, each a headline figure with small notes: EARNS (what the business earns as a share of its price; notes: against the safe US bond, and dividends where they are 3% or more), PRICED FOR ("+35% growth/year": the profit growth a year the price needs; notes: the last decade, and the analysts' forecast for next year), RISK (what happens if growth falls short; CUSHION when that is good news).
-3. Links at the foot: "Why so pricey?" (or "What the price assumes", "Why so cheap?") opens two or three points on why the price is what it is; "Finances" opens the company's health: cash or debt in years of profit (on Not profitable cards, only which is bigger; no line for banks), dividends, and how fast the share count changed over the last decade; "Compare over time" opens time buttons (1 week, 1 month, 3 months, 1 year) and a badge saying whether the deal is better, worse or the same, with what the price needed then and needs now.
+3. Links at the foot: "Why so pricey?" (or "What the price assumes", "Why so cheap?") opens two or three points on why the price is what it is; "Finances" opens the company's health: cash or debt in years of profit (on Little or no profit cards, only which is bigger; no line for banks), dividends, and how fast the share count changed over the last decade; "Compare over time" opens time buttons (1 week, 1 month, 3 months, 1 year) and a badge saying whether the deal is better, worse or the same, with what the price needed then and needs now.
 
 `docs/writing-guide.md` has the wording rules for every part.
 
@@ -78,7 +78,7 @@ The cards read as if a real analyst wrote them, in words an ordinary reader alre
 | returns, make, lose | pays, yields (for the bond: "Returns 5.1%/year") |
 | the safe US bond (US Bond as a card name) | the bond, risk-free rate |
 | more than, less than, the same as | up from, down from, pts, percentage points |
-| Pricey, Normal, Bargain, Not profitable | Expensive, Cheap as section names |
+| Pricey, Normal, Bargain, Little or no profit | Expensive, Cheap as section names |
 
 - State the fact directly. Every word must do a job.
 - No aphorisms, no "X, not Y" turns, no taglines, no lines that explain the concept.
@@ -130,7 +130,9 @@ The design is a plain card grid that a first-time reader can scan, with nothing 
 | Last decade from three-year averages at each end (October 2026) | A single starting year in a slump flattered the record: the S&P 500's 13%/year started from the 2016 profit dip (9.6% averaged), Chevron's and Merck's from bad years. |
 | Profit leaves out gains on investments; the stakes come off the price (October 2026) | Alphabet's and Amazon's stakes in other companies rose in value by about as much as their businesses earned; counted as profit, they made both look like bargains. Gains are taken out at the company's own tax rate (banks keep them), and the stakes' balance-sheet value comes off the price before counting years of profit, as Mauboussin and Rappaport add investments to the business's value. Finances lists them when worth half a year of profit and 1% of the price. |
 | Next year grows filed profit at the analysts' rate, never uses their figure directly (October 2026) | Analysts' figures leave out costs such as pay in shares (ServiceNow's are three times its filed profit), so mixing them with filed profit makes companies look cheaper. |
-| On the forecast view the whole card follows next year's profit, section included (October 2026) | Half-following it contradicted itself: Nvidia showed +10% under "Why so pricey?". A company moving section shows how much its price leans on the analysts. Not profitable cards stay put; they're written in dollars. |
+| On the forecast view the whole card follows next year's profit, section included (October 2026) | Half-following it contradicted itself: Nvidia showed +10% under "Why so pricey?". A company moving section shows how much its price leans on the analysts. Little-or-no-profit cards stay put; they're written in dollars. |
+| Finances adds profit on sales (three-year average) and a ten-year track record (October 2026) | How much of each sale a business keeps says a lot about it; three years together give the general picture without a range to read. The track record shows whether the market under- or overestimated it: what the price needed in 2016 against what profit did. Profit per employee and analyst "beats" were left out: the first mostly measures how a company is set up (outsourcing, retail staff), the second is steered by companies guiding analysts low. |
+| Compare over time shows the cheapest month in the last decade (October 2026) | Gives today's price some history in the board's terms. Worded as a fact, not "the best time to buy": the cheapest price isn't always the best buy, and the board doesn't advise. Same profit as every Priced for (last twelve months), so it agrees with the past views; left off for boom-and-bust businesses (sales fell a quarter in a year) and months under 5 years of profit. |
 | Past views keep figures for periods that ended 120 days before (October 2026) | 120 days is the longest filing deadline, so they were public then; requiring the exact filing loses figures the SEC summary data misses. |
 | Toggle between last year's profit and next year's forecast | "Cheap at 20" quotes use the forecast, so both views should be one tap apart. |
 | The company's own forecast, not an industry average | Industry averages were plain averages over hundreds of companies and rarely fit the one on the card. |
@@ -149,8 +151,9 @@ The design is a plain card grid that a first-time reader can scan, with nothing 
 
 ## Open items
 
-- [ ] **How much of each sale it keeps, over ten years (for later).** A single year's margin mixes up a protected business with a boom (Micron at 75% lost money in 2023). The useful version is a pair: the ten-year average and the worst year. High and steady suggests customers keep paying whatever happens. The owner found it too complicated for now (October 2026).
+- [x] **How much of each sale it keeps (done October 2026 as a three-year average in Finances).** A single year's margin mixes up a protected business with a boom (Micron at 75% lost money in 2023). The useful version is a pair: the ten-year average and the worst year. High and steady suggests customers keep paying whatever happens. The owner found it too complicated for now (October 2026).
 - [ ] **What the business earns on the money it keeps (for later).** Two businesses priced for the same growth aren't equally likely to get there: one that needs $1,000 of new kit for each extra $100 of profit has to plough back most of what it earns, while one that needs $200 can grow and still pay you. Buffett looks hard at this. It can be computed from the filings (profit against the money tied up in the business), but the owner found it too complicated to explain for now (October 2026).
+- [ ] **Whether profit is real cash (for later).** Buffett's "owner earnings": profit less what the business must spend on buildings and equipment to stay where it is. Plain form: "Turns 90 cents of every dollar of profit into cash it could pay out", from the cash-flow statement (cash from the business less spending on equipment). Raised with the return on money kept as what Buffett would say the board lacks; the owner found both too complicated for now (October 2026).
 - [ ] **The 18-year ending for cheap stocks (open).** Every if-line assumes buyers pay 18 years of profit in 2036. For a stock at 10 years that means its price rises, which can be most of a good result: AT&T's Cushion comes mostly from it. Naming it on the line muddied the card (owner, October 2026); undecided what to do instead. Some cards’ notes in cards.json raise the same question (Micron, for one).
 
 - [ ] **Cheap stocks get a flattering assumption.** The board assumes people pay 18 years of profit in 2036. For a stock priced below 18 (Verizon at 12, AT&T at 8) that assumes it becomes more popular, which adds several points a year to its "if" line. (A line saying so on those cards was tried and removed: it confused more than it helped.) Capping the 2036 figure at today's isn't clearly better: every stock below 18 would then need about 10% minus its dividend, so Micron at 12 and Alphabet at 17 would look the same. The owner's call.

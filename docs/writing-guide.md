@@ -156,7 +156,7 @@ Use one word for one thing, everywhere. If the reader learns a word on one card,
 | more than, less than, the same as | up from, down from, pts, points, percentage points, bps |
 | the stock corrects | (the owner's word for buyers going back to ordinary years of profit) |
 | dividends | capital return, shareholder yield, payout |
-| Pricey, Normal, Bargain, Not profitable | Expensive, Cheap, Overvalued, Undervalued (as labels) |
+| Pricey, Normal, Bargain, Little or no profit | Expensive, Cheap, Overvalued, Undervalued (as labels) |
 | the average big US company | the market average, the median company |
 | the index | the market, SPX (in prose) |
 | individual investors | retail, retail investors |
@@ -261,7 +261,7 @@ What the business earns each year as a share of its price, against the safe US b
 
 - Percentages only, against the bond. Never "each $100 buys" (the owner prefers percentages to dollar amounts).
 - The dividend note appears only when dividends are 3% or more (section 3.5).
-- Left off cards that are Not profitable: there's nothing earned to compare.
+- On cards with little or no profit, Earns is the card's own line in dollars instead: there's no profit to put against the bond.
 - The S&P 500 has its own wording: "of an index fund's price a year".
 
 ### 8.3 Priced for (`assumes`)
@@ -282,26 +282,32 @@ The profit growth a year the price needs, as a headline, then notes:
 - No decade of profit: the headline alone (`**{reqSigned}** growth/year`). The fact goes in the bubble: "Profitable only since 2023, so there's little record to go on".
 - Profit allowed to shrink: the record in plain words, "Over the last decade it shrank 1%/year". When the record rounds to 0%, "Over the last decade its profit barely changed" (Verizon); a test checks it still rounds to 0%.
 
-**Cards in dollars.** A company that lost money, or earns under 0.2% of its price (more than 500 years of profit), sits in Not profitable and is priced in dollars, with two anchors the reader knows:
+**Cards in dollars.** A company that lost money, or earns under 0.2% of its price (more than 500 years of profit), sits in Little or no profit and is priced in dollars. It keeps the three sections, and the corner shows no years figure. Earns comes from the card's own `earns` line: what it made or lost, in dollars. Priced for is the profit the price needs by 2036, with `{reqProfitTimes}` (" (700x last year's)", from the two figures as printed) when there was a profit. Then one anchor the reader knows:
 
-> **$65 billion** profit/year by 2036
-> Intel lost $11 billion last year. Its best years were $21 billion.
+> **EARNS** Almost nothing: **$50 million** last year, after paying staff $1.2 billion in shares
+> **PRICED FOR** **$35 billion** profit/year by 2036 (700x last year's)
+> **RISK** If profit only reaches the $2 billion a year it makes before paying staff in shares, you may lose **85% of your investment**.
 
-> **$290 billion** profit/year by 2036
-> SpaceX lost $9 billion on $23 billion of revenue last year. Apple earns $130 billion.
+> **EARNS** Lost **$11 billion** last year
+> **PRICED FOR** **$65 billion** profit/year by 2036 / Its best years were $21 billion.
 
 ### 8.3a Finances (shared, `company-lines`)
 
-A link at the foot of the card, "Finances", opens one bubble on the company's health. It stays out of the three sections, which are the card's core (owner, October 2026). Written once for every card; the app picks the wording from the data. Up to four small headings, each left off when its figure isn't in the data:
+A link at the foot of the card, "Finances", opens one bubble on the company's health. It stays out of the three sections, which are the card's core (owner, October 2026). Written once for every card; the app picks the wording from the data. Up to six small headings, each left off when its figure isn't in the data:
 
 > **Cash**: Holds **8 years** of profit in cash, beyond its debt
 > **Debt**: It would take **10 years** of profit to pay off its debt, after using its cash
 > **Cash & debt**: Cash and debt close to even (within a quarter of a year of profit)
-> **Investments**: Owns stakes in other companies worth **2 years** of profit (when worth half a year of profit and 1% of the price; not on Not profitable cards)
+> **Investments**: Owns stakes in other companies worth **2 years** of profit (when worth half a year of profit and 1% of the price; not on cards with little or no profit)
+> **Profit on sales**: Keeps **25 cents** of every dollar of sales as profit, over the last three years (not for banks or cards with little or no profit; "margin" stays banned, so the label says what it is)
 > **Dividends**: Pays **2.4%** of its stock price a year as dividends / Pays no dividend
 > **Shares**: Bought back **4.3%** of its shares a year over the last 10 years / Issued **6.3%** more shares a year…
 
-Relative only: years of profit and percentages, no dollar amounts (owner, October 2026). Not profitable cards have no profit to measure against, so the cash line says only which is bigger: "Holds more in cash than it owes". Banks get no cash or debt line: their debts are mostly deposits. A missing figure never reads as zero.
+> **Track record**: In 2016 the price assumed at least **5%/year** profit growth. Profit actually grew **14%/year** over the last 10 years (owner's wording, October 2026; "allowed profit to fall up to" when it needed shrinking, "assumed no profit growth" at 0%)
+
+Relative only: years of profit and percentages, no dollar amounts (owner, October 2026). Cards with little or no profit have none to measure against, so the cash line says only which is bigger: "Holds more in cash than it owes". Banks get no cash or debt line: their debts are mostly deposits. A missing figure never reads as zero.
+
+In the Compare over time popover, under the dates: "Cheapest in the last decade: **November 2016**, priced for **+4%** growth/year" ("Cheapest since listing in 2020" for later listings). Never "best time to buy": it's a fact about the price, not advice.
 
 ### 8.4 Risk or Cushion (`consequence`)
 
@@ -349,7 +355,7 @@ The link under each card opens a bubble. The link text is the section's heading,
 | Pricey | Why so pricey? |
 | Normal | What the price assumes |
 | Bargain | Why so cheap? |
-| Not profitable | Why this price? |
+| Little or no profit | Why this price? |
 
 The bubble holds two or three bullets. Each bullet is one belief the price rests on, or one fact that explains why people pay what they pay.
 

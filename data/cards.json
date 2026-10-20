@@ -110,7 +110,7 @@
           "h": "Next year’s forecast",
           "p": [
             "The forecast view grows last year’s official profit at the analysts’ average forecast growth for their next fiscal year, the one ending six to eighteen months from now. That keeps both years counted the same way: analysts’ own figures usually leave out costs such as pay in shares, so they can’t be compared with official profit directly. Where gains on investments were more than a fifth of last year’s profit, the analysts’ figures for this year include them, so those cards show no forecast.",
-            "On the forecast view the whole card follows next year’s profit: the growth its price needs, the “if” line and its section. So a company can move section, which shows how much the price leans on the analysts being right. Cards that are Not profitable stay where they are."
+            "On the forecast view the whole card follows next year’s profit: the growth its price needs, the “if” line and its section. So a company can move section, which shows how much the price leans on the analysts being right. Cards with little or no profit stay where they are."
           ]
         },
         {
@@ -129,17 +129,19 @@
         {
           "h": "Finances",
           "p": [
-            "The “Finances” link on each card shows up to four things about the company’s health, each left off when its figure isn’t in the data.",
-            "Cash or debt: from the latest balance sheet in its SEC filings. Cash counts cash, short-term investments and marketable securities; debt counts borrowing, without leases. The difference between them is shown in years of last year’s profit, or as close to even when it’s under a quarter of a year. Cards that are Not profitable have no profit to measure against, so they say only which is bigger. Banks are left out, because most of what a bank owes is its customers’ deposits.",
+            "The “Finances” link on each card shows up to six things about the company’s health, each left off when its figure isn’t in the data.",
+            "Cash or debt: from the latest balance sheet in its SEC filings. Cash counts cash, short-term investments and marketable securities; debt counts borrowing, without leases. The difference between them is shown in years of last year’s profit, or as close to even when it’s under a quarter of a year. Cards with little or no profit have none to measure against, so they say only which is bigger. Banks are left out, because most of what a bank owes is its customers’ deposits.",
             "Investments: stakes in other companies, at their value on the latest balance sheet, in years of last year’s profit. Shown when they’re worth half a year of profit or more.",
+            "Profit on sales: how much of each dollar of sales it kept as profit, over its latest three fiscal years added together, leaving out gains on investments. Not shown for banks, whose sales are mostly interest, or for cards with little or no profit.",
             "Dividends: those paid over the last twelve months, as a share of today’s price.",
-            "Shares: how fast the number of shares changed each year, from the average count in the latest annual report and the one ten years before (as few as five, for companies listed more recently). Fewer shares means the company bought some back of the profit; more means it issued new ones, often as pay for staff or to buy another company."
+            "Shares: how fast the number of shares changed each year, from the average count in the latest annual report and the one ten years before (as few as five, for companies listed more recently). Fewer shares means the company bought some back of the profit; more means it issued new ones, often as pay for staff or to buy another company.",
+            "Track record: the profit growth a year its price needed ten years ago, against how fast profit actually grew since, measured as on today’s card (three-year averages at each end)."
           ]
         },
         {
           "h": "The sections",
           "p": [
-            "Pricey: the price needs profit to grow at 14% a year or more. Normal: 10% to 14%. Bargain: under 10%. Not profitable: the company lost money last year, or made so little (under 0.2% of its price, more than 500 years of profit) that a growth rate means nothing; these cards say instead how much profit the price needs by 2036."
+            "Pricey: the price needs profit to grow at 14% a year or more. Normal: 10% to 14%. Bargain: under 10%. Little or no profit: the company lost money last year, or made so little (under 0.2% of its price, more than 500 years of profit) that a growth rate means nothing; these cards say instead how much profit the price needs by 2036."
           ]
         },
         {
@@ -163,7 +165,8 @@
         {
           "h": "Compare over time",
           "p": [
-            "Each card can compare today’s deal with a week, a month, three months or a year ago: the growth the price needed then, using the filings known then, against what it needs now. Less growth needed means a better deal."
+            "Each card can compare today’s deal with a week, a month, three months or a year ago: the growth the price needed then, using the filings known then, against what it needs now. Less growth needed means a better deal.",
+            "Under the dates, the cheapest month in the last decade: the month’s end when the price needed the least growth, using the filings known then (since listing, for companies listed later). It’s left off for businesses whose sales fell by a quarter or more in a year, where a boom year’s profit makes a price look cheap, and months priced under 5 years of profit are skipped, since a profit that high is almost always a one-off."
           ]
         },
         {
@@ -201,8 +204,8 @@
       "priceyThen": "Pricey then",
       "normalThen": "Normal then",
       "bargainThen": "Bargain then",
-      "loss": "Not profitable",
-      "lossThen": "Not profitable then",
+      "loss": "Little or no profit",
+      "lossThen": "Little or no profit then",
       "notes": []
     },
     {
@@ -234,7 +237,9 @@
         "balanceEven": "Cash & debt",
         "dividends": "Dividends",
         "shares": "Shares",
-        "stakes": "Investments"
+        "stakes": "Investments",
+        "margin": "Profit on sales",
+        "track": "Track record"
       },
       "balanceCash": "Holds **{netYears}** of profit in cash, beyond its debt",
       "balanceDebt": "It would take **{netYears}** of profit to pay off its debt, after using its cash",
@@ -243,12 +248,17 @@
       "balanceDebtDollars": "Owes more than it holds in cash",
       "stakes": "Owns stakes in other companies worth **{stakeYears}** of profit",
       "stakesNamed": "Owns stakes in other companies, including {stakesNames}, worth **{stakeYears}** of profit",
+      "marginKeeps": "Keeps **{marginCents}** of every dollar of sales as profit, over the last three years",
+      "marginLoses": "Lost **{marginCents}** on every dollar of sales, over the last three years",
       "financesLink": "Finances",
       "dividends": "Pays **{divYield}** of its stock price a year as dividends",
       "noDividend": "Pays no dividend",
       "sharesDown": "Bought back **{shareRate}** of its shares a year over the last {shareYears} years",
       "sharesUp": "Issued **{shareRate}** more shares a year over the last {shareYears} years",
-      "sharesSteady": "Kept the same number of shares over the last {shareYears} years"
+      "sharesSteady": "Kept the same number of shares over the last {shareYears} years",
+      "track": "In {trackYear} the price assumed at least **{trackReq}/year** profit growth. Profit actually {trackMove} over the last 10 years",
+      "trackShrink": "In {trackYear} the price allowed profit to fall up to **{trackReq}/year**. Profit actually {trackMove} over the last 10 years",
+      "trackFlat": "In {trackYear} the price assumed no profit growth. Profit actually {trackMove} over the last 10 years"
     },
     {
       "id": "compare",
@@ -261,6 +271,8 @@
       "worse": "Worse deal",
       "same": "Same deal",
       "detail": "needed {then}/year, now {now}/year",
+      "cheapest": "Cheapest in the last decade: **{month}**, priced for **{req}** growth/year",
+      "cheapestSince": "Cheapest since listing in {since}: **{month}**, priced for **{req}** growth/year",
       "notes": [
         "The badge on each company card (owner chose option A, October 2026): the growth the price needed at the chosen time, with the filings known then, against today. Lower is a better deal. Shown on the Now view with last year’s profit.",
         "Per card (owner, October 2026): a “Compare over time” link at the foot opens the time buttons for that card; it starts on 1 year.",
@@ -798,7 +810,8 @@
     {
       "id": "INTC:now",
       "about": "Chips for PCs & chip factories",
-      "assumes": "**{reqProfit}** profit/year by 2036\nIntel lost {p:last:abs} last year. Its best years were {p:best}.",
+      "earns": "Lost **{p:last:abs}** last year",
+      "assumes": "**{reqProfit}** profit/year by 2036\nIts best years were {p:best}.",
       "consequence": "If profit reaches Intel’s best year ({p:best}){corrects}, {outcome}.",
       "scenario": {
         "anchor": "profit",
@@ -979,7 +992,8 @@
     {
       "id": "SPCX:now",
       "about": "Rockets & Starlink satellite internet",
-      "assumes": "**{reqProfit}** profit/year by 2036\nSpaceX lost {p:last:abs} on {p:revenue:bare} of revenue {profitsPeriod}. Apple earns {p:apple} a year.",
+      "earns": "Lost **{p:last:abs}** on {p:revenue:bare} of revenue {profitsPeriod}",
+      "assumes": "**{reqProfit}** profit/year by 2036\nApple earns {p:apple} a year.",
       "consequence": "If profit reaches Apple’s level ({p:apple}){corrects}, {outcome}.",
       "scenario": {
         "anchor": "profit",
@@ -1796,8 +1810,9 @@
     {
       "id": "PANW:now",
       "about": "Cybersecurity software",
-      "assumes": "**{reqProfit}** profit/year by 2036\nMade {p:last:bare} last year, after paying staff {p:sharePay:bare} in shares.",
-      "consequence": "If profit grows to the cash its business already brings in ({p:cash:bare} a year){corrects}, {outcome}.",
+      "earns": "Almost nothing: **{p:last:bare}** last year, after paying staff {p:sharePay:bare} in shares",
+      "assumes": "**{reqProfit}** profit/year by 2036{reqProfitTimes}",
+      "consequence": "If profit only reaches the {p:cash:bare} a year it makes before paying staff in shares{corrects}, {outcome}.",
       "scenario": {
         "anchor": "profit",
         "key": "cash"
@@ -1955,8 +1970,9 @@
     {
       "id": "CRWD:now",
       "about": "Cybersecurity software",
-      "assumes": "**{reqProfit}** profit/year by 2036\nMade {p:last:bare} last year, after paying staff {p:sharePay:bare} in shares.",
-      "consequence": "If profit grows to the cash its business already brings in ({p:cash:bare} a year){corrects}, {outcome}.",
+      "earns": "Almost nothing: **{p:last:bare}** last year, after paying staff {p:sharePay:bare} in shares",
+      "assumes": "**{reqProfit}** profit/year by 2036{reqProfitTimes}",
+      "consequence": "If profit only reaches the {p:cash:bare} a year it makes before paying staff in shares{corrects}, {outcome}.",
       "scenario": {
         "anchor": "profit",
         "key": "cash"

@@ -71,9 +71,18 @@ function financesBubble(co: Company, section: Section, shared: CopyEntry | null 
   // the biggest stakes are named on the card's own entry (`stakesNames`), from the company's filings
   const names = entry?.stakesNames as string | undefined;
   if (co.now.balance?.stakes && section !== 'loss') rows.push([labels.stakes, names ? (shared.stakesNamed as string).replace('{stakesNames}', names) : (shared.stakes as string)]);
+  // how much of each dollar of sales it keeps (not on cards with little or no profit, where one-off years can mislead)
+  const mg = co.now.margin;
+  if (mg !== undefined && section !== 'loss') rows.push([labels.margin, (mg < 0 ? shared.marginLoses : shared.marginKeeps) as string]);
   rows.push([labels.dividends, (co.now.y > 0 ? shared.dividends : shared.noDividend) as string]);
   const sh = co.now.shares;
   if (sh) rows.push([labels.shares, (Math.abs(sh.rate) < 0.005 ? shared.sharesSteady : sh.rate < 0 ? shared.sharesDown : shared.sharesUp) as string]);
+  // what its price assumed ten years ago against what the business then did
+  const was = pastModel(co, 'y10');
+  if (was?.req !== null && was?.req !== undefined && co.now.last !== null && co.now.last !== undefined) {
+    const r = Math.round(was.req * 100);
+    rows.push([labels.track, (r > 0 ? shared.track : r < 0 ? shared.trackShrink : shared.trackFlat) as string]);
+  }
   return {
     link: shared.financesLink as string,
     html: rows.map(([h, t]) => `<h4>${esc(h)}</h4><p class="story">${fill(t, tk, `${id} finances`)}</p>`).join(''),
@@ -167,6 +176,9 @@ export interface Rendered {
   errors: string[];
 }
 
+/** "+5%", "−2%" or "0%": a growth rate as a headline shows it (never "−0%") */
+const signedPct = (g: number) => { const p = pct(g); return p === '−0%' || p === '0%' ? '0%' : p.startsWith('−') ? p : `+${p}`; };
+
 /** Years of profit rounded as a card shows them (as figures.ts writes them): whole years from 10 up, else one decimal. */
 const shownYears = (pe: number) => (pe >= 10 ? Math.round(pe) : Math.round(pe * 10) / 10);
 
@@ -198,10 +210,17 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
       return [{ c, html: `<div class="deal ${kind}" data-w="${c}">${esc(copy.label('compare', kind))} · ${detail}</div>` }];
     });
     if (!badges.length) return undefined;
+    // the cheapest month in the last decade (or since listing), under the date buttons
+    const ch = co.now.cheapest;
+    const cheapest = ch ? `<p class="cheapest">${fill(copy.label('compare', ch.since ? 'cheapestSince' : 'cheapest'), {
+      month: () => new Date(`${ch.month}-15`).toLocaleString('en-US', { month: 'long', year: 'numeric' }),
+      since: () => ch.since ?? '',
+      req: () => signedPct(ch.req),
+    }, `${co.id} cheapest`)}</p>` : '';
     const buttons = `<button type="button" data-w="now">${esc(copy.label('compare', 'now'))}</button>` + badges.map(({ c }) => `<button type="button" data-w="${c}">${esc(copy.label('compare', c))}</button>`).join('');
     return {
       link: copy.label('compare', 'link'),
-      panel: `<div class="seg" role="group" aria-label="${esc(copy.label('compare', 'label'))}">${buttons}</div>${badges.map((b) => b.html).join('')}`,
+      panel: `<div class="seg" role="group" aria-label="${esc(copy.label('compare', 'label'))}">${buttons}</div>${badges.map((b) => b.html).join('')}${cheapest}`,
     };
   };
   const yearsUnit = (b: Basis) => L(b === 't' ? 'unitT' : 'unitF');
@@ -316,7 +335,8 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
           // what analysts expect next year, and what happens if growth falls short
           const earnsNow = mm.section !== 'loss' && mm.shown(basis) !== null;
           const tpl: ([string, string | undefined] | [string, string | undefined, string])[] = [
-            ['farm', earnsNow ? (shared?.farm as string | undefined) : undefined],
+            // little or no profit: the card's own line on what it made (or lost), in dollars
+            ['farm', earnsNow ? (shared?.farm as string | undefined) : (e.earns as string | undefined)],
             // the analysts' forecast sits under the requirement as a note, so the two growth figures read together
             ['assumes', e.assumes === undefined ? undefined : (e.assumes as string) + (c.now.forecast !== undefined && c.now.forecast !== null && shared?.forecast ? `\n${shared.forecast as string}` : '')],
             ['consequence', e.consequence as string | undefined],

@@ -48,7 +48,7 @@ The design-stage tables in `test/formula.test.ts` are test cases. The app should
 
 Cards read as if a real analyst wrote them, in mainstream words. Use one term for one thing. The full lists are in the writing guide.
 
-- Use: "priced at 35 years of last year's profit", "profit" (per share), "the price needs profit to grow at X%/year", "returns", "make", "lose", "the safe US bond", "more than / less than / the same as" (owner prefers these to up from / down from), Pricey / Normal / Bargain / Not profitable.
+- Use: "priced at 35 years of last year's profit", "profit" (per share), "the price needs profit to grow at X%/year", "returns", "make", "lose", "the safe US bond", "more than / less than / the same as" (owner prefers these to up from / down from), Pricey / Normal / Bargain / Little or no profit.
 - Avoid: P/E, multiple, EPS, "the ask", "pts" or "percentage points", "about", "the bond", margin of safety, room for error, mood, sentiment, Mr Market.
 - No taglines, no aphorisms, no "X, not Y" turns, no lines that explain the concept. Every word must help the reader decide.
 - Never show the dollar share price.

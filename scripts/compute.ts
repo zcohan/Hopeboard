@@ -162,7 +162,7 @@ export function fxOn(pair: string, d: string): number | null {
 
 // ---------- SEC filings ----------
 
-interface Fact { start?: string; end: string; val: number; filed: string; form: string; unit?: string }
+interface Fact { start?: string; end: string; val: number; filed: string; form: string; unit?: string; reported?: number /* profit per share as filed, before leaveOutGains */ }
 
 const EPS = ['EarningsPerShareDiluted', 'EarningsPerShareBasicAndDiluted', 'DilutedEarningsLossPerShare', 'IncomeLossFromContinuingOperationsPerDilutedShare'];
 const DPS = ['CommonStockDividendsPerShareDeclared', 'CommonStockDividendsPerShareCashPaid'];
@@ -257,6 +257,7 @@ export class Filings {
             // the period's own tax rate when it reads sensibly, else the US rate
             const own = p && ni && p.val > 0 ? 1 - ni.val / p.val : null;
             const tax = own !== null && own >= 0 && own <= 0.4 ? own : US_TAX;
+            e.reported ??= e.val;
             if (sh && sh.val > 0) { e.val -= (g.val * (1 - tax)) / sh.val; continue; }
             if (p && p.val > 0 && g.val < p.val) e.val = (e.val * (p.val - g.val)) / p.val;
           }
@@ -523,6 +524,25 @@ export function gainsShare(f: Filings, d: string): number {
   if (f.src.operating || f.src.keepGains) return 0;
   const g = f.ttm(f.src.gains ?? GAINS, d), p = f.ttm(PRETAX, d);
   return g && p && p.val > 0 && g.end === p.end ? g.val / p.val : 0;
+}
+
+/** How much of each dollar of sales it kept as profit, over its latest three fiscal years together (profit ÷ sales,
+ * both added up). Profit leaves out gains on investments, as the board's profit per share does: the filed profit,
+ * scaled by profit per share without the gains against profit per share as filed. */
+export function margin(f: Filings, today: string): number | null {
+  const latest = f.latestAnnualEnd(f.eps, today);
+  if (!latest) return null;
+  const filed = f.src.operating ? EPS : f.eps;
+  let profit = 0, sales = 0;
+  for (const n of [0, 1, 2]) {
+    const end = yearsBefore(latest, n);
+    const rev = f.annualNear(f.revenue, end, today), ni = f.annualNear(f.netIncome, end, today);
+    const eps = f.annualNear(f.eps, end, today), asFiled = f.annualNear(filed, end, today, (x) => x.reported ?? x.val);
+    if (rev === null || ni === null || rev <= 0) return null;
+    profit += eps !== null && asFiled ? (ni * eps) / asFiled : ni;
+    sales += rev;
+  }
+  return profit / sales;
 }
 
 /** Profit-per-share growth per year over the last ten fiscal years. */

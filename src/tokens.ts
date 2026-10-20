@@ -1,6 +1,6 @@
 // The placeholder values each kind of card offers its wording.
 import { approx, outcome, type OutcomeRef, type Tokens } from './copy';
-import { nowModel, parseFig, type NowModel, type Parsed } from './engine';
+import { nowModel, parseFig, pastModel, type NowModel, type Parsed } from './engine';
 import { INDEX_RETURN, NORMAL_YEARS, requiredGrowth } from './formula';
 import { billions, decPct, halfPct, pct, range } from './format';
 import type { Basis, Company, CopyEntry, EraFigures, Figures, PastEra, Scenario } from './types';
@@ -154,8 +154,26 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
       const v = need(b.stakes, 'stakes') / need(b.profit, 'a year of profit');
       return v >= 1.5 ? `${Math.round(v)} years` : v >= 0.75 ? '1 year' : 'half a year';
     },
+    /** " (700x last year's)": the profit the price needs by 2036 against last year's, when there was one */
+    reqProfitTimes: () => {
+      const last = co.now.profits?.last;
+      const need2036 = nowModel(co, F, basis).reqProfit;
+      if (!last || last <= 0 || co.now.profitsPeriod || !need2036) return '';
+      // from the two figures as the card prints them ($35 billion against $50 million: 700x), rounded to two figures
+      const shown = (v: number) => Number(billions(v).replace(/[^\d.]/g, '')) * (/trillion/.test(billions(v)) ? 1000 : 1);
+      const lastShown = last < 1 ? Math.round(last * 100) / 100 : last;
+      const x = shown(need2036.reduce((a, b) => a + b, 0) / need2036.length) / lastShown;
+      const two = (v: number) => { const p = Math.pow(10, Math.floor(Math.log10(v)) - 1); return Math.round(v / p) * p; };
+      return x < 1.5 ? '' : ` (${x >= 10 ? two(x).toLocaleString('en-US') : Math.round(x * 2) / 2}x last year’s)`;
+    },
     /** when the dollar figures are from: "last year", or "in the first half of 2026" for a new listing */
     profitsPeriod: () => co.now.profitsPeriod ?? 'last year',
+    /** "26 cents" of every $1 of sales kept as profit, over the last three years */
+    marginCents: () => { const c = Math.round(Math.abs(need(co.now.margin, 'margin')) * 100); return c === 1 ? '1 cent' : `${c} cents`; },
+    /** ten years ago: the year, the growth its price assumed, and what profit then did */
+    trackYear: () => need(F.eras.y10.label.match(/\d{4}/)?.[0], 'ten-years-ago year'),
+    trackReq: () => pct(Math.abs(need(pastModel(co, 'y10')?.req, 'required growth ten years ago'))),
+    trackMove: () => { const m = moved(need(co.now.last, 'last-decade growth'), true); return m === 'barely changed' ? m : m.replace(/^(\S+) (.*)$/, '$1 **$2**'); },
     divYield: () => decPct(co.now.y),
     /** the yearly change in the share count, without its sign: "4%", "0.7%" */
     shareRate: () => decPct(Math.abs(need(co.now.shares, 'share count change').rate)),

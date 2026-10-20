@@ -194,6 +194,11 @@
         "shares": {
           "rate": 0.0626,
           "years": 10
+        },
+        "margin": 0.089,
+        "cheapest": {
+          "month": "2024-04",
+          "req": 0.182
         }
       },
       "past": {
@@ -269,6 +274,12 @@
           "debt": 0,
           "end": "2026-06-30",
           "profit": 2.9
+        },
+        "margin": 0.24,
+        "cheapest": {
+          "month": "2026-06",
+          "req": 0.36,
+          "since": "2020"
         }
       },
       "past": {
@@ -340,6 +351,11 @@
         "shares": {
           "rate": 0.0007,
           "years": 10
+        },
+        "margin": 0.03,
+        "cheapest": {
+          "month": "2017-07",
+          "req": 0.083
         }
       },
       "past": {
@@ -421,7 +437,12 @@
           "rate": -0.0425,
           "years": 10
         },
-        "forecast": 0.085
+        "forecast": 0.085,
+        "margin": 0.254,
+        "cheapest": {
+          "month": "2016-11",
+          "req": 0.044
+        }
       },
       "past": {
         "y1": {
@@ -503,6 +524,11 @@
         "shares": {
           "rate": 0.0075,
           "years": 10
+        },
+        "margin": 0.525,
+        "cheapest": {
+          "month": "2018-12",
+          "req": 0.107
         }
       },
       "past": {
@@ -584,6 +610,11 @@
         "shares": {
           "rate": -0.0072,
           "years": 10
+        },
+        "margin": 0.373,
+        "cheapest": {
+          "month": "2020-03",
+          "req": 0.116
         }
       },
       "past": {
@@ -665,6 +696,11 @@
         "shares": {
           "rate": -0.0102,
           "years": 10
+        },
+        "margin": 0.323,
+        "cheapest": {
+          "month": "2022-10",
+          "req": 0.037
         }
       },
       "past": {
@@ -741,6 +777,11 @@
           "debt": 32.3,
           "end": "2025-12-31",
           "profit": 53.1
+        },
+        "margin": 0.418,
+        "cheapest": {
+          "month": "2023-05",
+          "req": 0.051
         }
       },
       "past": {
@@ -822,6 +863,11 @@
         "shares": {
           "rate": 0.0127,
           "years": 10
+        },
+        "margin": 0.081,
+        "cheapest": {
+          "month": "2025-04",
+          "req": 0.161
         }
       },
       "past": {
@@ -903,6 +949,11 @@
         "shares": {
           "rate": -0.0383,
           "years": 10
+        },
+        "margin": 0.215,
+        "cheapest": {
+          "month": "2020-03",
+          "req": 0.049
         }
       },
       "past": {
@@ -981,6 +1032,11 @@
           "end": "2026-06-30",
           "profit": 124.1,
           "stakes": 211.3
+        },
+        "margin": 0.268,
+        "cheapest": {
+          "month": "2023-01",
+          "req": 0.1
         }
       },
       "past": {
@@ -1059,7 +1115,8 @@
           "debt": 42.4,
           "end": "2026-06-30",
           "profit": 32.4
-        }
+        },
+        "margin": 0.096
       },
       "past": {
         "y1": {
@@ -1140,6 +1197,11 @@
         "shares": {
           "rate": 0.0267,
           "years": 9
+        },
+        "margin": 0.285,
+        "cheapest": {
+          "month": "2018-07",
+          "req": -0.016
         }
       },
       "past": {},
@@ -1197,6 +1259,11 @@
         "shares": {
           "rate": 0.0765,
           "years": 10
+        },
+        "margin": 0.082,
+        "cheapest": {
+          "month": "2022-10",
+          "req": 0.137
         }
       },
       "past": {},
@@ -1240,6 +1307,11 @@
         "shares": {
           "rate": -0.0077,
           "years": 10
+        },
+        "margin": -0.106,
+        "cheapest": {
+          "month": "2022-10",
+          "req": -0.04
         }
       },
       "past": {},
@@ -1296,6 +1368,11 @@
         "shares": {
           "rate": -0.0106,
           "years": 10
+        },
+        "margin": 0.283,
+        "cheapest": {
+          "month": "2022-10",
+          "req": 0.124
         }
       },
       "past": {},
@@ -1352,7 +1429,8 @@
         "shares": {
           "rate": 0.0099,
           "years": 10
-        }
+        },
+        "margin": 0.482
       },
       "past": {},
       "src": {
@@ -1408,6 +1486,11 @@
         "shares": {
           "rate": 0.0375,
           "years": 10
+        },
+        "margin": 0.152,
+        "cheapest": {
+          "month": "2026-06",
+          "req": 0.108
         }
       },
       "past": {},
@@ -1465,6 +1548,11 @@
         "shares": {
           "rate": -0.0171,
           "years": 10
+        },
+        "margin": 0.279,
+        "cheapest": {
+          "month": "2026-06",
+          "req": 0.056
         }
       },
       "past": {},
@@ -1522,6 +1610,11 @@
         "shares": {
           "rate": 0.0255,
           "years": 8
+        },
+        "margin": 0.148,
+        "cheapest": {
+          "month": "2026-05",
+          "req": 0.234
         }
       },
       "past": {},
@@ -1579,6 +1672,11 @@
         "shares": {
           "rate": 0.0242,
           "years": 6
+        },
+        "margin": 0.123,
+        "cheapest": {
+          "month": "2022-10",
+          "req": 0.047
         }
       },
       "past": {},
@@ -1636,6 +1734,11 @@
         "shares": {
           "rate": -0.0005,
           "years": 10
+        },
+        "margin": 0.213,
+        "cheapest": {
+          "month": "2022-06",
+          "req": 0.087
         }
       },
       "past": {},
@@ -1693,6 +1796,12 @@
         "shares": {
           "rate": 0.0387,
           "years": 5
+        },
+        "margin": 0.142,
+        "cheapest": {
+          "month": "2025-12",
+          "req": 0.037,
+          "since": "2019"
         }
       },
       "past": {},
@@ -1744,7 +1853,8 @@
           "debt": 2.5,
           "end": "2026-06-30",
           "profit": 2.6
-        }
+        },
+        "margin": 0.299
       },
       "past": {},
       "src": {
@@ -1799,6 +1909,11 @@
         "shares": {
           "rate": -0.0241,
           "years": 10
+        },
+        "margin": 0.189,
+        "cheapest": {
+          "month": "2020-03",
+          "req": 0.022
         }
       },
       "past": {},
@@ -1856,6 +1971,11 @@
         "shares": {
           "rate": -0.0155,
           "years": 6
+        },
+        "margin": 0.045,
+        "cheapest": {
+          "month": "2022-10",
+          "req": -0.047
         }
       },
       "past": {},
@@ -1946,6 +2066,11 @@
           "debt": 128.6,
           "end": "2026-06-30",
           "profit": 43.5
+        },
+        "margin": 0.109,
+        "cheapest": {
+          "month": "2019-01",
+          "req": 0.031
         }
       },
       "past": {
@@ -2018,6 +2143,10 @@
         "shares": {
           "rate": -0.03,
           "years": 10
+        },
+        "cheapest": {
+          "month": "2020-04",
+          "req": -0.024
         }
       },
       "past": {
@@ -2090,6 +2219,10 @@
         "shares": {
           "rate": -0.0373,
           "years": 10
+        },
+        "cheapest": {
+          "month": "2020-03",
+          "req": -0.026
         }
       },
       "past": {
@@ -2161,6 +2294,10 @@
         "shares": {
           "rate": -0.0463,
           "years": 10
+        },
+        "cheapest": {
+          "month": "2020-03",
+          "req": -0.076
         }
       },
       "past": {
@@ -2232,6 +2369,10 @@
         "shares": {
           "rate": -0.0463,
           "years": 10
+        },
+        "cheapest": {
+          "month": "2020-04",
+          "req": -0.077
         }
       },
       "past": {
@@ -2444,6 +2585,11 @@
           "debt": 24,
           "end": "2026-03-31",
           "profit": 22.2
+        },
+        "margin": 0.527,
+        "cheapest": {
+          "month": "2022-10",
+          "req": 0.136
         }
       },
       "past": {
@@ -2523,6 +2669,11 @@
         "shares": {
           "rate": -0.0225,
           "years": 10
+        },
+        "margin": 0.455,
+        "cheapest": {
+          "month": "2026-05",
+          "req": 0.142
         }
       },
       "past": {
@@ -2601,6 +2752,11 @@
         "shares": {
           "rate": 0.0033,
           "years": 10
+        },
+        "margin": 0.117,
+        "cheapest": {
+          "month": "2023-10",
+          "req": -0.088
         }
       },
       "past": {
@@ -2680,6 +2836,11 @@
         "shares": {
           "rate": 0.0243,
           "years": 10
+        },
+        "margin": 0.116,
+        "cheapest": {
+          "month": "2018-12",
+          "req": -0.098
         }
       },
       "past": {
@@ -2758,6 +2919,11 @@
         "shares": {
           "rate": 0.0324,
           "years": 10
+        },
+        "margin": 0.123,
+        "cheapest": {
+          "month": "2018-12",
+          "req": 0.047
         }
       },
       "past": {
@@ -2836,6 +3002,11 @@
         "shares": {
           "rate": -0.0168,
           "years": 10
+        },
+        "margin": 0.253,
+        "cheapest": {
+          "month": "2019-10",
+          "req": 0.048
         }
       },
       "past": {
@@ -2915,6 +3086,11 @@
         "shares": {
           "rate": -0.0183,
           "years": 10
+        },
+        "margin": 0.029,
+        "cheapest": {
+          "month": "2017-01",
+          "req": 0.049
         }
       },
       "past": {
@@ -2994,6 +3170,11 @@
         "shares": {
           "rate": -0.0146,
           "years": 10
+        },
+        "margin": 0.286,
+        "cheapest": {
+          "month": "2024-06",
+          "req": -0.002
         }
       },
       "past": {
@@ -3072,6 +3253,11 @@
         "shares": {
           "rate": 0.008,
           "years": 10
+        },
+        "margin": 0.078,
+        "cheapest": {
+          "month": "2020-03",
+          "req": 0.013
         }
       },
       "past": {
@@ -3150,7 +3336,8 @@
         "shares": {
           "rate": -0.001,
           "years": 10
-        }
+        },
+        "margin": 0.087
       },
       "past": {
         "y1": {
@@ -3229,6 +3416,11 @@
         "shares": {
           "rate": -0.0021,
           "years": 10
+        },
+        "margin": 0.239,
+        "cheapest": {
+          "month": "2020-05",
+          "req": 0.061
         }
       },
       "past": {
@@ -3307,6 +3499,11 @@
         "shares": {
           "rate": -0.0159,
           "years": 10
+        },
+        "margin": 0.184,
+        "cheapest": {
+          "month": "2017-05",
+          "req": 0.054
         }
       },
       "past": {
@@ -3385,6 +3582,11 @@
         "shares": {
           "rate": -0.0049,
           "years": 10
+        },
+        "margin": 0.257,
+        "cheapest": {
+          "month": "2018-12",
+          "req": 0.015
         }
       },
       "past": {
@@ -3463,6 +3665,11 @@
         "shares": {
           "rate": -0.0059,
           "years": 10
+        },
+        "margin": 0.04,
+        "cheapest": {
+          "month": "2025-07",
+          "req": 0.026
         }
       },
       "past": {
@@ -3542,6 +3749,11 @@
         "shares": {
           "rate": -0.0124,
           "years": 10
+        },
+        "margin": 0.186,
+        "cheapest": {
+          "month": "2025-05",
+          "req": 0.005
         }
       },
       "past": {
@@ -3620,6 +3832,11 @@
         "shares": {
           "rate": -0.0239,
           "years": 10
+        },
+        "margin": 0.15,
+        "cheapest": {
+          "month": "2020-03",
+          "req": -0.019
         }
       },
       "past": {
@@ -3699,6 +3916,11 @@
         "shares": {
           "rate": -0.0323,
           "years": 10
+        },
+        "margin": 0.291,
+        "cheapest": {
+          "month": "2018-12",
+          "req": 0.009
         }
       },
       "past": {
@@ -3777,7 +3999,8 @@
         "shares": {
           "rate": -0.0158,
           "years": 10
-        }
+        },
+        "margin": 0.152
       },
       "past": {
         "y1": {
@@ -3855,6 +4078,11 @@
         "shares": {
           "rate": -0.0408,
           "years": 10
+        },
+        "margin": 0.249,
+        "cheapest": {
+          "month": "2018-12",
+          "req": 0.015
         }
       },
       "past": {
@@ -3933,6 +4161,11 @@
         "shares": {
           "rate": 0.0006,
           "years": 10
+        },
+        "margin": 0.224,
+        "cheapest": {
+          "month": "2020-05",
+          "req": 0.004
         }
       },
       "past": {
@@ -4011,6 +4244,11 @@
         "shares": {
           "rate": -0.0251,
           "years": 10
+        },
+        "margin": 0.092,
+        "cheapest": {
+          "month": "2020-03",
+          "req": 0.052
         }
       },
       "past": {
@@ -4095,6 +4333,11 @@
         "shares": {
           "rate": 0.0435,
           "years": 7
+        },
+        "margin": 0.14,
+        "cheapest": {
+          "month": "2024-04",
+          "req": 0.2
         }
       },
       "past": {
@@ -4172,6 +4415,11 @@
         "shares": {
           "rate": 0.0438,
           "years": 10
+        },
+        "margin": 0.062,
+        "cheapest": {
+          "month": "2020-03",
+          "req": 0.029
         }
       },
       "past": {
@@ -4250,6 +4498,11 @@
         "shares": {
           "rate": -0.0061,
           "years": 10
+        },
+        "margin": 0.146,
+        "cheapest": {
+          "month": "2021-05",
+          "req": 0.125
         }
       },
       "past": {
@@ -4329,6 +4582,11 @@
         "shares": {
           "rate": -0.0132,
           "years": 10
+        },
+        "margin": 0.321,
+        "cheapest": {
+          "month": "2022-10",
+          "req": 0.054
         }
       },
       "past": {
@@ -4403,6 +4661,12 @@
           "debt": 2.8,
           "end": "2026-06-30",
           "profit": 5.8
+        },
+        "margin": 0.056,
+        "cheapest": {
+          "month": "2026-09",
+          "req": 0.198,
+          "since": "2024"
         }
       },
       "past": {
@@ -4466,6 +4730,11 @@
         "shares": {
           "rate": -0.034,
           "years": 10
+        },
+        "margin": 0.187,
+        "cheapest": {
+          "month": "2019-05",
+          "req": 0.031
         }
       },
       "past": {
@@ -4609,6 +4878,11 @@
         "shares": {
           "rate": 0.0566,
           "years": 9
+        },
+        "margin": 0.197,
+        "cheapest": {
+          "month": "2019-04",
+          "req": 0.053
         }
       },
       "past": {

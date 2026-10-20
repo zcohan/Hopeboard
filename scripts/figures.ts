@@ -9,7 +9,7 @@ import { parseFig, sectionOf } from '../src/engine';
 import type { Company, Figures, PastEra } from '../src/types';
 import { SOURCES } from './sources';
 import { loadSupplements } from './xbrl';
-import { gainsShare, shareChange, fxOn, oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
+import { gainsShare, margin, shareChange, fxOn, oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
 
 const WRITE = process.argv.includes('--write');
 await loadSupplements(SOURCES);
@@ -138,12 +138,14 @@ for (const s of SOURCES) {
       const stakes = profit !== null && now.stakes >= profit / 2 && now.stakesShare >= 0.01 ? Math.round(now.stakes * 10) / 10 : undefined;
       return b ? { cash: Math.round(b.cash / 1e8) / 10, debt: Math.round(b.debt / 1e8) / 10, end: b.end, ...(profit !== null ? { profit: Math.round(profit * 10) / 10 } : {}), ...(stakes ? { stakes } : {}) } : undefined;
     })(),
+    // how much of each dollar of sales it keeps as profit, over its last three years (not for banks: their sales are mostly interest)
+    margin: BANKS.has(s.id) ? undefined : r3(margin(f, today)) ?? undefined,
     // how fast the share count changed per year: buybacks (negative) or new shares
     shares: (() => { const c = shareChange(f, s.eod, today); return c ? { rate: r4(c.rate)!, years: c.years } : undefined; })(),
     capex: (() => { const c = f.ttm(f.capex, today); return c && c.end > yearsBefore(today, 1) ? Math.round(Math.abs(c.val) / 1e9) : undefined; })(),
     listing: listedRecently ? (() => { const l = sinceListing(s.eod); return { low: r4(l.low)!, high: r4(l.high)!, month: l.month }; })() : undefined,
   });
-  for (const k of ['ytd', 'revenueGrowth', 'balance', 'shares', 'capex', 'listing'] as const) if (co.now[k] === undefined) delete co.now[k];
+  for (const k of ['ytd', 'revenueGrowth', 'balance', 'margin', 'shares', 'capex', 'listing'] as const) if (co.now[k] === undefined) delete co.now[k];
 
   // how the deal has moved: years of profit and dividends a week, a month, a quarter and a year ago, as known then
   const daysBefore = (n: number) => new Date(Date.parse(today) - n * 86_400_000).toISOString().slice(0, 10);
@@ -177,6 +179,28 @@ for (const s of SOURCES) {
     p.maxFall = r4(maxFall(s.eod, d, today))!;
   }
   if (now.eps !== null) co.src.past = 'sec-eod';
+
+  // the cheapest month in the last decade: the least growth its price needed at a month's end, with the filings known
+  // then. Left off for businesses that boom and bust, where sales fell by a quarter or more from one year to the next:
+  // there a boom year's profit makes the price look cheap (one-off charges halve profit too, so sales tell them apart)
+  co.now.cheapest = (() => {
+    const first = series(s.eod)[0].date;
+    const latest = f.latestAnnualEnd(f.revenue, today);
+    if (!latest) return undefined;
+    const sales = [...Array(11).keys()].map((n) => f.annualNear(f.revenue, yearsBefore(latest, n), today)).filter((x) => x !== null).reverse() as number[];
+    if (sales.some((x, i) => i > 0 && x < sales[i - 1] * 0.75)) return undefined;
+    let best: { month: string; req: number } | undefined;
+    for (let d = monthsBefore(today, 1); d >= first && d > yearsBefore(today, 10); d = monthsBefore(d, 1)) {
+      const t = computeOn(f, d, today);
+      // under 5 years of profit, the profit itself is almost always distorted (a one-off gain), so the month is skipped
+      if (!t || t.pe === null || t.pe > 500 || t.pe < 5 || t.dividendYield === null) continue;
+      const req = requiredGrowth(t.dividendYield, t.pe >= 10 ? Math.round(t.pe) : Math.round(t.pe * 10) / 10);
+      if (!best || req < best.req) best = { month: t.date.slice(0, 7), req };
+    }
+    if (!best) return undefined;
+    return { month: best.month, req: r3(best.req)!, since: first > yearsBefore(today, 10) ? first.slice(0, 4) : undefined };
+  })();
+  if (co.now.cheapest === undefined) delete co.now.cheapest;
 
   const reqOf = (n: typeof co.now) => { const v = parseFig(n.pe).v; return v === null ? null : requiredGrowth(n.y, v); };
   const a = reqOf(old), b = reqOf(co.now);

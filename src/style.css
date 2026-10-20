@@ -239,3 +239,5 @@ h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 .why p.note{margin:4px 0 0; font-size:13px; color:var(--ink-3)}
 .why > :last-child{margin-bottom:0}
 [data-at][hidden]{display:none !important}
+.why .cheapest{margin:12px 0 0; padding-top:10px; border-top:1px solid var(--rule); font-size:14px; color:var(--ink-2)}
+.why .cheapest b{color:var(--ink); font-weight:600}
