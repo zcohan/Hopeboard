@@ -57,7 +57,7 @@
           ]
         },
         {
-          "h": "What the price needs",
+          "h": "What the price assumes",
           "p": [
             "Most companies grow, so most are priced above what a farm would fetch. Paying 35 years of profit only works out if the profit grows a lot.",
             "For every card, Hopeboard works out how fast profit has to grow each year for the next ten years for the stock to do as well as the S&P 500 has done since 1928, {index} a year. Then it sets that against what the business has actually done, and against what analysts expect next year.",
@@ -74,15 +74,15 @@
         {
           "h": "Parking money for a decade",
           "p": [
-            "Hopeboard is for people deciding where to put savings for ten years. It doesn’t follow the daily price. The deal does change every day, though: when the price falls or the profit grows, the same company becomes a better deal. “Compare over time” on each card shows whether the deal is better or worse than a week, a month, three months or a year ago."
+            "Hopeboard is for people deciding where to put savings for ten years. It doesn’t follow the daily price. The price does change every day, though: when it falls or profit grows, the same company becomes cheaper. “Compare over time” on each card shows whether it’s cheaper or pricier than a week, a month, three months or a year ago."
           ]
         },
         {
           "h": "What the board leaves to you",
           "p": [
             "In 2016 Warren Buffett asked for a big US company priced at no more than 15 years of next year’s profit, that his managers were 90% sure would earn more in five years, and at least 50% sure would grow profit 7% a year. The search found Apple, as The Wall Street Journal later reported.",
-            "Hopeboard does the first part for every company: the years of profit, and the growth the price needs. The second part is judgement: how sure you can be that the profit grows. Buffett got there by understanding the business. He learned, for example, that about 95% of iPhone owners buy another iPhone. The board can’t do that part for you.",
-            "Buffett also buys rarely, and only when a price needs little. On most days, most prices on this board need a lot."
+            "Hopeboard does the first part for every company: the years of profit, and the growth the price assumes. The second part is judgement: how sure you can be that the profit grows. Buffett got there by understanding the business. He learned, for example, that about 95% of iPhone owners buy another iPhone. The board can’t do that part for you.",
+            "Buffett also buys rarely, and only when a price assumes little. On most days, most prices on this board assume a lot."
           ]
         },
         {
@@ -110,19 +110,19 @@
           "h": "Next year’s forecast",
           "p": [
             "The forecast view grows last year’s official profit at the analysts’ average forecast growth for their next fiscal year, the one ending six to eighteen months from now. That keeps both years counted the same way: analysts’ own figures usually leave out costs such as pay in shares, so they can’t be compared with official profit directly. Where gains on investments were more than a fifth of last year’s profit, the analysts’ figures for this year include them, so those cards show no forecast.",
-            "On the forecast view the whole card follows next year’s profit: the growth its price needs, the “if” line and its section. So a company can move section, which shows how much the price leans on the analysts being right. Cards with little or no profit stay where they are."
+            "On the forecast view the whole card follows next year’s profit: the growth its price assumes, the “if” line and its section. So a company can move section, which shows how much the price leans on the analysts being right. Cards with little or no profit stay where they are."
           ]
         },
         {
           "h": "Earns",
           "p": [
-            "What the business earns each year as a share of its price: one over the years of profit. A company priced at 25 years of profit earns 4% of its price a year. Dividends are those paid over the last twelve months. A card spells out the dividend only when it is 3% of the price or more, where it explains why the price needs little growth; smaller dividends are still counted in “Priced for”. Buybacks aren’t counted as cash returned: they already raise profit per share."
+            "What the business earns each year as a share of its price: one over the years of profit. A company priced at 25 years of profit earns 4% of its price a year. Dividends are those paid over the last twelve months. A card spells out the dividend only when it is 3% of the price or more, where it explains why the price assumes little growth; smaller dividends are still counted in “Priced for”. Buybacks aren’t counted as cash returned: they already raise profit per share."
           ]
         },
         {
           "h": "What “Priced for” means",
           "p": [
-            "“Priced for” is the profit growth a year the stock needs to return what the S&P 500 has averaged since 1928, {index} a year, with dividends. The return over ten years comes from three things: profit growth, the dividends paid along the way, and the change in how many years of profit people pay. Hopeboard assumes that in ten years people pay an ordinary {normalYears} years of profit, the long-run average, and works backwards to the growth each price needs."
+            "“Priced for” is the profit growth a year the price assumes, for the stock to return what the S&P 500 has averaged since 1928, {index} a year, with dividends. The return over ten years comes from three things: profit growth, the dividends paid along the way, and the change in how many years of profit people pay. Hopeboard assumes that in ten years people pay an ordinary {normalYears} years of profit, the long-run average, and works backwards to the growth each price assumes."
           ],
           "formula": "return per year = (1 + growth) × (1 + dividends) × (18 ÷ years of profit today)^(1/10) − 1"
         },
@@ -135,13 +135,13 @@
             "Profit on sales: how much of each dollar of sales it kept as profit, over its latest three fiscal years added together, leaving out gains on investments. Not shown for banks, whose sales are mostly interest, or for cards with little or no profit.",
             "Dividends: those paid over the last twelve months, as a share of today’s price.",
             "Shares: how fast the number of shares changed each year, from the average count in the latest annual report and the one ten years before (as few as five, for companies listed more recently). Fewer shares means the company bought some back of the profit; more means it issued new ones, often as pay for staff or to buy another company.",
-            "Track record: the profit growth a year its price needed ten years ago, against how fast profit actually grew since, measured as on today’s card (three-year averages at each end)."
+            "Track record: the profit growth a year its price assumed ten years ago, against how fast profit actually grew since, measured as on today’s card (three-year averages at each end)."
           ]
         },
         {
           "h": "The sections",
           "p": [
-            "Pricey: the price needs profit to grow at 14% a year or more. Normal: 10% to 14%. Bargain: under 10%. Little or no profit: the company lost money last year, or made so little (under 0.2% of its price, more than 500 years of profit) that a growth rate means nothing; these cards say instead how much profit the price needs by 2036."
+            "Pricey: the price assumes profit grows 14% a year or more. Normal: 10% to 14%. Bargain: under 10%. Little or no profit: the company lost money last year, or made so little (under 0.2% of its price, more than 500 years of profit) that a growth rate means nothing; these cards say instead how much profit the price assumes by 2036."
           ]
         },
         {
@@ -165,8 +165,8 @@
         {
           "h": "Compare over time",
           "p": [
-            "Each card can compare today’s deal with a week, a month, three months or a year ago: the growth the price needed then, using the filings known then, against what it needs now. Less growth needed means a better deal.",
-            "Under the dates, the cheapest month in the last decade: the month’s end when the price needed the least growth, using the filings known then (since listing, for companies listed later). It’s left off for businesses whose sales fell by a quarter or more in a year, where a boom year’s profit makes a price look cheap, and months priced under 5 years of profit are skipped, since a profit that high is almost always a one-off."
+            "Each card can compare today’s price with a week, a month, three months or a year ago: the growth the price assumed then, using the filings known then, against what it assumes now. Less growth assumed means cheaper.",
+            "Under the dates, the cheapest month in the last decade: the month’s end when the price assumed the least growth, using the filings known then (since listing, for companies listed later). It’s left off for businesses whose sales fell by a quarter or more in a year, where a boom year’s profit makes a price look cheap, and months priced under 5 years of profit are skipped, since a profit that high is almost always a one-off."
           ]
         },
         {
@@ -256,9 +256,7 @@
       "sharesDown": "Bought back **{shareRate}** of its shares a year over the last {shareYears} years",
       "sharesUp": "Issued **{shareRate}** more shares a year over the last {shareYears} years",
       "sharesSteady": "Kept the same number of shares over the last {shareYears} years",
-      "track": "In {trackYear} the price assumed at least **{trackReq}/year** profit growth. Profit actually {trackMove} over the last 10 years",
-      "trackShrink": "In {trackYear} the price allowed profit to fall up to **{trackReq}/year**. Profit actually {trackMove} over the last 10 years",
-      "trackFlat": "In {trackYear} the price assumed no profit growth. Profit actually {trackMove} over the last 10 years"
+      "track": "In {trackYear} its price assumed **{trackThen}/year** profit growth. {trackGot}. Today’s price assumes **{trackNow}/year** for the next decade"
     },
     {
       "id": "compare",
@@ -267,18 +265,18 @@
       "m1": "1 month ago",
       "m3": "3 months ago",
       "m12": "1 year ago",
-      "better": "Better deal",
-      "worse": "Worse deal",
-      "same": "Same deal",
-      "detail": "needed {then}/year, now {now}/year",
+      "better": "Cheaper now",
+      "worse": "Pricier now",
+      "same": "No change",
+      "detail": "assumed {then}/year then, {now}/year now",
       "cheapest": "Cheapest in the last decade: **{month}**, priced for **{req}** growth/year",
       "cheapestSince": "Cheapest since listing in {since}: **{month}**, priced for **{req}** growth/year",
       "notes": [
-        "The badge on each company card (owner chose option A, October 2026): the growth the price needed at the chosen time, with the filings known then, against today. Lower is a better deal. Shown on the Now view with last year’s profit.",
+        "The badge on each company card (owner chose option A, October 2026): the growth the price assumed at the chosen time, with the filings known then, against today. Lower is cheaper. Shown on the Now view with last year’s profit.",
         "Per card (owner, October 2026): a “Compare over time” link at the foot opens the time buttons for that card; it starts on 1 year.",
         "Picking a date shows the whole card as it was then: years of profit, Earns, Priced for and Risk, from that day's price, dividend and bond. “Today” comes first and is where it starts (owner, October 2026)."
       ],
-      "detailSame": "needs {now}/year",
+      "detailSame": "assumes {now}/year",
       "link": "Compare over time",
       "now": "Today"
     },
@@ -367,7 +365,7 @@
       ],
       "notes": [
         "Same three sections as the company cards (owner, October 2026). The 1928 line stays as a note: it is the 10% every card's growth figure is measured against.",
-        "“only” holds while the last decade’s growth is below what the price needs."
+        "“only” holds while the last decade’s growth is below what the price assumes."
       ]
     },
     {
@@ -912,7 +910,7 @@
         "The price assumes AI tools don’t take its customers"
       ],
       "notes": [
-        "October 2026: with buybacks no longer counted as cash returned, Adobe needs growth; the “even if profit shrinks” frame was dropped."
+        "October 2026: with buybacks no longer counted as cash returned, Adobe’s price assumes growth; the “even if profit shrinks” frame was dropped."
       ]
     },
     {
@@ -1394,7 +1392,7 @@
       },
       "bullets": [
         "Priced like a tech company, on online sales, advertising and membership fees",
-        "Revenue grew {rev} last year, a fraction of the growth the price needs"
+        "Revenue grew {rev} last year, a fraction of the growth the price assumes"
       ]
     },
     {

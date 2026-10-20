@@ -66,7 +66,7 @@ A price is the market's bet on the next ten years. The useful question is what t
 
 - Build the reader's judgement. Do not hand out picks, and do not sell a line or a headline return.
 - Plain words, concrete pictures, no jargon. If a pro term is needed, translate it once and keep to the board's own terms.
-- Show the two numbers every time: what the business has done, and what the price needs.
+- Show the two numbers every time: what the business has done, and what the price assumes.
 - Measure everything against the safe US bond and the index.
 - Turn every number into a consequence: what you would make or lose.
 - Anchor every scenario to something a reader can check.

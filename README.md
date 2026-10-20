@@ -1,6 +1,6 @@
 # Hopeboard
 
-Hopeboard shows what today's price of popular investments assumes: what the business earns against the safe US bond, the profit growth the price needs over ten years, and what you'd make or lose if it doesn't come.
+Hopeboard shows what today's price of popular investments assumes: what the business earns against the safe US bond, the profit growth the price assumes over ten years, and what you'd make or lose if it doesn't come.
 
 **It is an educational tool, not investment advice.** Nothing here recommends buying or selling anything. Figures are computed from public data, rounded, and may be out of date or wrong.
 

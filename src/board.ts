@@ -79,10 +79,7 @@ function financesBubble(co: Company, section: Section, shared: CopyEntry | null 
   if (sh) rows.push([labels.shares, (Math.abs(sh.rate) < 0.005 ? shared.sharesSteady : sh.rate < 0 ? shared.sharesDown : shared.sharesUp) as string]);
   // what its price assumed ten years ago against what the business then did
   const was = pastModel(co, 'y10');
-  if (was?.req !== null && was?.req !== undefined && co.now.last !== null && co.now.last !== undefined) {
-    const r = Math.round(was.req * 100);
-    rows.push([labels.track, (r > 0 ? shared.track : r < 0 ? shared.trackShrink : shared.trackFlat) as string]);
-  }
+  if (was?.req !== null && was?.req !== undefined && co.now.last !== null && co.now.last !== undefined) rows.push([labels.track, shared.track as string]);
   return {
     link: shared.financesLink as string,
     html: rows.map(([h, t]) => `<h4>${esc(h)}</h4><p class="story">${fill(t, tk, `${id} finances`)}</p>`).join(''),
@@ -195,7 +192,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
   };
   const L = (field: string) => copy.label('page', field);
   // the compare panel: one badge per time scale, shown when the reader opens it and picks one.
-  // Lower required growth is a better deal. Last year's profit only, so not on the forecast view.
+  // Lower required growth is cheaper. Last year's profit only, so not on the forecast view.
   const comparePanel = (co: Company, now: number | null, section: Section): TileParts['compare'] => {
     // growth rates mean nothing for a company with little or no profit
     if (s.basis !== 't' || now === null || !co.now.then || section === 'loss') return undefined;
@@ -331,7 +328,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
           // becomes profitable, which the card's dollar lines spell out). Years of revenue aren't shown: the board is about profit
           const price = mm.section === 'loss' || !shown ? undefined
             : { pre: L('pricedAt'), n: `${shown.years.text} ${L('years')}`, unit: yearsUnit(shown.basis) };
-          // every company card: what the price needs, what the business earns against the bond,
+          // every company card: what the price assumes, what the business earns against the bond,
           // what analysts expect next year, and what happens if growth falls short
           const earnsNow = mm.section !== 'loss' && mm.shown(basis) !== null;
           const tpl: ([string, string | undefined] | [string, string | undefined, string])[] = [
@@ -399,7 +396,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     board += `<div class="tabs" role="tablist">` + tab('every', copy.label('sections', 'every'), total) + SECTIONS
       // Not profitable is left off when nothing in view lost money
       .filter((sec) => sec !== 'loss' || counts.loss).map((sec) => tab(sec, label(sec), counts[sec])).join('') + `</div>`;
-    // All: the not profitable first (their price needs more growth than any percentage), then the most required growth down
+    // All: the not profitable first (their price assumes more growth than any percentage), then the most required growth down
     const tiles = s.section === 'every' ? (['loss', 'pricey', 'normal', 'bargain'] as Section[]).flatMap(sorted) : sorted(s.section);
     board += tiles.length ? `<div class="grid">${tiles.join('')}</div>` : '';
   }

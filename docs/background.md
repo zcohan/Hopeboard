@@ -13,11 +13,11 @@ A stock's price chart is two numbers multiplied together:
 - **The record:** what the business actually earned, per share, and how fast that grew. Checkable, slow, indifferent to opinion.
 - **The hope:** how many years of that profit people will pay for. Jumpy, and entirely opinion.
 
-A chart shows only the product, so a rising line looks like one fact when it is two. Jack Bogle's split of stock returns into "investment return" (dividend yield plus earnings growth) and "speculative return" (the change in the P/E) is the same idea. The board doesn't use that vocabulary: no "mood", no "multiple", no "sentiment". Its own words are "priced at N years of last year's profit" and "the price needs profit to grow X%/year". "Hope" survives only in the name.
+A chart shows only the product, so a rising line looks like one fact when it is two. Jack Bogle's split of stock returns into "investment return" (dividend yield plus earnings growth) and "speculative return" (the change in the P/E) is the same idea. The board doesn't use that vocabulary: no "mood", no "multiple", no "sentiment". Its own words are "priced at N years of last year's profit" and "the price assumes profit to grow X%/year". "Hope" survives only in the name.
 
 ## Why required growth
 
-If the price already assumes a lot, growth that arrives is not extra. It is what the buyer paid for. A stock returns roughly its profit growth plus the dividends it pays, adjusted for any change in how many years of profit people pay. So for any price you can work backwards to the growth it needs for a normal stock-market return. That is the board's central number. It answers "is this a reasonable price?" without forecasting anything.
+If the price already assumes a lot, growth that arrives is not extra. It is what the buyer paid for. A stock returns roughly its profit growth plus the dividends it pays, adjusted for any change in how many years of profit people pay. So for any price you can work backwards to the growth it assumes for a normal stock-market return. That is the board's central number. It answers "is this a reasonable price?" without forecasting anything.
 
 The yardstick is the S&P 500's long-run average (10%/year since 1928), which itself sits above the safe US bond. The extra return over the bond is the payment for risk. The board lets a reader see, card by card, whether a price leaves any cushion above the bond.
 

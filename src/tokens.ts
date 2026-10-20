@@ -154,7 +154,7 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
       const v = need(b.stakes, 'stakes') / need(b.profit, 'a year of profit');
       return v >= 1.5 ? `${Math.round(v)} years` : v >= 0.75 ? '1 year' : 'half a year';
     },
-    /** " (700x last year's)": the profit the price needs by 2036 against last year's, when there was one */
+    /** " (700x last year's)": the profit the price assumes by 2036 against last year's, when there was one */
     reqProfitTimes: () => {
       const last = co.now.profits?.last;
       const need2036 = nowModel(co, F, basis).reqProfit;
@@ -170,10 +170,19 @@ export function companyNowTokens(co: Company, basis: Basis, F: Figures, entry: C
     profitsPeriod: () => co.now.profitsPeriod ?? 'last year',
     /** "26 cents" of every $1 of sales kept as profit, over the last three years */
     marginCents: () => { const c = Math.round(Math.abs(need(co.now.margin, 'margin')) * 100); return c === 1 ? '1 cent' : `${c} cents`; },
-    /** ten years ago: the year, the growth its price assumed, and what profit then did */
+    /** the track record: the year ten years ago, the growth its price assumed then, what profit did, and what today's assumes */
     trackYear: () => need(F.eras.y10.label.match(/\d{4}/)?.[0], 'ten-years-ago year'),
-    trackReq: () => pct(Math.abs(need(pastModel(co, 'y10')?.req, 'required growth ten years ago'))),
-    trackMove: () => { const m = moved(need(co.now.last, 'last-decade growth'), true); return m === 'barely changed' ? m : m.replace(/^(\S+) (.*)$/, '$1 **$2**'); },
+    trackThen: () => pct(need(pastModel(co, 'y10')?.req, 'growth assumed ten years ago')),
+    /** "It grew faster, at **14%/year**", "It grew slower, at…", "It grew at that rate, …", compared as printed */
+    trackGot: () => {
+      const got = need(co.now.last, 'last-decade growth'), then = need(pastModel(co, 'y10')?.req, 'growth assumed ten years ago');
+      const g = pct(got);
+      if (g === '0%') return 'Its profit stayed roughly the same';
+      if (got < 0) return `Its profit fell instead, by **${pct(-got)}/year**`;
+      const a = Math.round(got * 100), b = Math.round(then * 100);
+      return a > b ? `It grew faster, at **${g}/year**` : a < b ? `It grew slower, at **${g}/year**` : `It grew at that rate, **${g}/year**`;
+    },
+    trackNow: () => pct(need(nowModel(co, F, 't').req('t'), 'growth assumed today')),
     divYield: () => decPct(co.now.y),
     /** the yearly change in the share count, without its sign: "4%", "0.7%" */
     shareRate: () => decPct(Math.abs(need(co.now.shares, 'share count change').rate)),

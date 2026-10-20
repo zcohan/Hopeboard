@@ -32,7 +32,7 @@ They are not stupid and they don't want to be taught. They want to know whether 
 
 After reading a card, the reader should be able to say, in their own words:
 
-- what the price needs to happen,
+- what the price assumes to happen,
 - whether the business has ever done that,
 - and roughly what they'd make or lose if it doesn't.
 
@@ -45,24 +45,24 @@ Every company card connects three numbers, each in its own labelled section:
 | Section | What it says | Example (Costco) |
 | --- | --- | --- |
 | EARNS | What the business earns each year as a share of its price, against the safe US bond | **2.1%** of its stock price a year / 3% less than the safe US bond |
-| PRICED FOR | The profit growth a year the price needs, against what the business has done | **+21%** growth/year / More than the 15%/year of the last decade |
+| PRICED FOR | The profit growth a year the price assumes, against what the business has done | **+21%** growth/year / More than the 15%/year of the last decade |
 | RISK or CUSHION | What you'd make or lose if growth comes in at an anchored rate | If the last decade's 15%/year growth repeats & the stock corrects, you'd make **0.5%/year less** than the safe US bond. |
 
 The bubble behind the link ("Why so pricey?") says why people pay what they pay: the beliefs the price rests on.
 
-A card is a short argument with no conclusion. It lays out the need, the record and the consequence, and stops. The reader draws the conclusion. Never write "so it's overpriced", "avoid", "a buy", "worth a look".
+A card is a short argument with no conclusion. It lays out the assumption, the record and the consequence, and stops. The reader draws the conclusion. Never write "so it's overpriced", "avoid", "a buy", "worth a look".
 
 ## 3. What to emphasise, in order
 
 When there is room for only one point, take the first one on this list that applies.
 
-### 3.1 The gap between what the price needs and what the business has done
+### 3.1 The gap between what the price assumes and what the business has done
 
 This is the board's central fact. The Priced for section shows it on every card; the bullets and the Risk line should follow from it.
 
-- Costco needs 21%/year and has done 15%. The card is about that gap.
-- Adobe needs 7%/year and has done 33%. The card is about that gap the other way.
-- Mastercard needs 17% and has done 17%. The card is about there being no gap.
+- Costco assumes 21%/year and has done 15%. The card is about that gap.
+- Adobe assumes 7%/year and has done 33%. The card is about that gap the other way.
+- Mastercard assumes 17% and has done 17%. The card is about there being no gap.
 
 ### 3.2 What the reader would make or lose, in money
 
@@ -72,9 +72,9 @@ The safe US bond is the reference because it is the price of taking no risk. A s
 
 ### 3.2a Put big numbers in perspective
 
-A profit of "$290 billion a year" means nothing on its own. Next to "Apple earns $130 billion" it means the price needs SpaceX to become more than twice the most profitable company most people can name. The owner singled this out as the board's clearest kind of line. The skill is the perspective, not Apple: pick whatever comparison makes this card's number land.
+A profit of "$290 billion a year" means nothing on its own. Next to "Apple earns $130 billion" it means the price assumes SpaceX to become more than twice the most profitable company most people can name. The owner singled this out as the board's clearest kind of line. The skill is the perspective, not Apple: pick whatever comparison makes this card's number land.
 
-- A dollar profit the price needs: compare with a profit the reader can place. Another company's (SpaceX against Apple), the company's own best year (Intel against its best years), or the cash its business already brings in (CrowdStrike).
+- A dollar profit the price assumes: compare with a profit the reader can place. Another company's (SpaceX against Apple), the company's own best year (Intel against its best years), or the cash its business already brings in (CrowdStrike).
 - A long stretch of years: compare with a span the reader knows. A price of 160 years of profit is longer than the US has had a stock market.
 - A growth rate: compare with what the company has done ("More than the 15%/year of the last decade").
 - One comparison per number, and only where the bare number would be abstract. Every compared figure is a placeholder from the data, never typed.
@@ -101,7 +101,7 @@ Markets are good at facts and weaker on duration. When a price is low because pe
 
 Dividends are part of the return, and they are a slice of the profit, not extra on top of it. Buybacks work through profit per share (each share owns more of the profit), so they are never presented as cash returned.
 
-The Earns section spells out the dividend only when it is 3% of the price or more (Verizon, AT&T, Chevron, Home Depot), where it explains why the price needs little growth. Smaller dividends still count in Priced for.
+The Earns section spells out the dividend only when it is 3% of the price or more (Verizon, AT&T, Chevron, Home Depot), where it explains why the price assumes little growth. Smaller dividends still count in Priced for.
 
 ### 3.6 What changed the years people pay
 
@@ -118,7 +118,7 @@ In past views, the gap between profit growth and the stock's return is the chang
 
 ## 5. Voice
 
-Explain the price the way Charlie Munger or Mohnish Pabrai would explain an investment to a ten-year-old: what you pay, what the business earns, and what has to happen for the deal to work. Simple enough for a child, and every step backed by a reason and a number. The owner holds this up as the board's model.
+Explain the price the way Charlie Munger or Mohnish Pabrai would explain an investment to a ten-year-old: what you pay, what the business earns, and what has to happen for the price to work out. Simple enough for a child, and every step backed by a reason and a number. The owner holds this up as the board's model.
 
 The cards read like a sharp analyst writing for a friend who doesn't work in finance. The owner's edits all point the same way: fewer words, neutral rather than dramatic, nothing clever.
 
@@ -149,7 +149,7 @@ Use one word for one thing, everywhere. If the reader learns a word on one card,
 | orders it hasn't delivered yet | backlog |
 | spending on buildings and equipment, data centres | capex |
 | big cloud companies | hyperscalers |
-| Priced for +21% growth/year; the price needs profit to grow at 21%/year | the ask, asks, implied growth, priced in, baked in |
+| Priced for +21% growth/year; the price assumes profit grows 21%/year | the ask, asks, implied growth, priced in, baked in |
 | profit grows at 21%/year | profit grows 21%/year (drops the "at") |
 | returns, make, lose | pays, yields, total shareholder return |
 | the safe US bond (US Bond as the card name) | the bond, Treasuries, risk-free rate |
@@ -202,7 +202,7 @@ Facts that are inputs, not results, may be typed in bullets and stories when the
 
 ### 7.3 Units
 
-- Growth and returns per year: "15%/year". Write "/year" every time, so the reader never has to guess whether a figure is yearly or total. That includes short labels: the compare badge reads "Better deal · needed 48%/year, now 47%/year", never "needed 48%, now 47%".
+- Growth and returns per year: "15%/year". Write "/year" every time, so the reader never has to guess whether a figure is yearly or total. That includes short labels: the compare badge reads "Cheaper now · assumed 48%/year then, 47%/year now", never "assumed 48% then, 47% now". Never "deal": investing is buying at a market price, not two people making a deal (owner, October 2026).
 - Losses over the whole decade: "you may lose 34% of your investment". This is the one total figure.
 - One-year past views: "Profit grew 30%. The stock returned 39%." (no "/year", because it is one year).
 - Years of profit: "35 years", never "35x". The US Bond is in the same unit: "20 years of its yearly interest".
@@ -229,8 +229,8 @@ Never pick a round number because it sounds reasonable ("if growth drops to 8%")
 
 How to choose:
 
-- No decade of profit to repeat, and growth needed above the average → the average big US company (Tesla, Palantir, AMD).
-- The price needs more than the company has ever done → its own record (Costco, Walmart).
+- No decade of profit to repeat, and growth assumed above the average → the average big US company (Tesla, Palantir, AMD).
+- The price assumes more than the company has ever done → its own record (Costco, Walmart).
 - The record ends on a boom → no growth (Nvidia, Micron).
 - Cash returned is most of the return → no growth (Exxon, Verizon).
 - No profit, or barely any → a dollar profit the reader can place (Intel's best year, Apple's profit, the cash the business brings in).
@@ -266,7 +266,7 @@ What the business earns each year as a share of its price, against the safe US b
 
 ### 8.3 Priced for (`assumes`)
 
-The profit growth a year the price needs, as a headline, then notes:
+The profit growth a year the price assumes, as a headline, then notes:
 
 ```
 "assumes": "**{reqSigned}** growth/year\n{vsLastNote}."
@@ -282,7 +282,7 @@ The profit growth a year the price needs, as a headline, then notes:
 - No decade of profit: the headline alone (`**{reqSigned}** growth/year`). The fact goes in the bubble: "Profitable only since 2023, so there's little record to go on".
 - Profit allowed to shrink: the record in plain words, "Over the last decade it shrank 1%/year". When the record rounds to 0%, "Over the last decade its profit barely changed" (Verizon); a test checks it still rounds to 0%.
 
-**Cards in dollars.** A company that lost money, or earns under 0.2% of its price (more than 500 years of profit), sits in Little or no profit and is priced in dollars. It keeps the three sections, and the corner shows no years figure. Earns comes from the card's own `earns` line: what it made or lost, in dollars. Priced for is the profit the price needs by 2036, with `{reqProfitTimes}` (" (700x last year's)", from the two figures as printed) when there was a profit. Then one anchor the reader knows:
+**Cards in dollars.** A company that lost money, or earns under 0.2% of its price (more than 500 years of profit), sits in Little or no profit and is priced in dollars. It keeps the three sections, and the corner shows no years figure. Earns comes from the card's own `earns` line: what it made or lost, in dollars. Priced for is the profit the price assumes by 2036, with `{reqProfitTimes}` (" (700x last year's)", from the two figures as printed) when there was a profit. Then one anchor the reader knows:
 
 > **EARNS** Almost nothing: **$50 million** last year, after paying staff $1.2 billion in shares
 > **PRICED FOR** **$35 billion** profit/year by 2036 (700x last year's)
@@ -303,7 +303,7 @@ A link at the foot of the card, "Finances", opens one bubble on the company's he
 > **Dividends**: Pays **2.4%** of its stock price a year as dividends / Pays no dividend
 > **Shares**: Bought back **4.3%** of its shares a year over the last 10 years / Issued **6.3%** more shares a year…
 
-> **Track record**: In 2016 the price assumed at least **5%/year** profit growth. Profit actually grew **14%/year** over the last 10 years (owner's wording, October 2026; "allowed profit to fall up to" when it needed shrinking, "assumed no profit growth" at 0%)
+> **Track record**: In 2016 its price assumed **5%/year** profit growth. It grew faster, at **14%/year**. Today's price assumes **18%/year** for the next decade (owner, October 2026: "assumed" throughout, never "needed" or "expected"; "grew slower" / "grew at that rate" from the printed figures)
 
 Relative only: years of profit and percentages, no dollar amounts (owner, October 2026). Cards with little or no profit have none to measure against, so the cash line says only which is bigger: "Holds more in cash than it owes". Banks get no cash or debt line: their debts are mostly deposits. A missing figure never reads as zero.
 
@@ -333,7 +333,7 @@ Write the scenario so it names the anchor in plain words:
 
 | Good | Why |
 | --- | --- |
-| If profit only grows at 13%/year (the average big US company), {outcome}. | Names the anchor. "only" because 13% is below what the price needs. |
+| If profit only grows at 13%/year (the average big US company), {outcome}. | Names the anchor. "only" because 13% is below what the price assumes. |
 | If the last decade's 15%/year growth repeats, {outcome}. | The record repeating is the test. |
 | If profit doesn't grow from this year's level, {outcome}. | Says "this year's level" because the level itself is the doubt. |
 
@@ -344,7 +344,7 @@ Write the scenario so it names the anchor in plain words:
 | If things go wrong, you could lose money. | No number, hedged, says nothing. |
 | …you'd make 5.8%/year. | A return with no comparison means nothing to the reader. Always compare with the bond. |
 
-"only" goes in when the scenario growth is below what the price needs. "still" is written by the app when the result beats the bond. Never write "still" yourself.
+"only" goes in when the scenario growth is below what the price assumes. "still" is written by the app when the result beats the bond. Never write "still" yourself.
 
 ### 8.5 The bubble (`bullets`, opened by the link)
 
@@ -397,7 +397,7 @@ A price move can appear as a fact in a bullet only when it explains the current 
 
 ## 9. Past views
 
-Past cards show what a price needed then, what people were saying, and what happened. Their job is to show that the same reading worked or failed in hindsight. They use the same Priced for section as today's cards; the story and what happened sit behind the link.
+Past cards show what a price assumed then, what people were saying, and what happened. Their job is to show that the same reading worked or failed in hindsight. They use the same Priced for section as today's cards; the story and what happened sit behind the link.
 
 ### 9.1 The story then (`story`)
 
@@ -466,7 +466,7 @@ The board explains itself through its numbers. Never write a line that explains 
 | --- |
 | Remember: a high price means high expectations. |
 | This shows why the years of profit matter. |
-| The required growth is the growth needed to match the index. |
+| The required growth is the growth assumed to match the index. |
 
 The Methodology page defines terms once. The cards never do.
 
@@ -483,13 +483,13 @@ The Methodology page defines terms once. The cards never do.
 
 Each example shows how the card reads today, then why it was written that way.
 
-### 12.1 Costco: needs more than it has ever done
+### 12.1 Costco: assumes more than it has ever done
 
 > EARNS **2.1%** of its stock price a year / 3% less than the safe US bond
 > PRICED FOR **+21%** growth/year / More than the 15%/year of the last decade
 > RISK If the last decade's 15%/year growth repeats & the stock corrects, you'd make **0.5%/year less** than the safe US bond.
 
-Why: the hinge is that Costco's price needs more than its own best decade. So the test is its own record, and the result is worse than the bond. The reader sees that a famous, steady company can be a poor place to park money at this price.
+Why: the hinge is that Costco's price assumes more than its own best decade. So the test is its own record, and the result is worse than the bond. The reader sees that a famous, steady company can be a poor place to park money at this price.
 
 ### 12.2 Nvidia: the record ends on a boom
 
@@ -520,7 +520,7 @@ Why: there is no record to compare with, so Priced for stands alone and the fact
 > RISK If profit doesn't grow, you'd make **2.5%/year less** than the safe US bond.
 > Bubble ("Why so cheap?"): The stock is down this year on fears that AI makes creative tools cheap / The price assumes AI tools don't take its customers
 
-Why: the price needs much less than the record, and the bubble names the doubt in plain words.
+Why: the price assumes much less than the record, and the bubble names the doubt in plain words.
 
 ### 12.6 Intel: no profit to price
 
@@ -555,7 +555,7 @@ Lines the owner rejected or changed, with what replaced them.
 | ≈$4,165 an ounce, no profit | (nothing) | No prices |
 | Why so much hope? | Why so pricey? | Board words |
 | Room for error: 3% | (removed) | Banned phrase |
-| The ask is 15% | The price needs profit to grow at 15%/year | Words |
+| The ask is 15% | The price assumes profit grows 15%/year | Words |
 | 9 pts above the bond | 9%/year more than the safe US bond | Words, units |
 | The stock took 25 years to get back to $80 | The stock took 25 years to get back to its March 2000 price | No share price |
 

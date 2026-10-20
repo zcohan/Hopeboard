@@ -11,7 +11,7 @@ export type Era = 'now' | 'y1' | 'y5' | 'y10';
 export const ERAS: Era[] = ['now', 'y1', 'y5', 'y10'];
 export type PastEra = Exclude<Era, 'now'>;
 export type Basis = 't' | 'f'; // last year's profit, next year's forecast
-/** The time scale the board compares the deal against. */
+/** The time scale the board compares today's price against. */
 export type Compare = 'w1' | 'm1' | 'm3' | 'm12';
 export const COMPARES: Compare[] = ['w1', 'm1', 'm3', 'm12'];
 
@@ -52,7 +52,7 @@ export interface NowFigures {
   /** Cash and debt on the latest balance sheet ($ billions), a year's profit to count them in, and stakes in other
    * companies when they're worth half a year of profit or more */
   balance?: { cash: number; debt: number; end: string; profit?: number; stakes?: number };
-  /** The month in the last decade when its price needed the least growth, and how much (`since`: listed later, that year) */
+  /** The month in the last decade when its price assumed the least growth, and how much (`since`: listed later, that year) */
   cheapest?: { month: string; req: number; since?: string };
   /** Profit as a share of sales over its last three fiscal years together (not for banks) */
   margin?: number;

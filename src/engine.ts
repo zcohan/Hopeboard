@@ -26,7 +26,7 @@ export function parseFig(f: Fig): Parsed {
 export type Section = 'pricey' | 'normal' | 'bargain' | 'loss';
 
 /** Pricey at 14% or more, Normal from 10%, Bargain under 10%, on the rounded figure as shown.
- * No profit to price goes to Losing money: it can't be ranked by the growth its price needs. */
+ * No profit to price goes to Losing money: it can't be ranked by the growth its price assumes. */
 export function sectionOf(req: number | null): Section {
   if (req === null) return 'loss';
   const r = Math.round(req * 100);

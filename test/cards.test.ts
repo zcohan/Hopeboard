@@ -37,7 +37,7 @@ describe('wording stays true to the numbers', () => {
     const bad: string[] = [];
     for (const t of board.split('<div class="tile').slice(1)) {
       const id = /data-copy="([^"]+)"/.exec(t)![1];
-      for (const m of t.matchAll(/<div class="deal \w+" data-w="(\w+)">[^<]*?(?:needed|needs) ([−\d]+%)/g)) {
+      for (const m of t.matchAll(/<div class="deal \w+" data-w="(\w+)">[^<]*?(?:assumed|assumes) ([−\d]+%)/g)) {
         const card = new RegExp(`<dl class="facts" data-at="${m[1]}"[\\s\\S]*?</dl>`).exec(t)?.[0] ?? '';
         const shown = /([+−]?\d+%)<\/b> growth\/year/.exec(card)?.[1]?.replace('+', '');
         if (shown !== m[2]) bad.push(`${id} ${m[1]}: badge ${m[2]}, card ${shown}`);
@@ -46,7 +46,7 @@ describe('wording stays true to the numbers', () => {
     expect(bad).toEqual([]);
   });
 
-  it('the S&P 500’s “only grows at” holds: its last decade is below what its price needs', () => {
+  it('the S&P 500’s “only grows at” holds: its last decade is below what its price assumes', () => {
     const spx = F.eras.now.spx;
     const req = requiredGrowth(spx.y, Number(String(spx.pe).replace(/^≈/, '')));
     expect(Math.round(spx.last! * 100)).toBeLessThan(Math.round(req * 100));

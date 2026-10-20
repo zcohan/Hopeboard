@@ -2,9 +2,9 @@
 
 ## What the Hopeboard is
 
-The Hopeboard teaches one thing: a stock price is a bet on the next ten years, and the way to judge it is the profit growth the price needs, not the chart.
+The Hopeboard teaches one thing: a stock price is a bet on the next ten years, and the way to judge it is the profit growth the price assumes, not the chart.
 
-It is a grid of cards for ordinary people deciding where to park money for a decade. The cards cover big companies, plus three baselines: the safe US bond, gold and the S&P 500. Each card says what the business earns against the bond, what its price needs to be true, what analysts expect next year, and what you would make or lose if the price is wrong.
+It is a grid of cards for ordinary people deciding where to park money for a decade. The cards cover big companies, plus three baselines: the safe US bond, gold and the S&P 500. Each card says what the business earns against the bond, what its price assumes to be true, what analysts expect next year, and what you would make or lose if the price is wrong.
 
 The reader has no finance training and reads a rising chart as "this stock is doing well". The app replaces that habit with a better one. The original mockup is `mockup/hopeboard.html`.
 
@@ -16,7 +16,7 @@ A price already contains what people expect. Paying 35 years of last year's prof
 
 - **The unit is years of profit.** The card shows "priced at 35 years of last year's profit" (the P/E). The dollar share price is never shown, because it says nothing on its own.
 - **What the business earns, against the bond.** One over the years of profit is what the business earns each year as a share of its price: Buffett's farm, in percent. Set next to the safe US bond, it shows how much growth has to make up the gap.
-- **The test is required growth.** This is the profit growth per year, for ten years, that the price needs for the stock to return what the S&P 500 has averaged (10%/year since 1928).
+- **The test is required growth.** This is the profit growth per year, for ten years, that the price assumes for the stock to return what the S&P 500 has averaged (10%/year since 1928).
 - **Everything is measured against baselines.** The safe US bond pays a guaranteed return. Anything riskier has to promise more. Gold has no profit at all.
 - **A chart multiplies two numbers and hides both.** A stock's rise is profit growth times the change in how many years of profit people pay. Never present the price line as the story.
 - **The frame is parking money, not betting.** Safety is a property of the price, not a feeling about the company. A famous company at a high price can pay less than the safe US bond.
@@ -43,21 +43,21 @@ The test tables in `test/formula.test.ts` are the design-stage figures; the app 
 
 ## The board and the cards
 
-**Sections.** Baselines (US Bond, S&P 500, Gold) sit on top; the S&P 500 card uses the company layout. Company cards sit under category pills (Mag 7 by default, then All industries and each industry) and tabs sorted by required growth. The All tab (the default) shows every card in one grid: the not profitable first (their price needs more growth than any percentage), then most required growth first; the others split them:
+**Sections.** Baselines (US Bond, S&P 500, Gold) sit on top; the S&P 500 card uses the company layout. Company cards sit under category pills (Mag 7 by default, then All industries and each industry) and tabs sorted by required growth. The All tab (the default) shows every card in one grid: the not profitable first (their price assumes more growth than any percentage), then most required growth first; the others split them:
 
 - **Pricey:** required growth of 14% or more.
 - **Normal:** 10% to 14%.
 - **Bargain:** under 10%.
 - **Little or no profit** (renamed from Not profitable, October 2026: a company earning a little still counts): lost money last year, or earns under 0.2% of its price (more than 500 years of profit), so it is priced in dollars, with no years figure in the corner and its Earns line in dollars. The tab is hidden when it has no cards.
 
-**Views.** A clock button in the header opens a menu: prices from Today, 1 year ago, 5 years ago or 10 years ago, and (for Today) whether to count last year's profit or next year's forecast. The button shows a dot when the view isn't today against last year's profit. Past views show the price then, what it needed, the story at the time and what happened since, under a bar saying which date is shown, with a way back to today.
+**Views.** A clock button in the header opens a menu: prices from Today, 1 year ago, 5 years ago or 10 years ago, and (for Today) whether to count last year's profit or next year's forecast. The button shows a dot when the view isn't today against last year's profit. Past views show the price then, what it assumed, the story at the time and what happened since, under a bar saying which date is shown, with a way back to today.
 
 **Card anatomy (company cards)**
 
 1. Logo, name, a one-line description of the business, and a right-aligned stack: "priced at", the number of years, "of last year's profit".
 
-2. Three labelled sections, each a headline figure with small notes: EARNS (what the business earns as a share of its price; notes: against the safe US bond, and dividends where they are 3% or more), PRICED FOR ("+35% growth/year": the profit growth a year the price needs; notes: the last decade, and the analysts' forecast for next year), RISK (what happens if growth falls short; CUSHION when that is good news).
-3. Links at the foot: "Why so pricey?" (or "What the price assumes", "Why so cheap?") opens two or three points on why the price is what it is; "Finances" opens the company's health: cash or debt in years of profit (on Little or no profit cards, only which is bigger; no line for banks), dividends, and how fast the share count changed over the last decade; "Compare over time" opens time buttons (1 week, 1 month, 3 months, 1 year) and a badge saying whether the deal is better, worse or the same, with what the price needed then and needs now.
+2. Three labelled sections, each a headline figure with small notes: EARNS (what the business earns as a share of its price; notes: against the safe US bond, and dividends where they are 3% or more), PRICED FOR ("+35% growth/year": the profit growth a year the price assumes; notes: the last decade, and the analysts' forecast for next year), RISK (what happens if growth falls short; CUSHION when that is good news).
+3. Links at the foot: "Why so pricey?" (or "What the price assumes", "Why so cheap?") opens two or three points on why the price is what it is; "Finances" opens the company's health: cash or debt in years of profit (on Little or no profit cards, only which is bigger; no line for banks), dividends, and how fast the share count changed over the last decade; "Compare over time" opens time buttons (1 week, 1 month, 3 months, 1 year) and a badge saying whether today's price is cheaper, pricier or no different, with what the price assumed then and assumes now.
 
 `docs/writing-guide.md` has the wording rules for every part.
 
@@ -74,7 +74,7 @@ The cards read as if a real analyst wrote them, in words an ordinary reader alre
 | --- | --- |
 | priced at 35 years of last year's profit | P/E, multiple, multiple expansion |
 | profit (always per share) | earnings, EPS |
-| the price needs profit to grow at X%/year | the ask, asks, implied growth |
+| the price assumes profit grows X%/year | the ask, asks, implied growth |
 | returns, make, lose | pays, yields (for the bond: "Returns 5.1%/year") |
 | the safe US bond (US Bond as a card name) | the bond, risk-free rate |
 | more than, less than, the same as | up from, down from, pts, percentage points |
@@ -125,13 +125,13 @@ The design is a plain card grid that a first-time reader can scan, with nothing 
 | Name it Hopeboard | The price carries hope about the next decade, and the board shows how much. |
 | Show years of profit, never the share price | The dollar price is a meaningless number on its own. |
 | Baselines at the top: US Bond, Gold, S&P 500 | These are the places people actually park money, and every other card is measured against them. |
-| Sort by required growth, not years of profit | Dividends change what a given number of years needs. |
+| Sort by required growth, not years of profit | Dividends change what a given number of years assumes. |
 | Past-view buttons (1, 5, 10 years ago) | Seeing what was assumed then and what happened builds the intuition. |
 | Last decade from three-year averages at each end (October 2026) | A single starting year in a slump flattered the record: the S&P 500's 13%/year started from the 2016 profit dip (9.6% averaged), Chevron's and Merck's from bad years. |
 | Profit leaves out gains on investments; the stakes come off the price (October 2026) | Alphabet's and Amazon's stakes in other companies rose in value by about as much as their businesses earned; counted as profit, they made both look like bargains. Gains are taken out at the company's own tax rate (banks keep them), and the stakes' balance-sheet value comes off the price before counting years of profit, as Mauboussin and Rappaport add investments to the business's value. Finances lists them when worth half a year of profit and 1% of the price. |
 | Next year grows filed profit at the analysts' rate, never uses their figure directly (October 2026) | Analysts' figures leave out costs such as pay in shares (ServiceNow's are three times its filed profit), so mixing them with filed profit makes companies look cheaper. |
 | On the forecast view the whole card follows next year's profit, section included (October 2026) | Half-following it contradicted itself: Nvidia showed +10% under "Why so pricey?". A company moving section shows how much its price leans on the analysts. Little-or-no-profit cards stay put; they're written in dollars. |
-| Finances adds profit on sales (three-year average) and a ten-year track record (October 2026) | How much of each sale a business keeps says a lot about it; three years together give the general picture without a range to read. The track record shows whether the market under- or overestimated it: what the price needed in 2016 against what profit did. Profit per employee and analyst "beats" were left out: the first mostly measures how a company is set up (outsourcing, retail staff), the second is steered by companies guiding analysts low. |
+| Finances adds profit on sales (three-year average) and a ten-year track record (October 2026) | How much of each sale a business keeps says a lot about it; three years together give the general picture without a range to read. The track record shows whether the market under- or overestimated it: what the price assumed in 2016 against what profit did. Profit per employee and analyst "beats" were left out: the first mostly measures how a company is set up (outsourcing, retail staff), the second is steered by companies guiding analysts low. |
 | Compare over time shows the cheapest month in the last decade (October 2026) | Gives today's price some history in the board's terms. Worded as a fact, not "the best time to buy": the cheapest price isn't always the best buy, and the board doesn't advise. Same profit as every Priced for (last twelve months), so it agrees with the past views; left off for boom-and-bust businesses (sales fell a quarter in a year) and months under 5 years of profit. |
 | Past views keep figures for periods that ended 120 days before (October 2026) | 120 days is the longest filing deadline, so they were public then; requiring the exact filing loses figures the SEC summary data misses. |
 | Toggle between last year's profit and next year's forecast | "Cheap at 20" quotes use the forecast, so both views should be one tap apart. |
@@ -156,7 +156,7 @@ The design is a plain card grid that a first-time reader can scan, with nothing 
 - [ ] **Whether profit is real cash (for later).** Buffett's "owner earnings": profit less what the business must spend on buildings and equipment to stay where it is. Plain form: "Turns 90 cents of every dollar of profit into cash it could pay out", from the cash-flow statement (cash from the business less spending on equipment). Raised with the return on money kept as what Buffett would say the board lacks; the owner found both too complicated for now (October 2026).
 - [ ] **The 18-year ending for cheap stocks (open).** Every if-line assumes buyers pay 18 years of profit in 2036. For a stock at 10 years that means its price rises, which can be most of a good result: AT&T's Cushion comes mostly from it. Naming it on the line muddied the card (owner, October 2026); undecided what to do instead. Some cards’ notes in cards.json raise the same question (Micron, for one).
 
-- [ ] **Cheap stocks get a flattering assumption.** The board assumes people pay 18 years of profit in 2036. For a stock priced below 18 (Verizon at 12, AT&T at 8) that assumes it becomes more popular, which adds several points a year to its "if" line. (A line saying so on those cards was tried and removed: it confused more than it helped.) Capping the 2036 figure at today's isn't clearly better: every stock below 18 would then need about 10% minus its dividend, so Micron at 12 and Alphabet at 17 would look the same. The owner's call.
+- [ ] **Cheap stocks get a flattering assumption.** The board assumes people pay 18 years of profit in 2036. For a stock priced below 18 (Verizon at 12, AT&T at 8) that assumes it becomes more popular, which adds several points a year to its "if" line. (A line saying so on those cards was tried and removed: it confused more than it helped.) Capping the 2036 figure at today's isn't clearly better: every stock below 18 would then assume about 10% minus its dividend, so Micron at 12 and Alphabet at 17 would look the same. The owner's call.
 - [ ] **The S&P 500's next-year forecast** is still a quoted figure (≈); its other figures come from Shiller's data.
 - [ ] **TSMC and ASML** file full years only, so last year's profit is the last calendar year. **SpaceX** keeps rough figures until its first annual report.
 - [ ] **Host the board** and move the daily refresh to a scheduled job there; check EOD's terms on republishing derived figures.
