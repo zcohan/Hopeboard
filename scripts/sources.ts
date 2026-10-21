@@ -31,6 +31,13 @@ export interface Source {
   debtFree?: true;
 }
 
+/** The board's companies that are in the S&P 500 (Wikipedia's list of its members, October 2026): their gains on
+ * investments and stakes come off the index's profit and price the way they come off their own cards'. */
+export const SPX_MEMBERS = new Set(['TSLA', 'PLTR', 'COST', 'AAPL', 'NVDA', 'MSFT', 'META', 'AMZN', 'ORCL', 'GOOGL', 'XOM', 'AVGO', 'AMD', 'INTC', 'MU', 'CRM', 'ADBE', 'NOW', 'NFLX', 'UBER', 'ABNB', 'CSCO', 'DELL', 'BRK.B', 'JPM', 'BAC', 'WFC', 'C', 'GS', 'MS', 'V', 'MA', 'VZ', 'T', 'TMUS', 'LLY', 'WMT', 'JNJ', 'ABBV', 'CVX', 'KO', 'PG', 'BLK', 'UNH', 'MRK', 'CAT', 'LRCX', 'GE', 'AMAT', 'PM', 'HD', 'PANW', 'RTX', 'TMO', 'TXN', 'GEV', 'AMGN', 'CRWD', 'LIN']);
+/** The S&P 500's total market value at a date (Seeking Alpha's quarterly snapshot), carried to today with the index's
+ * level: what the gains and stakes above are a share of. */
+export const SPX_VALUE = { trillions: 68.45, on: '2026-09-30', source: 'Seeking Alpha, Fall 2026 snapshot of the S&P 500’s market cap (end of September 2026)' };
+
 const us = (id: string, ...cik: number[]): Source => ({ id, cik, eod: `${id}.US` });
 
 /** An IFRS company's yearly figures, read from its filed reports when the SEC summary lags. */

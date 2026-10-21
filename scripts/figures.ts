@@ -7,9 +7,9 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { requiredGrowth } from '../src/formula';
 import { parseFig, sectionOf } from '../src/engine';
 import type { Company, Figures, PastEra } from '../src/types';
-import { SOURCES } from './sources';
+import { SOURCES, SPX_MEMBERS, SPX_VALUE } from './sources';
 import { loadSupplements } from './xbrl';
-import { gainsShare, margin, shareChange, splitFactor, fxOn, oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
+import { reportedProfit, gainsShare, margin, shareChange, splitFactor, fxOn, oilOn, shiller, shillerKnown, shillerTotalReturn, monthsBefore, barOn, bond, bondHighSince, computeOn, Filings, forecast, fromHigh, lastDate, lastDecade, longRun, maxFall, series, sinceListing, yearsBefore, yearToDate } from './compute';
 
 const WRITE = process.argv.includes('--write');
 await loadSupplements(SOURCES);
@@ -29,6 +29,8 @@ const rows: string[][] = [];
 
 /** Banks: their debts are mostly customers' deposits, so cash and debt don't read the same way. */
 const BANKS = new Set(['JPM', 'BAC', 'WFC', 'C', 'GS', 'MS']);
+/** Across the board's S&P 500 companies, $ billions: gains on investments inside their reported profit, and their stakes. */
+const spxOut = { gains: 0, stakes: 0, companies: 0 };
 
 for (const s of SOURCES) {
   const co = F.companies.find((c) => c.id === s.id) as Company | undefined;
@@ -37,6 +39,10 @@ for (const s of SOURCES) {
   const now = computeOn(f, today, today);
   if (!now) { notes.push(`${s.id}: no price for ${today}`); continue; }
   const old = structuredClone(co.now);
+  if (SPX_MEMBERS.has(s.id) && !s.keepGains) {
+    const adjusted = s.operating ? now.netIncome : now.profit, reported = reportedProfit(f, today, today, now);
+    if (adjusted !== null && reported !== null) { spxOut.gains += reported - adjusted; spxOut.stakes += now.stakes; spxOut.companies++; }
+  }
   const dollar = co.now.value !== undefined || co.now.yearsOfRevenue !== undefined;
 
   // years of last year's profit, cash returned, last decade
@@ -258,7 +264,15 @@ for (const [era, n] of ERAS) {
   const avg3 = (i: number) => { const e = [0, 12, 24].map((k) => months[i - k]?.E); return e.every((x) => x) ? (e as number[]).reduce((a, b) => a + b, 0) / 3 : null; };
   const nowE = avg3(at), thenE = avg3(at - 120);
   const spx = F.eras.now.spx;
-  spx.pe = Math.round(level(today) / known.E!);
+  // Shiller's profit is as reported, gains on investments included. Take out the gains inside the board's S&P 500
+  // companies' profit, and the part of the price that buys their stakes, as their own cards do (the other companies'
+  // are left in: they're mostly smaller companies with few large stakes)
+  const asReported = level(today) / known.E!;
+  const indexValue = SPX_VALUE.trillions * 1000 * (level(today) / level(SPX_VALUE.on));
+  const indexProfit = indexValue / asReported;
+  spx.pe = Math.round((indexValue - spxOut.stakes) / (indexProfit - spxOut.gains));
+  spx.gainsShare = r3(spxOut.gains / indexProfit)!;
+  notes.push(`S&P 500: ${Math.round(asReported)} years of profit as reported; gains on investments at ${spxOut.companies} board companies are ${pct(spxOut.gains / indexProfit)} of the index's profit, stakes ${pct(spxOut.stakes / indexValue)} of its value: ${spx.pe} years without them`);
   spx.y = r3(withD.D! / level(today))!;
   spx.last = nowE && thenE ? r3(Math.pow(nowE / thenE, 1 / 10) - 1)! : spx.last;
   const lastTR = shiller().filter((r) => r.realTR !== null).at(-1)!.month;

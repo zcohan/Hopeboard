@@ -282,6 +282,8 @@ export function pageTokens(F: Figures): Tokens {
   const exReq = requiredGrowth(0.01, 40);
   return {
     index: () => '10%',
+    /** gains on investments taken out of the S&P 500's profit, as a share of it: "10%" */
+    spxGains: () => pct(need(F.eras.now.spx.gainsShare, 'S&P 500 gains share')),
     normalYears: () => String(NORMAL_YEARS),
     avg: () => `${Math.round(need(F.eras.now.spx.last, 'S&P last-decade growth') * 100)}%`,
     y10year: () => need(F.eras.y10.label.match(/\d{4}/)?.[0], 'ten-years-ago year'),

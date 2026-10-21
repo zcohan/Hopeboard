@@ -523,6 +523,17 @@ export function computeOn(f: Filings, d: string, today: string): Computed | null
   };
 }
 
+/** A company's profit as reported over the twelve months to the latest report, gains on investments included
+ * ($ billions): what the S&P 500's profit counts. `n` is computeOn's result for the same date. */
+export function reportedProfit(f: Filings, d: string, today: string, n: Computed): number | null {
+  const s = f.src;
+  // Berkshire: its official profit, whose paper gains its profit per share leaves out
+  if (s.operating) { const t = f.ttm(f.netIncome, d); return t ? t.val / 1e9 : null; }
+  const shares = n.profit !== null && n.eps ? n.profit / n.eps : null;
+  const t = f.ttm(f.eps, d, (x) => (x.reported ?? x.val) / splitFactor(s.eod, x.filed, today));
+  return t && shares ? t.val * shares : null;
+}
+
 /** Gains on investments as a share of pre-tax profit, over the twelve months to the latest report (0 when it has none). */
 export function gainsShare(f: Filings, d: string): number {
   if (f.src.operating || f.src.keepGains) return 0;

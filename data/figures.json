@@ -18,7 +18,7 @@
     "sec-eod": {
       "name": "Company filings (SEC EDGAR) and prices (EOD Historical Data)",
       "url": "https://www.sec.gov/edgar/search/",
-      "date": "2026-10-16",
+      "date": "2026-10-20",
       "note": "Profit is the twelve months to the latest quarterly report, per share after dilution. Cash returned is dividends paid over the last twelve months (EOD); buybacks show up in profit-per-share growth. Next year’s profit is last year’s, grown at the analysts’ forecast rate (Alpha Vantage)."
     },
     "alphavantage": {
@@ -27,7 +27,7 @@
       "note": "Next year’s profit grows last year’s official profit at the forecast rate for the next fiscal year."
     },
     "spx-quotes": {
-      "name": "S&P 500 years of profit and growth: quoted figures (Yahoo Finance, StockAnalysis)",
+      "name": "S&P 500 years of next year’s forecast profit: quoted figure (Yahoo Finance, StockAnalysis)",
       "date": "October 2026",
       "rough": true,
       "note": "Not yet computed from data."
@@ -46,6 +46,11 @@
       "name": "Private companies: the value at the latest funding round or staff share sale, and the revenue and losses the companies reported to investors, as published by Reuters, Bloomberg, The Wall Street Journal and The Information",
       "date": "October 2026",
       "note": "Not audited, and typed in by hand. Anthropic $965 billion (funding round, May 2026), OpenAI $852 billion (funding round, March 2026), Stripe $159 billion (staff share sale, February 2026), ByteDance $550 billion (stake sale, early 2026, Reuters), Revolut $115 billion (staff share sale, July 2026, The Wall Street Journal), Canva $34.9 billion (two early investors' valuation of their stakes, August 2026; its last share sale, in August 2025, was at $42 billion). Profit: ByteDance $42–50 billion in 2025 (Bloomberg and others, from people familiar); Revolut $1.7 billion in 2025 (its audited annual report)."
+    },
+    "spx-gains": {
+      "name": "S&P 500 profit without gains on investments: Shiller’s profit as reported, less the gains inside the board’s S&P 500 companies’ profit (their filings), and the index’s price less their stakes in other companies; the index’s total value from Seeking Alpha’s Fall 2026 snapshot (end of September 2026), carried forward with its level; members from Wikipedia’s list of S&P 500 companies",
+      "date": "October 2026",
+      "note": "October 2026: the gains were about 10% of the index’s profit, mostly at Alphabet, Amazon, Berkshire Hathaway and Nvidia, which moved it from 26 to 29 years of profit. The other members’ gains are left in."
     }
   },
   "industries": {
@@ -90,13 +95,14 @@
     "now": {
       "label": "October 2026",
       "bond": 0.051,
-      "gold": 4165,
+      "gold": 4114,
       "goldReturn": 0.08,
       "spx": {
-        "pe": 26,
+        "pe": 29,
         "y": 0.011,
         "pef": "≈23",
-        "last": 0.096
+        "last": 0.096,
+        "gainsShare": 0.102
       },
       "bondHighSince": "It reached 5.3% in October, the highest since 2002",
       "oil": 127,
@@ -123,41 +129,41 @@
     "y1": {
       "label": "October 2025",
       "bond": 0.04,
-      "gold": 4333,
-      "goldReturn": -0.039,
+      "gold": 4388,
+      "goldReturn": -0.062,
       "spx": {
-        "pe": 29,
+        "pe": 30,
         "y": 0.012,
         "profit": 0.303,
-        "stock": 0.156
+        "stock": 0.158
       },
       "oil": 61
     },
     "y5": {
       "label": "October 2021",
-      "bond": 0.016,
-      "gold": 1767,
-      "goldReturn": 0.187,
+      "bond": 0.017,
+      "gold": 1782,
+      "goldReturn": 0.182,
       "spx": {
-        "pe": 27,
+        "pe": 28,
         "y": 0.013,
         "profit": 0.124,
         "stock": 0.131
       },
-      "oil": 85
+      "oil": 86
     },
     "y10": {
       "label": "October 2016",
       "bond": 0.018,
-      "gold": 1251,
-      "goldReturn": 0.128,
+      "gold": 1266,
+      "goldReturn": 0.125,
       "spx": {
         "pe": 24,
         "y": 0.021,
         "profit": 0.096,
         "stock": 0.155
       },
-      "oil": 49
+      "oil": 50
     }
   },
   "companies": [
@@ -168,32 +174,32 @@
       "category": "Other",
       "industry": "autos",
       "now": {
-        "pe": 328,
+        "pe": 346,
         "pef": null,
         "y": 0,
         "last": null,
-        "ytd": -0.2112,
+        "ytd": -0.169,
         "fromHigh": {
-          "below": 0.2759,
+          "below": 0.2371,
           "month": "December 2025"
         },
         "revenueGrowth": 0.1175,
         "capex": 13,
         "then": {
           "w1": {
-            "pe": 354.4,
+            "pe": 347.4,
             "y": 0
           },
           "m1": {
-            "pe": 331.6,
+            "pe": 337.3,
             "y": 0
           },
           "m3": {
-            "pe": 358.8,
+            "pe": 339.1,
             "y": 0
           },
           "m12": {
-            "pe": 255.2,
+            "pe": 266.3,
             "y": 0
           }
         },
@@ -210,30 +216,30 @@
         "margin": 0.089,
         "cheapest": {
           "month": "2024-04",
-          "req": 0.182
+          "req": 0.172
         },
         "prevYear": 1.889
       },
       "past": {
         "y1": {
-          "pe": 255,
+          "pe": 266,
           "profit": -0.357,
-          "stock": -0.173,
+          "stock": -0.165,
           "y": 0,
           "revenueGrowth": -0.0273,
           "maxFall": 0.391
         },
         "y5": {
-          "pe": 437,
+          "pe": 449,
           "profit": 0.109,
-          "stock": 0.048,
+          "stock": 0.053,
           "y": 0,
           "revenueGrowth": 0.6284,
           "maxFall": 0.7363
         },
         "y10": {
           "pe": "loss",
-          "stock": 0.391,
+          "stock": 0.396,
           "y": 0,
           "revenueGrowth": 0.2336,
           "maxFall": 0.7363
@@ -253,32 +259,32 @@
       "category": "Software",
       "industry": "software",
       "now": {
-        "pe": 162,
+        "pe": 168,
         "pef": null,
         "y": 0,
         "last": null,
-        "ytd": 0.0466,
+        "ytd": 0.0835,
         "fromHigh": {
-          "below": 0.1101,
+          "below": 0.0787,
           "month": "October"
         },
         "revenueGrowth": 0.7892,
         "capex": 0,
         "then": {
           "w1": {
-            "pe": 182.4,
+            "pe": 182.1,
             "y": 0
           },
           "m1": {
-            "pe": 152.1,
+            "pe": 155,
             "y": 0
           },
           "m3": {
-            "pe": 150.9,
+            "pe": 151.4,
             "y": 0
           },
           "m12": {
-            "pe": 610.1,
+            "pe": 621.9,
             "y": 0
           }
         },
@@ -291,23 +297,23 @@
         "margin": 0.24,
         "cheapest": {
           "month": "2026-06",
-          "req": 0.36,
+          "req": 0.354,
           "since": "2020"
         },
         "prevYear": 0.166
       },
       "past": {
         "y1": {
-          "pe": 610,
+          "pe": 622,
           "profit": 2.925,
-          "stock": 0.044,
+          "stock": 0.061,
           "y": 0,
           "revenueGrowth": 0.3879,
           "maxFall": 0.4822
         },
         "y5": {
           "pe": "loss",
-          "stock": 0.506,
+          "stock": 0.514,
           "y": 0,
           "maxFall": 0.7757,
           "revenueGrowth": 0.7889
@@ -331,16 +337,16 @@
         "pef": null,
         "y": 0.006,
         "last": 0.137,
-        "ytd": 0.1521,
+        "ytd": 0.1585,
         "fromHigh": {
-          "below": 0.0947,
+          "below": 0.0897,
           "month": "May"
         },
         "revenueGrowth": 0.1014,
         "capex": 6,
         "then": {
           "w1": {
-            "pe": 45.6,
+            "pe": 46,
             "y": 0.006
           },
           "m1": {
@@ -348,11 +354,11 @@
             "y": 0.006
           },
           "m3": {
-            "pe": 47.6,
+            "pe": 47.1,
             "y": 0.006
           },
           "m12": {
-            "pe": 50.8,
+            "pe": 51.4,
             "y": 0.005
           }
         },
@@ -369,7 +375,7 @@
         "margin": 0.03,
         "cheapest": {
           "month": "2017-07",
-          "req": 0.083
+          "req": 0.078
         },
         "prevYear": 0.877
       },
@@ -377,23 +383,23 @@
         "y1": {
           "pe": 51,
           "profit": 0.14,
-          "stock": 0.075,
+          "stock": 0.069,
           "y": 0.005,
           "revenueGrowth": 0.0817,
           "maxFall": 0.182
         },
         "y5": {
-          "pe": 40,
+          "pe": 42,
           "profit": 0.13,
-          "stock": 0.182,
-          "y": 0.029,
+          "stock": 0.174,
+          "y": 0.028,
           "revenueGrowth": 0.1749,
           "maxFall": 0.314
         },
         "y10": {
           "pe": 28,
           "profit": 0.137,
-          "stock": 0.228,
+          "stock": 0.229,
           "y": 0.011,
           "revenueGrowth": 0.0217,
           "maxFall": 0.314
@@ -417,28 +423,28 @@
         "pef": 36,
         "y": 0.003,
         "last": 0.139,
-        "ytd": 0.2668,
+        "ytd": 0.2522,
         "fromHigh": {
-          "below": 0,
+          "below": 0.0115,
           "month": "October"
         },
         "revenueGrowth": 0.1424,
         "capex": 10,
         "then": {
           "w1": {
-            "pe": 38.6,
+            "pe": 39.1,
             "y": 0.003
           },
           "m1": {
-            "pe": 38.1,
+            "pe": 38.5,
             "y": 0.003
           },
           "m3": {
-            "pe": 40.3,
+            "pe": 39.5,
             "y": 0.003
           },
           "m12": {
-            "pe": 37.5,
+            "pe": 39.8,
             "y": 0.004
           }
         },
@@ -462,17 +468,17 @@
       },
       "past": {
         "y1": {
-          "pe": 38,
+          "pe": 40,
           "profit": 0.323,
-          "stock": 0.393,
+          "stock": 0.299,
           "y": 0.004,
           "revenueGrowth": 0.0597,
           "maxFall": 0.138
         },
         "y5": {
-          "pe": 28,
+          "pe": 29,
           "profit": 0.112,
-          "stock": 0.194,
+          "stock": 0.185,
           "y": 0.006,
           "revenueGrowth": 0.2677,
           "maxFall": 0.3336
@@ -480,7 +486,7 @@
         "y10": {
           "pe": 14,
           "profit": 0.139,
-          "stock": 0.29,
+          "stock": 0.289,
           "y": 0.019,
           "maxFall": 0.3852
         }
@@ -505,28 +511,28 @@
         "y": 0.002,
         "last": 0.611,
         "forecast": 0.709,
-        "ytd": 0.1508,
+        "ytd": 0.1634,
         "fromHigh": {
-          "below": 0.105,
+          "below": 0.0952,
           "month": "October"
         },
         "revenueGrowth": 0.8338,
         "capex": 7,
         "then": {
           "w1": {
-            "pe": 32.9,
+            "pe": 32.8,
             "y": 0.002
           },
           "m1": {
-            "pe": 30.6,
+            "pe": 31.9,
             "y": 0.002
           },
           "m3": {
-            "pe": 36.1,
+            "pe": 35.3,
             "y": 0.001
           },
           "m12": {
-            "pe": 53.3,
+            "pe": 53.5,
             "y": 0
           }
         },
@@ -544,7 +550,7 @@
         "margin": 0.525,
         "cheapest": {
           "month": "2018-12",
-          "req": 0.107
+          "req": 0.095
         },
         "prevYear": 0.423
       },
@@ -552,13 +558,13 @@
         "y1": {
           "pe": 53,
           "profit": 1.011,
-          "stock": 0.181,
+          "stock": 0.188,
           "y": 0,
           "revenueGrowth": 0.7155,
           "maxFall": 0.2021
         },
         "y5": {
-          "pe": 80,
+          "pe": 81,
           "profit": 0.904,
           "stock": 0.58,
           "y": 0.001,
@@ -566,9 +572,9 @@
           "maxFall": 0.6634
         },
         "y10": {
-          "pe": 43,
+          "pe": 44,
           "profit": 0.611,
-          "stock": 0.63,
+          "stock": 0.627,
           "y": 0.007,
           "revenueGrowth": 0.138,
           "maxFall": 0.6634
@@ -593,28 +599,28 @@
         "pef": null,
         "y": 0.007,
         "last": 0.208,
-        "ytd": 0.1009,
+        "ytd": 0.1067,
         "fromHigh": {
-          "below": 0.0265,
+          "below": 0.0213,
           "month": "October"
         },
         "revenueGrowth": 0.1779,
         "capex": 116,
         "then": {
           "w1": {
-            "pe": 30.5,
+            "pe": 31,
             "y": 0.007
           },
           "m1": {
-            "pe": 28,
+            "pe": 28.2,
             "y": 0.007
           },
           "m3": {
-            "pe": 24,
+            "pe": 24.1,
             "y": 0.009
           },
           "m12": {
-            "pe": 37.4,
+            "pe": 37.8,
             "y": 0.006
           }
         },
@@ -637,25 +643,25 @@
       },
       "past": {
         "y1": {
-          "pe": 37,
+          "pe": 38,
           "profit": 0.278,
-          "stock": 0.043,
+          "stock": 0.038,
           "y": 0.006,
           "revenueGrowth": 0.1493,
           "maxFall": 0.345
         },
         "y5": {
-          "pe": 38,
+          "pe": 39,
           "profit": 0.172,
-          "stock": 0.126,
+          "stock": 0.125,
           "y": 0.007,
           "revenueGrowth": 0.1753,
           "maxFall": 0.3715
         },
         "y10": {
-          "pe": 28,
+          "pe": 29,
           "profit": 0.208,
-          "stock": 0.264,
+          "stock": 0.265,
           "y": 0.025,
           "maxFall": 0.3715
         }
@@ -675,33 +681,33 @@
       "category": "Internet",
       "industry": "internet",
       "now": {
-        "pe": 26,
+        "pe": 25,
         "pef": 23,
         "y": 0.003,
         "last": 0.354,
         "forecast": 0.105,
-        "ytd": 0.0774,
+        "ytd": 0.0545,
         "fromHigh": {
-          "below": 0.0878,
+          "below": 0.1072,
           "month": "September"
         },
         "revenueGrowth": 0.2765,
         "capex": 89,
         "then": {
           "w1": {
-            "pe": 26.3,
+            "pe": 27.9,
             "y": 0.003
           },
           "m1": {
-            "pe": 24.6,
+            "pe": 24.3,
             "y": 0.003
           },
           "m3": {
-            "pe": 23.5,
+            "pe": 22.8,
             "y": 0.003
           },
           "m12": {
-            "pe": 25.4,
+            "pe": 26.1,
             "y": 0.003
           }
         },
@@ -717,32 +723,32 @@
         },
         "margin": 0.323,
         "cheapest": {
-          "month": "2022-10",
-          "req": 0.037
+          "month": "2022-12",
+          "req": 0.047
         },
         "prevYear": 0.883
       },
       "past": {
         "y1": {
-          "pe": 25,
+          "pe": 26,
           "profit": -0.024,
-          "stock": 0,
+          "stock": -0.049,
           "y": 0.003,
           "revenueGrowth": 0.1937,
           "maxFall": 0.2994
         },
         "y5": {
-          "pe": 24,
+          "pe": 25,
           "profit": 0.149,
-          "stock": 0.171,
+          "stock": 0.155,
           "y": 0,
           "revenueGrowth": 0.3943,
           "maxFall": 0.7442
         },
         "y10": {
-          "pe": 61,
+          "pe": 62,
           "profit": 0.354,
-          "stock": 0.188,
+          "stock": 0.184,
           "y": 0,
           "revenueGrowth": 0.5137,
           "maxFall": 0.7674
@@ -763,43 +769,43 @@
       "category": "Chips",
       "industry": "chips",
       "now": {
-        "pe": 40,
+        "pe": 42,
         "pef": null,
         "y": 0.008,
         "last": null,
-        "ytd": 0.367,
+        "ytd": 0.4083,
         "fromHigh": {
-          "below": 0.1507,
+          "below": 0.125,
           "month": "October"
         },
         "revenueGrowth": 0.3161,
         "then": {
           "w1": {
-            "pe": 44.2,
+            "pe": 43.7,
             "y": 0.008
           },
           "m1": {
-            "pe": 40.6,
+            "pe": 42.3,
             "y": 0.008
           },
           "m3": {
-            "pe": 40.4,
+            "pe": 39.6,
             "y": 0.007
           },
           "m12": {
-            "pe": 41.1,
+            "pe": 40.7,
             "y": 0.008
           }
         },
         "balance": {
-          "cash": 86.7,
-          "debt": 32.3,
+          "cash": 85.4,
+          "debt": 31.9,
           "end": "2025-12-31",
-          "profit": 53.1
+          "profit": 52.4
         },
         "margin": 0.418,
         "cheapest": {
-          "month": "2023-05",
+          "month": "2023-04",
           "req": 0.051
         },
         "prevYear": 0.682
@@ -807,26 +813,26 @@
       "past": {
         "y1": {
           "pe": 41,
-          "profit": 0.406,
-          "stock": 0.389,
+          "profit": 0.382,
+          "stock": 0.441,
           "y": 0.008,
-          "revenueGrowth": 0.4062,
+          "revenueGrowth": 0.4042,
           "maxFall": 0.2155
         },
         "y5": {
-          "pe": 33,
-          "profit": 0.238,
-          "stock": 0.311,
+          "pe": 30,
+          "profit": 0.215,
+          "stock": 0.317,
           "y": 0.016,
-          "revenueGrowth": 0.2856,
+          "revenueGrowth": 0.3979,
           "maxFall": 0.5647
         },
         "y10": {
           "pe": 17,
-          "stock": 0.326,
-          "y": 0.025,
+          "stock": 0.328,
+          "y": 0.024,
           "maxFall": 0.5647,
-          "profit": 0.187
+          "profit": 0.185
         }
       },
       "src": {
@@ -844,24 +850,24 @@
       "category": "Internet",
       "industry": "internet",
       "now": {
-        "pe": 36,
+        "pe": 37,
         "pef": null,
         "y": 0,
         "last": 0.632,
-        "ytd": 0.0831,
+        "ytd": 0.1378,
         "fromHigh": {
-          "below": 0.1198,
+          "below": 0.0753,
           "month": "August"
         },
         "revenueGrowth": 0.1577,
         "capex": 173,
         "then": {
           "w1": {
-            "pe": 37.4,
+            "pe": 36.8,
             "y": 0
           },
           "m1": {
-            "pe": 34.9,
+            "pe": 36.1,
             "y": 0
           },
           "m3": {
@@ -869,7 +875,7 @@
             "y": 0
           },
           "m12": {
-            "pe": 34.3,
+            "pe": 34.7,
             "y": 0
           }
         },
@@ -887,15 +893,15 @@
         "margin": 0.081,
         "cheapest": {
           "month": "2025-04",
-          "req": 0.161
+          "req": 0.158
         },
         "prevYear": 0.85
       },
       "past": {
         "y1": {
-          "pe": 34,
+          "pe": 35,
           "profit": 0.079,
-          "stock": 0.166,
+          "stock": 0.213,
           "y": 0,
           "revenueGrowth": 0.1087,
           "maxFall": 0.2174
@@ -903,15 +909,15 @@
         "y5": {
           "pe": 70,
           "profit": 0.224,
-          "stock": 0.08,
+          "stock": 0.09,
           "y": 0,
           "revenueGrowth": 0.3776,
           "maxFall": 0.5573
         },
         "y10": {
-          "pe": 199,
+          "pe": 196,
           "profit": 0.632,
-          "stock": 0.198,
+          "stock": 0.206,
           "y": 0,
           "maxFall": 0.5615
         }
@@ -933,32 +939,32 @@
       "now": {
         "pe": 23,
         "pef": 17,
-        "y": 0.016,
+        "y": 0.015,
         "last": 0.071,
         "forecast": 0.351,
-        "ytd": -0.3333,
+        "ytd": -0.3182,
         "fromHigh": {
-          "below": 0.5539,
+          "below": 0.531,
           "month": "October 2025"
         },
         "revenueGrowth": 0.2162,
         "capex": 76,
         "then": {
           "w1": {
-            "pe": 25.3,
-            "y": 0.014
-          },
-          "m1": {
             "pe": 25.6,
             "y": 0.014
           },
+          "m1": {
+            "pe": 26.4,
+            "y": 0.014
+          },
           "m3": {
-            "pe": 24.5,
+            "pe": 23.9,
             "y": 0.016
           },
           "m12": {
-            "pe": 71.2,
-            "y": 0.006
+            "pe": 63.1,
+            "y": 0.007
           }
         },
         "balance": {
@@ -974,31 +980,31 @@
         "margin": 0.215,
         "cheapest": {
           "month": "2020-03",
-          "req": 0.049
+          "req": 0.058
         },
         "prevYear": 0.79
       },
       "past": {
         "y1": {
-          "pe": 71,
+          "pe": 63,
           "profit": 0.273,
-          "stock": -0.585,
-          "y": 0.006,
+          "stock": -0.521,
+          "y": 0.007,
           "revenueGrowth": 0.0967,
-          "maxFall": 0.6291
+          "maxFall": 0.5902
         },
         "y5": {
           "pe": 21,
           "profit": 0.039,
-          "stock": 0.076,
-          "y": 0.013,
+          "stock": 0.077,
+          "y": 0.012,
           "revenueGrowth": 0.0414,
           "maxFall": 0.6458
         },
         "y10": {
           "pe": 18,
           "profit": 0.071,
-          "stock": 0.145,
+          "stock": 0.149,
           "y": 0.016,
           "revenueGrowth": -0.0232,
           "maxFall": 0.6458
@@ -1023,28 +1029,28 @@
         "pef": null,
         "y": 0.003,
         "last": 0.221,
-        "ytd": 0.0903,
+        "ytd": 0.0893,
         "fromHigh": {
-          "below": 0.153,
+          "below": 0.1538,
           "month": "May"
         },
         "revenueGrowth": 0.2005,
         "capex": 132,
         "then": {
           "w1": {
-            "pe": 33.2,
+            "pe": 33.4,
             "y": 0.002
           },
           "m1": {
-            "pe": 32.3,
-            "y": 0.003
+            "pe": 33,
+            "y": 0.002
           },
           "m3": {
-            "pe": 35.7,
+            "pe": 35.5,
             "y": 0.002
           },
           "m12": {
-            "pe": 29,
+            "pe": 29.6,
             "y": 0.003
           }
         },
@@ -1057,16 +1063,16 @@
         },
         "margin": 0.268,
         "cheapest": {
-          "month": "2023-01",
-          "req": 0.1
+          "month": "2022-12",
+          "req": 0.094
         },
         "prevYear": 0.781
       },
       "past": {
         "y1": {
-          "pe": 29,
+          "pe": 30,
           "profit": 0.186,
-          "stock": 0.358,
+          "stock": 0.33,
           "y": 0.003,
           "revenueGrowth": 0.1313,
           "maxFall": 0.2105
@@ -1074,14 +1080,14 @@
         "y5": {
           "pe": 37,
           "profit": 0.215,
-          "stock": 0.195,
+          "stock": 0.194,
           "y": 0,
           "revenueGrowth": 0.3267,
           "maxFall": 0.4432
         },
         "y10": {
-          "pe": 31,
-          "stock": 0.239,
+          "pe": 32,
+          "stock": 0.237,
           "y": 0,
           "profit": 0.221,
           "revenueGrowth": 0.1745,
@@ -1108,16 +1114,16 @@
         "y": 0.023,
         "last": 0.022,
         "forecast": -0.082,
-        "ytd": 0.5171,
+        "ytd": 0.5076,
         "fromHigh": {
-          "below": 0,
+          "below": 0.0063,
           "month": "October"
         },
         "revenueGrowth": 0.0907,
         "capex": 29,
         "then": {
           "w1": {
-            "pe": 21.7,
+            "pe": 22.4,
             "y": 0.024
           },
           "m1": {
@@ -1125,12 +1131,12 @@
             "y": 0.025
           },
           "m3": {
-            "pe": 24.6,
+            "pe": 25,
             "y": 0.028
           },
           "m12": {
-            "pe": 15.7,
-            "y": 0.036
+            "pe": 16,
+            "y": 0.035
           }
         },
         "balance": {
@@ -1146,22 +1152,22 @@
         "y1": {
           "pe": 16,
           "profit": 0.104,
-          "stock": 0.665,
-          "y": 0.036,
+          "stock": 0.624,
+          "y": 0.035,
           "revenueGrowth": -0.0375,
           "maxFall": 0.2011
         },
         "y5": {
           "pe": "loss",
-          "stock": 0.278,
-          "y": 0.056,
+          "stock": 0.271,
+          "y": 0.055,
           "revenueGrowth": -0.0061,
           "maxFall": 0.2051
         },
         "y10": {
-          "pe": 34,
+          "pe": 35,
           "profit": 0.022,
-          "stock": 0.123,
+          "stock": 0.121,
           "y": 0.034,
           "revenueGrowth": -0.3416,
           "maxFall": 0.6101
@@ -1182,33 +1188,33 @@
       "category": "Chips",
       "industry": "chips",
       "now": {
-        "pe": 42,
-        "pef": 25,
+        "pe": 43,
+        "pef": 26,
         "y": 0.008,
         "last": null,
         "forecast": 0.664,
-        "ytd": -0.0448,
+        "ytd": -0.0285,
         "fromHigh": {
-          "below": 0.315,
+          "below": 0.3032,
           "month": "June"
         },
         "revenueGrowth": 0.4869,
         "capex": 1,
         "then": {
           "w1": {
-            "pe": 46.1,
+            "pe": 45.6,
             "y": 0.007
           },
           "m1": {
-            "pe": 43.3,
+            "pe": 45.6,
             "y": 0.007
           },
           "m3": {
-            "pe": 62.3,
+            "pe": 62.9,
             "y": 0.007
           },
           "m12": {
-            "pe": 90.3,
+            "pe": 89,
             "y": 0.007
           }
         },
@@ -1224,8 +1230,8 @@
         },
         "margin": 0.285,
         "cheapest": {
-          "month": "2018-07",
-          "req": -0.016
+          "month": "2018-08",
+          "req": -0.014
         },
         "prevYear": 0.157
       },
@@ -1245,33 +1251,33 @@
       "category": "Chips",
       "industry": "chips",
       "now": {
-        "pe": 135,
-        "pef": 65,
+        "pe": 137,
+        "pef": 66,
         "y": 0,
         "last": null,
         "forecast": 1.072,
-        "ytd": 1.4689,
+        "ytd": 1.4969,
         "fromHigh": {
-          "below": 0.1858,
+          "below": 0.1766,
           "month": "October"
         },
         "revenueGrowth": 0.3954,
         "capex": 2,
         "then": {
           "w1": {
-            "pe": 155.7,
+            "pe": 155,
             "y": 0
           },
           "m1": {
-            "pe": 131.1,
+            "pe": 143.3,
             "y": 0
           },
           "m3": {
-            "pe": 163.9,
+            "pe": 164.7,
             "y": 0
           },
           "m12": {
-            "pe": 135.3,
+            "pe": 138.8,
             "y": 0
           }
         },
@@ -1309,18 +1315,18 @@
       "industry": "chips",
       "now": {
         "pe": null,
-        "pef": 42,
+        "pef": 43,
         "y": 0,
-        "value": 453,
+        "value": 462,
         "profits": {
           "last": -11,
           "best": 21
         },
         "last": null,
         "forecast": null,
-        "ytd": 1.435,
+        "ytd": 1.4848,
         "fromHigh": {
-          "below": 0.3625,
+          "below": 0.3494,
           "month": "June"
         },
         "revenueGrowth": 0.0747,
@@ -1360,33 +1366,33 @@
         "pef": null,
         "y": 0.006,
         "last": 0.227,
-        "ytd": 0.5417,
+        "ytd": 0.5317,
         "fromHigh": {
-          "below": 0.1738,
+          "below": 0.1792,
           "month": "June"
         },
         "revenueGrowth": 0.1558,
         "capex": 2,
         "then": {
           "w1": {
-            "pe": 64.2,
+            "pe": 62,
             "y": 0.005
           },
           "m1": {
-            "pe": 56.1,
-            "y": 0.006
+            "pe": 59.2,
+            "y": 0.005
           },
           "m3": {
-            "pe": 63,
+            "pe": 61.5,
             "y": 0.005
           },
           "m12": {
-            "pe": 45.4,
+            "pe": 46.5,
             "y": 0.007
           }
         },
         "balance": {
-          "cash": 14.9,
+          "cash": 15,
           "debt": 4.9,
           "end": "2025-12-31",
           "profit": 10.8
@@ -1397,8 +1403,8 @@
         },
         "margin": 0.283,
         "cheapest": {
-          "month": "2022-10",
-          "req": 0.124
+          "month": "2018-12",
+          "req": 0.133
         },
         "prevYear": 0.779
       },
@@ -1422,28 +1428,28 @@
         "pef": null,
         "y": 0.001,
         "last": 0.331,
-        "ytd": 2.0815,
+        "ytd": 2.1419,
         "fromHigh": {
-          "below": 0.2756,
+          "below": 0.2614,
           "month": "June"
         },
         "revenueGrowth": 2.5633,
         "capex": 31,
         "then": {
           "w1": {
-            "pe": 13.8,
+            "pe": 12.8,
             "y": 0
           },
           "m1": {
-            "pe": 20.9,
+            "pe": 23,
             "y": 0.001
           },
           "m3": {
-            "pe": 19.3,
+            "pe": 19.6,
             "y": 0.001
           },
           "m12": {
-            "pe": 26.7,
+            "pe": 27.2,
             "y": 0.002
           }
         },
@@ -1480,29 +1486,29 @@
         "pef": null,
         "y": 0.007,
         "last": null,
-        "ytd": -0.0852,
+        "ytd": -0.0786,
         "fromHigh": {
-          "below": 0.0897,
+          "below": 0.0832,
           "month": "December 2025"
         },
         "revenueGrowth": 0.1123,
         "capex": 1,
         "then": {
           "w1": {
-            "pe": 32.1,
-            "y": 0.008
+            "pe": 33.4,
+            "y": 0.007
           },
           "m1": {
-            "pe": 35.1,
+            "pe": 33.3,
             "y": 0.007
           },
           "m3": {
-            "pe": 23.8,
+            "pe": 24,
             "y": 0.01
           },
           "m12": {
-            "pe": 35,
-            "y": 0.007
+            "pe": 36.2,
+            "y": 0.006
           }
         },
         "balance": {
@@ -1518,7 +1524,7 @@
         "margin": 0.152,
         "cheapest": {
           "month": "2026-06",
-          "req": 0.108
+          "req": 0.105
         },
         "prevYear": 0.906
       },
@@ -1539,24 +1545,24 @@
       "industry": "software",
       "now": {
         "pe": 14,
-        "pef": 12,
+        "pef": 13,
         "y": 0,
         "last": 0.331,
         "forecast": 0.13,
-        "ytd": -0.2994,
+        "ytd": -0.2665,
         "fromHigh": {
-          "below": 0.3187,
+          "below": 0.2867,
           "month": "October 2025"
         },
         "revenueGrowth": 0.1203,
         "capex": 0,
         "then": {
           "w1": {
-            "pe": 13.6,
+            "pe": 13.3,
             "y": 0
           },
           "m1": {
-            "pe": 14.4,
+            "pe": 14.3,
             "y": 0
           },
           "m3": {
@@ -1564,7 +1570,7 @@
             "y": 0
           },
           "m12": {
-            "pe": 20.6,
+            "pe": 21.5,
             "y": 0
           }
         },
@@ -1581,7 +1587,7 @@
         "margin": 0.279,
         "cheapest": {
           "month": "2026-06",
-          "req": 0.056
+          "req": 0.047
         },
         "prevYear": 0.689
       },
@@ -1601,33 +1607,33 @@
       "category": "Software",
       "industry": "software",
       "now": {
-        "pe": 104,
-        "pef": 85,
+        "pe": 110,
+        "pef": 89,
         "y": 0,
         "last": null,
         "forecast": 0.231,
-        "ytd": -0.0732,
+        "ytd": -0.0238,
         "fromHigh": {
-          "below": 0.2499,
+          "below": 0.2099,
           "month": "October 2025"
         },
         "revenueGrowth": 0.2219,
         "capex": 1,
         "then": {
           "w1": {
-            "pe": 103.2,
+            "pe": 101.6,
             "y": 0
           },
           "m1": {
-            "pe": 102.5,
+            "pe": 99.3,
             "y": 0
           },
           "m3": {
-            "pe": 61.9,
+            "pe": 62.3,
             "y": 0
           },
           "m12": {
-            "pe": 112.8,
+            "pe": 115.7,
             "y": 0
           }
         },
@@ -1643,7 +1649,7 @@
         },
         "margin": 0.148,
         "cheapest": {
-          "month": "2026-05",
+          "month": "2026-06",
           "req": 0.234
         },
         "prevYear": 1.004
@@ -1664,33 +1670,33 @@
       "category": "Software",
       "industry": "internet",
       "now": {
-        "pe": 115,
-        "pef": 89,
+        "pe": 117,
+        "pef": 91,
         "y": 0,
         "last": null,
         "forecast": 0.285,
-        "ytd": 0.0531,
+        "ytd": 0.0777,
         "fromHigh": {
-          "below": 0.0541,
+          "below": 0.032,
           "month": "October"
         },
         "revenueGrowth": 0.325,
         "capex": 0,
         "then": {
           "w1": {
-            "pe": 115.4,
+            "pe": 119.3,
             "y": 0
           },
           "m1": {
-            "pe": 87.8,
+            "pe": 86.8,
             "y": 0
           },
           "m3": {
-            "pe": 122.6,
+            "pe": 122,
             "y": 0
           },
           "m12": {
-            "pe": 87,
+            "pe": 91.5,
             "y": 0
           }
         },
@@ -1707,7 +1713,7 @@
         "margin": 0.123,
         "cheapest": {
           "month": "2022-10",
-          "req": 0.047
+          "req": 0.065
         },
         "prevYear": 1.047
       },
@@ -1728,32 +1734,32 @@
       "industry": "entertainment",
       "now": {
         "pe": 22,
-        "pef": 21,
+        "pef": 20,
         "y": 0,
         "last": 0.476,
         "forecast": 0.063,
-        "ytd": -0.2478,
+        "ytd": -0.2674,
         "fromHigh": {
-          "below": 0.4318,
+          "below": 0.4467,
           "month": "October 2025"
         },
         "revenueGrowth": 0.1602,
         "capex": 1,
         "then": {
           "w1": {
-            "pe": 22.1,
+            "pe": 22.2,
             "y": 0
           },
           "m1": {
-            "pe": 24,
+            "pe": 22.6,
             "y": 0
           },
           "m3": {
-            "pe": 24,
+            "pe": 21.3,
             "y": 0
           },
           "m12": {
-            "pe": 50.4,
+            "pe": 52.8,
             "y": 0
           }
         },
@@ -1791,32 +1797,32 @@
       "industry": "internet",
       "now": {
         "pe": 15,
-        "pef": 11,
+        "pef": 10,
         "y": 0,
         "last": null,
         "forecast": 0.427,
-        "ytd": -0.139,
+        "ytd": -0.1563,
         "fromHigh": {
-          "below": 0.2945,
+          "below": 0.3087,
           "month": "November 2025"
         },
         "revenueGrowth": 0.1668,
         "capex": 0,
         "then": {
           "w1": {
-            "pe": 15.4,
-            "y": 0
-          },
-          "m1": {
             "pe": 15.3,
             "y": 0
           },
+          "m1": {
+            "pe": 15.2,
+            "y": 0
+          },
           "m3": {
-            "pe": 17.8,
+            "pe": 17.3,
             "y": 0
           },
           "m12": {
-            "pe": 18,
+            "pe": 18.3,
             "y": 0
           }
         },
@@ -1858,27 +1864,27 @@
         "y": 0,
         "last": null,
         "forecast": 0.179,
-        "ytd": 0.2798,
+        "ytd": 0.3037,
         "fromHigh": {
-          "below": 0.0882,
+          "below": 0.0712,
           "month": "August"
         },
         "revenueGrowth": 0.1364,
         "then": {
           "w1": {
-            "pe": 37.9,
+            "pe": 37.8,
             "y": 0
           },
           "m1": {
-            "pe": 38.2,
+            "pe": 37.9,
             "y": 0
           },
           "m3": {
-            "pe": 36.5,
+            "pe": 35.8,
             "y": 0
           },
           "m12": {
-            "pe": 29.8,
+            "pe": 30.9,
             "y": 0
           }
         },
@@ -1910,29 +1916,29 @@
         "pef": null,
         "y": 0.016,
         "last": 0.046,
-        "ytd": 0.4199,
+        "ytd": 0.411,
         "fromHigh": {
-          "below": 0.1676,
+          "below": 0.1729,
           "month": "June"
         },
         "revenueGrowth": 0.1177,
         "capex": 1,
         "then": {
           "w1": {
-            "pe": 38.5,
-            "y": 0.014
+            "pe": 37.4,
+            "y": 0.015
           },
           "m1": {
-            "pe": 35,
+            "pe": 35.6,
             "y": 0.015
           },
           "m3": {
-            "pe": 37.9,
+            "pe": 38.2,
             "y": 0.015
           },
           "m12": {
-            "pe": 27.1,
-            "y": 0.024
+            "pe": 27.7,
+            "y": 0.023
           }
         },
         "balance": {
@@ -1948,7 +1954,7 @@
         "margin": 0.189,
         "cheapest": {
           "month": "2020-03",
-          "req": 0.022
+          "req": 0.032
         },
         "prevYear": 0.834
       },
@@ -1968,33 +1974,33 @@
       "category": "Hardware",
       "industry": "hardware",
       "now": {
-        "pe": 28,
-        "pef": 27,
-        "y": 0.005,
+        "pe": 29,
+        "pef": 28,
+        "y": 0.006,
         "last": null,
         "forecast": 0.035,
-        "ytd": 2.6212,
+        "ytd": 2.7053,
         "fromHigh": {
-          "below": 0.2323,
+          "below": 0.2145,
           "month": "September"
         },
         "revenueGrowth": 0.4903,
         "capex": 4,
         "then": {
           "w1": {
-            "pe": 36.6,
+            "pe": 35.8,
             "y": 0.004
           },
           "m1": {
-            "pe": 35.2,
+            "pe": 35.5,
             "y": 0.004
           },
           "m3": {
-            "pe": 34.2,
+            "pe": 33.4,
             "y": 0.006
           },
           "m12": {
-            "pe": 23,
+            "pe": 22.5,
             "y": 0.013
           }
         },
@@ -2011,7 +2017,7 @@
         "margin": 0.045,
         "cheapest": {
           "month": "2022-10",
-          "req": -0.047
+          "req": -0.053
         },
         "prevYear": 0.385
       },
@@ -2040,7 +2046,7 @@
         },
         "last": null,
         "fromHigh": {
-          "below": 0.3092,
+          "below": 0.3009,
           "month": "June"
         },
         "listing": {
@@ -2053,7 +2059,7 @@
           "debt": 38.3,
           "end": "2026-06-30"
         },
-        "value": 1925,
+        "value": 1948,
         "profitsPeriod": "in the first half of 2026"
       },
       "past": {},
@@ -2069,11 +2075,11 @@
       "color": "#1F3A68",
       "category": "Financials",
       "now": {
-        "pe": 26,
+        "pe": 27,
         "pef": null,
         "y": 0,
         "last": 0.1,
-        "ytd": 0.0584,
+        "ytd": 0.0739,
         "fromHigh": {
           "below": 0,
           "month": "October"
@@ -2082,19 +2088,19 @@
         "capex": 22,
         "then": {
           "w1": {
-            "pe": 25.6,
-            "y": 0
-          },
-          "m1": {
             "pe": 25.8,
             "y": 0
           },
+          "m1": {
+            "pe": 25.3,
+            "y": 0
+          },
           "m3": {
-            "pe": 28.1,
+            "pe": 27.9,
             "y": 0
           },
           "m12": {
-            "pe": 25.3,
+            "pe": 25.6,
             "y": 0
           }
         },
@@ -2106,17 +2112,17 @@
         },
         "margin": 0.109,
         "cheapest": {
-          "month": "2019-01",
-          "req": 0.031
+          "month": "2018-12",
+          "req": 0.027
         },
         "prevYear": 1.089
       },
       "past": {
         "y1": {
-          "pe": "≈25",
+          "pe": "≈26",
           "y": 0,
           "profit": 0.046,
-          "stock": 0.088,
+          "stock": 0.093,
           "revenueGrowth": 0.0001,
           "maxFall": 0.0942
         },
@@ -2132,7 +2138,7 @@
           "pe": "≈20",
           "y": 0,
           "profit": 0.1,
-          "stock": 0.139,
+          "stock": 0.141,
           "revenueGrowth": 0.0913,
           "maxFall": 0.2957
         }
@@ -2150,32 +2156,32 @@
       "color": "#5E4B3C",
       "category": "Financials",
       "now": {
-        "pe": 15,
+        "pe": 14,
         "pef": null,
         "y": 0.018,
         "last": 0.136,
-        "ytd": 0.0746,
+        "ytd": 0.0605,
         "fromHigh": {
-          "below": 0.0651,
+          "below": 0.0774,
           "month": "August"
         },
         "revenueGrowth": 0.0275,
         "then": {
           "w1": {
-            "pe": 14.3,
-            "y": 0.018
+            "pe": 14.2,
+            "y": 0.019
           },
           "m1": {
-            "pe": 14.9,
+            "pe": 15,
             "y": 0.017
           },
           "m3": {
-            "pe": 16.4,
-            "y": 0.017
+            "pe": 16.2,
+            "y": 0.018
           },
           "m12": {
-            "pe": 15.3,
-            "y": 0.019
+            "pe": 15.5,
+            "y": 0.018
           }
         },
         "shares": {
@@ -2183,17 +2189,17 @@
           "years": 10
         },
         "cheapest": {
-          "month": "2020-04",
-          "req": -0.024
+          "month": "2020-03",
+          "req": -0.028
         },
         "prevYear": 0.846
       },
       "past": {
         "y1": {
-          "pe": 15,
-          "y": 0.019,
+          "pe": 16,
+          "y": 0.018,
           "profit": 0.197,
-          "stock": 0.16,
+          "stock": 0.13,
           "revenueGrowth": 0.123,
           "maxFall": 0.1547
         },
@@ -2201,15 +2207,15 @@
           "pe": 11,
           "y": 0.022,
           "profit": 0.093,
-          "stock": 0.182,
+          "stock": 0.173,
           "revenueGrowth": 0.0339,
           "maxFall": 0.3877
         },
         "y10": {
-          "pe": 11,
+          "pe": 12,
           "y": 0.027,
           "profit": 0.136,
-          "stock": 0.206,
+          "stock": 0.203,
           "revenueGrowth": -0.007,
           "maxFall": 0.4363
         }
@@ -2231,9 +2237,9 @@
         "pef": null,
         "y": 0.023,
         "last": 0.147,
-        "ytd": -0.0536,
+        "ytd": -0.0645,
         "fromHigh": {
-          "below": 0.2055,
+          "below": 0.2147,
           "month": "August"
         },
         "revenueGrowth": 0.1408,
@@ -2243,16 +2249,16 @@
             "y": 0.021
           },
           "m1": {
-            "pe": 13.4,
+            "pe": 13.3,
             "y": 0.02
           },
           "m3": {
-            "pe": 15.3,
-            "y": 0.018
+            "pe": 15,
+            "y": 0.019
           },
           "m12": {
-            "pe": 14.8,
-            "y": 0.021
+            "pe": 15.3,
+            "y": 0.02
           }
         },
         "shares": {
@@ -2261,32 +2267,32 @@
         },
         "cheapest": {
           "month": "2020-03",
-          "req": -0.026
+          "req": -0.03
         },
         "prevYear": 0.737
       },
       "past": {
         "y1": {
           "pe": 15,
-          "y": 0.021,
+          "y": 0.02,
           "profit": 0.27,
-          "stock": 0.037,
+          "stock": -0.006,
           "revenueGrowth": 0.0631,
-          "maxFall": 0.2055
+          "maxFall": 0.2185
         },
         "y5": {
-          "pe": 15,
+          "pe": 16,
           "y": 0.016,
           "profit": 0.076,
-          "stock": 0.045,
+          "stock": 0.04,
           "revenueGrowth": -0.0612,
           "maxFall": 0.4664
         },
         "y10": {
-          "pe": 13,
+          "pe": 14,
           "y": 0.014,
           "profit": 0.147,
-          "stock": 0.149,
+          "stock": 0.144,
           "revenueGrowth": -0.038,
           "maxFall": 0.4895
         }
@@ -2306,29 +2312,29 @@
       "now": {
         "pe": 12,
         "pef": null,
-        "y": 0.022,
+        "y": 0.023,
         "last": 0.031,
-        "ytd": -0.0853,
+        "ytd": -0.1035,
         "fromHigh": {
-          "below": 0.1156,
+          "below": 0.1332,
           "month": "January"
         },
         "then": {
           "w1": {
-            "pe": 12.1,
-            "y": 0.022
+            "pe": 11.7,
+            "y": 0.023
           },
           "m1": {
-            "pe": 12.7,
+            "pe": 12.5,
             "y": 0.021
           },
           "m3": {
-            "pe": 13.6,
-            "y": 0.02
+            "pe": 13.3,
+            "y": 0.021
           },
           "m12": {
-            "pe": 14.4,
-            "y": 0.02
+            "pe": 14.8,
+            "y": 0.019
           }
         },
         "shares": {
@@ -2343,17 +2349,17 @@
       },
       "past": {
         "y1": {
-          "pe": 14,
-          "y": 0.02,
+          "pe": 15,
+          "y": 0.019,
           "profit": 0.182,
-          "stock": 0.02,
+          "stock": -0.024,
           "maxFall": 0.2302
         },
         "y5": {
           "pe": 13,
           "y": 0.01,
           "profit": 0.129,
-          "stock": 0.144,
+          "stock": 0.131,
           "revenueGrowth": -0.0407,
           "maxFall": 0.371
         },
@@ -2361,7 +2367,7 @@
           "pe": 11,
           "y": 0.034,
           "profit": 0.031,
-          "stock": 0.095,
+          "stock": 0.092,
           "maxFall": 0.6446
         }
       },
@@ -2382,29 +2388,29 @@
         "pef": null,
         "y": 0.02,
         "last": 0.036,
-        "ytd": 0.081,
+        "ytd": 0.0657,
         "fromHigh": {
-          "below": 0.1426,
+          "below": 0.1547,
           "month": "June"
         },
         "revenueGrowth": 0.0224,
         "capex": 7,
         "then": {
           "w1": {
-            "pe": 14,
-            "y": 0.019
+            "pe": 13.4,
+            "y": 0.02
           },
           "m1": {
-            "pe": 14.3,
+            "pe": 14.2,
             "y": 0.019
           },
           "m3": {
-            "pe": 16.3,
-            "y": 0.018
+            "pe": 15.9,
+            "y": 0.019
           },
           "m12": {
-            "pe": 14.2,
-            "y": 0.024
+            "pe": 14.7,
+            "y": 0.023
           }
         },
         "shares": {
@@ -2412,25 +2418,25 @@
           "years": 10
         },
         "cheapest": {
-          "month": "2020-04",
-          "req": -0.077
+          "month": "2022-10",
+          "req": -0.067
         },
         "prevYear": 0.64
       },
       "past": {
         "y1": {
-          "pe": 14,
-          "y": 0.024,
+          "pe": 15,
+          "y": 0.023,
           "profit": 0.373,
-          "stock": 0.318,
+          "stock": 0.26,
           "revenueGrowth": 0.0575,
-          "maxFall": 0.1564
+          "maxFall": 0.1604
         },
         "y5": {
           "pe": 7.4,
           "y": 0.028,
           "profit": -0.01,
-          "stock": 0.153,
+          "stock": 0.151,
           "revenueGrowth": -0.0884,
           "maxFall": 0.4239
         },
@@ -2438,7 +2444,7 @@
           "pe": 10,
           "y": 0.006,
           "profit": 0.036,
-          "stock": 0.132,
+          "stock": 0.128,
           "revenueGrowth": -0.0592,
           "maxFall": 0.5651
         }
@@ -2460,9 +2466,9 @@
         "pef": null,
         "y": 0.02,
         "last": 0.099,
-        "ytd": 0.0172,
+        "ytd": 0.0213,
         "fromHigh": {
-          "below": 0.2313,
+          "below": 0.2282,
           "month": "July"
         },
         "capex": 2,
@@ -2476,11 +2482,11 @@
             "y": 0.019
           },
           "m3": {
-            "pe": 20,
+            "pe": 19.3,
             "y": 0.016
           },
           "m12": {
-            "pe": 16.7,
+            "pe": 16.8,
             "y": 0.017
           }
         },
@@ -2495,11 +2501,11 @@
           "pe": 17,
           "y": 0.017,
           "profit": 0.426,
-          "stock": 0.185,
-          "maxFall": 0.2335
+          "stock": 0.182,
+          "maxFall": 0.2361
         },
         "y5": {
-          "pe": 7.4,
+          "pe": 7.5,
           "y": 0.014,
           "profit": 0.034,
           "stock": 0.196,
@@ -2509,7 +2515,7 @@
           "pe": 16,
           "y": 0.015,
           "profit": 0.099,
-          "stock": 0.203,
+          "stock": 0.201,
           "maxFall": 0.4875
         }
       },
@@ -2530,27 +2536,27 @@
         "pef": null,
         "y": 0.023,
         "last": 0.148,
-        "ytd": 0.0339,
+        "ytd": 0.0329,
         "fromHigh": {
-          "below": 0.2056,
+          "below": 0.2063,
           "month": "July"
         },
         "then": {
           "w1": {
-            "pe": 15.3,
+            "pe": 15.1,
             "y": 0.022
           },
           "m1": {
             "pe": 16.4,
-            "y": 0.021
+            "y": 0.02
           },
           "m3": {
-            "pe": 19.8,
-            "y": 0.018
+            "pe": 19.1,
+            "y": 0.019
           },
           "m12": {
-            "pe": 18.1,
-            "y": 0.024
+            "pe": 18.3,
+            "y": 0.023
           }
         },
         "shares": {
@@ -2562,23 +2568,23 @@
       "past": {
         "y1": {
           "pe": 18,
-          "y": 0.024,
+          "y": 0.023,
           "profit": 0.402,
-          "stock": 0.154,
-          "maxFall": 0.2056
+          "stock": 0.139,
+          "maxFall": 0.2148
         },
         "y5": {
-          "pe": 14,
+          "pe": 13,
           "y": 0.017,
           "profit": 0.104,
-          "stock": 0.157,
+          "stock": 0.16,
           "maxFall": 0.3238
         },
         "y10": {
           "pe": 15,
           "y": 0.02,
           "profit": 0.148,
-          "stock": 0.223,
+          "stock": 0.219,
           "maxFall": 0.5133
         }
       },
@@ -2595,11 +2601,11 @@
       "color": "#1A1F71",
       "category": "Financials",
       "now": {
-        "pe": 34,
+        "pe": 35,
         "pef": null,
         "y": 0.007,
         "last": 0.156,
-        "ytd": 0.1549,
+        "ytd": 0.1662,
         "fromHigh": {
           "below": 0,
           "month": "October"
@@ -2608,41 +2614,35 @@
         "capex": 2,
         "then": {
           "w1": {
-            "pe": 32.7,
+            "pe": 33.6,
             "y": 0.007
           },
           "m1": {
-            "pe": 31.5,
+            "pe": 31.3,
             "y": 0.007
           },
           "m3": {
-            "pe": 31.8,
+            "pe": 31.4,
             "y": 0.007
           },
           "m12": {
-            "pe": 32.7,
+            "pe": 33.6,
             "y": 0.007
           }
         },
-        "balance": {
-          "cash": 12.4,
-          "debt": 24,
-          "end": "2026-03-31",
-          "profit": 22.2
-        },
         "margin": 0.527,
         "cheapest": {
-          "month": "2022-10",
-          "req": 0.136
+          "month": "2020-03",
+          "req": 0.137
         },
         "prevYear": 0.828
       },
       "past": {
         "y1": {
-          "pe": 33,
+          "pe": 34,
           "y": 0.007,
           "profit": 0.148,
-          "stock": 0.21,
+          "stock": 0.19,
           "revenueGrowth": 0.1138,
           "maxFall": 0.1718
         },
@@ -2650,7 +2650,7 @@
           "pe": 49,
           "y": 0.006,
           "profit": 0.2,
-          "stock": 0.126,
+          "stock": 0.128,
           "maxFall": 0.2414,
           "revenueGrowth": -0.0103
         },
@@ -2658,7 +2658,7 @@
           "pe": 36,
           "y": 0.007,
           "profit": 0.156,
-          "stock": 0.18,
+          "stock": 0.181,
           "revenueGrowth": 0.0631,
           "maxFall": 0.3636
         }
@@ -2680,7 +2680,7 @@
         "pef": null,
         "y": 0.006,
         "last": 0.168,
-        "ytd": 0.0885,
+        "ytd": 0.0938,
         "fromHigh": {
           "below": 0,
           "month": "October"
@@ -2689,20 +2689,20 @@
         "capex": 1,
         "then": {
           "w1": {
-            "pe": 32.1,
+            "pe": 33,
             "y": 0.006
           },
           "m1": {
-            "pe": 30.9,
+            "pe": 30.8,
             "y": 0.006
           },
           "m3": {
-            "pe": 31.6,
+            "pe": 31.4,
             "y": 0.006
           },
           "m12": {
-            "pe": 36.9,
-            "y": 0.006
+            "pe": 38,
+            "y": 0.005
           }
         },
         "balance": {
@@ -2717,17 +2717,17 @@
         },
         "margin": 0.455,
         "cheapest": {
-          "month": "2026-05",
-          "req": 0.142
+          "month": "2020-03",
+          "req": 0.138
         },
         "prevYear": 0.761
       },
       "past": {
         "y1": {
-          "pe": 37,
-          "y": 0.006,
+          "pe": 38,
+          "y": 0.005,
           "profit": 0.23,
-          "stock": 0.13,
+          "stock": 0.102,
           "revenueGrowth": 0.1459,
           "maxFall": 0.1848
         },
@@ -2735,15 +2735,15 @@
           "pe": 52,
           "y": 0.005,
           "profit": 0.219,
-          "stock": 0.123,
+          "stock": 0.124,
           "revenueGrowth": 0.0256,
           "maxFall": 0.2825
         },
         "y10": {
           "pe": 30,
-          "y": 0.008,
+          "y": 0.007,
           "profit": 0.168,
-          "stock": 0.206,
+          "stock": 0.204,
           "revenueGrowth": 0.0042,
           "maxFall": 0.41
         }
@@ -2765,27 +2765,27 @@
         "pef": null,
         "y": 0.063,
         "last": 0.001,
-        "ytd": 0.1729,
+        "ytd": 0.1663,
         "fromHigh": {
-          "below": 0.1159,
+          "below": 0.1209,
           "month": "September"
         },
         "revenueGrowth": 0.0138,
         "then": {
           "w1": {
-            "pe": 10.8,
-            "y": 0.084
+            "pe": 11.3,
+            "y": 0.065
           },
           "m1": {
-            "pe": 12.9,
-            "y": 0.056
+            "pe": 12.5,
+            "y": 0.058
           },
           "m3": {
-            "pe": 10.6,
+            "pe": 10.5,
             "y": 0.064
           },
           "m12": {
-            "pe": 9.3,
+            "pe": 9.4,
             "y": 0.067
           }
         },
@@ -2802,32 +2802,32 @@
         "margin": 0.117,
         "cheapest": {
           "month": "2023-10",
-          "req": -0.088
+          "req": -0.086
         },
         "prevYear": 1.078
       },
       "past": {
         "y1": {
-          "pe": 9.3,
+          "pe": 9.4,
           "y": 0.067,
           "profit": -0.107,
-          "stock": 0.184,
+          "stock": 0.164,
           "revenueGrowth": 0.0205,
           "maxFall": 0.1779
         },
         "y5": {
           "pe": 11,
-          "y": 0.048,
+          "y": 0.047,
           "profit": -0.045,
-          "stock": 0.034,
+          "stock": 0.027,
           "revenueGrowth": 0.0242,
           "maxFall": 0.3838
         },
         "y10": {
           "pe": 14,
-          "y": 0.045,
+          "y": 0.046,
           "profit": 0.001,
-          "stock": 0.044,
+          "stock": 0.045,
           "revenueGrowth": 0.0088,
           "maxFall": 0.4121
         }
@@ -2849,29 +2849,29 @@
         "pef": null,
         "y": 0.047,
         "last": 0.01,
-        "ytd": -0.0113,
+        "ytd": -0.0122,
         "fromHigh": {
-          "below": 0.1658,
+          "below": 0.1666,
           "month": "March"
         },
         "revenueGrowth": 0.0263,
         "capex": 22,
         "then": {
           "w1": {
-            "pe": 9.5,
-            "y": 0.063
+            "pe": 9.8,
+            "y": 0.049
           },
           "m1": {
-            "pe": 11.1,
-            "y": 0.043
+            "pe": 10.9,
+            "y": 0.044
           },
           "m3": {
             "pe": 9.6,
             "y": 0.051
           },
           "m12": {
-            "pe": 15.1,
-            "y": 0.042
+            "pe": 15,
+            "y": 0.043
           }
         },
         "balance": {
@@ -2887,31 +2887,31 @@
         "margin": 0.116,
         "cheapest": {
           "month": "2018-12",
-          "req": -0.098
+          "req": -0.107
         },
         "prevYear": 0.64
       },
       "past": {
         "y1": {
           "pe": 15,
-          "y": 0.042,
+          "y": 0.043,
           "profit": 0.347,
-          "stock": -0.063,
+          "stock": -0.06,
           "revenueGrowth": 0.0146,
           "maxFall": 0.2889
         },
         "y5": {
           "pe": "loss",
-          "y": 0.107,
-          "stock": 0.1,
+          "y": 0.106,
+          "stock": 0.098,
           "revenueGrowth": 0.005,
           "maxFall": 0.3201
         },
         "y10": {
           "pe": 17,
-          "y": 0.065,
+          "y": 0.066,
           "profit": 0.01,
-          "stock": 0.047,
+          "stock": 0.048,
           "revenueGrowth": 0.2202,
           "maxFall": 0.3943
         }
@@ -2933,29 +2933,29 @@
         "pef": null,
         "y": 0.026,
         "last": 0.365,
-        "ytd": -0.2038,
+        "ytd": -0.2106,
         "fromHigh": {
-          "below": 0.2939,
+          "below": 0.2968,
           "month": "October 2025"
         },
         "revenueGrowth": 0.0968,
         "capex": 10,
         "then": {
           "w1": {
-            "pe": 15.5,
+            "pe": 16.1,
             "y": 0.027
           },
           "m1": {
-            "pe": 18.4,
-            "y": 0.023
+            "pe": 17.6,
+            "y": 0.024
           },
           "m3": {
-            "pe": 20.5,
+            "pe": 20.8,
             "y": 0.02
           },
           "m12": {
-            "pe": 21.4,
-            "y": 0.016
+            "pe": 21.7,
+            "y": 0.015
           }
         },
         "balance": {
@@ -2977,18 +2977,18 @@
       },
       "past": {
         "y1": {
-          "pe": 21,
-          "y": 0.016,
+          "pe": 22,
+          "y": 0.015,
           "profit": -0.097,
-          "stock": -0.283,
+          "stock": -0.3,
           "revenueGrowth": 0.0627,
           "maxFall": 0.3406
         },
         "y5": {
-          "pe": 37,
+          "pe": 38,
           "y": 0,
           "profit": 0.247,
-          "stock": 0.073,
+          "stock": 0.064,
           "revenueGrowth": 0.5336,
           "maxFall": 0.4399
         },
@@ -2996,7 +2996,7 @@
           "pe": 36,
           "y": 0,
           "profit": 0.365,
-          "stock": 0.137,
+          "stock": 0.134,
           "revenueGrowth": 0.0781,
           "maxFall": 0.4399
         }
@@ -3014,31 +3014,31 @@
       "color": "#D52B1E",
       "category": "Health",
       "now": {
-        "pe": 42,
+        "pe": 43,
         "pef": null,
         "y": 0.005,
         "last": 0.165,
-        "ytd": 0.1753,
+        "ytd": 0.2002,
         "fromHigh": {
-          "below": 0.0182,
-          "month": "August"
+          "below": 0,
+          "month": "October"
         },
         "revenueGrowth": 0.4958,
         "then": {
           "w1": {
-            "pe": 39.6,
+            "pe": 39.2,
             "y": 0.006
           },
           "m1": {
-            "pe": 38.2,
+            "pe": 38.7,
             "y": 0.006
           },
           "m3": {
-            "pe": 41.7,
+            "pe": 40.9,
             "y": 0.006
           },
           "m12": {
-            "pe": 53.8,
+            "pe": 53.1,
             "y": 0.007
           }
         },
@@ -3055,24 +3055,24 @@
         "margin": 0.253,
         "cheapest": {
           "month": "2019-10",
-          "req": 0.048
+          "req": 0.049
         },
         "prevYear": 0.395
       },
       "past": {
         "y1": {
-          "pe": 54,
+          "pe": 53,
           "y": 0.007,
           "profit": 0.952,
-          "stock": 0.544,
+          "stock": 0.597,
           "revenueGrowth": 0.3683,
           "maxFall": 0.2318
         },
         "y5": {
-          "pe": 43,
-          "y": 0.014,
+          "pe": 44,
+          "y": 0.013,
           "profit": 0.401,
-          "stock": 0.408,
+          "stock": 0.407,
           "revenueGrowth": 0.1646,
           "maxFall": 0.3448
         },
@@ -3080,7 +3080,7 @@
           "pe": 34,
           "y": 0.026,
           "profit": 0.165,
-          "stock": 0.339,
+          "stock": 0.343,
           "revenueGrowth": 0.0502,
           "maxFall": 0.3448
         }
@@ -3098,32 +3098,32 @@
       "color": "#0071CE",
       "category": "Consumer",
       "now": {
-        "pe": 42,
+        "pe": 41,
         "pef": null,
         "y": 0.008,
         "last": 0.041,
-        "ytd": 0.0732,
+        "ytd": 0.0645,
         "fromHigh": {
-          "below": 0.1126,
+          "below": 0.1197,
           "month": "May"
         },
         "revenueGrowth": 0.0616,
         "capex": 29,
         "then": {
           "w1": {
-            "pe": 39,
+            "pe": 39.3,
             "y": 0.009
           },
           "m1": {
-            "pe": 37.6,
+            "pe": 37.3,
             "y": 0.009
           },
           "m3": {
-            "pe": 44.6,
-            "y": 0.008
+            "pe": 43.5,
+            "y": 0.009
           },
           "m12": {
-            "pe": 42.8,
+            "pe": 43,
             "y": 0.009
           }
         },
@@ -3149,15 +3149,15 @@
           "pe": 43,
           "y": 0.009,
           "profit": 0.148,
-          "stock": 0.125,
+          "stock": 0.11,
           "revenueGrowth": 0.0423,
           "maxFall": 0.2334
         },
         "y5": {
-          "pe": 89,
-          "y": 0.016,
+          "pe": 93,
+          "y": 0.015,
           "profit": 0.403,
-          "stock": 0.22,
+          "stock": 0.209,
           "revenueGrowth": 0.0445,
           "maxFall": 0.2574
         },
@@ -3165,7 +3165,7 @@
           "pe": 15,
           "y": 0.029,
           "profit": 0.041,
-          "stock": 0.199,
+          "stock": 0.198,
           "revenueGrowth": -0.0037,
           "maxFall": 0.2574
         }
@@ -3185,30 +3185,30 @@
       "now": {
         "pe": 30,
         "pef": null,
-        "y": 0.021,
+        "y": 0.02,
         "last": 0.068,
-        "ytd": 0.2548,
+        "ytd": 0.2734,
         "fromHigh": {
-          "below": 0.0821,
+          "below": 0.0685,
           "month": "September"
         },
         "revenueGrowth": 0.0806,
         "capex": 5,
         "then": {
           "w1": {
-            "pe": 30.3,
-            "y": 0.02
+            "pe": 28.8,
+            "y": 0.021
           },
           "m1": {
-            "pe": 31,
+            "pe": 31.3,
             "y": 0.02
           },
           "m3": {
-            "pe": 28.9,
+            "pe": 28.8,
             "y": 0.021
           },
           "m12": {
-            "pe": 20,
+            "pe": 20.1,
             "y": 0.026
           }
         },
@@ -3224,8 +3224,8 @@
         },
         "margin": 0.286,
         "cheapest": {
-          "month": "2024-06",
-          "req": -0.002
+          "month": "2024-05",
+          "req": -0.004
         },
         "prevYear": 0.688
       },
@@ -3234,23 +3234,23 @@
           "pe": 20,
           "y": 0.026,
           "profit": -0.104,
-          "stock": 0.36,
+          "stock": 0.369,
           "revenueGrowth": 0.0468,
           "maxFall": 0.1096
         },
         "y5": {
-          "pe": 24,
-          "y": 0.026,
+          "pe": 25,
+          "y": 0.025,
           "profit": 0.053,
           "stock": 0.127,
           "revenueGrowth": 0.1079,
           "maxFall": 0.1841
         },
         "y10": {
-          "pe": 22,
-          "y": 0.026,
+          "pe": 21,
+          "y": 0.027,
           "profit": 0.068,
-          "stock": 0.111,
+          "stock": 0.115,
           "maxFall": 0.2737
         }
       },
@@ -3267,11 +3267,11 @@
       "color": "#071D49",
       "category": "Health",
       "now": {
-        "pe": 81,
+        "pe": 82,
         "pef": null,
         "y": 0.024,
         "last": 0.01,
-        "ytd": 0.2865,
+        "ytd": 0.303,
         "fromHigh": {
           "below": 0,
           "month": "October"
@@ -3280,20 +3280,20 @@
         "capex": 1,
         "then": {
           "w1": {
-            "pe": 78.1,
+            "pe": 77.5,
             "y": 0.025
           },
           "m1": {
-            "pe": 74.1,
+            "pe": 74.5,
             "y": 0.026
           },
           "m3": {
-            "pe": 125.3,
+            "pe": 124.8,
             "y": 0.027
           },
           "m12": {
-            "pe": 108,
-            "y": 0.029
+            "pe": 110.5,
+            "y": 0.028
           }
         },
         "balance": {
@@ -3309,32 +3309,32 @@
         "margin": 0.078,
         "cheapest": {
           "month": "2020-03",
-          "req": 0.013
+          "req": 0.001
         },
         "prevYear": 0.675
       },
       "past": {
         "y1": {
-          "pe": 108,
-          "y": 0.029,
+          "pe": 110,
+          "y": 0.028,
           "profit": 0.686,
-          "stock": 0.296,
+          "stock": 0.283,
           "revenueGrowth": 0.0605,
           "maxFall": 0.1574
         },
         "y5": {
-          "pe": 30,
+          "pe": 29,
           "y": 0.048,
           "profit": -0.009,
-          "stock": 0.255,
+          "stock": 0.261,
           "revenueGrowth": 0.4831,
           "maxFall": 0.2192
         },
         "y10": {
-          "pe": 17,
-          "y": 0.038,
+          "pe": 18,
+          "y": 0.037,
           "profit": 0.01,
-          "stock": 0.217,
+          "stock": 0.215,
           "maxFall": 0.4509
         }
       },
@@ -3355,7 +3355,7 @@
         "pef": null,
         "y": 0.031,
         "last": 0.016,
-        "ytd": 0.5174,
+        "ytd": 0.5223,
         "fromHigh": {
           "below": 0,
           "month": "October"
@@ -3364,20 +3364,20 @@
         "capex": 18,
         "then": {
           "w1": {
-            "pe": 20.4,
-            "y": 0.033
+            "pe": 20.9,
+            "y": 0.032
           },
           "m1": {
-            "pe": 20.3,
-            "y": 0.033
+            "pe": 20.1,
+            "y": 0.034
           },
           "m3": {
-            "pe": 32,
-            "y": 0.038
+            "pe": 33.1,
+            "y": 0.037
           },
           "m12": {
-            "pe": 19.6,
-            "y": 0.045
+            "pe": 19.9,
+            "y": 0.044
           }
         },
         "balance": {
@@ -3396,24 +3396,24 @@
       "past": {
         "y1": {
           "pe": 20,
-          "y": 0.045,
+          "y": 0.044,
           "profit": 0.344,
-          "stock": 0.541,
+          "stock": 0.519,
           "revenueGrowth": -0.029,
           "maxFall": 0.2081
         },
         "y5": {
-          "pe": 59,
-          "y": 0.048,
+          "pe": 61,
+          "y": 0.046,
           "profit": 0.41,
-          "stock": 0.202,
+          "stock": 0.195,
           "revenueGrowth": 0.0159,
           "maxFall": 0.2495
         },
         "y10": {
           "pe": "loss",
           "y": 0.042,
-          "stock": 0.13,
+          "stock": 0.129,
           "revenueGrowth": -0.3375,
           "maxFall": 0.5577,
           "profit": 0.016
@@ -3436,29 +3436,29 @@
         "pef": null,
         "y": 0.022,
         "last": 0.042,
-        "ytd": 0.3692,
+        "ytd": 0.3633,
         "fromHigh": {
-          "below": 0,
+          "below": 0.0044,
           "month": "October"
         },
         "revenueGrowth": 0.0472,
         "capex": 2,
         "then": {
           "w1": {
+            "pe": 29,
+            "y": 0.023
+          },
+          "m1": {
             "pe": 28.4,
             "y": 0.024
           },
-          "m1": {
-            "pe": 28.3,
-            "y": 0.024
-          },
           "m3": {
-            "pe": 27.4,
-            "y": 0.024
+            "pe": 26.5,
+            "y": 0.025
           },
           "m12": {
-            "pe": 24.3,
-            "y": 0.03
+            "pe": 24.6,
+            "y": 0.029
           }
         },
         "balance": {
@@ -3473,17 +3473,17 @@
         },
         "margin": 0.239,
         "cheapest": {
-          "month": "2020-05",
+          "month": "2020-03",
           "req": 0.061
         },
         "prevYear": 0.775
       },
       "past": {
         "y1": {
-          "pe": 24,
-          "y": 0.03,
+          "pe": 25,
+          "y": 0.029,
           "profit": 0.115,
-          "stock": 0.426,
+          "stock": 0.402,
           "revenueGrowth": 0.0128,
           "maxFall": 0.0787
         },
@@ -3491,7 +3491,7 @@
           "pe": 31,
           "y": 0.031,
           "profit": 0.122,
-          "stock": 0.148,
+          "stock": 0.147,
           "revenueGrowth": 0.0608,
           "maxFall": 0.1727
         },
@@ -3499,7 +3499,7 @@
           "pe": 24,
           "y": 0.033,
           "profit": 0.042,
-          "stock": 0.119,
+          "stock": 0.118,
           "maxFall": 0.3699
         }
       },
@@ -3520,29 +3520,29 @@
         "pef": null,
         "y": 0.027,
         "last": 0.066,
-        "ytd": 0.1367,
+        "ytd": 0.1365,
         "fromHigh": {
-          "below": 0.0326,
+          "below": 0.0328,
           "month": "February"
         },
         "revenueGrowth": 0.0326,
         "capex": 4,
         "then": {
           "w1": {
-            "pe": 22.8,
+            "pe": 23.1,
             "y": 0.028
           },
           "m1": {
-            "pe": 22.2,
+            "pe": 22.1,
             "y": 0.029
           },
           "m3": {
-            "pe": 22.1,
-            "y": 0.028
+            "pe": 21.8,
+            "y": 0.021
           },
           "m12": {
-            "pe": 23,
-            "y": 0.028
+            "pe": 23.3,
+            "y": 0.021
           }
         },
         "balance": {
@@ -3565,25 +3565,25 @@
       "past": {
         "y1": {
           "pe": 23,
-          "y": 0.028,
+          "y": 0.021,
           "profit": 0.017,
-          "stock": 0.096,
-          "revenueGrowth": 0.0029,
+          "stock": 0.079,
+          "revenueGrowth": 0.0045,
           "maxFall": 0.1552
         },
         "y5": {
           "pe": 26,
-          "y": 0.023,
+          "y": 0.024,
           "profit": 0.039,
-          "stock": 0.046,
-          "revenueGrowth": 0.0728,
+          "stock": 0.051,
+          "revenueGrowth": 0.0644,
           "maxFall": 0.2377
         },
         "y10": {
-          "pe": 24,
-          "y": 0.03,
+          "pe": 23,
+          "y": 0.039,
           "profit": 0.066,
-          "stock": 0.09,
+          "stock": 0.093,
           "maxFall": 0.2377
         }
       },
@@ -3604,28 +3604,28 @@
         "pef": null,
         "y": 0.02,
         "last": 0.07,
-        "ytd": 0.0772,
+        "ytd": 0.0718,
         "fromHigh": {
-          "below": 0.036,
+          "below": 0.0409,
           "month": "August"
         },
         "revenueGrowth": 0.2654,
         "capex": 0,
         "then": {
           "w1": {
-            "pe": 26.4,
+            "pe": 26,
             "y": 0.021
           },
           "m1": {
-            "pe": 25.3,
-            "y": 0.022
+            "pe": 26.1,
+            "y": 0.021
           },
           "m3": {
-            "pe": 29.1,
-            "y": 0.02
+            "pe": 28.2,
+            "y": 0.021
           },
           "m12": {
-            "pe": 30.8,
+            "pe": 30.5,
             "y": 0.018
           }
         },
@@ -3642,18 +3642,18 @@
         "margin": 0.257,
         "cheapest": {
           "month": "2018-12",
-          "req": 0.015
+          "req": 0.014
         },
         "prevYear": 0.982
       },
       "past": {
         "y1": {
-          "pe": 31,
+          "pe": 30,
           "y": 0.018,
           "profit": 0.071,
-          "stock": -0.011,
+          "stock": -0.006,
           "revenueGrowth": 0.1545,
-          "maxFall": 0.2039
+          "maxFall": 0.2021
         },
         "y5": {
           "pe": 29,
@@ -3665,9 +3665,9 @@
         },
         "y10": {
           "pe": 19,
-          "y": 0.025,
+          "y": 0.026,
           "profit": 0.07,
-          "stock": 0.151,
+          "stock": 0.152,
           "maxFall": 0.439
         }
       },
@@ -3684,32 +3684,32 @@
       "color": "#002677",
       "category": "Health",
       "now": {
-        "pe": 26,
+        "pe": 27,
         "pef": null,
-        "y": 0.023,
+        "y": 0.022,
         "last": 0.118,
-        "ytd": 0.2401,
+        "ytd": 0.2952,
         "fromHigh": {
-          "below": 0.0744,
+          "below": 0.0332,
           "month": "July"
         },
         "revenueGrowth": 0.0646,
         "capex": 3,
         "then": {
           "w1": {
-            "pe": 24.1,
+            "pe": 24,
             "y": 0.024
           },
           "m1": {
-            "pe": 23.9,
+            "pe": 24,
             "y": 0.024
           },
           "m3": {
-            "pe": 31.6,
+            "pe": 31.5,
             "y": 0.021
           },
           "m12": {
-            "pe": 15.4,
+            "pe": 15.8,
             "y": 0.024
           }
         },
@@ -3726,32 +3726,32 @@
         "margin": 0.04,
         "cheapest": {
           "month": "2025-07",
-          "req": 0.026
+          "req": 0.025
         },
         "prevYear": 0.997
       },
       "past": {
         "y1": {
-          "pe": 15,
+          "pe": 16,
           "y": 0.024,
           "profit": -0.326,
-          "stock": 0.155,
+          "stock": 0.181,
           "revenueGrowth": 0.097,
           "maxFall": 0.2856
         },
         "y5": {
-          "pe": 28,
-          "y": 0.013,
+          "pe": 29,
+          "y": 0.012,
           "profit": 0.005,
-          "stock": 0.005,
+          "stock": 0.011,
           "revenueGrowth": 0.098,
           "maxFall": 0.6139
         },
         "y10": {
-          "pe": 21,
-          "y": 0.017,
+          "pe": 23,
+          "y": 0.016,
           "profit": 0.118,
-          "stock": 0.135,
+          "stock": 0.131,
           "revenueGrowth": 0.2741,
           "maxFall": 0.6139
         }
@@ -3769,33 +3769,33 @@
       "color": "#00857C",
       "category": "Health",
       "now": {
-        "pe": 137,
-        "pef": null,
+        "pe": 140,
+        "pef": 40,
         "y": 0.023,
         "last": 0.075,
-        "ytd": 0.4152,
+        "ytd": 0.438,
         "fromHigh": {
-          "below": 0.0616,
+          "below": 0.0465,
           "month": "August"
         },
         "revenueGrowth": 0.0464,
         "capex": 4,
         "then": {
           "w1": {
-            "pe": 137,
-            "y": 0.023
+            "pe": 133.5,
+            "y": 0.024
           },
           "m1": {
-            "pe": 136.3,
+            "pe": 138.2,
             "y": 0.023
           },
           "m3": {
-            "pe": 37.2,
-            "y": 0.026
+            "pe": 36.3,
+            "y": 0.027
           },
           "m12": {
-            "pe": 12.8,
-            "y": 0.039
+            "pe": 13.2,
+            "y": 0.038
           }
         },
         "balance": {
@@ -3811,24 +3811,25 @@
         "margin": 0.186,
         "cheapest": {
           "month": "2025-05",
-          "req": 0.005
+          "req": 0.006
         },
-        "prevYear": 6.374
+        "prevYear": 6.374,
+        "forecast": 2.468
       },
       "past": {
         "y1": {
           "pe": 13,
-          "y": 0.039,
+          "y": 0.038,
           "profit": -0.837,
-          "stock": 0.79,
+          "stock": 0.768,
           "revenueGrowth": 0.0182,
           "maxFall": 0.1137
         },
         "y5": {
-          "pe": 49,
-          "y": 0.032,
+          "pe": 51,
+          "y": 0.031,
           "profit": -0.077,
-          "stock": 0.168,
+          "stock": 0.163,
           "revenueGrowth": 0.0676,
           "maxFall": 0.4344
         },
@@ -3836,7 +3837,7 @@
           "pe": 34,
           "y": 0.03,
           "profit": 0.075,
-          "stock": 0.128,
+          "stock": 0.13,
           "maxFall": 0.4344
         }
       },
@@ -3844,7 +3845,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -3853,33 +3855,33 @@
       "color": "#FFCD11",
       "category": "Industry",
       "now": {
-        "pe": 32,
-        "pef": null,
-        "y": 0.008,
+        "pe": 31,
+        "pef": 26,
+        "y": 0.006,
         "last": 0.129,
-        "ytd": 0.2834,
+        "ytd": 0.2737,
         "fromHigh": {
-          "below": 0.3125,
+          "below": 0.3177,
           "month": "June"
         },
         "revenueGrowth": 0.1836,
         "capex": 3,
         "then": {
           "w1": {
-            "pe": 34.6,
+            "pe": 33.4,
             "y": 0.008
           },
           "m1": {
-            "pe": 33.8,
+            "pe": 34.9,
             "y": 0.008
           },
           "m3": {
-            "pe": 43.8,
-            "y": 0.007
+            "pe": 43.1,
+            "y": 0.009
           },
           "m12": {
-            "pe": 27.7,
-            "y": 0.011
+            "pe": 27.2,
+            "y": 0.014
           }
         },
         "balance": {
@@ -3895,32 +3897,33 @@
         "margin": 0.15,
         "cheapest": {
           "month": "2020-03",
-          "req": -0.019
+          "req": -0.016
         },
-        "prevYear": 0.949
+        "prevYear": 0.949,
+        "forecast": 0.192
       },
       "past": {
         "y1": {
-          "pe": 28,
-          "y": 0.011,
+          "pe": 27,
+          "y": 0.014,
           "profit": 0.185,
-          "stock": 0.363,
+          "stock": 0.374,
           "revenueGrowth": -0.0487,
-          "maxFall": 0.3125
+          "maxFall": 0.3177
         },
         "y5": {
-          "pe": 25,
+          "pe": 26,
           "y": 0.021,
           "profit": 0.242,
-          "stock": 0.32,
+          "stock": 0.311,
           "revenueGrowth": -0.0138,
           "maxFall": 0.3405
         },
         "y10": {
           "pe": 39,
-          "y": 0.035,
+          "y": 0.044,
           "profit": 0.129,
-          "stock": 0.264,
+          "stock": 0.263,
           "revenueGrowth": -0.2086,
           "maxFall": 0.4336
         }
@@ -3929,7 +3932,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -3942,28 +3946,28 @@
         "pef": null,
         "y": 0.004,
         "last": 0.262,
-        "ytd": 0.5465,
+        "ytd": 0.5436,
         "fromHigh": {
-          "below": 0.3903,
+          "below": 0.3914,
           "month": "June"
         },
         "revenueGrowth": 0.2602,
         "capex": 1,
         "then": {
           "w1": {
-            "pe": 55.4,
-            "y": 0.003
+            "pe": 52.3,
+            "y": 0.004
           },
           "m1": {
-            "pe": 46.7,
+            "pe": 50,
             "y": 0.004
           },
           "m3": {
-            "pe": 60.7,
+            "pe": 58,
             "y": 0.003
           },
           "m12": {
-            "pe": 34.3,
+            "pe": 34.7,
             "y": 0.007
           }
         },
@@ -3980,16 +3984,16 @@
         "margin": 0.291,
         "cheapest": {
           "month": "2018-12",
-          "req": 0.009
+          "req": 0.004
         },
         "prevYear": 0.72
       },
       "past": {
         "y1": {
-          "pe": 34,
+          "pe": 35,
           "y": 0.007,
           "profit": 0.388,
-          "stock": 0.862,
+          "stock": 0.837,
           "revenueGrowth": 0.2368,
           "maxFall": 0.4176
         },
@@ -3997,7 +4001,7 @@
           "pe": 21,
           "y": 0.01,
           "profit": 0.164,
-          "stock": 0.375,
+          "stock": 0.374,
           "revenueGrowth": 0.4561,
           "maxFall": 0.5639
         },
@@ -4005,7 +4009,7 @@
           "pe": 19,
           "y": 0.012,
           "profit": 0.262,
-          "stock": 0.408,
+          "stock": 0.41,
           "maxFall": 0.5639
         }
       },
@@ -4022,13 +4026,13 @@
       "color": "#005EB8",
       "category": "Industry",
       "now": {
-        "pe": 38,
-        "pef": null,
+        "pe": 36,
+        "pef": 29,
         "y": 0.006,
         "last": 0.049,
-        "ytd": 0.0231,
+        "ytd": -0.0224,
         "fromHigh": {
-          "below": 0.1755,
+          "below": 0.2122,
           "month": "August"
         },
         "revenueGrowth": 0.217,
@@ -4039,16 +4043,16 @@
             "y": 0.006
           },
           "m1": {
-            "pe": 37.5,
+            "pe": 37.7,
             "y": 0.005
           },
           "m3": {
-            "pe": 41.4,
+            "pe": 40.9,
             "y": 0.005
           },
           "m12": {
-            "pe": 44.1,
-            "y": 0.005
+            "pe": 44.5,
+            "y": 0.004
           }
         },
         "balance": {
@@ -4062,21 +4066,22 @@
           "years": 10
         },
         "margin": 0.152,
-        "prevYear": 0.654
+        "prevYear": 0.654,
+        "forecast": 0.24
       },
       "past": {
         "y1": {
           "pe": 44,
-          "y": 0.005,
+          "y": 0.004,
           "profit": 0.229,
-          "stock": 0.052,
+          "stock": -0.004,
           "revenueGrowth": -0.4005,
-          "maxFall": 0.2085
+          "maxFall": 0.2122
         },
         "y5": {
           "pe": "loss",
           "y": 0.003,
-          "stock": 0.377,
+          "stock": 0.36,
           "revenueGrowth": -0.1041,
           "maxFall": 0.4494
         },
@@ -4084,7 +4089,7 @@
           "pe": 25,
           "y": 0.032,
           "profit": 0.049,
-          "stock": 0.097,
+          "stock": 0.091,
           "revenueGrowth": -0.0574,
           "maxFall": 0.8094
         }
@@ -4093,7 +4098,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -4102,32 +4108,32 @@
       "color": "#7AB4E2",
       "category": "Chips",
       "now": {
-        "pe": 41,
-        "pef": null,
+        "pe": 40,
+        "pef": 28,
         "y": 0.005,
         "last": 0.273,
-        "ytd": 0.5983,
+        "ytd": 0.5815,
         "fromHigh": {
-          "below": 0.4333,
+          "below": 0.4393,
           "month": "June"
         },
         "revenueGrowth": 0.0777,
         "capex": 3,
         "then": {
           "w1": {
-            "pe": 50.2,
+            "pe": 46,
             "y": 0.004
           },
           "m1": {
-            "pe": 41.1,
-            "y": 0.005
+            "pe": 44,
+            "y": 0.004
           },
           "m3": {
-            "pe": 65,
-            "y": 0.003
+            "pe": 60.9,
+            "y": 0.004
           },
           "m12": {
-            "pe": 28,
+            "pe": 28.1,
             "y": 0.008
           }
         },
@@ -4144,24 +4150,25 @@
         "margin": 0.249,
         "cheapest": {
           "month": "2018-12",
-          "req": 0.015
+          "req": 0.01
         },
-        "prevYear": 0.851
+        "prevYear": 0.851,
+        "forecast": 0.444
       },
       "past": {
         "y1": {
           "pe": 28,
           "y": 0.008,
           "profit": 0.244,
-          "stock": 0.807,
+          "stock": 0.785,
           "revenueGrowth": 0.0655,
-          "maxFall": 0.4333
+          "maxFall": 0.4393
         },
         "y5": {
           "pe": 23,
           "y": 0.007,
           "profit": 0.121,
-          "stock": 0.265,
+          "stock": 0.258,
           "revenueGrowth": 0.3295,
           "maxFall": 0.5514
         },
@@ -4169,7 +4176,7 @@
           "pe": 22,
           "y": 0.014,
           "profit": 0.273,
-          "stock": 0.321,
+          "stock": 0.318,
           "maxFall": 0.5514
         }
       },
@@ -4177,7 +4184,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -4186,32 +4194,32 @@
       "color": "#003087",
       "category": "Consumer",
       "now": {
-        "pe": 29,
-        "pef": null,
-        "y": 0.029,
+        "pe": 28,
+        "pef": 25,
+        "y": 0.03,
         "last": 0.012,
-        "ytd": 0.3126,
+        "ytd": 0.2787,
         "fromHigh": {
-          "below": 0.0018,
+          "below": 0.0276,
           "month": "October"
         },
         "revenueGrowth": 0.0893,
         "capex": 2,
         "then": {
           "w1": {
-            "pe": 28,
+            "pe": 27.8,
             "y": 0.03
           },
           "m1": {
-            "pe": 26.7,
+            "pe": 26.3,
             "y": 0.031
           },
           "m3": {
-            "pe": 26.4,
+            "pe": 26.8,
             "y": 0.031
           },
           "m12": {
-            "pe": 32.1,
+            "pe": 32.5,
             "y": 0.035
           }
         },
@@ -4227,25 +4235,26 @@
         },
         "margin": 0.224,
         "cheapest": {
-          "month": "2020-05",
-          "req": 0.004
+          "month": "2020-03",
+          "req": -0.027
         },
-        "prevYear": 0.591
+        "prevYear": 0.591,
+        "forecast": 0.094
       },
       "past": {
         "y1": {
           "pe": 32,
           "y": 0.035,
           "profit": 0.474,
-          "stock": 0.362,
+          "stock": 0.309,
           "revenueGrowth": 0.0716,
           "maxFall": 0.1854
         },
         "y5": {
           "pe": 17,
-          "y": 0.049,
+          "y": 0.05,
           "profit": 0.048,
-          "stock": 0.213,
+          "stock": 0.21,
           "revenueGrowth": 0.0312,
           "maxFall": 0.2278
         },
@@ -4253,7 +4262,7 @@
           "pe": 23,
           "y": 0.043,
           "profit": 0.012,
-          "stock": 0.133,
+          "stock": 0.131,
           "maxFall": 0.4287
         }
       },
@@ -4261,7 +4270,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -4271,31 +4281,31 @@
       "category": "Consumer",
       "now": {
         "pe": 22,
-        "pef": null,
-        "y": 0.03,
+        "pef": 21,
+        "y": 0.029,
         "last": 0.123,
-        "ytd": -0.0806,
+        "ytd": -0.0644,
         "fromHigh": {
-          "below": 0.191,
+          "below": 0.1767,
           "month": "February"
         },
         "revenueGrowth": 0.025,
         "capex": 4,
         "then": {
           "w1": {
-            "pe": 20.3,
+            "pe": 20.6,
             "y": 0.032
           },
           "m1": {
-            "pe": 21.2,
+            "pe": 21,
             "y": 0.031
           },
           "m3": {
-            "pe": 24.7,
-            "y": 0.027
+            "pe": 23.7,
+            "y": 0.028
           },
           "m12": {
-            "pe": 26.3,
+            "pe": 26.4,
             "y": 0.024
           }
         },
@@ -4312,16 +4322,17 @@
         "margin": 0.092,
         "cheapest": {
           "month": "2020-03",
-          "req": 0.052
+          "req": 0.042
         },
-        "prevYear": 1.043
+        "prevYear": 1.043,
+        "forecast": 0.064
       },
       "past": {
         "y1": {
           "pe": 26,
           "y": 0.024,
           "profit": -0.029,
-          "stock": -0.178,
+          "stock": -0.167,
           "revenueGrowth": 0.0852,
           "maxFall": 0.2654
         },
@@ -4329,7 +4340,7 @@
           "pe": 25,
           "y": 0.018,
           "profit": 0.001,
-          "stock": 0.001,
+          "stock": 0,
           "revenueGrowth": 0.2103,
           "maxFall": 0.3473
         },
@@ -4337,7 +4348,7 @@
           "pe": 21,
           "y": 0.021,
           "profit": 0.123,
-          "stock": 0.121,
+          "stock": 0.123,
           "maxFall": 0.3799
         }
       },
@@ -4345,7 +4356,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -4354,36 +4366,36 @@
       "color": "#FA582D",
       "category": "Software",
       "now": {
-        "pe": 855,
+        "pe": 851,
         "pef": null,
         "y": 0,
         "last": null,
-        "ytd": 0.8567,
+        "ytd": 0.8473,
         "fromHigh": {
-          "below": 0.1855,
+          "below": 0.1896,
           "month": "October"
         },
         "revenueGrowth": 0.2449,
         "capex": 0,
         "then": {
           "w1": {
-            "pe": 1046.9,
+            "pe": 992.6,
             "y": 0
           },
           "m1": {
-            "pe": 939.1,
+            "pe": 909,
             "y": 0
           },
           "m3": {
-            "pe": 307.8,
+            "pe": 303.2,
             "y": 0
           },
           "m12": {
-            "pe": 128.4,
+            "pe": 132.4,
             "y": 0
           }
         },
-        "value": 280,
+        "value": 278,
         "profits": {
           "last": 0.31,
           "sharePay": 1.8,
@@ -4408,24 +4420,24 @@
       },
       "past": {
         "y1": {
-          "pe": 128,
+          "pe": 132,
           "y": 0,
           "profit": -0.75,
-          "stock": 0.664,
+          "stock": 0.606,
           "revenueGrowth": 0.1487,
           "maxFall": 0.3601
         },
         "y5": {
           "pe": "loss",
           "y": 0,
-          "stock": 0.322,
+          "stock": 0.319,
           "revenueGrowth": 0.2487,
           "maxFall": 0.3601
         },
         "y10": {
           "pe": "loss",
           "y": 0,
-          "stock": 0.299,
+          "stock": 0.3,
           "revenueGrowth": 0.4854,
           "maxFall": 0.4798
         }
@@ -4444,32 +4456,32 @@
       "category": "Industry",
       "now": {
         "pe": 34,
-        "pef": null,
+        "pef": 31,
         "y": 0.015,
         "last": -0.024,
-        "ytd": 0.0688,
+        "ytd": 0.0656,
         "fromHigh": {
-          "below": 0.14,
+          "below": 0.1426,
           "month": "August"
         },
         "revenueGrowth": 0.1184,
         "capex": 3,
         "then": {
           "w1": {
-            "pe": 32.7,
+            "pe": 32.2,
             "y": 0.015
           },
           "m1": {
-            "pe": 34.7,
-            "y": 0.014
+            "pe": 34.2,
+            "y": 0.015
           },
           "m3": {
             "pe": 36.5,
             "y": 0.014
           },
           "m12": {
-            "pe": 34.5,
-            "y": 0.017
+            "pe": 35.3,
+            "y": 0.016
           }
         },
         "balance": {
@@ -4485,24 +4497,25 @@
         "margin": 0.062,
         "cheapest": {
           "month": "2020-03",
-          "req": 0.029
+          "req": 0.018
         },
-        "prevYear": 0.625
+        "prevYear": 0.625,
+        "forecast": 0.085
       },
       "past": {
         "y1": {
           "pe": 35,
-          "y": 0.017,
+          "y": 0.016,
           "profit": 0.248,
-          "stock": 0.253,
+          "stock": 0.221,
           "revenueGrowth": 0.1544,
           "maxFall": 0.2006
         },
         "y5": {
           "pe": 51,
-          "y": 0.022,
+          "y": 0.021,
           "profit": 0.26,
-          "stock": 0.189,
+          "stock": 0.186,
           "revenueGrowth": 0.2848,
           "maxFall": 0.3284
         },
@@ -4518,7 +4531,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -4528,31 +4542,31 @@
       "category": "Health",
       "now": {
         "pe": 37,
-        "pef": null,
+        "pef": 34,
         "y": 0.003,
         "last": 0.143,
-        "ytd": 0.1941,
+        "ytd": 0.1895,
         "fromHigh": {
-          "below": 0.0093,
+          "below": 0.0131,
           "month": "October"
         },
         "revenueGrowth": 0.0723,
         "capex": 2,
         "then": {
           "w1": {
-            "pe": 35.6,
+            "pe": 35.9,
             "y": 0.003
           },
           "m1": {
-            "pe": 35.1,
+            "pe": 35.2,
             "y": 0.003
           },
           "m3": {
-            "pe": 29.9,
+            "pe": 29,
             "y": 0.003
           },
           "m12": {
-            "pe": 31.1,
+            "pe": 31.5,
             "y": 0.003
           }
         },
@@ -4568,25 +4582,26 @@
         },
         "margin": 0.146,
         "cheapest": {
-          "month": "2021-05",
-          "req": 0.125
+          "month": "2025-06",
+          "req": 0.123
         },
-        "prevYear": 0.892
+        "prevYear": 0.892,
+        "forecast": 0.097
       },
       "past": {
         "y1": {
           "pe": 31,
           "y": 0.003,
           "profit": 0.071,
-          "stock": 0.29,
+          "stock": 0.268,
           "revenueGrowth": 0.0205,
           "maxFall": 0.3138
         },
         "y5": {
-          "pe": 27,
+          "pe": 28,
           "y": 0.002,
           "profit": -0.03,
-          "stock": 0.037,
+          "stock": 0.029,
           "revenueGrowth": 0.4573,
           "maxFall": 0.4095
         },
@@ -4594,7 +4609,7 @@
           "pe": 30,
           "y": 0.004,
           "profit": 0.143,
-          "stock": 0.167,
+          "stock": 0.166,
           "revenueGrowth": 0.0446,
           "maxFall": 0.4095
         }
@@ -4603,7 +4618,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -4613,32 +4629,32 @@
       "category": "Chips",
       "now": {
         "pe": 42,
-        "pef": null,
-        "y": 0.021,
+        "pef": 35,
+        "y": 0.02,
         "last": 0.093,
-        "ytd": 0.6204,
+        "ytd": 0.6281,
         "fromHigh": {
-          "below": 0.1637,
+          "below": 0.1597,
           "month": "June"
         },
         "revenueGrowth": 0.1666,
         "capex": 3,
         "then": {
           "w1": {
-            "pe": 43.1,
+            "pe": 43.7,
             "y": 0.02
           },
           "m1": {
-            "pe": 39.6,
-            "y": 0.022
+            "pe": 40.5,
+            "y": 0.021
           },
           "m3": {
-            "pe": 49.8,
-            "y": 0.019
+            "pe": 48.6,
+            "y": 0.02
           },
           "m12": {
-            "pe": 32.1,
-            "y": 0.031
+            "pe": 32.8,
+            "y": 0.03
           }
         },
         "balance": {
@@ -4654,32 +4670,33 @@
         "margin": 0.321,
         "cheapest": {
           "month": "2022-10",
-          "req": 0.054
+          "req": 0.062
         },
-        "prevYear": 0.79
+        "prevYear": 0.79,
+        "forecast": 0.196
       },
       "past": {
         "y1": {
-          "pe": 32,
-          "y": 0.031,
+          "pe": 33,
+          "y": 0.03,
           "profit": 0.203,
-          "stock": 0.616,
+          "stock": 0.587,
           "revenueGrowth": 0.0362,
           "maxFall": 0.2337
         },
         "y5": {
-          "pe": 27,
-          "y": 0.021,
+          "pe": 28,
+          "y": 0.02,
           "profit": -0.017,
-          "stock": 0.104,
+          "stock": 0.099,
           "revenueGrowth": 0.2245,
           "maxFall": 0.3341
         },
         "y10": {
-          "pe": 23,
+          "pe": 24,
           "y": 0.022,
           "profit": 0.093,
-          "stock": 0.182,
+          "stock": 0.18,
           "maxFall": 0.3341
         }
       },
@@ -4687,7 +4704,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -4696,13 +4714,13 @@
       "color": "#005E60",
       "category": "Industry",
       "now": {
-        "pe": 43,
-        "pef": null,
+        "pe": 41,
+        "pef": 51,
         "y": 0.002,
         "last": null,
-        "ytd": 0.4121,
+        "ytd": 0.3648,
         "fromHigh": {
-          "below": 0.2159,
+          "below": 0.2422,
           "month": "June"
         },
         "revenueGrowth": 0.1298,
@@ -4713,16 +4731,16 @@
             "y": 0.002
           },
           "m1": {
-            "pe": 42.7,
+            "pe": 43.4,
             "y": 0.002
           },
           "m3": {
-            "pe": 50.3,
+            "pe": 52.5,
             "y": 0.002
           },
           "m12": {
-            "pe": 145.8,
-            "y": 0.001
+            "pe": 143.8,
+            "y": 0.002
           }
         },
         "balance": {
@@ -4737,14 +4755,15 @@
           "req": 0.198,
           "since": "2024"
         },
-        "prevYear": 0.258
+        "prevYear": 0.258,
+        "forecast": -0.195
       },
       "past": {
         "y1": {
-          "pe": 146,
-          "y": 0.001,
+          "pe": 144,
+          "y": 0.002,
           "profit": 4.243,
-          "stock": 0.534,
+          "stock": 0.501,
           "maxFall": 0.2554,
           "revenueGrowth": 0.0845
         }
@@ -4753,7 +4772,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -4762,33 +4782,33 @@
       "color": "#0063C3",
       "category": "Health",
       "now": {
-        "pe": 28,
-        "pef": null,
+        "pe": 29,
+        "pef": 27,
         "y": 0.023,
         "last": 0.043,
-        "ytd": 0.3484,
+        "ytd": 0.3685,
         "fromHigh": {
-          "below": 0.0262,
+          "below": 0.0117,
           "month": "September"
         },
         "revenueGrowth": 0.091,
         "capex": 2,
         "then": {
           "w1": {
-            "pe": 27,
+            "pe": 26.9,
             "y": 0.024
           },
           "m1": {
-            "pe": 24.5,
+            "pe": 25.1,
             "y": 0.026
           },
           "m3": {
-            "pe": 27.3,
-            "y": 0.026
+            "pe": 26.8,
+            "y": 0.027
           },
           "m12": {
-            "pe": 24.1,
-            "y": 0.032
+            "pe": 24.7,
+            "y": 0.031
           }
         },
         "balance": {
@@ -4806,22 +4826,23 @@
           "month": "2019-05",
           "req": 0.031
         },
-        "prevYear": 0.494
+        "prevYear": 0.494,
+        "forecast": 0.065
       },
       "past": {
         "y1": {
-          "pe": 24,
-          "y": 0.032,
+          "pe": 25,
+          "y": 0.031,
           "profit": 0.254,
-          "stock": 0.503,
+          "stock": 0.487,
           "revenueGrowth": 0.1288,
           "maxFall": 0.1657
         },
         "y5": {
-          "pe": 21,
+          "pe": 22,
           "y": 0.033,
           "profit": 0.098,
-          "stock": 0.194,
+          "stock": 0.196,
           "revenueGrowth": 0.0487,
           "maxFall": 0.2486
         },
@@ -4829,7 +4850,7 @@
           "pe": 17,
           "y": 0.023,
           "profit": 0.043,
-          "stock": 0.137,
+          "stock": 0.139,
           "revenueGrowth": 0.0823,
           "maxFall": 0.2486
         }
@@ -4838,7 +4859,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -4847,11 +4869,11 @@
       "color": "#EC0000",
       "category": "Software",
       "now": {
-        "pe": 31280,
+        "pe": 31278,
         "pef": null,
         "y": 0,
         "last": null,
-        "ytd": 0.9404,
+        "ytd": 0.9402,
         "fromHigh": {
           "below": 0.1846,
           "month": "October"
@@ -4859,11 +4881,11 @@
         "capex": 0,
         "then": {
           "w1": {
-            "pe": 37835.2,
+            "pe": 35932.7,
             "y": 0
           },
           "m1": {
-            "pe": 33202.1,
+            "pe": 32691.8,
             "y": 0
           }
         },
@@ -4888,13 +4910,13 @@
         "y1": {
           "pe": "loss",
           "y": 0,
-          "stock": 0.886,
+          "stock": 0.806,
           "maxFall": 0.3718
         },
         "y5": {
           "pe": "loss",
           "y": 0,
-          "stock": 0.272,
+          "stock": 0.263,
           "maxFall": 0.6769
         }
       },
@@ -4902,7 +4924,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {
@@ -4912,31 +4935,31 @@
       "category": "Industry",
       "now": {
         "pe": 32,
-        "pef": null,
+        "pef": 32,
         "y": 0.013,
         "last": null,
-        "ytd": 0.1805,
+        "ytd": 0.1887,
         "fromHigh": {
-          "below": 0.0852,
+          "below": 0.0788,
           "month": "July"
         },
         "revenueGrowth": 0.0663,
         "capex": 6,
         "then": {
           "w1": {
-            "pe": 31.2,
+            "pe": 31.7,
             "y": 0.013
           },
           "m1": {
-            "pe": 29.8,
+            "pe": 29.7,
             "y": 0.014
           },
           "m3": {
-            "pe": 34.5,
+            "pe": 34,
             "y": 0.012
           },
           "m12": {
-            "pe": 31.6,
+            "pe": 32.1,
             "y": 0.013
           }
         },
@@ -4952,25 +4975,26 @@
         },
         "margin": 0.197,
         "cheapest": {
-          "month": "2019-04",
-          "req": 0.053
+          "month": "2019-03",
+          "req": 0.045
         },
-        "prevYear": 0.879
+        "prevYear": 0.879,
+        "forecast": 0.019
       },
       "past": {
         "y1": {
           "pe": 32,
           "y": 0.013,
           "profit": 0.102,
-          "stock": 0.137,
+          "stock": 0.127,
           "revenueGrowth": 0.0128,
           "maxFall": 0.1603
         },
         "y5": {
-          "pe": 49,
+          "pe": 50,
           "y": 0.013,
           "profit": 0.2,
-          "stock": 0.116,
+          "stock": 0.115,
           "revenueGrowth": 0.0646,
           "maxFall": 0.2282
         }
@@ -4979,7 +5003,8 @@
         "pe": "sec-eod",
         "y": "sec-eod",
         "last": "sec-eod",
-        "past": "sec-eod"
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     },
     {

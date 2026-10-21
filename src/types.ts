@@ -105,7 +105,7 @@ export interface EraFigures {
   inflation?: { decade: number; year: number; lost: number; since: string; month: string };
   /** The bond on each Compare over time date (now only). */
   bondThen?: Partial<Record<Compare, number>>;
-  spx: { pe: Fig; pef?: Fig; y: number; last?: number; profit?: number; stock?: number };
+  spx: { pe: Fig; pef?: Fig; y: number; last?: number; profit?: number; stock?: number; /** today: gains on investments taken out of its profit, as a share of it */ gainsShare?: number };
 }
 
 export interface Figures {
