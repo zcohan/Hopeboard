@@ -8,6 +8,10 @@ export interface Source {
   eod: string;
   fx?: string;
   perShare?: number;
+  /** When `perShare` changed (Alibaba split its shares eight for one in July 2019, its US shares unchanged; Toyota's
+   * five-for-one split in 2021): the ratio
+   * for figures filed before `filedBefore`. */
+  perShareEarlier?: { filedBefore: string; perShare: number };
   forecast?: false;
   /** Alpha Vantage's symbol when it differs from `id`. */
   av?: string;
@@ -28,6 +32,13 @@ export interface Source {
 }
 
 const us = (id: string, ...cik: number[]): Source => ({ id, cik, eod: `${id}.US` });
+
+/** An IFRS company's yearly figures, read from its filed reports when the SEC summary lags. */
+const IFRS_ANNUAL: Source['supplement'] = [
+  { concept: 'ifrs-full:DilutedEarningsLossPerShare', as: 'DilutedEarningsLossPerShare' }, { concept: 'ifrs-full:Revenue', as: 'Revenue' },
+  { concept: 'ifrs-full:ProfitLossAttributableToOwnersOfParent', as: 'ProfitLossAttributableToOwnersOfParent' },
+  { concept: 'ifrs-full:CashAndCashEquivalents', as: 'CashAndCashEquivalents' },
+];
 
 export const SOURCES: Source[] = [
   us('TSLA', 1318605),
@@ -134,4 +145,28 @@ export const SOURCES: Source[] = [
   us('AMGN', 318154),
   us('CRWD', 1535527),
   us('LIN', 1707925),
+  // companies based outside the US, added October 2026. Toyota and Sony report in yen under IFRS; their latest annual
+  // reports are missing from the SEC summary, so they're read from the filings too. One Toyota US share is ten of its
+  // shares; one Alibaba US share is eight, one PDD (Temu) US share four.
+  // Toyota split its shares five for one in October 2021: one US share was two shares before
+  { ...us('TM', 1094517), fx: 'USDJPY.FOREX', perShare: 10, perShareEarlier: { filedBefore: '2021-10-01', perShare: 2 },
+    // its US GAAP years (to March 2020) with its IFRS ones, so there's a decade of profit to compare
+    supplement: [...IFRS_ANNUAL!, { concept: 'us-gaap:EarningsPerShareDiluted', as: 'DilutedEarningsLossPerShare' }] },
+  // Sony: profit from its continuing businesses. Spinning off its finance arm (October 2025) put a ¥1.4 trillion loss
+  // on discontinued operations in its year to March 2026, which would show Sony as losing money
+  {
+    ...us('SONY', 313838), fx: 'USDJPY.FOREX',
+    supplement: [
+      { concept: 'ifrs-full:DilutedEarningsLossPerShareFromContinuingOperations', as: 'DilutedEarningsLossPerShare' }, { concept: 'ifrs-full:Revenue', as: 'Revenue' },
+      { concept: 'ifrs-full:ProfitLossFromContinuingOperationsAttributableToOwnersOfParent', as: 'ProfitLossAttributableToOwnersOfParent' },
+      { concept: 'ifrs-full:CashAndCashEquivalents', as: 'CashAndCashEquivalents' },
+    ],
+  },
+  { ...us('RACE', 1648416), fx: 'EURUSD.FOREX' },
+  { ...us('BABA', 1577552), fx: 'USDCNY.FOREX', perShare: 8, perShareEarlier: { filedBefore: '2019-07-30', perShare: 1 } },
+  { ...us('PDD', 1737806), fx: 'USDCNY.FOREX', perShare: 4 },
+  // Wise trades on Nasdaq as WSE (since May 2026), and files its profit per share in cents
+  { ...us('WSE', 2099039), perShare: 0.01 },
+  us('TEAM', 1650372),
+  us('ARM', 1973239),
 ];

@@ -112,7 +112,7 @@ In past views, the gap between profit growth and the stock's return is the chang
 - **The chart and the stock's past return as a headline.** A past return appears only in past views, and always next to profit growth, so the reader sees which part was the business and which part was people paying more.
 - **Product excitement.** "The new chip is incredible" is not a reason. "Makes almost all of the most advanced AI chips" is: it explains why people pay.
 - **News flow.** A week's headlines go stale. Write the belief underneath ("Investors doubt Google search holds up against AI chatbots"), not the event ("Google unveiled X on Tuesday").
-- **Prices.** Never a dollar share price, and no dollar price for gold. The board's units are years of profit and percentages. Company-wide dollar amounts (profit, revenue, spending, value) are fine, and so is the oil price on oil companies.
+- **Prices.** Never a dollar share price, and no dollar price for gold. The board's units are years of profit and percentages. Company-wide dollar amounts (profit, revenue, spending) are fine, and so is the oil price on oil companies. A company's total value is a price too: leave it off the card and show the profit it assumes instead (owner, October 2026, on the pre-IPO cards' "Valued at $965 billion").
 - **Our opinion of the company.** "A great business" or "a fading brand" is opinion. Say what the price assumes and what the record shows.
 - **Who said it.** No "analysts warn", "critics say", "bulls argue". If a belief is in the price, state it as what the price assumes. (The analysts' forecast note is the exception: it is a figure, and it says whose.)
 
@@ -261,7 +261,7 @@ What the business earns each year as a share of its price, against the safe US b
 
 - Percentages only, against the bond. Never "each $100 buys" (the owner prefers percentages to dollar amounts).
 - The dividend note appears only when dividends are 3% or more (section 3.5).
-- On cards with little or no profit, Earns is the card's own line in dollars instead: there's no profit to put against the bond.
+- On cards with little or no profit, the row is labelled PROFIT and is the card's own line in dollars instead: there's no profit to put against the bond. It leads with the profit or loss; revenue is only ever context under it, and never sits under Earns (owner, October 2026). When the profit isn't published, the headline says **Unknown** and the note says why.
 - The S&P 500 has its own wording: "of an index fund's price a year".
 
 ### 8.3 Priced for (`assumes`)
@@ -283,13 +283,13 @@ The profit growth a year the price assumes, as a headline, then notes:
 - No decade of profit: the headline alone (`**{reqSigned}**/year growth`). The fact goes in the bubble: "Profitable only since 2023, so there's little record to go on".
 - Profit allowed to shrink: the record in plain words, "Over the last decade it shrank 1%/year". When the record rounds to 0%, "Over the last decade its profit barely changed" (Verizon); a test checks it still rounds to 0%.
 
-**Cards in dollars.** A company that lost money, or earns under 0.2% of its price (more than 500 years of profit), sits in Little or no profit and is priced in dollars. It keeps the three sections, and the corner shows no years figure. Earns comes from the card's own `earns` line: what it made or lost, in dollars. Priced for is the profit the price assumes by 2036, with `{reqProfitTimes}` (" (700x last year's profit)", from the two figures as printed) when there was a profit. Then one anchor the reader knows:
+**Cards in dollars.** A company that lost money, or earns under 0.2% of its price (more than 500 years of profit), sits in Little or no profit and is priced in dollars. It keeps the three sections, and the corner shows no years figure. Its first row, labelled PROFIT, comes from the card's own `earns` line: what it made or lost, in dollars. Priced for is the profit the price assumes by 2036, with `{reqProfitTimes}` (" (700x last year's profit)", from the two figures as printed) when there was a profit. Then one anchor the reader knows:
 
-> **EARNS** Almost nothing: **$50 million** last year, after paying staff $1.2 billion in shares
+> **PROFIT** Almost nothing: **$50 million** last year, after paying staff $1.2 billion in shares
 > **PRICED FOR** **$35 billion** profit/year by 2036 (700x last year's profit)
 > **RISK** If profit only reaches the $2 billion a year it makes before paying staff in shares, you may lose **85% of your investment**.
 
-> **EARNS** Lost **$11 billion** last year
+> **PROFIT** Lost **$11 billion** last year
 > **PRICED FOR** **$65 billion** profit/year by 2036 / Its best years were $21 billion.
 
 ### 8.3a Finances (shared, `company-lines`)
@@ -321,6 +321,7 @@ One if-then sentence: the scenario, then `{outcome}`. The owner tried the result
 - `{corrects}` goes straight after the scenario. On Pricey cards it writes " & the story fades", because buyers going back to an ordinary 18 years of profit is most of the loss there; the Methodology page says so once. Elsewhere it writes nothing. Every card uses it, Tesla included (owner, October 2026).
 - `{reqTimes}` follows the Priced for headline on today's cards: " (5.5x today's profit by 2036)", what the growth adds up to over ten years (the owner prefers "x" to "times"). Left off under 4%/year. Halves under 10x, whole numbers above.
 - The label is RISK when you'd make less than the safe US bond (a loss counts as less), and CUSHION when you'd make at least as much. The app sets it.
+- Cushion means a margin of safety. A card with little or no profit never gets one, even when its scenario beats the bond: the app always labels it RISK, and when its scenario beats the bond the label is POTENTIAL instead: "If profit reaches Alphabet's level ($124 billion/year), you'd make **3.5%/year more** than the safe US bond" (owner, October 2026: "a WeWork would never be a cushion"). No "still" there: it's a big if, not reassurance.
 
 Forms the app writes for `{outcome}`:
 

@@ -15,10 +15,10 @@ export type Basis = 't' | 'f'; // last year's profit, next year's forecast
 export type Compare = 'w1' | 'm1' | 'm3' | 'm12';
 export const COMPARES: Compare[] = ['w1', 'm1', 'm3', 'm12'];
 
-export type Category = 'Chips' | 'Software' | 'Internet' | 'Hardware' | 'Health' | 'Consumer' | 'Financials' | 'Industry' | 'Telecoms' | 'Other';
+export type Category = 'Chips' | 'Software' | 'Internet' | 'Hardware' | 'Health' | 'Consumer' | 'Financials' | 'Industry' | 'Telecoms' | 'Other' | 'Private';
 /** The "Magnificent 7": the seven giant US tech companies, a filter of its own on top of the industries. */
 export const MAG7 = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'NVDA', 'META', 'TSLA'];
-export const CATEGORIES: Category[] = ['Chips', 'Software', 'Internet', 'Hardware', 'Health', 'Consumer', 'Financials', 'Industry', 'Telecoms', 'Other'];
+export const CATEGORIES: Category[] = ['Chips', 'Software', 'Internet', 'Hardware', 'Health', 'Consumer', 'Financials', 'Industry', 'Telecoms', 'Other', 'Private'];
 
 export interface Source {
   name: string;
@@ -84,6 +84,10 @@ export interface Company {
   past: Partial<Record<PastEra, PastFigures>>;
   /** Which source each group of figures comes from (keys into Figures.sources). */
   src: { pe: string; y: string; last?: string; past?: string };
+  /** Not listed: valued by its latest funding round or share sale, with figures the company or the press reported.
+   * Its card links to the company's own site. `unranked`: profitable by its own account but with no profit figure
+   * published, so it sits in no section and shows only under All. */
+  private?: { site: string; unranked?: boolean };
 }
 
 export interface EraFigures {

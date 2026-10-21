@@ -17,6 +17,13 @@ If something is not in these files, ask the owner.
 
 The owner talks to you directly in this session. There is no other channel and nobody in between, so ask questions here and do not wait on anyone else.
 
+- **Before showing the owner any card, new or changed,** go through these four checks. Passing tests doesn't count as checking; they catch banned words and broken figures, not meaning.
+  1. Read the writing guide's section for each card part you touched.
+  2. Read every label and headline as an ordinary reader would, and ask what they would conclude. A card can be right in every figure and still mislead. For example, a best case labelled Cushion on a company losing money reads as safe; revenue under a profit label reads as profit.
+  3. Check every number: is its unit clear (a one-off figure against a figure per year), is it a price in disguise (a company's total value is a price too), and is its scenario anchored and realistic?
+  4. When copying an existing card or pattern, ask whether it still fits the new case before reusing it.
+
+  Then tell the owner what you checked and anything you're unsure of. "Prototype" or "for critique" doesn't lower the bar: the owner should be critiquing the idea, not catching mistakes.
 - **Copy follows the writing guide.** The owner does not approve each phrase. The AI writes card copy to `docs/writing-guide.md`, and the owner reviews the guide. When a case isn't covered, write in its spirit, add a line to the entry's `notes`, and propose a guide addition. Keep all card copy in `data/cards.json`, separate from layout code. `npm test` checks the guide's word lists and the no-share-price rule.
 - **Accuracy.** The owner holds a high standard. Every figure needs a named source and is computed from data, never typed in. Mark rough estimates with ≈; no ~ on rounded figures (the footer says once that figures are rounded). Flag soft claims on the card or in the footer.
 - **Open items are the owner's calls.** Bring them up yourself, one at a time, in the order the build needs them.

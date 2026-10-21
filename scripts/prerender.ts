@@ -105,6 +105,12 @@ const boardMd = [
     const ts = tiles(r.companies);
     return ts.length ? [`## ${S(sec)}`, '', ...ts.map(tileMd).flatMap((t) => [t, ''])] : [];
   }),
+  // companies in no section (a private company with no profit figure published): only under All
+  ...(() => {
+    const inSections = SECTIONS.map((sec) => renderBoard(F, C, { ...state, section: sec }).companies).join('');
+    const rest = tiles(renderBoard(F, C, { ...state, section: 'every' }).companies).filter((t) => !inSections.includes(t.match(/data-copy="[^"]+"/)![0]));
+    return rest.length ? [`## ${S('unranked')}`, '', ...rest.map(tileMd).flatMap((t) => [t, ''])] : [];
+  })(),
 ].join('\n');
 
 function pageMd(id: 'philosophy' | 'methodology'): string {
@@ -131,4 +137,9 @@ writeFileSync('dist/llms.txt', [
   `- [Philosophy](${SITE}/philosophy.md): how the board thinks about investing and stock prices`,
   `- [Methodology](${SITE}/methodology.md): the formula, data sources and rules behind every figure`, '',
 ].join('\n'));
-console.log('prerendered: /, /philosophy, /methodology, their markdown, and llms.txt');
+// for search engines: every page, when the figures last changed, and where the list is
+const day = new Date().toISOString().slice(0, 10);
+writeFileSync('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${ROUTES.map((r) =>
+  `  <url><loc>${SITE}${path(r)}</loc><lastmod>${day}</lastmod><changefreq>${r === 'board' ? 'daily' : 'weekly'}</changefreq></url>`).join('\n')}\n</urlset>\n`);
+writeFileSync('dist/robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+console.log('prerendered: /, /philosophy, /methodology, their markdown, llms.txt, sitemap.xml and robots.txt');

@@ -258,7 +258,8 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         // analysts' forecast always starts its own line); Earns keeps one note per line
         const notes = f === 'assumes' ? lines.slice(1).join('\n').split('\n\n').map((g) => g.split('\n').join(' ')).filter(Boolean) : lines.slice(1);
         const shaped = f === 'farm' || f === 'assumes' || f === 'balance' ? [`<span class="headline">${lines[0]}</span>`, ...notes.map((l) => `<span class="note">${l}</span>`)].join('') : html;
-        return { label: (labelKey ? labels[labelKey] : good ? labels.consequenceGood : labels[f]) ?? '', html: shaped, cls: f };
+        const key = labelKey === 'lossConsequence' ? (good ? 'consequencePotential' : 'consequence') : labelKey ?? (good ? 'consequenceGood' : f);
+        return { label: labels[key] ?? '', html: shaped, cls: f };
       });
   };
 
@@ -339,6 +340,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
   let board = '';
 
   const buckets: Record<Section, { sort: number; html: string }[]> = { pricey: [], normal: [], bargain: [], loss: [] };
+  const unranked: string[] = [];
   if (s.era === 'now') {
     for (const co of F.companies.filter(inCategory)) {
       const id = `${co.id}:now`;
@@ -362,18 +364,22 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
           const earnsNow = mm.section !== 'loss' && mm.shown(basis) !== null;
           const tpl: ([string, string | undefined] | [string, string | undefined, string])[] = [
             // little or no profit: the card's own line on what it made (or lost), in dollars
-            ['farm', earnsNow ? (shared?.farm as string | undefined) : (e.earns as string | undefined)],
+            // labelled Profit there: the line is the company's profit or loss in dollars, never its revenue
+            earnsNow ? ['farm', shared?.farm as string | undefined] : ['farm', e.earns as string | undefined, 'profit'],
             // the analysts' forecast sits under the requirement as a note, so the two growth figures read together
             // notes under Priced for: what its price assumed ten years ago against what profit did (replacing the
             // last-decade note, which would say the same growth twice; its qualifier, like "ending on a boom year",
             // moves onto the new sentence), then the analysts' forecast
             ['assumes', e.assumes === undefined ? undefined : priced(e.assumes as string, mm.section !== 'loss' && pastModel(c, 'y10')?.req != null && c.now.last != null ? shared?.trackNote as string | undefined : undefined)
               + (c.now.forecast !== undefined && c.now.forecast !== null && shared?.forecast ? `\n\n${shared.forecast as string}` : '')],
-            ['consequence', e.consequence as string | undefined],
+            // little or no profit: never a cushion. The line says what a big jump in profit would bring, so when that
+            // beats the bond it's labelled Potential, else Risk
+            mm.section === 'loss' ? ['consequence', e.consequence as string | undefined, 'lossConsequence'] : ['consequence', e.consequence as string | undefined],
           ];
           return { tk, price, facts: facts(id, tk, tpl) };
         };
         const today = card(co, F, s.basis);
+        // no Finances for a private company: it publishes no balance sheet, dividends or share count to show
         const compare = comparePanel(co, m.req('t'), m.section);
         // the card as it was on each Compare over time date: that day's years of profit, dividend and bond;
         // no forecast (the board keeps only today's)
@@ -387,10 +393,12 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
           const v = card(was, FF, 't');
           return [{ w, price: v.price, facts: v.facts }];
         }) : undefined;
-        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, href: yahoo(co.id), about: aboutOf(copy, co.id), price: today.price, lines: [], facts: today.facts, at, extra: financesBubble(co, m.section, shared, today.tk, id, e), compare, why: { heading: heading(m.section), bullets: bulletsOf(e, today.tk) } }, copy);
+        return tile({ id, badge: co.id, logo: HAS_LOGO.has(co.id) ? co.id : undefined, color: co.color, name: co.name, href: co.private?.site ?? yahoo(co.id), about: aboutOf(copy, co.id), price: today.price, lines: [], facts: today.facts, at, extra: co.private ? undefined : financesBubble(co, m.section, shared, today.tk, id, e), compare, why: { heading: heading(m.section), bullets: bulletsOf(e, today.tk) } }, copy);
       });
       // not profitable: the most years of profit first, and an outright loss (no years to count) ahead of those
-      if (html) buckets[m.section].push({ sort: m.section === 'loss' ? m.pe.v ?? Infinity : m.sectionReq ?? -Infinity, html });
+      // a private company with no profit figure published can't be put in a section: All only, at the end
+      if (html && co.private?.unranked) unranked.push(html);
+      else if (html) buckets[m.section].push({ sort: m.section === 'loss' ? m.pe.v ?? Infinity : m.sectionReq ?? -Infinity, html });
     }
 
   } else {
@@ -421,16 +429,19 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
   const sorted = (sec: Section) => buckets[sec].sort((a, b) => b.sort - a.sort).map((x) => x.html);
   const counts = Object.fromEntries(SECTIONS.map((sec) => [sec, buckets[sec].length])) as Record<Section, number>;
   const label = (sec: Section) => copy.label('sections', s.era === 'now' ? sec : `${sec}Then`);
-  if (s.section === 'all') for (const sec of SECTIONS) board += section(label(sec), sorted(sec));
+  if (s.section === 'all') {
+    for (const sec of SECTIONS) board += section(label(sec), sorted(sec));
+    if (unranked.length) board += `<div class="grid">${unranked.join('')}</div>`;
+  }
   else {
-    const total = SECTIONS.reduce((n, sec) => n + counts[sec], 0);
+    const total = SECTIONS.reduce((n, sec) => n + counts[sec], 0) + unranked.length;
     const tab = (sec: string, name: string, n: number) =>
       `<button type="button" role="tab" data-sec="${sec}" aria-selected="${sec === s.section}"${n ? '' : ' disabled'}>${esc(name)}<span class="count">${n}</span></button>`;
     board += `<div class="tabs" role="tablist">` + tab('every', copy.label('sections', 'every'), total) + SECTIONS
       // Not profitable is left off when nothing in view lost money
       .filter((sec) => sec !== 'loss' || counts.loss).map((sec) => tab(sec, label(sec), counts[sec])).join('') + `</div>`;
     // All: the not profitable first (their price assumes more growth than any percentage), then the most required growth down
-    const tiles = s.section === 'every' ? (['loss', 'pricey', 'normal', 'bargain'] as Section[]).flatMap(sorted) : sorted(s.section);
+    const tiles = s.section === 'every' ? [...(['loss', 'pricey', 'normal', 'bargain'] as Section[]).flatMap(sorted), ...unranked] : sorted(s.section);
     board += tiles.length ? `<div class="grid">${tiles.join('')}</div>` : '';
   }
 

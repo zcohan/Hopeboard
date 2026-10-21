@@ -69,7 +69,7 @@ describe('hand-written lines', () => {
   // Bullets and stories are written by hand, so any figure in them must come from a placeholder.
   // Years are fine, and so are names that contain a number. A dollar amount for a named event
   // (Tesla's pay package) is a fact of the story, listed here once it's checked.
-  const NAMES = /Model 3|2-nanometre|5G|\$1 trillion/g;
+  const NAMES = /Model 3|2-nanometre|5G|\$1 trillion|PlayStation \d/g;
   it('quote no typed figures', () => {
     const hits = C.entries.flatMap((e) =>
       (['bullets', 'story', 'happened'] as const).flatMap((k) => ([] as string[]).concat((e[k] as string | string[] | undefined) ?? []))

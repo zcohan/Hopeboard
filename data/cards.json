@@ -149,7 +149,8 @@
       "bargainThen": "Bargain then",
       "loss": "Little or no profit",
       "lossThen": "Little or no profit then",
-      "notes": []
+      "notes": [],
+      "unranked": "Profit not published"
     },
     {
       "id": "comment-headings",
@@ -168,13 +169,16 @@
         "Company cards show labelled rows (owner’s layout, October 2026): Earns, Reasonably priced, Expected next year, Risk.",
         "The Risk row is labelled Cushion when its outcome is good news (no loss, and at least as much as the yardstick).",
         "The forecast is a note under the requirement (owner, October 2026), no longer its own row.",
-        "Finances (owner, October 2026): a third link at the foot of the card opening one bubble with Cash or Debt, Dividends and Shares, the company's health behind the three sections. Relative only: years of profit and percentages, no dollar amounts. Not Profitable cards say only whether cash or debt is bigger. Each line is left off when its figure isn't in the data (banks get no cash or debt line)."
+        "Finances (owner, October 2026): a third link at the foot of the card opening one bubble with Cash or Debt, Dividends and Shares, the company's health behind the three sections. Relative only: years of profit and percentages, no dollar amounts. Not Profitable cards say only whether cash or debt is bigger. Each line is left off when its figure isn't in the data (banks get no cash or debt line).",
+        "Little or no profit cards never label that row Cushion; when the scenario beats the bond it says Potential, else Risk: Cushion means a margin of safety, and a company with little or no profit has very little (owner, October 2026: a WeWork would never be a cushion). Their first row is labelled Profit and leads with profit or loss, never revenue."
       ],
       "labels": {
         "farm": "Earns",
+        "profit": "Profit",
         "assumes": "Priced for",
         "consequence": "Risk",
         "consequenceGood": "Cushion",
+        "consequencePotential": "Potential",
         "balanceCash": "Cash",
         "balanceDebt": "Debt",
         "balanceEven": "Cash & debt",
@@ -234,6 +238,7 @@
       "Internet": "Internet",
       "Hardware": "Hardware",
       "Other": "Elon",
+      "Private": "Pre-IPO",
       "notes": [
         "New: category filter pills (build step 7). “All” is a new label.",
         "Category of each company comes from docs/new-cards.md."
@@ -942,8 +947,8 @@
       "id": "SPCX:now",
       "about": "Rockets & Starlink satellite internet",
       "earns": "Lost **{p:last:abs}** on {p:revenue:bare} of revenue {profitsPeriod}",
-      "assumes": "**{reqProfit}** profit/year by 2036\nApple earns {p:apple} a year.",
-      "consequence": "If profit reaches Apple’s level ({p:apple}){corrects}, {outcome}.",
+      "assumes": "**{reqProfit}** profit/year by 2036\nFor perspective, Apple earns {p:apple} a year.",
+      "consequence": "If profit reaches Apple’s level ({p:apple}/year){corrects}, {outcome}.",
       "scenario": {
         "anchor": "profit",
         "key": "apple"
@@ -955,6 +960,336 @@
       ],
       "notes": [
         "October 2026: valued from its price and the share count on its first 10-Q's cover page; its loss and revenue are the first half of 2026 until twelve months are on file (its 2025 figures aren't filed in a form we read)."
+      ]
+    },
+    {
+      "id": "TM:now",
+      "about": "The world’s biggest carmaker",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
+      "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Investors pay little for carmakers, whose profit swings with the economy",
+        "US tariffs on imported cars have cut into its profit",
+        "It bet on hybrids instead of going all in on electric cars"
+      ],
+      "notes": [
+        "October 2026: added as a company based outside the US. Reports in yen: US GAAP to March 2020, IFRS since, joined for the last decade. One US share is ten Toyota shares (two before its 2021 split). Scenario: no growth, since a cheap price tests whether profit holds."
+      ]
+    },
+    {
+      "id": "TM:y1",
+      "story": "US tariffs on Japanese cars cutting its profit; its hybrids selling strongly.",
+      "happened": "Profit {profitMove}. The stock {returned}."
+    },
+    {
+      "id": "TM:y5",
+      "story": "Cutting production because of the chip shortage; seen as late to electric cars.",
+      "happened": "Profit {profitMove} {vsReq}. The stock {returned:year}."
+    },
+    {
+      "id": "TM:y10",
+      "story": "A strong yen shrinking the value of its sales abroad; talking up hydrogen cars.",
+      "happened": "Profit {profitMove} {vsReq}. The stock {returned:year}, and the years of profit people paid {peMove}."
+    },
+    {
+      "id": "SONY:now",
+      "about": "PlayStation, films & music",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
+      "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "PlayStation is now its biggest business",
+        "It spun off its insurance and banking arm in October 2025",
+        "The price assumes its games, films and music keep growing"
+      ],
+      "notes": [
+        "October 2026: added as a company based outside the US (filings with the SEC). No decade of comparable profit on file yet, so no last-decade note. Profit is from its continuing businesses: the finance arm's spin-off put a ¥1.4 trillion loss on discontinued operations in the year to March 2026."
+      ]
+    },
+    {
+      "id": "SONY:y1",
+      "story": "Had just spun off its insurance and banking arm; PlayStation 5 selling well.",
+      "happened": "Profit {profitMove}. The stock {returned}."
+    },
+    {
+      "id": "SONY:y5",
+      "story": "PlayStation 5 hard to buy because of the chip shortage; films and music doing well.",
+      "happened": "Profit {profitMove} {vsReq}. The stock {returned:year}."
+    },
+    {
+      "id": "SONY:y10",
+      "story": "Recovering from years of losses on TVs and phones; PlayStation 4 the bright spot.",
+      "happened": "Profit {profitMove} {vsReq}. The stock {returned:year}, and the years of profit people paid {peMove}."
+    },
+    {
+      "id": "RACE:now",
+      "about": "Sports cars",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
+      "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "It makes fewer cars than people want to buy, on purpose",
+        "The price assumes rich buyers keep paying more for each car"
+      ],
+      "notes": [
+        "October 2026: added as a company based outside the US (filings with the SEC). No decade of comparable profit on file yet, so no last-decade note. Reports in euros under IFRS."
+      ]
+    },
+    {
+      "id": "RACE:y1",
+      "story": "Its stock had just fallen sharply on targets below what investors hoped; its first electric car on the way.",
+      "happened": "Profit {profitMove}. The stock {returned}."
+    },
+    {
+      "id": "RACE:y5",
+      "story": "A chief executive from the chip industry had just started; its first plug-in hybrids selling well.",
+      "happened": "Profit {profitMove} {vsReq}. The stock {returned:year}."
+    },
+    {
+      "id": "RACE:y10",
+      "story": "A year after listing in New York and splitting off from Fiat Chrysler.",
+      "happened": "Profit {profitMove} {vsReq}. The stock {returned:year}, and the years of profit people paid {peMove}."
+    },
+    {
+      "id": "BABA:now",
+      "about": "Online shopping & cloud computing in China",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\n{vsLastNote}.",
+      "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Investors pay less for Chinese companies, because Beijing can change the rules they run under",
+        "Rivals like PDD, Temu’s owner, have taken shoppers from it",
+        "It is spending heavily on AI and its cloud business"
+      ],
+      "notes": [
+        "October 2026: added as a company based outside the US. Reports in yuan; one US share is eight Alibaba shares since its July 2019 split (one before), handled in scripts/sources.ts. Its stakes in other companies come off the price. Ten years ago its profit included large one-off gains on its stakes, so the last decade's growth is if anything understated. Scenario: no growth, since a cheap price tests whether profit holds."
+      ]
+    },
+    {
+      "id": "BABA:y1",
+      "story": "Its stock had more than doubled this year on hopes for its AI and cloud business; spending heavily on fast delivery.",
+      "happened": "Profit {profitMove}. The stock {returned}."
+    },
+    {
+      "id": "BABA:y5",
+      "story": "A year into Beijing’s crackdown; Ant Group’s listing blocked and a record fine for breaking competition rules.",
+      "happened": "Profit {profitMove} {vsReq}. The stock {returned:year}."
+    },
+    {
+      "id": "BABA:y10",
+      "story": "Two years after the biggest stock listing in history; China’s largest online shops growing fast.",
+      "happened": "Profit {profitMove} {vsReq}. The stock {returned:year}, and the years of profit people paid {peMove}."
+    },
+    {
+      "id": "PDD:now",
+      "about": "Owns the Temu & Pinduoduo shopping apps",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
+      "consequence": "If profit doesn’t grow{corrects}, {outcome}.",
+      "scenario": {
+        "anchor": "none"
+      },
+      "bullets": [
+        "Investors pay less for Chinese companies, because Beijing can change the rules they run under",
+        "The US ended duty-free entry for cheap parcels, which Temu relied on",
+        "Profit fell in 2025 after years of fast growth"
+      ],
+      "notes": [
+        "October 2026: added as a company based outside the US (filings with the SEC). No decade of comparable profit on file yet, so no last-decade note. Reports in yuan; one US share is four PDD shares. Scenario: no growth, since a cheap price tests whether profit holds."
+      ]
+    },
+    {
+      "id": "PDD:y1",
+      "story": "Temu hit by the end of US duty-free entry for cheap parcels; price wars in China cutting profit.",
+      "happened": "Profit {profitMove}. The stock {returned}."
+    },
+    {
+      "id": "PDD:y5",
+      "story": "Pinduoduo had just passed Alibaba in shoppers; pledging its profit to help China’s farmers.",
+      "happened": "From a loss to a profit. The stock {returned:year}."
+    },
+    {
+      "id": "WSE:now",
+      "about": "Sending money abroad",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
+      "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "The price assumes it keeps winning customers from banks’ costly transfers",
+        "Much of its profit is interest on customers’ money, which falls when interest rates do",
+        "It moved its main listing from London to New York in May 2026"
+      ],
+      "notes": [
+        "October 2026: added as a company based outside the US (filings with the SEC). No decade of comparable profit on file yet, so no last-decade note. Trades on Nasdaq as WSE; files profit per share in cents. Its year ends in March."
+      ]
+    },
+    {
+      "id": "TEAM:now",
+      "about": "Jira & other software teams use to plan work",
+      "earns": "Lost **{p:last:abs}** last year, after paying staff {p:sharePay:bare} in shares",
+      "assumes": "**{reqProfit}** profit/year by 2036{reqProfitTimes}",
+      "consequence": "If profit only reaches the {p:cash:bare} a year it makes before paying staff in shares{corrects}, {outcome}.",
+      "scenario": {
+        "anchor": "profit",
+        "key": "cash"
+      },
+      "bullets": [
+        "What it pays staff in shares is more than all the cash its business brings in",
+        "The price assumes its AI features win it new customers"
+      ],
+      "notes": [
+        "October 2026: founded in Australia, now based in the US. Like CrowdStrike: a small loss after a large pay in shares."
+      ]
+    },
+    {
+      "id": "TEAM:y1",
+      "story": "Investors worried that AI would make software like its own less needed.",
+      "happened": "The stock {returned}."
+    },
+    {
+      "id": "TEAM:y5",
+      "story": "Moving customers to its cloud versions; growing fast and losing money on paper.",
+      "happened": "The stock {returned:year}."
+    },
+    {
+      "id": "ARM:now",
+      "about": "Designs the chips in almost every phone",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}",
+      "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Chipmakers pay it a small fee for every chip built on its designs",
+        "The price assumes it wins a much bigger cut from AI data-centre chips",
+        "SoftBank owns almost all of it, so few of its shares trade"
+      ],
+      "notes": [
+        "October 2026: based in the UK, files like a US company (quarterly reports). Listed in 2023, so no decade of profit."
+      ]
+    },
+    {
+      "id": "ARM:y1",
+      "story": "Two years after listing; hopes for AI chips built on its designs; SoftBank still owning almost all of it.",
+      "happened": "Profit {profitMove}. The stock {returned}."
+    },
+    {
+      "id": "ANTHROPIC:now",
+      "about": "Makes the Claude AI models",
+      "earns": "**Unknown**\nTook in ≈{p:revenue} of revenue {profitsPeriod}.",
+      "assumes": "**{reqProfit}** profit/year by 2036\nPriced from its funding round in May 2026. For perspective, Alphabet earns {p:google} a year.",
+      "consequence": "If profit reaches Alphabet’s level ({p:google}/year), you’d make **{vsBond}** than the safe US bond.",
+      "scenario": {
+        "anchor": "profit",
+        "key": "google"
+      },
+      "bullets": [
+        "Its revenue passed OpenAI’s in the second quarter of 2026",
+        "It has reportedly filed to list its shares, possibly as soon as November",
+        "The price ignores new shares it will issue to raise money and pay staff"
+      ],
+      "notes": [
+        "October 2026, prototype: a private company. Its value is its latest funding round or staff share sale; revenue and losses are what it reported to investors, as published by the press, not audited. Typed in by hand in data/figures.json. Revenue: The Wall Street Journal, August 2026. Listing: Bloomberg, October 2026."
+      ]
+    },
+    {
+      "id": "OPENAI:now",
+      "about": "Makes ChatGPT",
+      "earns": "Lost **≈{p:last:abs}** on ≈{p:revenue} of revenue {profitsPeriod}",
+      "assumes": "**{reqProfit}** profit/year by 2036\nPriced from its funding round in March 2026. For perspective, Alphabet earns {p:google} a year.",
+      "consequence": "If profit reaches Alphabet’s level ({p:google}/year), you’d make **{vsBond}** than the safe US bond.",
+      "scenario": {
+        "anchor": "profit",
+        "key": "google"
+      },
+      "bullets": [
+        "Its loss grew faster than its revenue in the first half of 2026",
+        "It is reportedly raising more money at a much higher price",
+        "The price ignores new shares it will issue to raise money and pay staff"
+      ],
+      "notes": [
+        "October 2026, prototype: a private company. Its value is its latest funding round or staff share sale; revenue and losses are what it reported to investors, as published by the press, not audited. Typed in by hand in data/figures.json. Revenue and loss: The Wall Street Journal, August 2026. New round: Reuters, October 2026."
+      ]
+    },
+    {
+      "id": "STRIPE:now",
+      "about": "Takes payments for online businesses",
+      "earns": "**Unknown**\nIt says it’s profitable, but doesn’t publish the figure.\nTook in ≈{p:revenue} of revenue {profitsPeriod}.",
+      "assumes": "**{reqProfit}** profit/year by 2036\nPriced from a share sale for its staff in February 2026. For perspective, Visa earns {p:visa} a year.",
+      "consequence": "If profit reaches Visa’s level ({p:visa}/year), you’d make **{vsBond}** than the safe US bond.",
+      "scenario": {
+        "anchor": "profit",
+        "key": "visa"
+      },
+      "bullets": [
+        "Payments through it grew by a third in 2025, to almost two trillion dollars",
+        "Its founders say they’re in no rush to list its shares",
+        "It is reportedly looking at buying all or part of PayPal"
+      ],
+      "notes": [
+        "October 2026, prototype: a private company. Its value is its latest funding round or staff share sale; revenue and losses are what it reported to investors, as published by the press, not audited. Typed in by hand in data/figures.json. Revenue: The Information, February 2026. Payments and profitable: Stripe’s 2025 annual letter. PayPal: Bloomberg."
+      ]
+    },
+    {
+      "id": "BYTEDANCE:now",
+      "about": "Owns TikTok and its Chinese twin, Douyin",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\nPriced from a stake sale by one of its investors in early 2026. Its profit isn’t published, and press reports put it at ≈{p:lastLow} to {p:last} in 2025.",
+      "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Investors pay less for Chinese companies, because Beijing can change the rules they run under",
+        "TikTok’s US business was split off into a separate company in 2026",
+        "It is spending heavily on AI chips and data centres"
+      ],
+      "notes": [
+        "October 2026, prototype: a private company. Its price is its latest share sale; profit and revenue are as published by the company or the press. Typed in by hand in data/figures.json; years of profit computed from them by scripts/figures.ts. Price: Reuters (General Atlantic's stake sale). Profit: Bloomberg, December 2025 (on track for $50 billion), and a later report of $42 billion; shown as a range."
+      ]
+    },
+    {
+      "id": "REVOLUT:now",
+      "about": "Banking app",
+      "assumes": "**{reqSigned}**/year growth{reqTimes}\nPriced from a share sale for its staff in July 2026.",
+      "consequence": "If profit only grows at {g}/year (the average big US company){corrects}, {outcome}.",
+      "scenario": {
+        "anchor": "average"
+      },
+      "bullets": [
+        "Profit grew by about two-thirds in 2025",
+        "Much of its profit is interest on customers’ money, which falls when interest rates do",
+        "It is expanding into the US"
+      ],
+      "notes": [
+        "October 2026, prototype: a private company. Its price is its latest share sale; profit and revenue are as published by the company or the press. Typed in by hand in data/figures.json; years of profit computed from them by scripts/figures.ts. Profit: its 2025 annual report (audited), $1.7 billion after tax. Price: The Wall Street Journal, July 2026."
+      ]
+    },
+    {
+      "id": "CANVA:now",
+      "about": "Online design tool",
+      "earns": "**Unknown**\nIt says it has made a profit for years, but doesn’t publish the figure.\nSales were running at ≈{p:revenue} a year {profitsPeriod}.",
+      "assumes": "**{reqProfit}** profit/year by 2036\nPriced from what two of its early investors valued their stakes at in August 2026. For perspective, Adobe earns {p:adobe} a year.",
+      "consequence": "If profit reaches Adobe’s level ({p:adobe}/year), you’d make **{vsBond}** than the safe US bond.",
+      "scenario": {
+        "anchor": "profit",
+        "key": "adobe"
+      },
+      "bullets": [
+        "Its last share sale, in August 2025, priced it about a fifth higher",
+        "It has pushed its listing back to 2027"
+      ],
+      "notes": [
+        "October 2026, prototype: a private company. Its price is its latest share sale; profit and revenue are as published by the company or the press. Typed in by hand in data/figures.json; years of profit computed from them by scripts/figures.ts. Sales: TechCrunch, February 2026 (its COO). Price: Blackbird and AirTree's valuation of their stakes, $34.9 billion, August 2026 (SmartCompany, Startup Daily); no shares changed hands at it. Its last share sale was $42 billion in August 2025. Listing: Startup Daily, April 2026."
       ]
     },
     {

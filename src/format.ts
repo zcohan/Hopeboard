@@ -26,10 +26,10 @@ export const decPct = (x: number) => {
 /** One decimal always, for the bond's top-right figure: 0.04 → "4.0%". */
 export const decPctFixed = (x: number) => `${(x * 100).toFixed(1)}%`;
 
-/** $ billions, to the nearest 5 under 100 and 10 above: 67.7 → "$70 billion". */
+/** $ billions, to the nearest 1 under 10, 5 under 100 and 10 above: 6.05 → "$6 billion", 67.7 → "$70 billion". */
 export const billions = (x: number) => {
   const a = Math.abs(x);
-  const step = a < 100 ? 5 : 10;
+  const step = a < 10 ? 1 : a < 100 ? 5 : 10;
   const n = Math.round(a / step) * step;
   return n >= 1000 ? `$${trim(Math.round(n / 100) / 10)} trillion` : `$${n} billion`;
 };

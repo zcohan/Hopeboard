@@ -145,10 +145,12 @@ export function oilOn(d: string): number | null {
   return s.length && ms(d) - ms(s[s.length - 1].date) < 14 * DAY ? s[s.length - 1].price : null;
 }
 
-/** Exchange rates from the Federal Reserve's H.10: USDTWD is Taiwan dollars per dollar, EURUSD dollars per euro. */
+/** Exchange rates from the Federal Reserve's H.10: USDTWD is Taiwan dollars per dollar (USDJPY yen, USDCNY yuan),
+ * EURUSD dollars per euro. */
+const FED_CODES: Record<string, string> = { USDTWD: 'ta', EURUSD: 'eu', USDJPY: 'ja', USDCNY: 'ch' };
 const fxRows = new Map<string, { date: string; rate: number }[]>();
 export function fxOn(pair: string, d: string): number | null {
-  const code = pair.startsWith('USDTWD') ? 'ta' : pair.startsWith('EURUSD') ? 'eu' : null;
+  const code = FED_CODES[pair.slice(0, 6)] ?? null;
   if (!code) return null;
   if (!fxRows.has(code)) {
     const html = readFileSync(`.cache/fed/h10_${code}.htm`, 'latin1');
@@ -204,7 +206,7 @@ export class Filings {
       const sup = `.cache/xbrl/${String(cik).padStart(10, '0')}/supplement.json`;
       // the filed reports' unit ids vary; keep only values in the reporting currency
       if (existsSync(sup)) for (const [k, arr] of Object.entries(read(sup) as Record<string, Fact[]>))
-        ((this.facts.filed ??= {})[k] ??= {}).all = arr.filter((x) => !x.unit || !/usd|twd|eur/i.test(x.unit) || new RegExp(this.currency, 'i').test(x.unit));
+        ((this.facts.filed ??= {})[k] ??= {}).all = arr.filter((x) => !x.unit || !/usd|twd|eur|jpy|cny/i.test(x.unit) || new RegExp(this.currency, 'i').test(x.unit));
     }
     if (src.operating) this.deriveOperating();
     else if (!src.keepGains) this.leaveOutGains();
@@ -232,7 +234,8 @@ export class Filings {
           }
       return out;
     };
-    const money = (u: string) => u === 'USD' || u === 'all';
+    // in the reporting currency: Alibaba and PDD file theirs in yuan
+    const money = (u: string) => u === this.currency || u === 'all';
     const gains = byPeriod(names, money);
     if (!gains.size) return;
     const pretax = byPeriod(PRETAX, money), income = byPeriod(NET_INCOME, money), shares = byPeriod(WEIGHTED_SHARES, (u) => u === 'shares' || u === 'all');
@@ -480,8 +483,9 @@ export function computeOn(f: Filings, d: string, today: string): Computed | null
   // reported currency → dollars: EURUSD is dollars per euro; USDTWD is Taiwan dollars per dollar
   const toUsd = (v: number) => (s.fx?.startsWith('USD') ? v / fx : v * fx);
   const perShare = s.perShare ?? 1;
+  const perShareAt = (filed: string) => (s.perShareEarlier && filed < s.perShareEarlier.filedBefore ? s.perShareEarlier.perShare : perShare);
   const price = bar.close / splitFactor(s.eod, bar.date, today);
-  const epsAdj = (x: Fact) => (toUsd(x.val) * perShare) / splitFactor(s.eod, x.filed, today);
+  const epsAdj = (x: Fact) => (toUsd(x.val) * perShareAt(x.filed)) / splitFactor(s.eod, x.filed, today);
   const t = f.ttm(f.eps, d, epsAdj);
   // only count it if the twelve months end within ~14 months of the date
   const fresh = t && ms(d) - ms(t.end) < 430 * DAY ? t : null;
@@ -550,7 +554,8 @@ export function lastDecade(f: Filings, today: string): { g: number; from: string
   const s = f.src;
   const fx = s.fx ? fxOn(s.fx, today) ?? 1 : 1;
   const toUsd = (v: number) => (s.fx?.startsWith('USD') ? v / fx : v * fx); // one rate for both ends: growth in the reporting currency
-  const adj = (x: Fact) => (toUsd(x.val) * (s.perShare ?? 1)) / splitFactor(s.eod, x.filed, today);
+  const perShareAt = (filed: string) => (s.perShareEarlier && filed < s.perShareEarlier.filedBefore ? s.perShareEarlier.perShare : s.perShare ?? 1);
+  const adj = (x: Fact) => (toUsd(x.val) * perShareAt(x.filed)) / splitFactor(s.eod, x.filed, today);
   const latest = f.latestAnnualEnd(f.eps, today);
   if (!latest) return null;
   // each end of the decade is the average of three years, so one unusual year can't decide the rate

@@ -107,10 +107,13 @@ for (const s of SOURCES) {
   // a company whose filings gave no recent profit keeps its figures and their source
   if (now.eps !== null) co.src = { ...co.src, pe: 'sec-eod', y: 'sec-eod', last: 'sec-eod', ...(fc ? { forecast: 'alphavantage' } : {}) };
 
-  // barely profitable (earning under 0.5% of its price): shown like a loss-maker, in dollars
-  if (!dollar && now.eps !== null && now.eps > 0 && now.pe !== null && now.pe > 500 && now.netIncome) {
-    const b2 = (x: number) => (Math.abs(x) < 1 ? Math.round(x * 100) / 100 : Math.round(x * 10) / 10);
-    const ttmBn = (names: string[]) => { const t = f.ttm(names, today); return t ? b2(Math.abs(t.val) / 1e9) : undefined; };
+  // barely profitable (earning under 0.5% of its price), or losing money: shown in dollars from then on
+  const b2 = (x: number) => (Math.abs(x) < 1 ? Math.round(x * 100) / 100 : Math.round(x * 10) / 10);
+  const ttmBn = (names: string[]) => { const t = f.ttm(names, today); return t ? b2(Math.abs(t.val) / 1e9) : undefined; };
+  // the pay in shares and the cash the business brings in, which those cards quote, kept up to date
+  if (dollar && co.now.profits?.sharePay !== undefined && ttmBn(f.sharePay) !== undefined) co.now.profits.sharePay = ttmBn(f.sharePay)!;
+  if (dollar && co.now.profits?.cash !== undefined && ttmBn(f.operatingCash) !== undefined) co.now.profits.cash = ttmBn(f.operatingCash)!;
+  if (!dollar && now.eps !== null && now.netIncome && (now.loss || (now.eps > 0 && now.pe !== null && now.pe > 500))) {
     co.now.value = Math.round(now.price * (now.netIncome / now.eps));
     co.now.profits = { last: b2(now.netIncome), ...(ttmBn(f.sharePay) !== undefined ? { sharePay: ttmBn(f.sharePay)! } : {}), ...(ttmBn(f.operatingCash) !== undefined ? { cash: ttmBn(f.operatingCash)! } : {}) };
   }
@@ -290,10 +293,20 @@ for (const [era, n] of ERAS) {
 }
 F.sources['shiller'] = { name: 'Robert Shiller’s S&P 500 data (profit, dividends and total return per index share, and US consumer prices)', url: 'https://shillerdata.com/', date: shillerKnown(today)!.month } as never;
 
-// cards that compare a profit with Apple's quote Apple's own, from its filings (profit per share × shares)
-{
-  const apple = F.companies.find((c) => c.id === 'AAPL')?.now.balance?.profit;
-  for (const c of F.companies) if (c.now.profits?.apple !== undefined && apple) c.now.profits.apple = Math.round(apple);
+// cards that compare a profit with Apple's, Alphabet's or Visa's quote that company's own, from its filings
+// (profit per share × shares)
+for (const [key, id] of [['apple', 'AAPL'], ['google', 'GOOGL'], ['visa', 'V'], ['adobe', 'ADBE']]) {
+  const profit = F.companies.find((c) => c.id === id)?.now.balance?.profit;
+  for (const c of F.companies) if (c.now.profits?.[key] !== undefined && profit) c.now.profits[key] = Math.round(profit);
+}
+
+// private companies with a profit figure: years of profit from their latest price and that profit (a range when
+// reports give two profits), rounded as every card shows them
+for (const c of F.companies) {
+  const p = c.now.profits, v = c.now.value;
+  if (!c.private || typeof v !== 'number' || !p?.last || p.last <= 0) continue;
+  const yrs = (x: number) => (x >= 10 ? Math.round(x) : Math.round(x * 10) / 10);
+  c.now.pe = p.lastLow ? `${yrs(v / p.last)}–${yrs(v / p.lastLow)}` : yrs(v / p.last);
 }
 
 F.asOf = month(today);

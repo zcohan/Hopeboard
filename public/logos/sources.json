@@ -293,5 +293,75 @@
   "file": "Amgen.svg",
   "page": "https://commons.wikimedia.org/wiki/File:Amgen.svg",
   "license": "Public domain"
+ },
+ "ANTHROPIC": {
+  "file": "simple-icons anthropic.svg",
+  "page": "https://simpleicons.org/?q=anthropic",
+  "license": "CC0 (simple-icons)"
+ },
+ "OPENAI": {
+  "file": "simple-icons openai.svg",
+  "page": "https://simpleicons.org/?q=openai",
+  "license": "CC0 (simple-icons)"
+ },
+ "STRIPE": {
+  "file": "simple-icons stripe.svg",
+  "page": "https://simpleicons.org/?q=stripe",
+  "license": "CC0 (simple-icons)"
+ },
+ "BYTEDANCE": {
+  "file": "simple-icons bytedance.svg",
+  "page": "https://simpleicons.org/?q=bytedance",
+  "license": "CC0 (simple-icons)"
+ },
+ "REVOLUT": {
+  "file": "simple-icons revolut.svg",
+  "page": "https://simpleicons.org/?q=revolut",
+  "license": "CC0 (simple-icons)"
+ },
+ "CANVA": {
+  "file": "simple-icons canva.svg",
+  "page": "https://simpleicons.org/?q=canva",
+  "license": "CC0 (simple-icons)"
+ },
+ "TM": {
+  "file": "simple-icons toyota.svg",
+  "page": "https://simpleicons.org/?q=toyota",
+  "license": "CC0 (simple-icons)"
+ },
+ "SONY": {
+  "file": "simple-icons sony.svg",
+  "page": "https://simpleicons.org/?q=sony",
+  "license": "CC0 (simple-icons)"
+ },
+ "RACE": {
+  "file": "simple-icons ferrari.svg",
+  "page": "https://simpleicons.org/?q=ferrari",
+  "license": "CC0 (simple-icons)"
+ },
+ "BABA": {
+  "file": "simple-icons alibabadotcom.svg",
+  "page": "https://simpleicons.org/?q=alibabadotcom",
+  "license": "CC0 (simple-icons)"
+ },
+ "WSE": {
+  "file": "simple-icons wise.svg",
+  "page": "https://simpleicons.org/?q=wise",
+  "license": "CC0 (simple-icons)"
+ },
+ "TEAM": {
+  "file": "simple-icons atlassian.svg",
+  "page": "https://simpleicons.org/?q=atlassian",
+  "license": "CC0 (simple-icons)"
+ },
+ "ARM": {
+  "file": "simple-icons arm.svg",
+  "page": "https://simpleicons.org/?q=arm",
+  "license": "CC0 (simple-icons)"
+ },
+ "PDD": {
+  "file": "Temu logo.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Temu_logo.svg",
+  "license": "Public domain"
  }
 }

@@ -73,7 +73,7 @@ async function main() {
     log.push(`treasury ${year} ${await get(url, `.cache/treasury/${year}.csv`, age, browser)}`);
   }
   log.push(`eia brent ${await getBinary('https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls', '.cache/eia/RBRTEd.xls', DAY / 2)}`);
-  for (const c of ['ta', 'eu']) log.push(`fed ${c} ${await get(`https://www.federalreserve.gov/releases/h10/hist/dat00_${c}.htm`, `.cache/fed/h10_${c}.htm`, DAY / 2, browser)}`);
+  for (const c of ['ta', 'eu', 'ja', 'ch']) log.push(`fed ${c} ${await get(`https://www.federalreserve.gov/releases/h10/hist/dat00_${c}.htm`, `.cache/fed/h10_${c}.htm`, DAY / 2, browser)}`);
 
   // Damodaran's yearly returns on stocks and bonds since 1928 (the S&P's long-run average, and stocks' extra over bonds)
   log.push(`damodaran ${await get('https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html', '.cache/damodaran/histretSP.html', 30 * DAY, { 'User-Agent': 'Mozilla/5.0' })}`);

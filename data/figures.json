@@ -41,6 +41,11 @@
       "name": "Robert Shiller’s S&P 500 data (profit, dividends and total return per index share, and US consumer prices)",
       "url": "https://shillerdata.com/",
       "date": "2026-06"
+    },
+    "private": {
+      "name": "Private companies: the value at the latest funding round or staff share sale, and the revenue and losses the companies reported to investors, as published by Reuters, Bloomberg, The Wall Street Journal and The Information",
+      "date": "October 2026",
+      "note": "Not audited, and typed in by hand. Anthropic $965 billion (funding round, May 2026), OpenAI $852 billion (funding round, March 2026), Stripe $159 billion (staff share sale, February 2026), ByteDance $550 billion (stake sale, early 2026, Reuters), Revolut $115 billion (staff share sale, July 2026, The Wall Street Journal), Canva $34.9 billion (two early investors' valuation of their stakes, August 2026; its last share sale, in August 2025, was at $42 billion). Profit: ByteDance $42–50 billion in 2025 (Bloomberg and others, from people familiar); Revolut $1.7 billion in 2025 (its audited annual report)."
     }
   },
   "industries": {
@@ -4975,6 +4980,731 @@
         "y": "sec-eod",
         "last": "sec-eod",
         "past": "sec-eod"
+      }
+    },
+    {
+      "id": "ANTHROPIC",
+      "name": "Anthropic",
+      "color": "#D97757",
+      "category": "Private",
+      "private": {
+        "site": "https://www.anthropic.com"
+      },
+      "now": {
+        "pe": null,
+        "pef": null,
+        "y": 0,
+        "value": 965,
+        "profits": {
+          "revenue": 11.6,
+          "google": 124
+        },
+        "profitsPeriod": "in the second quarter of 2026",
+        "last": null
+      },
+      "past": {},
+      "src": {
+        "pe": "private",
+        "y": "private"
+      }
+    },
+    {
+      "id": "OPENAI",
+      "name": "OpenAI",
+      "color": "#10A37F",
+      "category": "Private",
+      "private": {
+        "site": "https://openai.com"
+      },
+      "now": {
+        "pe": null,
+        "pef": null,
+        "y": 0,
+        "value": 852,
+        "profits": {
+          "last": -12.3,
+          "revenue": 6.7,
+          "google": 124
+        },
+        "profitsPeriod": "in the second quarter of 2026",
+        "last": null
+      },
+      "past": {},
+      "src": {
+        "pe": "private",
+        "y": "private"
+      }
+    },
+    {
+      "id": "STRIPE",
+      "name": "Stripe",
+      "color": "#635BFF",
+      "category": "Private",
+      "private": {
+        "site": "https://stripe.com",
+        "unranked": true
+      },
+      "now": {
+        "pe": null,
+        "pef": null,
+        "y": 0,
+        "value": 159,
+        "profits": {
+          "revenue": 6.8,
+          "visa": 22
+        },
+        "profitsPeriod": "in 2025",
+        "last": null
+      },
+      "past": {},
+      "src": {
+        "pe": "private",
+        "y": "private"
+      }
+    },
+    {
+      "id": "BYTEDANCE",
+      "name": "ByteDance",
+      "color": "#3C8CFF",
+      "category": "Private",
+      "private": {
+        "site": "https://www.bytedance.com"
+      },
+      "now": {
+        "pe": "11–13",
+        "pef": null,
+        "y": 0,
+        "value": 550,
+        "profits": {
+          "last": 50,
+          "lastLow": 42,
+          "revenue": 200
+        },
+        "profitsPeriod": "in 2025",
+        "last": null
+      },
+      "past": {},
+      "src": {
+        "pe": "private",
+        "y": "private"
+      }
+    },
+    {
+      "id": "REVOLUT",
+      "name": "Revolut",
+      "color": "#191C1F",
+      "category": "Private",
+      "private": {
+        "site": "https://www.revolut.com"
+      },
+      "now": {
+        "pe": 68,
+        "pef": null,
+        "y": 0,
+        "value": 115,
+        "profits": {
+          "last": 1.7,
+          "revenue": 6
+        },
+        "profitsPeriod": "in 2025",
+        "last": null
+      },
+      "past": {},
+      "src": {
+        "pe": "private",
+        "y": "private"
+      }
+    },
+    {
+      "id": "CANVA",
+      "name": "Canva",
+      "color": "#00C4CC",
+      "category": "Private",
+      "private": {
+        "site": "https://www.canva.com",
+        "unranked": true
+      },
+      "now": {
+        "pe": null,
+        "pef": null,
+        "y": 0,
+        "value": 34.9,
+        "profits": {
+          "revenue": 4,
+          "adobe": 7
+        },
+        "profitsPeriod": "at the end of 2025",
+        "last": null
+      },
+      "past": {},
+      "src": {
+        "pe": "private",
+        "y": "private"
+      }
+    },
+    {
+      "id": "TM",
+      "name": "Toyota",
+      "color": "#EB0A1E",
+      "category": "Consumer",
+      "industry": "autos",
+      "now": {
+        "pe": 11,
+        "pef": null,
+        "y": 0.032,
+        "last": 0.098,
+        "prevYear": 1.218,
+        "ytd": -0.0515,
+        "fromHigh": {
+          "below": 0.1822,
+          "month": "February"
+        },
+        "revenueGrowth": 0.0551,
+        "margin": 0.094,
+        "shares": {
+          "rate": -0.0097,
+          "years": 10
+        },
+        "then": {
+          "w1": {
+            "pe": 10.1,
+            "y": 0.033
+          },
+          "m1": {
+            "pe": 10.2,
+            "y": 0.032
+          },
+          "m3": {
+            "pe": 9.8,
+            "y": 0.034
+          },
+          "m12": {
+            "pe": 8.4,
+            "y": 0.032
+          }
+        },
+        "cheapest": {
+          "month": "2025-07",
+          "req": -0.034
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 8.4,
+          "y": 0.032,
+          "profit": -0.217,
+          "stock": 0.015,
+          "revenueGrowth": 0.0581,
+          "maxFall": 0.3189
+        },
+        "y5": {
+          "pe": 13,
+          "y": 0.026,
+          "profit": 0.061,
+          "stock": 0.051,
+          "revenueGrowth": -0.158,
+          "maxFall": 0.368
+        },
+        "y10": {
+          "pe": 8.2,
+          "y": 0.033,
+          "profit": 0.098,
+          "stock": 0.086,
+          "revenueGrowth": 0.2022,
+          "maxFall": 0.368
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "SONY",
+      "name": "Sony",
+      "color": "#1A1A1A",
+      "category": "Hardware",
+      "industry": "hardware",
+      "now": {
+        "pe": 23,
+        "pef": null,
+        "y": 0.006,
+        "last": null,
+        "prevYear": 1.025,
+        "ytd": -0.0081,
+        "fromHigh": {
+          "below": 0.1608,
+          "month": "November 2025"
+        },
+        "revenueGrowth": -0.0368,
+        "shares": {
+          "rate": 0.0223,
+          "years": 10
+        },
+        "then": {
+          "w1": {
+            "pe": 22.5,
+            "y": 0.007
+          },
+          "m1": {
+            "pe": 21.5,
+            "y": 0.006
+          },
+          "m3": {
+            "pe": 20.1,
+            "y": 0.006
+          },
+          "m12": {
+            "pe": 25,
+            "y": 0.005
+          }
+        },
+        "cheapest": {
+          "month": "2019-07",
+          "req": 0.02
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 25,
+          "y": 0.005,
+          "profit": -0.07,
+          "stock": -0.13,
+          "revenueGrowth": -0.0116,
+          "maxFall": 0.3598
+        },
+        "y5": {
+          "pe": 17,
+          "y": 0.005,
+          "profit": -0.036,
+          "stock": 0.037,
+          "revenueGrowth": 0.0067,
+          "maxFall": 0.5055
+        },
+        "y10": {
+          "pe": 38,
+          "y": 0.001,
+          "profit": 0.206,
+          "stock": 0.155,
+          "revenueGrowth": 0.1373,
+          "maxFall": 0.5055
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "RACE",
+      "name": "Ferrari",
+      "color": "#D40000",
+      "category": "Consumer",
+      "now": {
+        "pe": 40,
+        "pef": null,
+        "y": 0.011,
+        "last": null,
+        "prevYear": 0.944,
+        "ytd": 0.0955,
+        "fromHigh": {
+          "below": 0.0832,
+          "month": "August"
+        },
+        "revenueGrowth": 0.0703,
+        "margin": 0.221,
+        "then": {
+          "w1": {
+            "pe": 39,
+            "y": 0.011
+          },
+          "m1": {
+            "pe": 39.6,
+            "y": 0.01
+          },
+          "m3": {
+            "pe": 36.3,
+            "y": 0.011
+          },
+          "m12": {
+            "pe": 40.4,
+            "y": 0.016
+          }
+        },
+        "cheapest": {
+          "month": "2026-03",
+          "req": 0.134
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 40,
+          "y": 0.016,
+          "profit": 0.02,
+          "stock": 0.016,
+          "revenueGrowth": 0.201,
+          "maxFall": 0.2552
+        },
+        "y5": {
+          "pe": 58,
+          "y": 0.005,
+          "profit": 0.214,
+          "stock": 0.135,
+          "revenueGrowth": -0.0955,
+          "maxFall": 0.3922
+        },
+        "y10": {
+          "pe": 32,
+          "y": 0.01,
+          "profit": 0.197,
+          "stock": 0.235,
+          "maxFall": 0.3922
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "BABA",
+      "name": "Alibaba",
+      "color": "#FF6A00",
+      "category": "Internet",
+      "industry": "internet",
+      "now": {
+        "pe": 15,
+        "pef": null,
+        "y": 0.01,
+        "last": 0.106,
+        "prevYear": 1.218,
+        "ytd": -0.2522,
+        "fromHigh": {
+          "below": 0.391,
+          "month": "October 2025"
+        },
+        "revenueGrowth": 0.0274,
+        "balance": {
+          "cash": 42.9,
+          "debt": 8.4,
+          "end": "2026-03-31",
+          "profit": 15.8,
+          "stakes": 18.7
+        },
+        "margin": 0.106,
+        "shares": {
+          "rate": 0.2234,
+          "years": 10
+        },
+        "then": {
+          "w1": {
+            "pe": 15.7,
+            "y": 0.009
+          },
+          "m1": {
+            "pe": 16.1,
+            "y": 0.009
+          },
+          "m3": {
+            "pe": 17.3,
+            "y": 0.009
+          },
+          "m12": {
+            "pe": 22.4,
+            "y": 0.011
+          }
+        },
+        "cheapest": {
+          "month": "2022-04",
+          "req": 0.035
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 22,
+          "y": 0.011,
+          "profit": -0.126,
+          "stock": -0.368,
+          "revenueGrowth": 0.056,
+          "maxFall": 0.4684
+        },
+        "y5": {
+          "pe": 20,
+          "y": 0,
+          "profit": -0.051,
+          "stock": -0.082,
+          "revenueGrowth": 0.4693,
+          "maxFall": 0.6446
+        },
+        "y10": {
+          "pe": 25,
+          "y": 0,
+          "profit": 0.106,
+          "stock": 0.011,
+          "revenueGrowth": 0.2493,
+          "maxFall": 0.8009
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "PDD",
+      "name": "PDD (Temu)",
+      "color": "#FB7701",
+      "category": "Internet",
+      "industry": "internet",
+      "now": {
+        "pe": 8.3,
+        "pef": null,
+        "y": 0,
+        "last": null,
+        "prevYear": 1.152,
+        "ytd": -0.2801,
+        "fromHigh": {
+          "below": 0.409,
+          "month": "November 2025"
+        },
+        "revenueGrowth": 0.0965,
+        "margin": 0.252,
+        "shares": {
+          "rate": 0.0422,
+          "years": 6
+        },
+        "then": {
+          "w1": {
+            "pe": 8.3,
+            "y": 0
+          },
+          "m1": {
+            "pe": 8,
+            "y": 0
+          },
+          "m3": {
+            "pe": 8.8,
+            "y": 0
+          },
+          "m12": {
+            "pe": 12.3,
+            "y": 0
+          }
+        },
+        "cheapest": {
+          "month": "2026-09",
+          "req": 0.014,
+          "since": "2018"
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 12,
+          "y": 0,
+          "profit": -0.075,
+          "stock": -0.38,
+          "revenueGrowth": 0.5863,
+          "maxFall": 0.4693
+        },
+        "y5": {
+          "pe": "loss",
+          "y": 0,
+          "stock": -0.039,
+          "revenueGrowth": 1.0607,
+          "maxFall": 0.7463
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "WSE",
+      "name": "Wise",
+      "color": "#163300",
+      "category": "Financials",
+      "now": {
+        "pe": 23,
+        "pef": null,
+        "y": 0,
+        "last": null,
+        "prevYear": 1.087,
+        "fromHigh": {
+          "below": 0.2851,
+          "month": "May"
+        },
+        "revenueGrowth": 0.2246,
+        "margin": 0.326,
+        "capex": 0,
+        "listing": {
+          "low": -0.1655,
+          "high": 0.2357,
+          "month": "April"
+        },
+        "then": {
+          "w1": {
+            "pe": 25.2,
+            "y": 0
+          },
+          "m1": {
+            "pe": 23.6,
+            "y": 0
+          },
+          "m3": {
+            "pe": 25.6,
+            "y": 0
+          }
+        },
+        "cheapest": {
+          "month": "2026-09",
+          "req": 0.132,
+          "since": "2026"
+        }
+      },
+      "past": {},
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "TEAM",
+      "name": "Atlassian",
+      "color": "#0052CC",
+      "category": "Software",
+      "industry": "software",
+      "now": {
+        "pe": "loss",
+        "pef": null,
+        "y": 0,
+        "last": null,
+        "ytd": 0.3637,
+        "fromHigh": {
+          "below": 0,
+          "month": "October"
+        },
+        "revenueGrowth": 0.2602,
+        "balance": {
+          "cash": 1.2,
+          "debt": 1,
+          "end": "2026-06-30"
+        },
+        "margin": -0.037,
+        "shares": {
+          "rate": 0.0083,
+          "years": 5
+        },
+        "capex": 0,
+        "value": 43,
+        "profits": {
+          "last": -0.05,
+          "sharePay": 1.6,
+          "cash": 1.4
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": "loss",
+          "y": 0,
+          "stock": 0.392,
+          "revenueGrowth": 0.1966,
+          "maxFall": 0.6754
+        },
+        "y5": {
+          "pe": "loss",
+          "y": 0,
+          "stock": -0.116,
+          "maxFall": 0.8753
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
+      }
+    },
+    {
+      "id": "ARM",
+      "name": "Arm",
+      "color": "#0091BD",
+      "category": "Chips",
+      "industry": "chips",
+      "now": {
+        "pe": 251,
+        "pef": 183,
+        "y": 0,
+        "forecast": 0.375,
+        "last": null,
+        "prevYear": 1.053,
+        "ytd": 1.0223,
+        "fromHigh": {
+          "below": 0.497,
+          "month": "June"
+        },
+        "revenueGrowth": 0.2512,
+        "margin": 0.18,
+        "capex": 1,
+        "then": {
+          "w1": {
+            "pe": 290.3,
+            "y": 0
+          },
+          "m1": {
+            "pe": 313.3,
+            "y": 0
+          },
+          "m3": {
+            "pe": 320.9,
+            "y": 0
+          },
+          "m12": {
+            "pe": 200.8,
+            "y": 0
+          }
+        },
+        "cheapest": {
+          "month": "2023-10",
+          "req": 0.289,
+          "since": "2023"
+        }
+      },
+      "past": {
+        "y1": {
+          "pe": 201,
+          "y": 0,
+          "profit": 0.03,
+          "stock": 0.289,
+          "revenueGrowth": 0.1784,
+          "maxFall": 0.497
+        }
+      },
+      "src": {
+        "pe": "sec-eod",
+        "y": "sec-eod",
+        "last": "sec-eod",
+        "past": "sec-eod",
+        "forecast": "alphavantage"
       }
     }
   ]
