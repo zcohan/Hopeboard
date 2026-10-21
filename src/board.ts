@@ -14,6 +14,9 @@ export interface BoardState {
   /** The section tab shown; 'every' is the All tab (one grid, most required growth first);
    * 'all' renders every section under its heading (tests). */
   section: Section | 'all' | 'every';
+  /** The page as sent to tools that don't run the app (prerender): today's card only, without the versions for each
+   * Compare over time date, which the app draws in the browser. Halves the page for AI tools that read only so far. */
+  todayOnly?: boolean;
 }
 
 export class Copy {
@@ -383,7 +386,7 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
         const compare = comparePanel(co, m.req('t'), m.section);
         // the card as it was on each Compare over time date: that day's years of profit, dividend and bond;
         // no forecast (the board keeps only today's)
-        const at = compare ? COMPARES.flatMap((w) => {
+        const at = compare && !s.todayOnly ? COMPARES.flatMap((w) => {
           const t = co.now.then?.[w];
           const bondThen = F.eras.now.bondThen?.[w];
           if (!t || bondThen === undefined) return [];

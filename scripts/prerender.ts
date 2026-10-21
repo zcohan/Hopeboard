@@ -20,7 +20,7 @@ if (built.includes('<main id="app"></main>')) writeFileSync('dist/.shell.html', 
 const shell = readFileSync('dist/.shell.html', 'utf8');
 
 // every company, so a reader that doesn't run the app sees the whole board (the app then shows the reader's own filter)
-const state: BoardState = { era: 'now', basis: 't', category: 'all', section: 'every' };
+const state: BoardState = { era: 'now', basis: 't', category: 'all', section: 'every', todayOnly: true };
 const path = (r: Route) => (r === 'board' ? '/' : `/${r}`);
 const mdPath = (r: Route) => (r === 'board' ? '/index.md' : `/${r}.md`);
 const DESCRIPTION: Record<Route, string> = {
@@ -32,8 +32,10 @@ const DESCRIPTION: Record<Route, string> = {
 function appHtml(r: Route): string {
   const opts = { base: '/', state, whenOpen: false, dark: false };
   const body = r === 'board' ? boardBody(F, C, copy, { ...state }).html : page(copy, F, r, philosophyMd);
+  // for tools reading the page without running it: where the whole page is as plain text (the app redraws this part)
+  const textVersion = `<p class="text-version">This page as plain text, for AI tools: <a href="${mdPath(r)}">${SITE}${mdPath(r)}</a>. Every page is listed at <a href="/llms.txt">${SITE}/llms.txt</a>.</p>`;
   // logos as plain images, so the page looks right before the app takes over
-  return (header(copy, r, opts) + body + footer(copy)).replace(/<div class="logo img" data-logo="([^"]+)"><\/div>/g, '<div class="logo img" data-logo="$1"><img alt="" src="/logos/$1.svg"></div>');
+  return (textVersion + header(copy, r, opts) + body + footer(copy)).replace(/<div class="logo img" data-logo="([^"]+)"><\/div>/g, '<div class="logo img" data-logo="$1"><img alt="" src="/logos/$1.svg"></div>');
 }
 
 function headTags(r: Route): string {
