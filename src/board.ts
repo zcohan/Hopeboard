@@ -440,9 +440,11 @@ export function renderBoard(F: Figures, C: CardsFile, s: BoardState): Rendered {
     board += `<div class="tabs" role="tablist">` + tab('every', copy.label('sections', 'every'), total) + SECTIONS
       // Not profitable is left off when nothing in view lost money
       .filter((sec) => sec !== 'loss' || counts.loss).map((sec) => tab(sec, label(sec), counts[sec])).join('') + `</div>`;
-    // All: the not profitable first (their price assumes more growth than any percentage), then the most required growth down
-    const tiles = s.section === 'every' ? [...(['loss', 'pricey', 'normal', 'bargain'] as Section[]).flatMap(sorted), ...unranked] : sorted(s.section);
-    board += tiles.length ? `<div class="grid">${tiles.join('')}</div>` : '';
+    // All: every section under a small heading, the most required growth first, and the companies with little or no
+    // profit (and those with no profit figure published) last, so the board opens on companies priced on their profit
+    const group = (title: string, tiles: string[]) => (tiles.length ? `<h3 class="group">${esc(title)}</h3><div class="grid">${tiles.join('')}</div>` : '');
+    if (s.section === 'every') board += (['pricey', 'normal', 'bargain', 'loss'] as Section[]).map((sec) => group(label(sec), sorted(sec))).join('') + group(copy.label('sections', 'unranked'), unranked);
+    else board += buckets[s.section].length ? `<div class="grid">${sorted(s.section).join('')}</div>` : '';
   }
 
   const footId = s.era === 'now' ? 'foot:now' : 'foot:past';

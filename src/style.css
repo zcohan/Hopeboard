@@ -25,6 +25,9 @@ main{max-width:1360px; margin:0 auto; padding:40px 20px 80px}
 h1{font-weight:600; font-size:26px; line-height:1.15; margin:0; letter-spacing:-0.025em}
 h2{font-weight:600; font-size:22px; margin:40px 0 14px; letter-spacing:-0.02em}
 #board h2:first-child{margin-top:8px}
+/* the All tab's section headings: quieter than the tabs above them */
+h3.group{font-weight:600; font-size:15px; color:var(--ink-2); margin:32px 0 12px; padding-top:14px; border-top:1px solid var(--rule)}
+.tabs + h3.group{margin-top:8px; padding-top:0; border-top:0}
 .sub{color:var(--ink); margin:3px 0 0; font-size:15px}
 .grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px}
 @media (max-width:1020px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
